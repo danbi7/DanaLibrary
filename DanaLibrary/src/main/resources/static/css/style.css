@@ -1,0 +1,135 @@
+.container-main {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	width: 100%;
+	width: 1000px;
+	margin: 0px auto;
+}
+
+body {
+	font-family: 'ë§‘ì€ ê³ ë”•', 'Malgun Gothic', 'ë‚˜ëˆ”ê³ ë”•', NanumGothic, Helvetica,
+		sans-serif;
+}
+
+.card {
+	margin: 15px;
+	margin-bottom: 70px;
+}
+
+.card p {
+	margin-top: 10px;
+}
+
+.secondNav a {
+	font-size: 18px;
+	color: #365486;
+	margin: 0px 50px;
+}
+
+.firstNav-right {
+	font-size: 15px;
+	margin-right: 20px;
+}
+
+.banner {
+	margin-top: 50px;
+}
+
+.firstNav-left img {
+	width: 50px;
+	height: auto;
+}
+
+.firstNav-left a {
+	padding: 0px;
+	font-size: 20px;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+}
+
+.py-3{
+    padding-bottom: 0px !important;
+}
+
+nav{
+	background-color: white;
+}
+
+.ms-auto img {
+	margin-left: 10px;
+	width: 28px;
+	height: auto;
+}
+
+.noti-icon {
+	margin-right: 10px;
+}
+
+ul {
+    padding-left: 0px;
+}
+
+.noticeList li {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 8px;
+    padding-right: 85px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.noticeList .date {
+    position: absolute;
+    top: 0;
+    right: 0;
+    letter-spacing: 0;
+}
+
+.notice-box{
+    float: left;
+    width: 500px;
+    height: 243px;
+    border-bottom: 1px solid #d0cfcf;
+    margin: 20px;
+}
+
+h3 {
+    display: block;
+    font-size: 1.17em;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+h3.title {
+    padding-bottom: 15px;
+    font-size: 1.286em;
+    line-height: 1.111em;
+    text-align: left;
+    color: #333;
+}
+
+.notice-box .title{
+    margin-bottom: 15px;
+    border-bottom: 3px solid #ccc;
+}
+
+.blue-line {
+    border-color: #0066b3 !important;
+}
+
+.carousel{
+	height: 350px;
+	margin-bottom: 20px;
+}
