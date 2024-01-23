@@ -8,8 +8,8 @@
 }
 
 body {
-	font-family: 'ë§‘ì€ ê³ ë”•', 'Malgun Gothic', 'ë‚˜ëˆ”ê³ ë”•', NanumGothic, Helvetica,
-		sans-serif;
+	font-family: '맑은 고딕','Malgun Gothic','나눔고딕',NanumGothic,Helvetica,sans-serif;
+    	color: #555;
 }
 
 .card {
