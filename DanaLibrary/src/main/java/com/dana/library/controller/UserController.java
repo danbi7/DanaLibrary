@@ -2,6 +2,7 @@ package com.dana.library.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import com.dana.library.service.UserService;
 
@@ -10,5 +11,10 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@GetMapping({"", "/"})
+	public String main() {
+		return "main";
+	}
 
 }
