@@ -57,16 +57,13 @@ public class UserController {
 	    if (user == null || password == null) {
 	        return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "비밀번호 변경 실패");
 	    }
-
 	    user.setPassword(password);
 	    userService.changepw(user);
-
+	    
 	    //findUser 세션에서 삭제
 	    session.removeAttribute("findUser");
 	    
 	    return new ResponseDTO<>(HttpStatus.OK.value(), "비밀번호 변경 성공");
 	}
 	
-	
-
 }
