@@ -20,7 +20,7 @@ let loginObject = {
 
       $.ajax({
          type : "POST", //요청 방식
-         url : "/login", //요청 경로
+         url : "/user/login", //요청 경로
          data : JSON.stringify(user), //user 객체를 JSON 형태로 변환
          contentType : "application/json; charset=utf-8"
       }).done(function(response){
