@@ -1,5 +1,8 @@
 package com.dana.library.service;
 
+import java.sql.Date;
+import java.util.function.Supplier;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +16,17 @@ public class UserService {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Transactional(readOnly = true)
+	public User findByEmail(User user) {
+		System.out.println("111111");
+		User findUser = userRepository.findByEmail(user.getEmail()).orElseGet(new Supplier<User>(){
+			public User get() {
+				return new User();
+			}
+		});
+		return findUser;
+	}
 	
 	@Transactional
 	public void insertUser(User user) {
@@ -57,4 +71,5 @@ public class UserService {
 	        throw new RuntimeException("사용자가 존재하지 않습니다.");
 	    }
 	}
+
 }

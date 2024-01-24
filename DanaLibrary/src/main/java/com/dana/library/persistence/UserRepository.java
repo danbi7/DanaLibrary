@@ -1,5 +1,6 @@
 package com.dana.library.persistence;
 
+import java.sql.Date;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,5 +15,14 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	
 	boolean existsByUserid(String userid);
 
+	Optional<User> findByUsername(String username);
+	
+	
 	Optional<User> findByEmail(String email);
+	
+	
+	Optional<User> findByBirthDate(Date birthDate);
+	
+	Optional<User> findByEmail(String email);
+
 }

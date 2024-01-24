@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="./layout/header1.jsp" %>
+<%@ include file="../layout/header1.jsp" %>
    
    <!-- Login 7 - Bootstrap Brain Component -->
 <section class="bg-light p-3 p-md-4 p-xl-5">
@@ -19,17 +19,17 @@
                 </div>
               </div>
             </div>
-            <form action="#!">
+            
                 <div class="row gy-3 overflow-hidden">
                 <div class="col-10" style="padding-right: 0px;">
                   <div class="form-floating mb-3">
-                    <input style="border-top-right-radius: 0px; border-bottom-right-radius: 0px;" type="text" class="form-control" name="email" id="email" placeholder="이메일 또는 아이디" required>
-                    <label for="email" class="form-label">이메일 또는 아이디</label>
+                    <input style="border-top-right-radius: 0px; border-bottom-right-radius: 0px;" type="text" class="form-control" name="email" id="email" placeholder="이메일" required>
+                    <label for="email" class="form-label">이메일</label>
                   </div>
                 </div>
                 
                <div class="col-2" style="padding-left: 0px;">
-                     <button class="btn btn-outline-secondary" type="submit " style="height: 58px; border-top-left-radius: 0px; border-bottom-left-radius: 0px;">인증</button>
+                     <button class="btn btn-outline-secondary" style="height: 58px; border-top-left-radius: 0px; border-bottom-left-radius: 0px;">인증</button>
                
                </div>
                 <div class="col-12">
@@ -40,18 +40,18 @@
                 </div>
                 <div class="col-12">
                   <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="birthDate" id="birthDate" value="" placeholder="생년월일을 입력하세요" required>
+                    <input type="date" class="form-control" name="birthDate" id="birthDate" placeholder="생년월일을 입력하세요" required>
                     <label for="birthDate" class="form-label">생년월일</label>
                   </div>
                 </div>
                 
                 <div class="col-12">
                   <div class="d-grid">
-                    <button class="btn bsb-btn-xl btn-primary" type="submit" id="btn-findUser">아이디 찾기</button>
+                    <button class="btn bsb-btn-xl btn-primary"  id="btn-findId">아이디 찾기</button>
                   </div>
                 </div>
               </div>
-            </form>
+            
             <div class="row">
               <div class="col-12">
                 <hr class="mt-5 mb-4 border-secondary-subtle">
@@ -96,7 +96,7 @@
   </div>
 </section>
 
-<script src="/js/findUser.js"></script>
+<script src="/js/findId.js"></script>
 
 <%@ include file="../layout/footer.jsp" %>
 </body>
