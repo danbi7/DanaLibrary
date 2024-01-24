@@ -31,7 +31,7 @@
                   </div>
                 </div>
                  <div class="col-2" style="padding-left:0px">
-                   <button type="button" class="btn btn-secondary" id="idcheck" style="height:58px; border-top-left-radius: 0px; border-bottom-left-radius: 0px">중복 확인</button>
+                   <button type="button" class="btn btn-secondary" id="btn-idcheck" style="height:58px; border-top-left-radius: 0px; border-bottom-left-radius: 0px">중복 확인</button>
                    </div>
                <div class="col-12">
                   <div class="form-floating mb-3">
@@ -68,7 +68,7 @@
       </select>
       <div class="col-12">
     <div class="input-group mb-3">
-       <input type="text" class="form-control" name="customEmail" id="customEmail" placeholder="ex) abc123@naver.com" style="display: none;">
+       <input type="email" class="form-control" name="customEmail" id="customEmail" placeholder="ex) abc123@naver.com" style="display: none;">
 </div>
 </div>
       
@@ -145,6 +145,7 @@
     });
   });
 </script>
+<script src="/js/idcheck.js"></script>
 <script src="/js/insertUser.js"></script>
 
 <%@ include file="../layout/footer.jsp" %>

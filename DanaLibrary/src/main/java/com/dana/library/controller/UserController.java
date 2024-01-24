@@ -41,5 +41,16 @@ public class UserController {
 					+ "님은 이미 가입하신 회원입니다.");
 		}
 	}
+	
+	  @PostMapping("/user/checkUserId")
+	  public @ResponseBody ResponseDTO<?> checkUserId(@RequestBody User user) {
+	    boolean isDuplicate = userService.isUserIdDuplicate(user.getUserid());
+
+	    if (isDuplicate) {
+	      return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "이미 가입된 아이디입니다.");
+	    } else {
+	      return new ResponseDTO<>(HttpStatus.OK.value(), "사용 가능한 아이디입니다.");
+	    }
+	  }
 
 }

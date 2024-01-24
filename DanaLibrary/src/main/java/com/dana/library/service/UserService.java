@@ -29,6 +29,10 @@ public class UserService {
 		return findUser;
 	}
 	
-	
+	 @Transactional(readOnly = true)
+	  public boolean isUserIdDuplicate(String userid) {
+	    // 사용자 아이디가 중복되는지 확인
+	    return userRepository.existsByUserid(userid);
+	  }
 
 }

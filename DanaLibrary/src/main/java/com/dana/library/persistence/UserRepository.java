@@ -10,5 +10,7 @@ import com.dana.library.domain.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer>{
 	Optional<User> findByUserid(String Userid);
+	
+	boolean existsByUserid(String userid);
 
 }
