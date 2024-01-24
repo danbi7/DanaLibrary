@@ -4,22 +4,6 @@
 <%@ include file="./layout/header1.jsp" %>
 <%@ include file="./layout/header2.jsp" %>
 	
-<c:if test="${emailUser ne null }">
- <div class="toast show">
-    <div class="toast-header">
-      <strong class="me-auto">아이디 찾기 성공!</strong>
-      <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
-    </div>
-    <div class="toast-body">
-      <p>아이디는 ${emailUser.username}입니다</p>
-    </div>
-  </div>
-</c:if>
-
-
-
-	
-	
 <div class="container mt-3">
 
 <!-- Carousel -->

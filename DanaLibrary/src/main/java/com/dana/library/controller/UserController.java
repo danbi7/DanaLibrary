@@ -72,7 +72,7 @@ public class UserController {
 		User findUser = userService.getUserByIdOrEmail(user.getUserid());
 		if (findUser != null) {
 			if (user.getPassword().equals(findUser.getPassword())) {
-				session.setAttribute("findUser", findUser);
+				session.setAttribute("loginUser", findUser);
 				return new ResponseDTO<>(HttpStatus.OK.value(), findUser.getUsername() + "님, 환영합니다.");
 			} else {
 				return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "회원 정보가 일치하지 않습니다.");
@@ -151,6 +151,13 @@ public class UserController {
 		session.removeAttribute("findUser");
 
 		return new ResponseDTO<>(HttpStatus.OK.value(), "비밀번호 변경 성공");
+	}
+	
+	// 로그아웃 및 메인이동
+	@GetMapping("/user/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
 	}
 
 }
