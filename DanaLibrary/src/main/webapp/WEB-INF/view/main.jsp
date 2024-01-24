@@ -1,7 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="./layout/header1.jsp" %>
 <%@ include file="./layout/header2.jsp" %>
+	
+<c:if test="${emailUser ne null }">
+ <div class="toast show">
+    <div class="toast-header">
+      <strong class="me-auto">아이디 찾기 성공!</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+    </div>
+    <div class="toast-body">
+      <p>아이디는 ${emailUser.username}입니다</p>
+    </div>
+  </div>
+</c:if>
+
+
+
+	
 	
 <div class="container mt-3">
 
@@ -82,61 +99,60 @@
 </div>
 </div>
 
-<br>
 <div class="container-main">
 <h3>" 다나 도서관의 추천 도서 목록 "</h3>
 </div>
 
 <div class="container-main">
-<div class="card" style="width: 180px; height: 260px;">
-  <img class="card-img-top" src="/image/book3.png" alt="Card image cap" style="width: 100%; height: 100%; object-fit: cover;">
+<div class="rec-book">
+  <img src="/image/book3.png" alt="Card image cap">
   <p>올해의 추천 도서 : <br><strong>물고기는 존재하지 않는다</strong></p> 
 </div>
 
-<div class="card" style="width: 180px; height: 260px;">
-  <img class="card-img-top" src="/image/book3.png" alt="Card image cap" style="width: 100%; height: 100%; object-fit: cover;">
+<div class="rec-book">
+  <img src="/image/book3.png" alt="Card image cap">
   <p>올해의 추천 도서 : <br><strong>물고기는 존재하지 않는다</strong></p>
 </div>
 
-<div class="card" style="width: 180px; height: 260px;">
-  <img class="card-img-top" src="/image/book1.png" alt="Card image cap" style="width: 100%; height: 100%; object-fit: cover;">
+<div class="rec-book">
+  <img src="/image/book1.png" alt="Card image cap">
     <p class="card-text">이번달의 신간 도서 : <br><strong>종의 기원</strong></p>
 </div>
 
-<div class="card" style="width: 180px; height: 260px;">
-  <img class="card-img-top" src="/image/book2.png" alt="Card image cap" style="width: 100%; height: 100%; object-fit: cover;">
+<div class="rec-book">
+  <img src="/image/book2.png" alt="Card image cap">
     <p class="card-text">다나 도서관의 추천 도서 : <br><strong>이기적 유전자</strong></p>
 </div>
 
-<div class="card" style="width: 180px; height: 260px;">
-  <img class="card-img-top" src="/image/book4.png" alt="Card image cap" style="width: 100%; height: 100%; object-fit: cover;">
+<div class="rec-book">
+  <img src="/image/book4.png" alt="Card image cap">
     <p class="card-text">주목할만한 도서 : <br><strong>데일 카네기-인간관계론</strong></p>
 </div>
 </div>
 
 <div class="container-main">
-<div class="card" style="width: 180px; height: 260px;">
-  <img class="card-img-top" src="/image/book3.png" alt="Card image cap" style="width: 100%; height: 100%; object-fit: cover;">
+<div class="rec-book">
+  <img src="/image/book3.png" alt="Card image cap">
+  <p>올해의 추천 도서 : <br><strong>물고기는 존재하지 않는다</strong></p> 
+</div>
+
+<div class="rec-book">
+  <img src="/image/book3.png" alt="Card image cap">
   <p>올해의 추천 도서 : <br><strong>물고기는 존재하지 않는다</strong></p>
 </div>
 
-<div class="card" style="width: 180px; height: 260px;">
-  <img class="card-img-top" src="/image/book3.png" alt="Card image cap" style="width: 100%; height: 100%; object-fit: cover;">
-  <p>올해의 추천 도서 : <br><strong>물고기는 존재하지 않는다</strong></p>
-</div>
-
-<div class="card" style="width: 180px; height: 260px;">
-  <img class="card-img-top" src="/image/book1.png" alt="Card image cap" style="width: 100%; height: 100%; object-fit: cover;">
+<div class="rec-book">
+  <img src="/image/book1.png" alt="Card image cap">
     <p class="card-text">이번달의 신간 도서 : <br><strong>종의 기원</strong></p>
 </div>
 
-<div class="card" style="width: 180px; height: 260px;">
-  <img class="card-img-top" src="/image/book2.png" alt="Card image cap" style="width: 100%; height: 100%; object-fit: cover;">
+<div class="rec-book">
+  <img src="/image/book2.png" alt="Card image cap">
     <p class="card-text">다나 도서관의 추천 도서 : <br><strong>이기적 유전자</strong></p>
 </div>
 
-<div class="card" style="width: 180px; height: 260px;">
-  <img class="card-img-top" src="/image/book4.png" alt="Card image cap" style="width: 100%; height: 100%; object-fit: cover;">
+<div class="rec-book">
+  <img src="/image/book4.png" alt="Card image cap">
     <p class="card-text">주목할만한 도서 : <br><strong>데일 카네기-인간관계론</strong></p>
 </div>
 </div>

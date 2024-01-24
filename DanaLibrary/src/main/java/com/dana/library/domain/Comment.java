@@ -2,6 +2,7 @@ package com.dana.library.domain;
 
 import java.sql.Timestamp;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
 import jakarta.persistence.Column;
@@ -39,7 +40,7 @@ public class Comment {
 	@Column(nullable = false, length = 1000)
 	private String content;
 	
-	@CreatedDate
+	@CreationTimestamp
 	private Timestamp regDate;
 
 }
