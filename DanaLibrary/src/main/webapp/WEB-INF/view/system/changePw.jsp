@@ -28,31 +28,32 @@
             
             <p>
             
-             <form action="#!">
+           
               <div class="row gy-3 overflow-hidden">
                 <div class="col-12">
                   <div class="form-floating mb-3">
-                    <input type="password" class="form-control" name="number" id="number" placeholder="인증번호 입력" required>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="비밀번호 입력" required>
                     <label for="number" class="form-label">새 비밀번호</label>
                   </div>
                 </div>
                               
                <div class="col-12">
                   <div class="form-floating mb-3">
-                    <input type="password" class="form-control" name="number" id="number" placeholder="인증번호 입력" required>
+                    <input type="password" class="form-control" name="repassword" id="repassword" placeholder="비밀번호 재입력" required>
                     <label for="number" class="form-label">비밀번호 재입력</label>
                   </div>
+                  <div id="repasswordError" style="color: red;"></div>
                 </div>
               
             
                 <div class="col-12" style="margin-bottom:30px">
                   <div class="d-grid">
-                    <button class="btn bsb-btn-xl btn-primary" type="submit">확인</button>
+                    <button class="btn bsb-btn-xl btn-primary"  id="btn-changePw">확인</button>
                   </div>
                 </div>
               </div>
              
-            </form>
+            
             
             </div>
           </div>
@@ -61,4 +62,6 @@
     </div>
   
 </section>
+<script src="/js/changePw.js"></script>
+
 <%@ include file="../layout/footer.jsp" %>
