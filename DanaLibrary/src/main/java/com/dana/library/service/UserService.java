@@ -38,9 +38,9 @@ public class UserService {
 	//아이디 또는 이메일로 getUser
 	@Transactional
 	public User getUserByIdOrEmail(String input) {
-		User findUser = userRepository.findByEmail(input);
+		User findUser = userRepository.findByEmail(input).get();
 		if (findUser == null) {
-			findUser = userRepository.findByUserid(input);
+			findUser = userRepository.findByUserid(input).get();
 		}
 
 		return findUser;
@@ -48,7 +48,7 @@ public class UserService {
 
 	@Transactional
 	public void changepw(User user) {
-	    User findUser = userRepository.findByUserid(user.getUserid());
+	    User findUser = userRepository.findByUserid(user.getUserid()).get();
 
 	    if (findUser != null) {
 	        findUser.setPassword(user.getPassword());

@@ -8,10 +8,11 @@ import org.springframework.stereotype.Repository;
 import com.dana.library.domain.User;
 
 @Repository
+
 public interface UserRepository extends JpaRepository<User, Integer>{
 	Optional<User> findByUserid(String Userid);
 	
 	boolean existsByUserid(String userid);
 
-	User findByEmail(String email);
+	Optional<User> findByEmail(String email);
 }
