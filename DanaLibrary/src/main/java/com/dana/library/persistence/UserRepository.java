@@ -8,4 +8,8 @@ import com.dana.library.domain.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer>{
 
+	
+	  User findByUserid(String userid);
+	   
+	   User findByEmail(String email);
 }

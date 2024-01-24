@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <%@ include file="../layout/header1.jsp" %>
    <!-- Login 7 - Bootstrap Brain Component -->
 <section class="bg-light p-3 p-md-4 p-xl-5">
@@ -19,12 +18,12 @@
                 </div>
               </div>
             </div>
-            <form>
+            
               <div class="row gy-3 overflow-hidden">
                 <div class="col-12">
                   <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="email" id="id" placeholder="name@example.com" required>
-                    <label for="email" class="form-label">아이디 또는 이메일</label>
+                    <input type="text" class="form-control" name="userid" id="userid" placeholder="name@example.com" required>
+                    <label for="userid" class="form-label">아이디 또는 이메일</label>
                     
                   </div>
                 </div>
@@ -45,11 +44,11 @@
                 </div>
                 <div class="col-12">
                   <div class="d-grid">
-                    <button class="btn bsb-btn-xl btn-primary" type="submit">로그인</button>
+                    <button id="btn-login" class="btn bsb-btn-xl btn-primary" >로그인</button>
                   </div>
                 </div>
               </div>
-            </form>
+            
             <div class="row">
               <div class="col-12">
                 <hr class="mt-5 mb-4 border-secondary-subtle">
@@ -95,4 +94,5 @@
     </div>
   </div>
 </section>
+<script src="/js/login.js"></script>
 <%@ include file="../layout/footer.jsp" %>
