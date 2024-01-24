@@ -20,55 +20,55 @@
                 </div>
               </div>
             </div>
-            <form action="#!">
+          
               <div class="row gy-3 overflow-hidden">
               
                <div class="col-10" style="padding-right:0px">
                   <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="id" id="id" placeholder="아이디를 입력하세요" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px">
+                    <input type="text" class="form-control" name="userid" id="userid" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px">
                     <label for="아이디" class="form-label">아이디</label>
                    
                   </div>
                 </div>
                  <div class="col-2" style="padding-left:0px">
-                   <button type="button" class="btn btn-secondary" id="idcheck" style="height:58px; border-top-left-radius: 0px; border-bottom-left-radius: 0px">중복 확인</button>
+                   <button type="button" class="btn btn-secondary" id="btn-idcheck" style="height:58px; border-top-left-radius: 0px; border-bottom-left-radius: 0px">중복 확인</button>
                    </div>
                <div class="col-12">
                   <div class="form-floating mb-3">
-                    <input type="password" class="form-control" name="password" id="password" placeholder="비밀번호를 입력하세요" >
+                    <input type="password" class="form-control" name="password" id="password">
                     <label for="비밀번호" class="form-label">비밀번호</label>
                   </div>
                 </div>
                 
                  <div class="col-12">
                   <div class="form-floating mb-3">
-                    <input type="password" class="form-control" name="passwordcheck" id="passwordcheck" placeholder="비밀번호를 재입력" >
+                    <input type="password" class="form-control" name="passwordcheck" id="passwordcheck">
                     <label for="비밀번호 확인" class="form-label">비밀번호 확인</label>
                   </div>
                 </div>
                 
                     <div class="col-12">
                   <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="username" id="username" value="" placeholder="이름을 입력하세요" >
+                    <input type="text" class="form-control" name="username" id="username">
                     <label for="이름" class="form-label">이름</label>
                   </div>
                 </div>
 
   <div class="col-12">
     <div class="input-group mb-3">
-     <input type="email" class="form-control" name="emailId" id="emailId" placeholder="아이디" >
+     <input type="text" class="form-control" name="emailId" id="emailId" placeholder="아이디" >
       <label class="input-group-text" for="emailDropdown">@</label>
       <select class="form-select" id="emailDomain" name="emailDomain">
         <option value="@naver.com" >naver.com</option>
         <option value="@google.com" >google.com</option>
         <option value="@hanmai.net" >hanmai.net</option>
-         <option value="@custom">직접 입력</option>
+         <option value="custom">직접 입력</option>
          
          
       </select>
       <div class="col-12">
     <div class="input-group mb-3">
-       <input type="text" class="form-control" name="customEmailDomain" id="customEmailDomain" placeholder="ex) abc123@naver.com" style="display: none;">
+       <input type="email" class="form-control" name="customEmail" id="customEmail" placeholder="ex) abc123@naver.com" style="display: none;">
 </div>
 </div>
       
@@ -79,7 +79,7 @@
   <div class="col-12">
     <div class="input-group mb-3">
     <label class="input-group-text" for="birthBox">생년월일</label>
-    <input type="text" class="form-control" name="birthDate" id="birthDate" placeholder="YYMMDD">
+    <input type="date" class="form-control" name="birthDate" id="birthDate" placeholder="YYMMDD">
       <label class="input-group-text" for="genderDropdown">성별</label>
       <select class="form-select" id="gender" name="gender">
         <option value="남">남</option>
@@ -94,7 +94,7 @@
                   </div>
                 </div>
               </div>
-            </form>
+            
             <div class="row">
               <div class="col-12">
                 <p class="mt-5 mb-5">SNS 계정으로 회원 가입하기</p>
@@ -135,15 +135,17 @@
 <script>
   $(document).ready(function(){
     $("#emailDomain").change(function(){
-      if($(this).val() === '@custom') {
-        $("#customEmailDomain").show();
+      if($(this).val() === 'custom') {
+        $("#customEmail").show();
         $("#emailId").prop('disabled', true);
       } else {
-        $("#customEmailDomain").hide();
+        $("#customEmail").hide();
         $("#emailId").prop('disabled', false);
       }
     });
   });
 </script>
+<script src="/js/idcheck.js"></script>
+<script src="/js/insertUser.js"></script>
 
 <%@ include file="../layout/footer.jsp" %>

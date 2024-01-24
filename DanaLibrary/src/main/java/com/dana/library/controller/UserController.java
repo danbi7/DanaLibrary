@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,6 +26,36 @@ public class UserController {
 	public String main() {
 		return "main";
 	}
+	
+	@GetMapping("/user/insertUser")
+	public String insertUser() {
+		return "system/register";
+	}
+	
+	@PostMapping("/user/insertUser")
+	public @ResponseBody ResponseDTO<?> insertUser(@RequestBody User user){
+		User findUser = userService.getUser(user.getUserid());
+		
+		if(findUser.getUserid() == null) {
+			userService.insertUser(user);
+			return new ResponseDTO<>(HttpStatus.OK.value(), user.getUsername()+
+					" 님 회원 가입을 축하합니다!");
+		} else {
+			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), user.getUsername()
+					+ "님은 이미 가입하신 회원입니다.");
+		}
+	}
+	
+	  @PostMapping("/user/checkUserId")
+	  public @ResponseBody ResponseDTO<?> checkUserId(@RequestBody User user) {
+	    boolean isDuplicate = userService.isUserIdDuplicate(user.getUserid());
+
+	    if (isDuplicate) {
+	      return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "이미 가입된 아이디입니다.");
+	    } else {
+	      return new ResponseDTO<>(HttpStatus.OK.value(), "사용 가능한 아이디입니다.");
+	    }
+	  }
 
 	@GetMapping("/user/view/verify")
 	public String verify() {

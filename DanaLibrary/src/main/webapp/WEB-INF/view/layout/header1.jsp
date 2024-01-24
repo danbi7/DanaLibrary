@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>DANA LIBRARY</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css"
 	rel="stylesheet">
