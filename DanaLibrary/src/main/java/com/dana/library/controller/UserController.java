@@ -51,6 +51,7 @@ public class UserController {
 		}else {
 			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(),"조건에 맞는 회원 없음");
 		}
+	}
 		
 	@GetMapping("/user/insertUser")
 	public String insertUser() {
