@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
 import jakarta.persistence.Column;
@@ -42,7 +43,7 @@ public class Board {
 	@JoinColumn(name = "userNum")
 	private User user;
 	
-	@CreatedDate
+	@CreationTimestamp
 	private Timestamp regDate;
 	
 	@ColumnDefault("0")

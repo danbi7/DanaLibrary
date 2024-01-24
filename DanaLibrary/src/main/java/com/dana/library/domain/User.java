@@ -31,7 +31,7 @@ public class User {
 	private String username;
 	
 	@Column(nullable = false, length = 20, unique = true)
-	private String id;
+	private String userid;
 	
 	@Column(nullable = false, length = 20)
 	private String password;
