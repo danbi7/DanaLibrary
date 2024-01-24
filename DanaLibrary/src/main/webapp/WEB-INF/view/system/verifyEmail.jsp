@@ -27,11 +27,11 @@
             </div>
             
             <p>
-            <form action="#!">
+           
               <div class="row gy-3 overflow-hidden">
                 <div class="col-10" style="padding-right: 0px;">
                   <div class="form-floating mb-3">
-                    <input style="border-top-right-radius: 0px; border-bottom-right-radius: 0px;" type="text" class="form-control" name="email" id="email" placeholder="이메일 또는 아이디" required>
+                    <input style="border-top-right-radius: 0px; border-bottom-right-radius: 0px;" type="text" class="form-control" name="input" id="input" placeholder="이메일 또는 아이디" required>
                     <label for="email" class="form-label">이메일 또는 아이디</label>
                   </div>
                 </div>
@@ -51,19 +51,19 @@
             
                 <div class="col-12" style="margin-bottom:30px">
                   <div class="d-grid">
-                    <button class="btn bsb-btn-xl btn-primary" type="submit">확인</button>
+                    <button class="btn bsb-btn-xl btn-primary" id="btn-verify">확인</button>
                   </div>
                 </div>
               </div>
-             
-            </form>
+            
             
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  
 </section>
 
+<script src="/js/changePw.js"></script>
 <%@ include file="../layout/footer.jsp" %>

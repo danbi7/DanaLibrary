@@ -21,9 +21,13 @@
 	<nav class="py-2 bg-body-tertiary border-bottom sticky-top">
 		<div class="container d-flex flex-wrap">
 			<ul class="nav me-auto">
-				<li class="nav-item firstNav-left"><a href="#" class="nav-link link-dark"><img src="/image/dana-removebg-preview.png"
-					alt="DANA LIBRARY Logo"> DANA LIBRARY</a></li>
+				<li class="nav-item firstNav-left"><a
+					href="javascript:void(0);" onclick="window.location.href='/';" class="nav-link link-dark"> <img
+						src="/image/dana-removebg-preview.png" alt="DANA LIBRARY Logo">
+						DANA LIBRARY
+				</a></li>
 			</ul>
+
 			<ul class="nav ms-auto">
 				<li class="noti-icon"><img src="/image/notification.png"></li>
 				<li class="nav-item firstNav-right"><a href="#"
