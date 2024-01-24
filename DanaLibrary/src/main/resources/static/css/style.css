@@ -9,16 +9,25 @@
 
 body {
 	font-family: '맑은 고딕','Malgun Gothic','나눔고딕',NanumGothic,Helvetica,sans-serif;
-    	color: #555;
+  color: #555;
 }
 
-.card {
-	margin: 15px;
+.rec-book {
+	margin: 10px;
 	margin-bottom: 70px;
+	width: 180px; 
+	height: 260px;
 }
 
-.card p {
+.rec-book p {
 	margin-top: 10px;
+}
+
+.rec-book img {
+	border-radius: 3px;
+	width: 100%; 
+	height: 100%; 
+	object-fit: cover;
 }
 
 .secondNav a {
