@@ -72,4 +72,14 @@ public class UserService {
 	    }
 	}
 
+	@Transactional
+	public User getUserByIdOrEmail(String userid) {
+		User findUser = userRepository.findByEmail(userid);
+		if (findUser == null) {
+			findUser = userRepository.findByUserid(userid);
+		}
+
+		return findUser;
+	}
+
 }
