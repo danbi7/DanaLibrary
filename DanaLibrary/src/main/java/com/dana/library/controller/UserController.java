@@ -27,12 +27,12 @@ public class UserController {
 		return "main";
 	}
 	
-	@GetMapping("/user/findId")
-	public String findId() {
+	@GetMapping("/user/view/findUserId")
+	public String findUserId() {
 		return "/system/findUser";
 	}
 	
-	@PostMapping("/user/findId")
+	@PostMapping("/user/findUserId")
 	public @ResponseBody ResponseDTO<?> findId(@RequestBody User user, HttpSession session) {
 		System.out.println(user.toString());
 		
@@ -53,7 +53,7 @@ public class UserController {
 		}
 	}
 		
-	@GetMapping("/user/insertUser")
+	@GetMapping("/user/view/insertUser")
 	public String insertUser() {
 		return "system/register";
 	}
@@ -93,12 +93,12 @@ public class UserController {
 		return "system/changePw";
 	}
 
-	@GetMapping("/login")
+	@GetMapping("/user/view/login")
 	public String login() {
 		return "system/login";
 	}
 	
-	@PostMapping("/login")
+	@PostMapping("/user/login")
 	public @ResponseBody ResponseDTO<?> login(@RequestBody User user, HttpSession session) {
 		System.out.println("안녕하세요");
 		System.out.println(user.getUserid());
