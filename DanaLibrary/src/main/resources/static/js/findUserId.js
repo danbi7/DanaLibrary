@@ -1,13 +1,13 @@
-let findIdObj = {
+let findUserIdObj = {
     init: function(){
         let _this=this;
 
         $("#btn-findId").on("click",()=>{
-            _this.findId();
+            _this.findUserId();
         });
     },
 
-    findId: function(){
+    findUserId: function(){
         alert("아이디찾기가 요청되었습니다");
 
         let user = {
@@ -18,7 +18,7 @@ let findIdObj = {
 
         $.ajax({
             type: "POST",
-            url: "/user/findId",
+            url: "/user/findUserId",
             data: JSON.stringify(user),
             contentType: "application/json; charset=utf-8"
         }).done(function(response){
@@ -34,4 +34,4 @@ let findIdObj = {
     }
 };
 
-findIdObj.init();
+findUserIdObj.init();
