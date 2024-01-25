@@ -142,3 +142,7 @@ h3.title {
 	height: 350px;
 	margin-bottom: 20px;
 }
+
+.toast{
+	display: none;
+}

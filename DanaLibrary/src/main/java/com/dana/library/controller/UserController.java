@@ -67,11 +67,11 @@ public class UserController {
 
 	// 로그인 기능
 	@PostMapping("/user/login")
-	public @ResponseBody ResponseDTO<?> login(@RequestBody User user, HttpSession session) {
-		System.out.println(user.getUserid());
-		User findUser = userService.getUserByIdOrEmail(user.getUserid());
+	public @ResponseBody ResponseDTO<?> login(@RequestParam String input, @RequestParam String password, HttpSession session) {
+		System.out.println("222" + input + password);
+		User findUser = userService.getUserByIdOrEmail(input);
 		if (findUser != null) {
-			if (user.getPassword().equals(findUser.getPassword())) {
+			if (password.equals(findUser.getPassword())) {
 				session.setAttribute("loginUser", findUser);
 				return new ResponseDTO<>(HttpStatus.OK.value(), findUser.getUsername() + "님, 환영합니다.");
 			} else {
@@ -101,7 +101,7 @@ public class UserController {
 			System.out.println(emailUser.getBirthDate() + " " + user.getBirthDate());
 			if (emailUser.getUsername().equals(user.getUsername())
 					&& emailUser.getBirthDate().toString().equals(user.getBirthDate().toString())) {
-				session.setAttribute("emailUser", emailUser);
+				session.setAttribute("userid", emailUser.getUserid());
 				return new ResponseDTO<>(HttpStatus.OK.value(), "아이디 찾기 성공");
 			}
 			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "조건에 맞는 회원 없음");
