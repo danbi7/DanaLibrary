@@ -23,5 +23,4 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	
 	Optional<User> findByBirthDate(Date birthDate);
 	
-	
 }

@@ -16,43 +16,46 @@
 									<h4 class="text-center">DANA 도서관</h4>
 								</div>
 							</div>
-
-
-
-							<p style="color: #6E6E6E; margin-bottom: 30px;">
-								이메일 인증이 완료되었습니다.<br>새로운 비밀번호를 설정해주세요.
-							</p>
-
-
 						</div>
 
-						<p>
 						<div class="row gy-3 overflow-hidden">
-							<div class="col-12">
+							<div class="col-10" style="padding-right: 0px;">
 								<div class="form-floating mb-3">
-									<input type="password" class="form-control" name="password"
-										id="password" placeholder="비밀번호 입력" required> <label
-										for="number" class="form-label">새 비밀번호</label>
+									<input
+										style="border-top-right-radius: 0px; border-bottom-right-radius: 0px;"
+										type="text" class="form-control" name="email" id="email"
+										placeholder="이메일" required> <label for="email"
+										class="form-label">이메일</label>
 								</div>
 							</div>
 
+							<div class="col-2" style="padding-left: 0px;">
+								<button class="btn btn-outline-secondary"
+									style="height: 58px; border-top-left-radius: 0px; border-bottom-left-radius: 0px;">인증</button>
+
+							</div>
 							<div class="col-12">
 								<div class="form-floating mb-3">
-									<input type="password" class="form-control" name="repassword"
-										id="repassword" placeholder="비밀번호 재입력" required> <label
-										for="number" class="form-label">비밀번호 재입력</label>
+									<input type="text" class="form-control" name="username"
+										id="username" placeholder="이름을 입력하세요" required> <label
+										for="username" class="form-label">이름</label>
 								</div>
-								<div id="repasswordError" style="color: red;"></div>
 							</div>
-
+							<div class="col-12">
+								<div class="form-floating mb-3">
+									<input type="date" class="form-control" name="birthDate"
+										id="birthDate" placeholder="생년월일을 입력하세요" required> <label
+										for="birthDate" class="form-label">생년월일</label>
+								</div>
+							</div>
 
 							<div class="col-12">
 								<div class="d-grid">
-									<button class="btn bsb-btn-xl btn-primary" id="btn-changePw">확인</button>
+									<button class="btn bsb-btn-xl btn-primary" id="btn-findId">아이디
+										찾기</button>
 								</div>
 							</div>
 						</div>
-
 
 						<div class="row">
 							<div class="col-12">
@@ -74,8 +77,9 @@
 			</div>
 		</div>
 	</div>
-
 </section>
-<script src="/js/changePw.js"></script>
+
+<script src="/js/findUserId.js"></script>
 
 <%@ include file="../layout/footer.jsp"%>
+</body>

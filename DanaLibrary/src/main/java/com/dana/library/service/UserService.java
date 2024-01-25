@@ -1,6 +1,5 @@
 package com.dana.library.service;
 
-
 import java.util.function.Supplier;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +16,7 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
+	// 이메일로 getUser
 	@Transactional(readOnly = true)
 	public User findByEmail(User user) {
 		System.out.println("111111");
@@ -28,12 +28,15 @@ public class UserService {
 		return findUser;
 	}
 	
+	// 회원가입
 	@Transactional
 	public void insertUser(User user) {
 		user.setUserStatus(Status.ACTIVE);
 		userRepository.save(user);
 	}
 	
+	
+	// 사용자 아이디로 getUser
 	@Transactional(readOnly = true)
 	public User getUser(String userid) {
 		User findUser = userRepository.findByUserid(userid).orElseGet(()->{
@@ -43,9 +46,10 @@ public class UserService {
 		return findUser;
 	}
 	
+	
+	// 사용자 아이디 중복 여부
 	 @Transactional(readOnly = true)
 	  public boolean isUserIdDuplicate(String userid) {
-	    // 사용자 아이디가 중복되는지 확인
 	    return userRepository.existsByUserid(userid);
 	  }
   
@@ -57,6 +61,7 @@ public class UserService {
 		return findUser;
 	}
 
+	// 사용자 비밀번호 변경
 	@Transactional
 	public void changepw(User user) {
 	    User findUser = userRepository.findByUserid(user.getUserid()).get();
