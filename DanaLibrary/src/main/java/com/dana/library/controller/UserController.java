@@ -58,11 +58,6 @@ public class UserController {
 	public @ResponseBody ResponseDTO<?> insertUser(@Valid @RequestBody UserDTO userDTO, BindingResult bindingResult) {
 	    // 검증 성공 시에만 매핑 및 비즈니스 로직 수행
 	    User user = modelMapper.map(userDTO, User.class);
-	    User findUser = userService.getUser(user.getUserid());
-
-	    if (findUser != null) {
-	        return new ResponseDTO<>(HttpStatus.BAD_GATEWAY.value(), "이미 가입한 회원입니다.");
-	    }
 	    userService.insertUser(user);
 	    return new ResponseDTO<>(HttpStatus.OK.value(), user.getUsername() + " 님 회원 가입을 축하합니다!");
 	}
