@@ -36,6 +36,7 @@ public class UserDTO {
 	@NotBlank(message = "비밀번호는 필수 입력 항목입니다.")
 	private String password;
 	
+	@NotNull(message = "생년월일 입력은 필수입니다.")
 	@Past(message = "생년월일은 현재 날짜보다 이전이어야 합니다.")
 	private Date birthDate;
 }
