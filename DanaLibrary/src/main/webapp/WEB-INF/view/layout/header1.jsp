@@ -15,7 +15,9 @@
 <link href="/webjars/summernote/0.8.10/summernote-bs4.css"
 	rel="stylesheet">
 <script src="/webjars/summernote/0.8.10/summernote-bs4.min.js"></script>
-<link rel="stylesheet" type="text/css" href="/css/style.css">
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="stylesheet" type="text/css" href="/css/result.css">
+<link rel="stylesheet" type="text/css" href="/css/board.css">
 
 </head>
 <body>

@@ -1,0 +1,40 @@
+#result-message{
+    font-size: 12px;
+	font-weight: bold;
+	color: #ff0000;
+}
+
+.result{
+    margin-top: 0px;
+	justify-content: space-between;
+}
+
+#result-username-message{
+    font-size: 12px;
+	font-weight: bold;
+	color: #ff0000;
+}
+
+#result-userid-message{
+    font-size: 12px;
+	font-weight: bold;
+	color: #ff0000;
+}
+
+#result-password-message{
+    font-size: 12px;
+	font-weight: bold;
+	color: #ff0000;
+}
+
+#result-repassowrd-message{
+    font-size: 12px;
+	font-weight: bold;
+	color: #ff0000;
+}
+
+#result-email-message{
+    font-size: 12px;
+	font-weight: bold;
+	color: #ff0000;
+}
