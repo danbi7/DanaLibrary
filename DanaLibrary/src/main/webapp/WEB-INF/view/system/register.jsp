@@ -33,6 +33,9 @@
                  <div class="col-2" style="padding-left:0px">
                    <button type="button" class="btn btn-secondary" id="btn-idcheck" style="height:58px; border-top-left-radius: 0px; border-bottom-left-radius: 0px">중복 확인</button>
                    </div>
+                   <div id="idcheckResult" style="margin-top:0px"></div>
+                  
+                   
                <div class="col-12">
                   <div class="form-floating mb-3">
                     <input type="password" class="form-control" name="password" id="password">
@@ -120,6 +123,8 @@
 
 <script>
   $(document).ready(function(){
+	    
+	  // 이메일 도메인 선택 시 이벤트 처리  
     $("#emailDomain").change(function(){
       if($(this).val() === 'custom') {
         $("#customEmail").show();

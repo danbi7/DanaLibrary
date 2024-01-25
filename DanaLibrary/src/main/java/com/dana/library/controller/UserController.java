@@ -6,9 +6,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -42,16 +43,21 @@ public class UserController {
 	}
 
 	// 아이디 중복검사 기능
-	@PostMapping("/user/checkUserId")
-	public @ResponseBody ResponseDTO<?> checkUserId(@RequestBody User user) {
-		boolean isDuplicate = userService.isUserIdDuplicate(user.getUserid());
-
+	@PostMapping("/user/checkUserId/{userid}")
+	public @ResponseBody ResponseDTO<?> checkUserId(@PathVariable String userid) {
+		// userService로 아이디 중복 확인
+		boolean isDuplicate = userService.isUserIdDuplicate(userid);
+		// 중복에 따라 결과 출력
 		if (isDuplicate) {
-			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "이미 가입된 아이디입니다.");
+			// 중복일 경우 CONFLICT 상태 코드와 아이디 중복 메시지 출력
+			return new ResponseDTO<>(HttpStatus.CONFLICT.value(), "이미 존재하는 아이디입니다.");
 		} else {
+			// 중복이 아닐 경우 OK(200) 상태 코드와 사용 가능 메시지 출력
 			return new ResponseDTO<>(HttpStatus.OK.value(), "사용 가능한 아이디입니다.");
 		}
+
 	}
+		
 
 	// 회원가입 기능
 	@PostMapping("/user/insertUser")
