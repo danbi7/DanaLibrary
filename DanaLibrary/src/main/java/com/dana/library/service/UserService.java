@@ -56,8 +56,8 @@ public class UserService {
 	//아이디 또는 이메일로 getUser
 	@Transactional
 	public User getUserByIdOrEmail(String input) {
-		User findUser = userRepository.findByEmail(input).orElseGet(() -> userRepository.findByUserid(input).orElse(new User()));
-
+		User findUser = userRepository.findByEmail(input)
+	            .orElseGet(() -> userRepository.findByUserid(input).orElse(new User()));
 		return findUser;
 	}
 
