@@ -35,6 +35,9 @@ let userObject = {
 				let message = response["data"];
 			alert(message);
 			location = "/";
+			}else if(status == 502){
+				let message = response["data"];
+				alert(message);
 			}else {
 				let warn = "";
 				let errors = response["data"];

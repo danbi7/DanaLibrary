@@ -79,16 +79,18 @@ let userObject = {
 		let password = $("#password").val();
 		let repassword = $("#repassword").val();
 		let repasswordError = $("#repasswordError");
-
-		if (password !== repassword) {
-			repasswordError.text("비밀번호가 일치하지 않습니다.");
-			return false; // 일치하지 않으면 false 반환
+		
+		if (password === null || password === "") {
+			return false; // 비밀번호가 null이거나 빈문자열일경우 false를 반환
+		} else {
+			if (password !== repassword) {
+				repasswordError.text("비밀번호가 일치하지 않습니다.");
+				return false; // 비밀번호가 일치하지 않으면 false를 반환
+			} else {
+				repasswordError.text("");
+				return true; // 비밀번호가 일치하면 true를 반환.
+			}
 		}
-		else {
-			repasswordError.text("");
-			return true; // 일치하면 true 반환
-		}
-
 	},
 
 

@@ -1,8 +1,10 @@
 package com.dana.library.controller;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,15 +14,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dana.library.domain.User;
 import com.dana.library.dto.ResponseDTO;
+import com.dana.library.dto.UserDTO;
 import com.dana.library.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @Controller
 public class UserController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private ModelMapper modelMapper;
 
 	// 메인 페이지
 	@GetMapping({ "", "/" })
@@ -48,15 +55,16 @@ public class UserController {
 
 	// 회원가입 기능
 	@PostMapping("/user/insertUser")
-	public @ResponseBody ResponseDTO<?> insertUser(@RequestBody User user) {
-		User findUser = userService.getUser(user.getUserid());
+	public @ResponseBody ResponseDTO<?> insertUser(@Valid @RequestBody UserDTO userDTO, BindingResult bindingResult) {
+	    // 검증 성공 시에만 매핑 및 비즈니스 로직 수행
+	    User user = modelMapper.map(userDTO, User.class);
+	    User findUser = userService.getUser(user.getUserid());
 
-		if (findUser.getUserid() == null) {
-			userService.insertUser(user);
-			return new ResponseDTO<>(HttpStatus.OK.value(), user.getUsername() + " 님 회원 가입을 축하합니다!");
-		} else {
-			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), user.getUsername() + "님은 이미 가입하신 회원입니다.");
-		}
+	    if (findUser != null) {
+	        return new ResponseDTO<>(HttpStatus.BAD_GATEWAY.value(), "이미 가입한 회원입니다.");
+	    }
+	    userService.insertUser(user);
+	    return new ResponseDTO<>(HttpStatus.OK.value(), user.getUsername() + " 님 회원 가입을 축하합니다!");
 	}
 
 	// 로그인 페이지
