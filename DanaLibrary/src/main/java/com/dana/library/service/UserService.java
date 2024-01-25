@@ -1,6 +1,6 @@
 package com.dana.library.service;
 
-import java.sql.Date;
+
 import java.util.function.Supplier;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,11 +52,8 @@ public class UserService {
 	//아이디 또는 이메일로 getUser
 	@Transactional
 	public User getUserByIdOrEmail(String input) {
-		User findUser = userRepository.findByEmail(input).get();
-		if (findUser == null) {
-			findUser = userRepository.findByUserid(input).get();
-		}
-
+		User findUser = userRepository.findByEmail(input)
+	            .orElseGet(() -> userRepository.findByUserid(input).orElse(new User()));
 		return findUser;
 	}
 
@@ -70,16 +67,6 @@ public class UserService {
 	    } else {
 	        throw new RuntimeException("사용자가 존재하지 않습니다.");
 	    }
-	}
-
-	@Transactional
-	public User getUserByIdOrEmail(String userid) {
-		User findUser = userRepository.findByEmail(userid);
-		if (findUser == null) {
-			findUser = userRepository.findByUserid(userid);
-		}
-
-		return findUser;
 	}
 
 }

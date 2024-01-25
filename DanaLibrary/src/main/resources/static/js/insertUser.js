@@ -30,10 +30,19 @@ let userObject = {
 			data: JSON.stringify(user),
 			contentType: "application/json; charset=utf-8"
 		}).done(function(response) {
-			console.log(user);
-			let message = response["data"];
+			let status = response["status"];
+			if(status == 200 ) {
+				let message = response["data"];
 			alert(message);
 			location = "/";
+			}else {
+				let warn = "";
+				let errors = response["data"];
+				if(errors.userid != null) warn = warn + errors.userid + "\n";
+				if(errors.password != null) warn = warn + errors.password + "\n";
+				if(errors.email != null) warn = warn + errors.email;
+				alert(warn);
+			}
 		}).fail(function(error) {
 			let message = error["data"];
 			alert("에러 발생 : " + message)
