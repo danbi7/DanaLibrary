@@ -45,9 +45,10 @@
                 
                  <div class="col-12">
                   <div class="form-floating mb-3">
-                    <input type="password" class="form-control" name="passwordcheck" id="passwordcheck">
+                    <input type="password" class="form-control" name="repassword" id="repassword">
                     <label for="비밀번호 확인" class="form-label">비밀번호 확인</label>
                   </div>
+                  <div id="pwcheckResult" style="margin-top:0px"></div>
                 </div>
                 
                     <div class="col-12">
@@ -69,6 +70,10 @@
          
          
       </select>
+      
+      <div class="col-2" style="padding-left:0px">
+                   <button type="button" class="btn btn-secondary" id="btn-emailcheck" style="height:58px; border-top-left-radius: 0px; border-bottom-left-radius: 0px">중복 확인</button>
+                   </div>
       <div class="col-12">
     <div class="input-group mb-3">
        <input type="email" class="form-control" name="customEmail" id="customEmail" placeholder="ex) abc123@naver.com" style="display: none;">
@@ -137,6 +142,7 @@
   });
 </script>
 <script src="/js/idcheck.js"></script>
+<script src="/js/passwordCheck.js"></script>
 <script src="/js/insertUser.js"></script>
 
 <%@ include file="../layout/footer.jsp" %>

@@ -1,4 +1,4 @@
-let userObject = {
+let insertUser = {
 
 	init: function() {
 		let _this = this;
@@ -54,4 +54,4 @@ let userObject = {
 	},
 }
 
-userObject.init();
+insertUser.init();

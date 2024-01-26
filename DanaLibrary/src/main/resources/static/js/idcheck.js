@@ -1,4 +1,4 @@
-let userObject = {
+let idcheck = {
 	
     init: function() {
         let _this = this;
@@ -35,4 +35,4 @@ let userObject = {
 }
 
 // 초기화 함수 호출
-userObject.init();
+idcheck.init();
