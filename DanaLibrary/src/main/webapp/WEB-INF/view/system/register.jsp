@@ -33,11 +33,15 @@
 							</div>
 
 							<div class="col-2" style="padding-left: 0px">
-								<button type="button" class="btn btn-secondary" id="btn-idcheck"
+								<button type="button" class="btn btn-secondary" id="btn-idCheck"
 									style="height: 58px; border-top-left-radius: 0px; border-bottom-left-radius: 0px">중복
 									확인</button>
 							</div>
-							
+
+							<div class="result">
+								<span id="result-userid-message"></span>
+							</div>
+
 							<div class="col-12">
 								<div class="form-floating mb-3">
 									<input type="password" class="form-control" name="password"
@@ -45,6 +49,9 @@
 								</div>
 							</div>
 
+							<div class="result">
+								<span id="result-password-message"></span>
+							</div>
 							<div class="col-12">
 								<div class="form-floating mb-3">
 									<input type="password" class="form-control"
@@ -53,11 +60,19 @@
 								</div>
 							</div>
 
+							<div class="result">
+								<span id="result-repassword-message"></span>
+							</div>
+
 							<div class="col-12">
 								<div class="form-floating mb-3">
 									<input type="text" class="form-control" name="username"
 										id="username"> <label for="이름" class="form-label">이름</label>
 								</div>
+							</div>
+
+							<div class="result">
+								<span id="result-username-message"></span>
 							</div>
 
 							<div class="col-12">
@@ -73,7 +88,7 @@
 
 
 									</select>
-									<div class="col-12">
+									<div class="col-12" id="customEmail-box" style="display: none; height: 37px">
 										<div class="input-group mb-3">
 											<input type="email" class="form-control" name="customEmail"
 												id="customEmail" placeholder="ex) abc123@naver.com"
@@ -82,8 +97,11 @@
 									</div>
 
 								</div>
+								
+							<div class="result">
+								<span id="result-email-message"></span>
 							</div>
-
+							</div>
 
 							<div class="col-12">
 								<div class="input-group mb-3">
@@ -97,7 +115,11 @@
 									</select>
 								</div>
 							</div>
-							
+
+							<div class="result">
+								<span id="result-birthDate-message"></span>
+							</div>
+
 							<div class="col-12">
 								<div class="d-grid">
 									<button class="btn bsb-btn-xl btn-primary" id="btn-insert">회원
@@ -133,6 +155,7 @@
 	$(document).ready(function() {
 		$("#emailDomain").change(function() {
 			if ($(this).val() === 'custom') {
+				$("#customEmail-box").show();
 				$("#customEmail").show();
 				$("#emailId").prop('disabled', true);
 			} else {
