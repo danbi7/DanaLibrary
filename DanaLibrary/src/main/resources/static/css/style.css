@@ -3,9 +3,25 @@
 	justify-content: center;
 	align-items: flex-start;
 	width: 100%;
-	width: 1000px;
 	margin: 0px auto;
 }
+.container-page{
+	min-height: 500px;
+}
+.container-page-content{
+	width: 80%;
+	margin: auto;
+}
+.container-tab{
+	background-color: #FFFFFF;
+	min-height: 500px;
+	border-top: 7px solid #205295;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 
 body {
 	font-family: '맑은 고딕','Malgun Gothic','나눔고딕',NanumGothic,Helvetica,sans-serif;
