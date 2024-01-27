@@ -35,7 +35,7 @@ public class UserService {
 			user.setGender("남");
 		}
 		
-		user.setUserStatus(Status.ACTIVE);
+		user.setUserStatus(Status.PENDING);
 		userRepository.save(user);
 	}
 	

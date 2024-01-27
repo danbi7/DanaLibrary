@@ -36,6 +36,12 @@ public class UserController {
 	public String main() {
 		return "main";
 	}
+	
+	// 도서관 소개
+	@GetMapping("/view/libraryInfo")
+	public String libraryInfo() {
+		return "libraryInfo";
+	}
 
 	// 회원가입 페이지
 	@GetMapping("/user/view/insertUser")
