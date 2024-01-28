@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
 
-<body>
-
-	<div class="table-responsive" style="margin-top: 20px;">
+	<div class="table-responsive">
 		<table class="table">
 		<thead></thead>
 			<thead>
@@ -82,7 +78,3 @@
 
 		</table>
 	</div>
-
-</body>
-
-</html>
