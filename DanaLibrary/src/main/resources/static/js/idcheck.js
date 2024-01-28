@@ -3,10 +3,11 @@ let idcheck = {
     init: function() {
         let _this = this;
 
-        $("#btn-idcheck").on("click", () => {
-            _this.idcheck();
+        $("#btn-idCheck").on("click", () => {
+            _this.idCheck();
         });
     },
+    
     idCheck: function() {
 		let userid = $("#userid").val();
 

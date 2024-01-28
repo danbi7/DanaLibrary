@@ -34,7 +34,7 @@
 
 			<ul class="nav ms-auto">
 			<c:if test="${sessionScope.loginUser != null }">
-				<li class="noti-icon"><img src="/image/notification.png"></li>
+				<li class="noti-icon"><img src="/image/icon/notification.png"></li>
 				<li class="nav-item firstNav-right"><a href="/user/logout"
 					class="nav-link link-dark px-2">로그아웃</a></li>
 				</c:if>
@@ -46,7 +46,7 @@
 					</c:if>
 				<li><input type="search" class="form-control"
 					placeholder="제목으로 검색하기" aria-label="Search"></li>
-				<li><a href="#"><img src="/image/search.png"></a></li>
+				<li><a href="#"><img src="/image/icon/search.png"></a></li>
 			</ul>
 		</div>
 	</nav>

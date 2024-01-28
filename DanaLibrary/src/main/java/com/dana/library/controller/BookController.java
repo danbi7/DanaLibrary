@@ -16,7 +16,7 @@ public class BookController {
 	@Autowired
 	private BookService bookService;
 	
-	@GetMapping("/book/view/bookList")
+	@GetMapping("/book/view/getBookList")
 	public String getBookList(Model model) {
 		List<Book> bookList = bookService.getBookList();
 		model.addAttribute("bookList", bookList);

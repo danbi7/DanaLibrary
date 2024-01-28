@@ -2,9 +2,26 @@
 	display: flex;
 	justify-content: center;
 	align-items: flex-start;
-	width: 80%;
+	width: 100%;
 	margin: 0px auto;
 }
+.container-page{
+	min-height: 500px;
+}
+.container-page-content{
+	width: 80%;
+	margin: auto;
+}
+.container-tab{
+	background-color: #FFFFFF;
+	min-height: 500px;
+	border-top: 7px solid #205295;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 
 body {
 	font-family: '맑은 고딕','Malgun Gothic','나눔고딕',NanumGothic,Helvetica,sans-serif;
@@ -32,12 +49,7 @@ body {
 .secondNav a {
 	font-size: 18px;
 	color: #365486;
-	display: flex;
-	justify-content: space-between;
-}
-
-.secondNav li:not(:last-child){
-	margin-right: 70px;
+	margin: 0px 50px;
 }
 
 .firstNav-right {
@@ -149,8 +161,4 @@ h3.title {
 
 .toast{
 	display: none;
-}
-
-header{
-	margin-bottom: 20px;
 }
