@@ -40,12 +40,9 @@ public class Book {
 	@Column
 	private String image;
 	
-	@Lob
-	@Column
-	private String info;
 	
-	@Column
-	private float size;
+	@Column(length = 3000)
+	private String info;
 	
 	@Column
 	private int pages;
