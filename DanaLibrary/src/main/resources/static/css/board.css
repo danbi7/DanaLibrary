@@ -1,0 +1,55 @@
+.container-board {
+	display: flex;
+	width: 50%;
+	margin: 0px auto;
+	flex-direction: column;
+}
+
+.parent{
+	width: 100%; 
+	display: flex; 
+	align-items: center;
+}
+
+.second, .thrid, .fourth, .fifth{
+	width: 100%
+}
+
+#btn-save{
+	width: 20%;
+}
+
+.third, .fifth, .container-board{
+	margin-top: 20px;
+}
+
+h4{
+	margin: 0px !important;
+}
+
+.container-head{
+	display: flex;	
+	justify-content: space-between;
+}
+
+/* styles.css */
+.title {
+    font-size: 20px;
+}
+
+.writer {
+    font-size: 18px;
+}
+
+.container-body{
+	display: flex;
+	justify-content: space-between;
+}
+
+.buttons{
+	margin: 5px;
+}
+
+hr:not([size]) {
+    height: 2px;
+}
