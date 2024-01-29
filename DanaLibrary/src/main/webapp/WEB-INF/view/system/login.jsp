@@ -66,5 +66,5 @@
     </div>
   </div>
 </section>
-<script src="/js/login.js"></script>
+<script src="/js/user/login.js"></script>
 <%@ include file="../layout/footer.jsp" %>

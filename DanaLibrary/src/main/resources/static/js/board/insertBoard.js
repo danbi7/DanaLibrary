@@ -10,7 +10,7 @@ let postObject = {
       alert("작성완료");
 
       let post = {
-         category: $("#dropdownMenuButton1").val(),
+         category: $("#category1").val(),
          title: $("#title").val(),
          content: $("#content").val()
       };

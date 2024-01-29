@@ -19,7 +19,7 @@ let insertUser = {
 			birthDate: $("#birthDate").val(),
 			gender: $("#gender").val()
 		}
-
+		
 		if ($("#emailDomain").val() === 'custom') {
 			user.email = $("#customEmail").val();
 		} else {

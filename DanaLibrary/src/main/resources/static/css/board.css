@@ -44,6 +44,7 @@ h4{
 .container-body{
 	display: flex;
 	justify-content: space-between;
+	font-size: 14px;
 }
 
 .buttons{
@@ -52,4 +53,25 @@ h4{
 
 hr:not([size]) {
     height: 2px;
+}
+
+.custom-textarea {
+   width: 100%;
+   margin: auto;
+   height: 250px;
+   /* 다른 스타일 속성들을 추가할 수 있습니다. */
+}
+
+#btn-searchBoard img {
+	margin-top: 4px;
+	margin-left: 8px;
+	width: 30px;
+	height: 30px;
+}
+
+#btn-searchBoard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Optional: Set the height of the container if needed */
 }

@@ -81,7 +81,7 @@
 	</div>
 </section>
 
-<script src="/js/findUserId.js"></script>
+<script src="/js/user/findUserId.js"></script>
 
 <%@ include file="../layout/footer.jsp"%>
 </body>

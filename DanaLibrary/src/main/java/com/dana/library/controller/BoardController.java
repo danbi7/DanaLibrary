@@ -70,30 +70,31 @@ public class BoardController {
 	}
 
 	// 글 상세 보기 페이지
-	@GetMapping("/board/view/getBoard")
-	public String getBoard() {
+	@GetMapping("/board/view/getBoard/{boardNum}")
+	public String getBoard(@PathVariable int boardNum, Model model) {
+		model.addAttribute("board", (Board) boardService.getBoardById(boardNum));
 		return "board/board";
 	}
 
 	// 글 수정 페이지
-	@GetMapping("/board/view/updatePost/{postId}")
-	public String updatePost(@PathVariable int postId, Model model) {
-		Board board = boardService.getBoardById(postId);
-		model.addAttribute("post", board);
-		return "system/updatePost";
+	@GetMapping("/board/view/updateBoard/{boardNum}")
+	public String updateBoard(@PathVariable int boardNum, Model model) {
+		Board board = boardService.getBoardById(boardNum);
+		model.addAttribute("board", board);
+		return "board/updateBoard";
 	}
 
 	// 글 수정 기능
-	@PutMapping("/board/updatePost/{postId}")
-	public @ResponseBody ResponseDTO<?> updatePost(@PathVariable int postId, @RequestBody Board board) {
-		boardService.updatePost(board, postId);
+	@PutMapping("/board/updateBoard/{boardNum}")
+	public @ResponseBody ResponseDTO<?> updatePost(@PathVariable int boardNum, @RequestBody Board board) {
+		boardService.updateBoard(board, boardNum);
 		return new ResponseDTO<>(HttpStatus.OK.value(), "글 수정 완료");
 	}
 
 	// 글 삭제 기능
-	@DeleteMapping("/board/deletePost/{postId}")
-	public @ResponseBody ResponseDTO<?> deletePost(@PathVariable int postId) {
-		boardService.deletePost(postId);
+	@DeleteMapping("/board/deleteBoard/{boardNum}")
+	public @ResponseBody ResponseDTO<?> deletePost(@PathVariable int boardNum) {
+		boardService.deleteBoard(boardNum);
 		return new ResponseDTO<>(HttpStatus.OK.value(), "글 삭제 컨트롤러 실행");
 	}
 }

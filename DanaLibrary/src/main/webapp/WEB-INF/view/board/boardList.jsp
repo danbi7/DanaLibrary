@@ -9,7 +9,7 @@
   <div class="col-md-6 text-center" style="margin: 10px;">
     <div class="d-flex">
       <div class="dropdown">
-    <select name="order" class="btn btn-secondary dropdown-toggle" aria-label="Dropdown" id="category1">
+    <select name="order" class="btn btn-outline-primary dropdown-toggle" aria-label="Dropdown" id="category1" style="height: 100%">
               <c:forEach var="category" items="${Category.values()}">
                   <option value="${category}">${category.category }</option>
                   </c:forEach>
@@ -17,15 +17,15 @@
 </div>
 
 
-      <input class="form-control me-2" type="text" placeholder="Search" id="title">
-      <button class="btn btn-primary" type="button" id="btn-searchBoard">Search</button>
+      <input class="form-control" type="text" placeholder="Search" id="title">
+      <a href="#" id="btn-searchBoard"><img src="/image/icon/search.png"></a>
     </div>
   </div>
 </div>
 
 <script src="/js/searchBoard.js"></script>
 
-<div class="container mt-3">      
+<div class="container-main">      
   <table class="table table-hover">
 	<tr>
 		<th>번호</th>
@@ -40,9 +40,9 @@
 	<c:forEach items="${boardList }" var="boardList">
 	<tr>
 		<td>${boardList.boardNum }</td>
-		<td><a href="/board/view/getBoard?boardNum=${boardList.boardNum }">${boardList.title }</a></td>
+		<td><a href="/board/view/getBoard/${boardList.boardNum }">${boardList.title }</a></td>
 		<td>${boardList.user.userid }</td>
-		<td>${boardList.category }</td>
+		<td>${boardList.category.category }</td>
 		<td>${boardList.regDate }</td>
 		<td>${boardList.views }</td>
 		<td>${boardList.likes }</td>
