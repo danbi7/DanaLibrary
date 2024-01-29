@@ -1,10 +1,14 @@
-let insertUser = {
+let userObject = {
 
 	init: function() {
 		let _this = this;
 
 		$("#btn-insert").on("click", () => {
 			_this.insertUser();
+		});
+
+		$("#btn-idCheck").on("click", () => {
+			_this.idCheck();
 		});
 
 		$("#passwordcheck").on("input", function() {
@@ -74,6 +78,29 @@ let insertUser = {
 
 	},
 
+	idCheck: function() {
+		let userid = $("#userid").val();
+
+		$.ajax({
+			type: "POST",
+			url: "/user/checkUserId/" + userid,
+			contentType: "application/json; charset=UTF-8"
+		}).done(function(response) {
+			console.log(response)
+			// 성공적인 응답 처리
+			// 서버로부터 받은 응답 처리
+			if (response.status === 200) {
+				// 중복이 아닌 경우
+				$("#result-userid-message").text("사용 가능한 아이디입니다.").css("color", "blue");
+			} else {
+				// 중복인 경우
+				$("#result-userid-message").text("사용 중인 아이디입니다.").css("color", "red");
+			}
+		}).fail(function(error) {
+			alert("에러 발생 : " + error)
+		});
+	},
+
 	validatePasswordConfirmation: function() {
 		let password = $("#password").val();
 		let repassword = $("#passwordcheck").val();
@@ -93,4 +120,4 @@ let insertUser = {
 	}
 }
 
-insertUser.init();
+userObject.init();

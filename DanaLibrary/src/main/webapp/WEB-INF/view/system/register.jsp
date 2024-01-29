@@ -164,10 +164,8 @@
 			}
 		});
 	});
-
 </script>
 <script src="/js/idcheck.js"></script>
-<script src="/js/passwordCheck.js"></script>
 <script src="/js/insertUser.js"></script>
 
 <%@ include file="../layout/footer.jsp"%>

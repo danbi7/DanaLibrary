@@ -18,6 +18,7 @@
 <link rel="stylesheet" type="text/css" href="/css/main.css">
 <link rel="stylesheet" type="text/css" href="/css/result.css">
 <link rel="stylesheet" type="text/css" href="/css/board.css">
+<link rel="stylesheet" type="text/css" href="/css/book.css">
 
 </head>
 <body>
