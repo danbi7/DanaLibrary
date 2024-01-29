@@ -78,7 +78,7 @@ let userObject = {
 	validatePasswordConfirmation: function() {
 		let password = $("#password").val();
 		let repassword = $("#repassword").val();
-
+		
 		if (password === null || password === "") {
 			$(".result").css("display", "flex");
 			$("#result-message").text("비밀번호 입력은 필수입니다.");
