@@ -39,11 +39,8 @@ public class Book {
 	@Column
 	private String image;
 	
-	@Column
+	@Column(length = 3000)
 	private String info;
-	
-	@Column
-	private float size;
 	
 	@Column
 	private int pages;
