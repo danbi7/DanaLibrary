@@ -1,6 +1,6 @@
 package com.dana.library.domain;
 
 public enum Status {
-	ACTIVE, INACTIVE;
+	ACTIVE, INACTIVE, PENDING, ADMIN;
 
 }

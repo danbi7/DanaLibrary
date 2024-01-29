@@ -6,16 +6,15 @@
 
 <div class="container-board">
 	<div class=parent>
-		<div class="dropdown first">
-			<button class="btn btn-secondary dropdown-toggle" type="button"
-				id="dropdownMenuButton1" data-bs-toggle="dropdown"
-				aria-expanded="false">카테고리</button>
-			<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-				<c:forEach var="category" items="${Category.values()}">
-					<li><a class="dropdown-item" onclick="changeCategory('${category.category}')">${category.category}</a></li>
-				</c:forEach>
-			</ul>
-		</div>
+		<div class="d-flex">
+      <div class="dropdown">
+    <select name="order" class="btn btn-secondary dropdown-toggle" aria-label="Dropdown" id="category1">
+              <c:forEach var="category" items="${Category.values()}">
+                  <option value="${category}">${category.category }</option>
+                  </c:forEach>
+    </select>
+</div>
+</div>
 
 		<div class="second">
 			<input type="text" id="title" name="title" class="form-control"
@@ -41,13 +40,9 @@
 		});
 	</script>
 	<div class="fifth text-center">
-		<button id="btn-save" class="btn btn-secondary">글등록</button>
+		<button id="write-board" class="btn btn-secondary">글등록</button>
 	</div>
 </div>
 
-<script>
-	function changeCategory(category) {
-		$('#dropdownMenuButton1').text(category);
-	}
-</script>
+<script src="/js/insertBoard.js"></script>
 <%@ include file="../layout/footer.jsp"%>

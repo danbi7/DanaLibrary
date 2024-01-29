@@ -9,8 +9,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -36,6 +36,12 @@ public class UserController {
 	public String main() {
 		return "main";
 	}
+	
+	// 도서관 소개
+	@GetMapping("/view/libraryInfo")
+	public String libraryInfo() {
+		return "libraryInfo";
+	}
 
 	// 회원가입 페이지
 	@GetMapping("/user/view/insertUser")
@@ -58,6 +64,7 @@ public class UserController {
 		}
 
 	}
+		
 
 	// 회원가입 기능
 	@PostMapping("/user/insertUser")
