@@ -31,6 +31,10 @@ public class UserService {
 	// 회원가입
 	@Transactional
 	public void insertUser(User user) {
+		if(user.getGender() == null) {
+			user.setGender("남");
+		}
+		
 		user.setUserStatus(Status.ACTIVE);
 		userRepository.save(user);
 	}

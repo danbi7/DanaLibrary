@@ -3,6 +3,7 @@
 	justify-content: center;
 	align-items: flex-start;
 	width: 100%;
+	width: 80%;
 	margin: 0px auto;
 }
 .container-page{
@@ -49,7 +50,12 @@ body {
 .secondNav a {
 	font-size: 18px;
 	color: #365486;
-	margin: 0px 50px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.secondNav li:not(:last-child){
+	margin-right: 70px;
 }
 
 .firstNav-right {
@@ -161,4 +167,8 @@ h3.title {
 
 .toast{
 	display: none;
+}
+
+header{
+	margin-bottom: 20px;
 }

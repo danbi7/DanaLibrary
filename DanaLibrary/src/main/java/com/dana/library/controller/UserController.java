@@ -4,8 +4,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -25,7 +27,7 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private ModelMapper modelMapper;
 
@@ -42,29 +44,29 @@ public class UserController {
 	}
 
 	// 아이디 중복검사 기능
-	@PostMapping("/user/checkUserId")
-	public @ResponseBody ResponseDTO<?> checkUserId(@RequestBody User user) {
-		boolean isDuplicate = userService.isUserIdDuplicate(user.getUserid());
-
+	@PostMapping("/user/checkUserId/{userid}")
+	public @ResponseBody ResponseDTO<?> checkUserId(@PathVariable String userid) {
+		// userService로 아이디 중복 확인
+		boolean isDuplicate = userService.isUserIdDuplicate(userid);
+		// 중복에 따라 결과 출력
 		if (isDuplicate) {
-			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "이미 가입된 아이디입니다.");
+			// 중복일 경우 CONFLICT 상태 코드와 아이디 중복 메시지 출력
+			return new ResponseDTO<>(HttpStatus.CONFLICT.value(), "이미 존재하는 아이디입니다.");
 		} else {
+			// 중복이 아닐 경우 OK(200) 상태 코드와 사용 가능 메시지 출력
 			return new ResponseDTO<>(HttpStatus.OK.value(), "사용 가능한 아이디입니다.");
 		}
+
 	}
 
 	// 회원가입 기능
 	@PostMapping("/user/insertUser")
 	public @ResponseBody ResponseDTO<?> insertUser(@Valid @RequestBody UserDTO userDTO, BindingResult bindingResult) {
-	    // 검증 성공 시에만 매핑 및 비즈니스 로직 수행
-	    User user = modelMapper.map(userDTO, User.class);
-	    User findUser = userService.getUser(user.getUserid());
-
-	    if (findUser != null) {
-	        return new ResponseDTO<>(HttpStatus.BAD_GATEWAY.value(), "이미 가입한 회원입니다.");
-	    }
-	    userService.insertUser(user);
-	    return new ResponseDTO<>(HttpStatus.OK.value(), user.getUsername() + " 님 회원 가입을 축하합니다!");
+		// 검증 성공 시에만 매핑 및 비즈니스 로직 수행
+		User user = modelMapper.map(userDTO, User.class);
+		System.out.println("user:  " + user);
+		userService.insertUser(user);
+		return new ResponseDTO<>(HttpStatus.OK.value(), user.getUsername() + " 님 회원 가입을 축하합니다!");
 	}
 
 	// 로그인 페이지
@@ -75,7 +77,8 @@ public class UserController {
 
 	// 로그인 기능
 	@PostMapping("/user/login")
-	public @ResponseBody ResponseDTO<?> login(@RequestParam String input, @RequestParam String password, HttpSession session) {
+	public @ResponseBody ResponseDTO<?> login(@RequestParam String input, @RequestParam String password,
+			HttpSession session) {
 		System.out.println("222" + input + password);
 		User findUser = userService.getUserByIdOrEmail(input);
 		if (findUser != null) {
@@ -98,7 +101,7 @@ public class UserController {
 
 	// 아이디 찾기 기능
 	@PostMapping("/user/findUserId")
-	public @ResponseBody ResponseDTO<?> findId(@RequestBody User user, HttpSession session) {
+	public @ResponseBody ResponseDTO<?> findId(@RequestBody User user, Model model) {
 		System.out.println(user.toString());
 
 		User emailUser = userService.findByEmail(user);
@@ -109,8 +112,7 @@ public class UserController {
 			System.out.println(emailUser.getBirthDate() + " " + user.getBirthDate());
 			if (emailUser.getUsername().equals(user.getUsername())
 					&& emailUser.getBirthDate().toString().equals(user.getBirthDate().toString())) {
-				session.setAttribute("userid", emailUser.getUserid());
-				return new ResponseDTO<>(HttpStatus.OK.value(), "아이디 찾기 성공");
+				return new ResponseDTO<>(HttpStatus.OK.value(), "아이디는 " + 	emailUser.getUserid() + "입니다.");
 			}
 			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "조건에 맞는 회원 없음");
 		} else {
@@ -160,7 +162,7 @@ public class UserController {
 
 		return new ResponseDTO<>(HttpStatus.OK.value(), "비밀번호 변경 성공");
 	}
-	
+
 	// 로그아웃 및 메인이동
 	@GetMapping("/user/logout")
 	public String logout(HttpSession session) {

@@ -66,7 +66,7 @@ let userObject = {
 					location = "/"; // 로그인 페이지로 보내야됨
 				} else {
 					alert("비밀번호 변경 실패");
-					location = "/user/view/verify";
+					location = "/user/view/verifyEmail";
 				}
 			},
 			error: function(error) {
@@ -78,19 +78,21 @@ let userObject = {
 	validatePasswordConfirmation: function() {
 		let password = $("#password").val();
 		let repassword = $("#repassword").val();
-		let repasswordError = $("#repasswordError");
 		
 		if (password === null || password === "") {
-			return false; // 비밀번호가 null이거나 빈문자열일경우 false를 반환
-		} else {
-			if (password !== repassword) {
-				repasswordError.text("비밀번호가 일치하지 않습니다.");
-				return false; // 비밀번호가 일치하지 않으면 false를 반환
-			} else {
-				repasswordError.text("");
-				return true; // 비밀번호가 일치하면 true를 반환.
-			}
+			$(".result").css("display", "flex");
+			$("#result-message").text("비밀번호 입력은 필수입니다.");
+			return false;
+		}else if (password !== repassword) {
+			$(".result").css("display", "flex");
+			$("#result-message").text("비밀번호가 일치하지 않습니다.");
+			return false; // 일치하지 않으면 false 반환
 		}
+		else {
+			$(".result").css("display", "none");
+			return true; // 일치하면 true 반환
+		}
+
 	},
 
 

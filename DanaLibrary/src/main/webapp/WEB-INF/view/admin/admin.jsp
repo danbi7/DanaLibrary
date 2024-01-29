@@ -93,7 +93,8 @@ margin-right: 10px;
 }
 
 .admin-edit{
-margin:0 auto;
+display: flex;
+justify-content: space-around;
 }
 
 .edit-btn{
