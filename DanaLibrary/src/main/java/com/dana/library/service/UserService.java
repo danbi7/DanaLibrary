@@ -1,5 +1,6 @@
 package com.dana.library.service;
 
+import java.util.Optional;
 import java.util.function.Supplier;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,11 @@ public class UserService {
 	// 회원가입
 	@Transactional
 	public void insertUser(User user) {
-		user.setUserStatus(Status.ACTIVE);
+		if(user.getGender() == null) {
+			user.setGender("남");
+		}
+		
+		user.setUserStatus(Status.PENDING);
 		userRepository.save(user);
 	}
 	
@@ -50,7 +55,8 @@ public class UserService {
 	// 사용자 아이디 중복 여부
 	 @Transactional(readOnly = true)
 	  public boolean isUserIdDuplicate(String userid) {
-	    return userRepository.existsByUserid(userid);
+	    Optional<User> existingUser = userRepository.findByUserid(userid);
+	    return existingUser.isPresent();
 	  }
   
 	//아이디 또는 이메일로 getUser

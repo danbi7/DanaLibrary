@@ -14,13 +14,20 @@ let returnBookObj = {
 		//alert($("#bookNum").val());
 		
 		$.ajax({
-			type: "DELETE",
+			type: "PUT",
 			url: "/rent/returnBook/" + $("#bookNum").val(),
 			//data: JSON.stringify($("#bookNum").val()),
 			contentType: "application/json; charset=utf-8"
 		}).done(function(response) {
-			alert("반납성공");
-			location = "/"
+			
+			if (response.status === 200) {
+                alert("반납성공");
+                location = "/book/getBook/"+$("#bookNum").val();
+            }else {
+                alert("반납할 수 없음");
+				location = "/book/getBook/"+$("#bookNum").val();
+            }
+			
 		}).fail(function(error){
 			alert("에러 발생: " + error);
 		});

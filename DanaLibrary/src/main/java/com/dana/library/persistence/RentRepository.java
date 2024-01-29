@@ -18,5 +18,5 @@ public interface RentRepository extends JpaRepository<Rent, Integer>{
 	
 	List<Rent> findAllByUser(User user); //select * from Rent where user= ?(로그인 유저랑 같음)
 	
-	void deleteByBook(Book book);
+	
 }

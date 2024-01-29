@@ -10,7 +10,7 @@ import com.dana.library.domain.Category;
 
 @Repository
 public interface BoardRepository extends JpaRepository<Board, Integer>{
-	
+
 	List<Board> findAllByCategoryAndTitle(Category category, String title);
 
 }

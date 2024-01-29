@@ -22,11 +22,11 @@ let rentBookObj = {
 			
 			if (response.status === 200) {
                 alert("대출성공");
-                location = "/";
+                location = "/book/getBook/"+$("#bookNum").val();
             }else {
-                alert("대출도서가 5권을 초과함.반납해야함");
+                alert("대출도서가 5권을 초과하거나 빌릴 수 없음");
+				location = "/book/getBook/"+$("#bookNum").val();
             }
-			location = "/"
 		}).fail(function(error){
 			alert("에러 발생: " + error);
 		});

@@ -39,4 +39,31 @@ public class BoardService {
 		return aaaa;
 	}
 
+	
+
+	@Transactional
+	public void writeBoard(Board board) {
+		boardRepository.save(board);
+	}
+
+	@Transactional
+	public void updatePost(Board requestBoard, int postId) {
+		Board board = boardRepository.findById(postId).orElse(null);
+		board.setTitle(requestBoard.getTitle());
+		board.setContent(requestBoard.getContent());
+		board.setCategory(requestBoard.getCategory());
+		boardRepository.save(board);
+	}
+
+	@Transactional
+	public Board getBoardById(int postId) {
+		return boardRepository.findById(postId).orElse(null);
+
+	}
+
+	@Transactional
+	public void deletePost(int postId) {
+		boardRepository.deleteById(postId);
+	}
+
 }

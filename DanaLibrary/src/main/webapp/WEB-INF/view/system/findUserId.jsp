@@ -18,6 +18,8 @@
 							</div>
 						</div>
 
+						<div id="findUserid" style="display: none"></div>
+						
 						<div class="row gy-3 overflow-hidden">
 							<div class="col-10" style="padding-right: 0px;">
 								<div class="form-floating mb-3">

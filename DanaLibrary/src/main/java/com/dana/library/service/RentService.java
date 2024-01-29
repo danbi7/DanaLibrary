@@ -35,9 +35,6 @@ public class RentService {
 		return rentRepository.findAllByUser(user);
 	}
 	
-	@Transactional
-	public void deleteRent(Book book) {
-		rentRepository.deleteByBook(book);
-	}
+	
 
 }

@@ -40,8 +40,7 @@ text-align: center;
         <td colspan=2><Strong>분류	</Strong> ${gettedBook.category }</td>
       </tr>
        <tr>
-        <td><Strong>사이즈	</Strong>${gettedBook.size }</td>
-        <td><Strong>페이지	</Strong>${gettedBook.pages }</td>
+        <td colspan=2><Strong>페이지	</Strong> ${gettedBook.pages }</td>
       </tr>
   </table>
 </div>
@@ -54,10 +53,26 @@ text-align: center;
 	<tr>
 		<td><a href="#">대출회수</a></td>
 	</tr>
+	
+	<c:choose>
+	<c:when test="${rent.rentStatus == Status.INACTIVE }">
+	<tr>
+		<td><a href="#" id="btn-rent">예약하기</a></td>
+	</tr>
+	</c:when>
+	<c:otherwise>
 	<tr>
 		<td><a href="#" id="btn-rent">대출하기</a></td>
+	</tr>
+	</c:otherwise>
+	</c:choose>
+	
+	
+	<c:if test="${rent.user eq loginUser }">
+	<tr>
 		<td><a href="#" id="btn-returnBook">반납하기</a></td>
 	</tr>
+	</c:if>
   </table>
 </div>
 
@@ -70,7 +85,7 @@ text-align: center;
 		<td style="width:15%;"><Strong>도서 설명</Strong></td>
 	</tr>
 	<tr>
-		<td>${getttedBook.info }
+		<td>${gettedBook.info }
 	</tr>
   </table>
 </div>
