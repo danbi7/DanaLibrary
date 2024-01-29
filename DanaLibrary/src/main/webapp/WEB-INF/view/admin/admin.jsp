@@ -2,7 +2,109 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../layout/header1.jsp"%>
 <%@ include file="../layout/header2.jsp"%>
-<link rel="stylesheet" type="text/css" href="/css/admin.css">
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<style>
+
+/* Style the tab */
+.tab {
+	overflow: hidden;
+	border: 1px solid #ccc;
+	background-color: #f2f2f2;
+	margin-top: 10px;
+}
+
+.tab button {
+	background-color: inherit;
+	float: left;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	padding: 14px 0; /* 필요에 따라 패딩 조절 */
+	transition: 0.3s;
+	font-size: 17px;
+	width: 16.66%; /* 버튼의 너비를 100%를 버튼의 개수로 나눈 값으로 설정 */
+	box-sizing: border-box;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	padding: 14px 0; /* 필요에 따라 패딩 조절 */
+	transition: 0.3s; /* 패딩과 테두리를 너비에 포함시킴 */
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+	background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+	background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+	display: none;
+}
+
+#home {
+	display: flex;
+}
+
+.table-responsive {
+	display: block;
+	width: 100%;
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+	-ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+
+.table-bordered {
+	border: 1px solid #dee2e6;
+}
+
+.table {
+	width: 100%;
+	margin-bottom: 1rem;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+.card-title h5 {
+	margin-bottom: 15px;
+}
+.admin-title{
+	margin-top: 20px;
+	margin-bottom: 10px;
+	margin-left: 15px;
+}
+
+.admin-icon{
+float:left;
+width: 30px;
+margin-bottom: 15px;
+margin-right: 10px;
+}
+
+.admin-edit{
+display: flex;
+justify-content: space-around;
+}
+
+.edit-btn{
+width:20px;
+}
+
+
+</style>
+</head>
+<body>
 
 	<div class="container-page">
 		<div class="container-page-content">
@@ -75,6 +177,8 @@
 			evt.currentTarget.classList.add("active");
 		}
 	</script>
+</body>
+</html>
 
 <%@ include file="../layout/footer.jsp"%>
 
