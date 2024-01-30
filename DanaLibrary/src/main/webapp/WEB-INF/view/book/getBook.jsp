@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.dana.library.domain.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="../layout/header1.jsp" %>
 <%@ include file="../layout/header2.jsp" %>
@@ -13,9 +14,10 @@
 
 a {
 display: block;
-text-align: center;
 }
+
 </style>
+
 </head>
 <body>
 
@@ -44,38 +46,33 @@ text-align: center;
       </tr>
   </table>
 </div>
-
 <div>
-  <table class="table" style="width:15%; float:left;">
-	<tr>
-		<td><a href="#">관심도서 수</a></td>
-	</tr>
-	<tr>
-		<td><a href="#">대출회수</a></td>
-	</tr>
-	
-	<c:choose>
+<a href="#" id="btn-interest">관심도서 수</a>
+<br>
+<c:choose>
 	<c:when test="${rent.rentStatus == Status.INACTIVE }">
-	<tr>
-		<td><a href="#" id="btn-rent">예약하기</a></td>
-	</tr>
+	
+	<c:if test="${rent.user ne loginUser }">
+	<a href="#" class="btn btn-outline-success" id="btn-reserve">예약하기</a>
+	
+	</c:if>
+	
 	</c:when>
+	
 	<c:otherwise>
-	<tr>
-		<td><a href="#" id="btn-rent">대출하기</a></td>
-	</tr>
+	<a href="#" class="btn btn-outline-primary" id="btn-rent">대출하기</a>
+	
 	</c:otherwise>
 	</c:choose>
 	
 	
-	<c:if test="${rent.user eq loginUser }">
-	<tr>
-		<td><a href="#" id="btn-returnBook">반납하기</a></td>
-	</tr>
+	<c:if test="${(rent.user eq loginUser) && (rent.rentStatus == Status.INACTIVE)}">
+	<a href="#" class="btn btn-outline-info" id="btn-returnBook">반납하기</a>
 	</c:if>
-  </table>
 </div>
 
+
+<script src="/js/interest.js"></script>
 <script src="/js/rentBook.js"></script>
 <script src="/js/returnBook.js"></script>
 

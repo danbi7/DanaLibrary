@@ -30,18 +30,6 @@ public class RentController {
 	@Autowired
 	private BookService bookService;
 	
-	@GetMapping("/rent/rentBook/{bookNum}")
-	public String getRent(@PathVariable int bookNum, HttpSession session) {
-		Book gettedBook = bookService.getBook(bookNum);
-		System.out.println(gettedBook.toString());
-	
-		Rent rent = rentService.getRent(gettedBook);
-		session.setAttribute("rent", rent);
-		
-		return "book/getBook";
-	}
-	
-	
 	
 	@PostMapping("/rent/rentBook/{bookNum}")
 	public @ResponseBody ResponseDTO<?> rentBook(@PathVariable int bookNum, HttpSession session) {
@@ -49,19 +37,19 @@ public class RentController {
 		User loginUser = (User)session.getAttribute("loginUser");
 		
 		List<Rent> rentList = rentService.getRentList(loginUser);
-		System.out.println(rentList.toString());
+		//System.out.println(rentList.toString());
 		
 		int renting = rentList.size();
-		System.out.println(renting);
+		System.out.println("rentList size : " + renting);
 		
 		
-		if(renting>5) {
+		if(renting>=5) { //size는 0부터 시작하니깐
 			System.out.println("대출도서가 5권을 초과함");
 			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(),"대출도서가 5권을 초과");
 		}else { 
 			
 			Book gettedBook = bookService.getBook(bookNum);
-			System.out.println(gettedBook.toString());
+			System.out.println("gettedBook.toString() : " + gettedBook.toString());
 			
 		
 			Rent rent = rentService.getRent(gettedBook);
@@ -75,17 +63,14 @@ public class RentController {
 				rent.setUser(loginUser);
 				rent.setRentStatus(Status.INACTIVE);
 				rentService.updateRent(rent);
-				System.out.println(rent.toString());
+				System.out.println("rent.toString() : " + rent.toString());
 				return new ResponseDTO<>(HttpStatus.OK.value(),"책 빌리기");
-			}//else {
-				//예약중인지?
-			//}
-			
+			}
 			 
-			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(),"책 빌리기");
+			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(),"책 빌리기 실패");
 		
 		}	
-		//return new ResponseDTO<>(HttpStatus.OK.value(),"책 빌리기");
+		
 	}
 	
 	@PutMapping("/rent/returnBook/{bookNum}")
@@ -95,7 +80,7 @@ public class RentController {
 		Book gettedBook = bookService.getBook(bookNum);
 		
 		Rent rent = rentService.getRent(gettedBook);
-		System.out.println(rent.toString());
+		System.out.println("rent.toString() : " + rent.toString());
 		
 		if(rent.getRentNum()!=0) {
 			if(rent.getUser().getUserNum()==loginUser.getUserNum()) {

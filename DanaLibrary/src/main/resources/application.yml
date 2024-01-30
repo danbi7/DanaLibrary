@@ -14,8 +14,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.NonRegisteringDriver
     url: jdbc:mysql://34.64.146.13/library?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-    username: ezen
-    password: 1234
+    username: ezen-dana
+    password: Ezen8090@
     
   jpa:
     open-in-view: true

@@ -6,21 +6,26 @@
 <title>도서 목록</title>
 </head>
 <body>
+<div class="container-page-content-book">
     <div class="jumbotron">
         <div class="container" align="center">
             <h2>도서 목록</h2>
-            <c:forEach var="book" items="${bookList}">
+            
         </div>
     </div>
     
+    <c:forEach var="book" items="${bookList}">
     <div class="row">
-        <div class="col-md-3" align="center">
-            <img src="${book.image}" style="width: 50%">
+
+        <div class="col-md-3" align="center" style="display: flex; justify-content: center;">   
+            <img src="${book.image}" style="width: 130px; height: 180px;">
+
         </div>
+        
         <div class="col-md-7">
-            <p><h5><b>${book.title}</b></h5>
-            <p>${book.author} | ${book.publisher}
-            <p> ${book.category}
+            <p><h6><b>${book.title}</b></h6>
+            <p>${book.author} &nbsp | &nbsp  ${book.publisher} &nbsp | &nbsp ${book.category}
+            
             <p style="padding-top: 20px;">
                 <c:choose>
                     <c:when test="${fn:length(book.info) <= 200}">
@@ -32,18 +37,20 @@
                 </c:choose>
             </p>
         </div>
-        <div class="col-md-2" style="padding-top: 70px">
-            <a href="#" class="btn btn-secondary" type="button">상세정보 &raquo;</a>
-            <br>
-            <br>
-            <a href="#" class="btn btn-primary" type="button">대출하기 &raquo;</a>
-            <br>
-            <br>
-            <img src="/image/emptyheart.png" class="likeimg1 likeimg1-" alt="emptyheart">찜 1
+        
+        <div class="col-md-2 buttons" >
+      
+            <a href="/book/getBook/${ book.bookNum }" class="btn btn-outline-danger custom-button" type="button">상세정보</a>
+            <a href="#" class="btn btn-outline-primary custom-button" type="button" id="btn-rent">대출하기</a>
+            <a href="#"><img src="/image/emptyheart.png" class="likeimg1 likeimg1-" alt="emptyheart">찜</a>
+    
         </div>
     </div>
     <hr>
 </c:forEach>
+</div>
+
+
 </body>
 </html>
 

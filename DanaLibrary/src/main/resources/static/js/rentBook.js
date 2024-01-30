@@ -11,7 +11,7 @@ let rentBookObj = {
 	rentBook: function(){
 		alert("책 대출하기가 요청되었습니다");
 		
-		alert($("#bookNum").val());
+		//alert($("#bookNum").val());
 		
 		$.ajax({
 			type: "POST",
@@ -24,7 +24,7 @@ let rentBookObj = {
                 alert("대출성공");
                 location = "/book/getBook/"+$("#bookNum").val();
             }else {
-                alert("대출도서가 5권을 초과하거나 빌릴 수 없음");
+                alert(response.data);
 				location = "/book/getBook/"+$("#bookNum").val();
             }
 		}).fail(function(error){
