@@ -47,7 +47,7 @@ h4{
 	font-size: 14px;
 }
 
-.buttons{
+.board-button{
 	margin: 5px;
 }
 
@@ -74,4 +74,40 @@ hr:not([size]) {
     justify-content: center;
     align-items: center;
     height: 100%; /* Optional: Set the height of the container if needed */
+}
+
+.container-boardList{
+	display: flex;
+	flex-direction: column;
+	width: 80%;
+	margin: 0px auto;
+}
+
+.row{
+	margin: 0px !important;
+}
+
+.row h5{
+	width: 100px;
+	height: 23px;
+	margin: 0px;
+}
+
+.row img{
+	width: 32px; 
+	height: 32px; 
+	padding: 0px;
+}
+
+.boardList-icon{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	width: 150px;
+}
+
+#insertButton{
+	width: 106px;
+	height: 100%;
+	margin-right: 10px;
 }

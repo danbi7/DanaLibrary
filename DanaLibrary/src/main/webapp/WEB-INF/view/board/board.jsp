@@ -25,7 +25,7 @@
 	
 	<div class="form-control custom-textarea mb-3" id="content">${board.content }</div>
 	<!-- <hr class="my-3"> -->
-		<div class="buttons text-center">
+		<div class="board-button text-center">
 			<button class="btn btn-secondary" onclick="history.back()">뒤로가기</button>
 			<c:if test="${sessionScope.loginUser.userid != null }">
 			<c:if test="${sessionScope.loginUser.userid eq board.user.userid }">
