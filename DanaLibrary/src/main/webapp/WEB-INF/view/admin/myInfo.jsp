@@ -8,7 +8,7 @@
         <h4 class="mb-3"><strong>${sessionScope.loginUser.username }</strong>님의 정보</h4>
         </div>
         <div class="col-3 edit-button">
-        <a href="#"><img class ="edit-img" src="/image/icon/icon-edit-button.png"><span class="edit-text">수정하기</span></a></div></div>
+        <a href="/admin/view/editMyInfo"><img class ="edit-img" src="/image/icon/icon-edit-button.png"><span class="edit-text">수정하기</span></a></div></div>
         <hr class="my-4">
         
           <div class="row g-3">

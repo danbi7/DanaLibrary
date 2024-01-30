@@ -19,5 +19,10 @@ public class AdminController {
 	public String myPage() {
 		return "admin/myPage";
 	}
+	
+	@GetMapping("/admin/view/editMyInfo")
+	public String editMyInfo() {
+		return "admin/editMyInfo";
+	}
 
 }
