@@ -11,17 +11,15 @@ let insertReviewObj = {
 	insertReview: function() {
 		alert("도서 후기가 요청되었습니다");
 		
-		let user={
-			content: $("#content").val(),
-			bookNum: $("#bookNum").val()
+		let review = {
+			content: $("#content").val()
 		}
 		
 		$.ajax({
 			type: "POST",
 			url: "/review/insertReview",
 			data: {
-				content: user.content,
-				bookNum: user.bookNum
+				content: review.content,
 			},
 			//contentType: "application/json; charset=utf-8"
 		}).done(function(response) {

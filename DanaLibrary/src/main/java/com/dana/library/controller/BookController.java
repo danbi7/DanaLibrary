@@ -56,13 +56,18 @@ public class BookController {
 	
 	//책 리뷰 등록
 	@PostMapping("/review/insertReview")
-	public @ResponseBody ResponseDTO<?> insertReview(@RequestParam String content, HttpSession session){
+	public @ResponseBody ResponseDTO<?> insertReview(@RequestParam String content, HttpSession session) {
 		User loginUser = (User)session.getAttribute("loginUser");
 		
+		//Book gettedBook = (Book)session.getAttribute("gettedBook");
+		
 		Book_review review = new Book_review();
+		
+		
 		review.setUser(loginUser);
 		review.setContent(content);
 		System.out.println("review : " + review.toString());
+		
 		reviewService.insertReview(review);
 		return new ResponseDTO<>(HttpStatus.OK.value(),"도서 후기 컨트롤러 완료");
 	}
