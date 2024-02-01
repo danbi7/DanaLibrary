@@ -50,7 +50,7 @@ display: block;
 <a href="#" id="btn-interest">관심도서 수</a>
 <br>
 <c:choose>
-	<c:when test="${rent.rentStatus == Status.INACTIVE }">
+	<c:when test="${rent.rentStatus == Status.ACTIVE }">
 	
 	<c:if test="${rent.user ne loginUser }">
 	<a href="#" class="btn btn-outline-success" id="btn-reserve">예약하기</a>
@@ -66,7 +66,7 @@ display: block;
 	</c:choose>
 	
 	
-	<c:if test="${(rent.user eq loginUser) && (rent.rentStatus == Status.INACTIVE)}">
+	<c:if test="${(rent.user eq loginUser) && (rent.rentStatus == Status.ACTIVE)}">
 	<a href="#" class="btn btn-outline-info" id="btn-returnBook">반납하기</a>
 	</c:if>
 </div>

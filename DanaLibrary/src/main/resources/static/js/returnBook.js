@@ -21,7 +21,7 @@ let returnBookObj = {
 		}).done(function(response) {
 			
 			if (response.status === 200) {
-                alert("반납성공");
+                alert("반납성공" + response.data);
                 location = "/book/getBook/"+$("#bookNum").val();
             }else {
                 alert("반납할 수 없음");

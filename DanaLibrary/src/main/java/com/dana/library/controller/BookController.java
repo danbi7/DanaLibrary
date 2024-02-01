@@ -49,7 +49,10 @@ public class BookController {
 		session.setAttribute("rent", rent);
 		System.out.println(rent.getRentStatus());
 		
-		List<Book_review> reviewList = reviewService.getReviewList();
+		
+		
+		//bookNum에 따른 책 리뷰 불러오기
+		List<Book_review> reviewList = reviewService.getReviewList(gettedBook);
 		session.setAttribute("reviewList", reviewList);
 		return "book/getBook";
 	}
@@ -59,13 +62,14 @@ public class BookController {
 	public @ResponseBody ResponseDTO<?> insertReview(@RequestParam String content, HttpSession session) {
 		User loginUser = (User)session.getAttribute("loginUser");
 		
-		//Book gettedBook = (Book)session.getAttribute("gettedBook");
+		Book gettedBook = (Book)session.getAttribute("gettedBook");
 		
 		Book_review review = new Book_review();
 		
 		
 		review.setUser(loginUser);
 		review.setContent(content);
+		review.setBook(gettedBook);
 		System.out.println("review : " + review.toString());
 		
 		reviewService.insertReview(review);

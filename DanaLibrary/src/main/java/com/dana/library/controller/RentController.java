@@ -1,5 +1,6 @@
 package com.dana.library.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,14 +30,23 @@ public class RentController {
 	@Autowired
 	private BookService bookService;
 	
-	
 	@PostMapping("/rent/rentBook/{bookNum}")
 	public @ResponseBody ResponseDTO<?> rentBook(@PathVariable int bookNum, HttpSession session) {
 		
 		User loginUser = (User)session.getAttribute("loginUser");
 		
-		List<Rent> rentList = rentService.getRentList(loginUser);
+		List<Rent> gettedList = rentService.getRentList(loginUser);
 		//System.out.println(rentList.toString());
+		
+		List<Rent> rentList = new ArrayList<Rent>();
+		
+		for(Rent rent : gettedList) {
+			if(rent.getRentStatus() == Status.ACTIVE) {
+				rentList.add(rent);
+			}
+		}
+		
+		
 		
 		int renting = rentList.size();
 		System.out.println("rentList size : " + renting);
@@ -48,7 +58,7 @@ public class RentController {
 		}else { 
 			
 			Book gettedBook = bookService.getBook(bookNum);
-			System.out.println("gettedBook.toString() : " + gettedBook.toString());
+			//System.out.println("gettedBook.toString() : " + gettedBook.toString());
 			
 		
 			Rent rent = rentService.getRent(gettedBook);
@@ -58,15 +68,16 @@ public class RentController {
 				rent.setBook(gettedBook);
 			}
 			
-			if(rent.getRentStatus()!=Status.INACTIVE) { //해당도서가 대출중인지?
+			if(rent.getRentStatus()!=Status.ACTIVE) { //해당도서가 대출중인지?
 				rent.setUser(loginUser);
-				rent.setRentStatus(Status.INACTIVE);
+				rent.setRentStatus(Status.ACTIVE);
 				rentService.updateRent(rent);
 				System.out.println("rent.toString() : " + rent.toString());
 				return new ResponseDTO<>(HttpStatus.OK.value(),"책 빌리기");
-			}
+			}else {
 			 
-			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(),"책 빌리기 실패");
+				return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(),"책 빌리기 실패");
+			}
 		
 		}	
 		
@@ -83,9 +94,12 @@ public class RentController {
 		
 		if(rent.getRentNum()!=0) {
 			if(rent.getUser().getUserNum()==loginUser.getUserNum()) {
-				rent.setRentStatus(Status.ACTIVE);
+				rent.setRentStatus(Status.INACTIVE);
+				
+				System.out.println(rent.toString());
+				
 				rentService.updateRent(rent);
-				return new ResponseDTO<>(HttpStatus.OK.value(),"책 반납하기");
+				return new ResponseDTO<>(HttpStatus.OK.value(),"  책 반납하기");
 			}
 		}
 		
