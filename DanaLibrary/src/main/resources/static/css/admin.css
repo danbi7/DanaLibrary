@@ -51,7 +51,6 @@
 	-ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
-
 .table-bordered {
 	border: 1px solid #dee2e6;
 }
@@ -68,28 +67,29 @@ table {
 .card-title h5 {
 	margin-bottom: 15px;
 }
-.admin-title{
+
+.admin-title {
 	margin-top: 20px;
 	margin-bottom: 10px;
 	margin-left: 15px;
 }
 
-.admin-icon{
-float:left;
-width: 30px;
-margin-bottom: 15px;
-margin-right: 10px;
+.admin-icon {
+	float: left;
+	width: 30px;
+	margin-bottom: 15px;
+	margin-right: 10px;
 }
 
-.admin-edit{
-display: flex;
-justify-content: space-around;
+.admin-edit {
+	display: flex;
+	justify-content: space-around;
 }
 
-.edit-btn{
-width:20px;
+.edit-btn {
+	width: 20px;
 }
 
-.table-responsive{
+.table-responsive {
 	margin-top: 20px;
 }
