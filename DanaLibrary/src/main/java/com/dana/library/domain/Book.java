@@ -39,6 +39,7 @@ public class Book {
 	@Column
 	private String image;
 	
+
 	@Column(length = 3000)
 	private String info;
 	

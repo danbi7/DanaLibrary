@@ -2,6 +2,7 @@ package com.dana.library.domain;
 
 import java.sql.Timestamp;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
 import jakarta.persistence.Entity;
@@ -29,7 +30,7 @@ public class Rent {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int rentNum;
 
-	@CreatedDate
+	@CreationTimestamp
 	private Timestamp rentDate;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
