@@ -6,4 +6,6 @@ import com.dana.library.domain.Comment;
 
 public interface CommentRepository extends JpaRepository<Comment, Integer>{
 
+	
+	
 }
