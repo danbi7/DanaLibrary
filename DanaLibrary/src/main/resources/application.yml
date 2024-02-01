@@ -16,7 +16,7 @@ spring:
     url: jdbc:mysql://34.64.146.13/library?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     username: ezen-dana
     password: EzenDanaLibrary8090@@
-   
+
   jpa:
     open-in-view: true
     database-platform: org.hibernate.dialect.MySQL8Dialect

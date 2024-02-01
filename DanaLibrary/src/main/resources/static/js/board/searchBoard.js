@@ -51,3 +51,4 @@ let searchBoardObj = {
 }
 
 searchBoardObj.init();
+

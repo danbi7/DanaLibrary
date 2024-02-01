@@ -3,6 +3,13 @@ package com.dana.library.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.dana.library.domain.Board;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -98,3 +105,4 @@ public class BoardController {
 		return new ResponseDTO<>(HttpStatus.OK.value(), "글 삭제 컨트롤러 실행");
 	}
 }
+

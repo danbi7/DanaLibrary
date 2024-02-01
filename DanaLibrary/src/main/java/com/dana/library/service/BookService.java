@@ -1,5 +1,6 @@
 package com.dana.library.service;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,10 @@ public class BookService {
 	private BookRepository bookRepository;
 	
 	@Transactional(readOnly = true)
+	public Book getBook(int bookNum) {
+		return bookRepository.findByBookNum(bookNum).get();
+	}
+
 	public List<Book> getBookList(){
 		return bookRepository.findAll();
 	}
