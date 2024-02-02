@@ -110,6 +110,7 @@ public class BookController {
 	//도서목록
 	@GetMapping("/book/view/getBookList")
 	public String getBookList(Model model) {
+		rentService.autoReturnCheck();
 		List<Book> bookList = bookService.getBookList();
 		model.addAttribute("bookList", bookList);
 		return "book/bookList";
