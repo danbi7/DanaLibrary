@@ -9,9 +9,6 @@ let rentBookObj = {
 	},
 	
 	rentBook: function(){
-		alert("책 대출하기가 요청되었습니다");
-		
-		//alert($("#bookNum").val());
 		
 		$.ajax({
 			type: "POST",
@@ -21,7 +18,7 @@ let rentBookObj = {
 		}).done(function(response) {
 			
 			if (response.status === 200) {
-                alert("대출성공");
+                alert("대출 완료");
                 location = "/book/getBook/"+$("#bookNum").val();
             }else {
                 alert(response.data);
