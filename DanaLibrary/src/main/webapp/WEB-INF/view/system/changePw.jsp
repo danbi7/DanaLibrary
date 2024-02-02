@@ -78,6 +78,6 @@
 	</div>
 
 </section>
-<script src="/js/changePw.js"></script>
+<script src="/js/user/changePw.js"></script>
 
 <%@ include file="../layout/footer.jsp"%>

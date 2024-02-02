@@ -47,8 +47,8 @@ public class BoardService {
 	}
 
 	@Transactional
-	public void updatePost(Board requestBoard, int postId) {
-		Board board = boardRepository.findById(postId).orElse(null);
+	public void updateBoard(Board requestBoard, int boardNum) {
+		Board board = boardRepository.findById(boardNum).orElse(null);
 		board.setTitle(requestBoard.getTitle());
 		board.setContent(requestBoard.getContent());
 		board.setCategory(requestBoard.getCategory());
@@ -56,14 +56,14 @@ public class BoardService {
 	}
 
 	@Transactional
-	public Board getBoardById(int postId) {
-		return boardRepository.findById(postId).orElse(null);
+	public Board getBoardById(int boardNum) {
+		return boardRepository.findById(boardNum).orElse(null);
 
 	}
 
 	@Transactional
-	public void deletePost(int postId) {
-		boardRepository.deleteById(postId);
+	public void deleteBoard(int boardNum) {
+		boardRepository.deleteById(boardNum);
 	}
 
 }

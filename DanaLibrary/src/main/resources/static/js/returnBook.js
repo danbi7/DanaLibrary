@@ -9,9 +9,6 @@ let returnBookObj = {
 	},
 	
 	returnBook: function(){
-		alert("책 반납하기가 요청되었습니다");
-		
-		//alert($("#bookNum").val());
 		
 		$.ajax({
 			type: "PUT",
@@ -21,7 +18,7 @@ let returnBookObj = {
 		}).done(function(response) {
 			
 			if (response.status === 200) {
-                alert("반납성공" + response.data);
+                alert("반납 완료");
                 location = "/book/getBook/"+$("#bookNum").val();
             }else {
                 alert("반납할 수 없음");
