@@ -44,9 +44,6 @@ public class User {
 	@Column
 	private Date birthDate;
 	
-	@Column
-	private String gender;
-	
 	@Enumerated(EnumType.STRING)
 	private Status userStatus;
 	

@@ -107,12 +107,7 @@
 								<div class="input-group mb-3">
 									<label class="input-group-text" for="birthBox">생년월일</label> <input
 										type="date" class="form-control" name="birthDate"
-										id="birthDate" placeholder="YYMMDD"> <label
-										class="input-group-text" for="genderDropdown">성별</label> 
-										<select class="form-select" id="gender" name="gender">
-										<option value="남">남</option>
-										<option value="여">여</option>
-									</select>
+										id="birthDate" placeholder="YYMMDD">
 								</div>
 							</div>
 
