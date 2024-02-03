@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dana.library.domain.Board;
+import com.dana.library.domain.Comment;
 import com.dana.library.domain.User;
 import com.dana.library.dto.ResponseDTO;
 import com.dana.library.service.BoardService;
+import com.dana.library.service.CommentService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -26,6 +28,9 @@ public class BoardController {
 
 	@Autowired
 	private BoardService boardService;
+	
+	@Autowired
+	private CommentService commentService;
 
 	// 글 등록 페이지
 	@GetMapping("/board/view/insertBoard")
@@ -72,9 +77,16 @@ public class BoardController {
 	// 글 상세 보기 페이지
 	@GetMapping("/board/view/getBoard/{boardNum}")
 	public String getBoard(@PathVariable int boardNum, Model model) {
-		model.addAttribute("board", (Board) boardService.getBoardById(boardNum));
-		return "board/board";
+	    Board board = boardService.getBoardById(boardNum);
+	    model.addAttribute("board", board);
+	    
+	    List<Comment> commentList = commentService.getComment(board);
+	    model.addAttribute("commentList", commentList);
+	    System.out.println(commentList.toString());
+	    
+	    return "board/board";
 	}
+	
 
 	// 글 수정 페이지
 	@GetMapping("/board/view/updateBoard/{boardNum}")
@@ -97,4 +109,6 @@ public class BoardController {
 		boardService.deleteBoard(boardNum);
 		return new ResponseDTO<>(HttpStatus.OK.value(), "글 삭제 컨트롤러 실행");
 	}
+
+
 }
