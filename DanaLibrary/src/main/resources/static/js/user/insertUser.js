@@ -3,8 +3,13 @@ let insertUser = {
 	init: function() {
 		let _this = this;
 
-		$("#btn-insert").on("click", () => {
-			_this.insertUser();
+		$("#btn-insert").on("click", () => {			
+			if(_this.validatePasswordConfirmation){
+				_this.insertUser();
+
+			}else{
+				alert("비밀번호를 다시 입력해주세요.");
+			}
 		});
 
 		$("#passwordcheck").on("input", function() {

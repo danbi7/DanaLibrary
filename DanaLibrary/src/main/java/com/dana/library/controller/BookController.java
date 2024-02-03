@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dana.library.domain.Book;
 import com.dana.library.domain.Book_review;
-import com.dana.library.domain.Status;
 import com.dana.library.domain.User;
 import com.dana.library.dto.ResponseDTO;
 import com.dana.library.service.BookService;
@@ -58,10 +57,10 @@ public class BookController {
 		if(reserveService.isReservedByUser(loginUser, gettedBook)) {
 			// 본인이 이미 예약한 도서 -> 예약 취소
 			bookStatus = 1;
-		}else if(rentService.isRentedBySomeone(loginUser, gettedBook)){
+		}else if(rentService.isRentedByUser(loginUser, gettedBook)){
 			// 본인이 이미 대출한 도서 -> 반납하기
 			bookStatus = 2;
-		}else if(rentService.getRent(gettedBook).getRentStatus() != null && rentService.getRent(gettedBook).getRentStatus().equals(Status.ACTIVE)) {
+		}else if(rentService.isRentedBySomeone(gettedBook)) {
 			// 본인이 예약하지 않았고 대출도 하지 않았으나 다른 사람이 대출중 -> 예약하기
 			bookStatus = 3;
 		}else {
