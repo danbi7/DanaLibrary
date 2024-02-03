@@ -83,7 +83,6 @@ public class UserService {
 	public void editUser(User user, HttpSession session) {
 		User editUser = userRepository.findByUserid(user.getUserid()).get();
 		editUser.setBirthDate(user.getBirthDate());
-		editUser.setGender(user.getGender());
 		editUser.setPassword(user.getPassword());
 		editUser.setUsername(user.getUsername());
 		
