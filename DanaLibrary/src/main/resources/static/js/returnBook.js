@@ -1,4 +1,5 @@
-let returnBookObj = {
+(function() {
+	let returnBookObj = {
 	
 	init: function(){
 		let _this=this;
@@ -22,9 +23,9 @@ let returnBookObj = {
 			
 			if (response.status === 200) {
                 alert("반납성공" + response.data);
-                location = "/book/getBook/"+$("#bookNum").val();
+                location = "/book/view/getBookList";
             }else {
-                alert("반납할 수 없음");
+                alert("반납할 수 없음"+ response.data);
 				location = "/book/getBook/"+$("#bookNum").val();
             }
 			
@@ -34,4 +35,6 @@ let returnBookObj = {
 	}
 	
 }
+
 returnBookObj.init();
+})();

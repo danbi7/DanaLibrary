@@ -1,5 +1,6 @@
 package com.dana.library.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.dana.library.domain.Book;
 import com.dana.library.domain.Book_review;
 import com.dana.library.domain.Rent;
+import com.dana.library.domain.Status;
 import com.dana.library.domain.User;
 import com.dana.library.dto.ResponseDTO;
 import com.dana.library.service.BookService;
@@ -48,6 +50,10 @@ public class BookController {
 		}
 		session.setAttribute("rent", rent);
 		System.out.println(rent.getRentStatus());
+		
+		
+		
+		
 		
 		
 		
@@ -88,12 +94,30 @@ public class BookController {
 	
 	//도서목록
 	@GetMapping("/book/view/getBookList")
-	public String getBookList(Model model) {
+	public String getBookList(Model model, HttpSession session) {
 		List<Book> bookList = bookService.getBookList();
 		model.addAttribute("bookList", bookList);
+		
+		
+	
 		return "book/bookList";
 	}
 	
+	/*
+	User loginUser = (User)session.getAttribute("loginUser");
+	List<Rent> userRentList = rentService.getRentList(loginUser);
+	//List<Rent> userRentList = rentService.getRentList(Status.ACTIVE, loginUser);
+	model.addAttribute("userRentList", userRentList);
+	
+	List<Rent> activeList = rentService.getRentList(Status.ACTIVE);
+	model.addAttribute("activeList",activeList);
+	
+	//List<Rent> inactiveList = rentService.getRentList(Status.INACTIVE);
+	//model.addAttribute("inactiveList",inactiveList);
+	
+	List<Rent> rentList = rentService.getRentList();
+	model.addAttribute("rentList", rentList);
+	*/
 	
 
 }

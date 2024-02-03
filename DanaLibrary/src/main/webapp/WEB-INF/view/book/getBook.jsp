@@ -72,7 +72,7 @@ display: block;
 </div>
 
 
-<script src="/js/interest.js"></script>
+
 <script src="/js/rentBook.js"></script>
 <script src="/js/returnBook.js"></script>
 

@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.dana.library.domain.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ include file="../layout/header1.jsp" %>
@@ -38,18 +39,31 @@
             </p>
         </div>
         
-        <div class="col-md-2 buttons" >
-      
-            <a href="/book/getBook/${ book.bookNum }" class="btn btn-outline-danger custom-button" type="button">상세정보</a>
-            <a href="#" class="btn btn-outline-primary custom-button" type="button" id="btn-rent">대출하기</a>
-            <a href="#"><img src="/image/emptyheart.png" class="likeimg1 likeimg1-" alt="emptyheart">찜</a>
+	<div class="col-md-2 buttons" >
+    <input id="bookNum" value="${book.bookNum }">
+    <a href="/book/getBook/${book.bookNum }" class="btn btn-outline-danger custom-button" type="button">상세정보</a> 
     
-        </div>
+	
+	
+	<a href="#" class="btn btn-outline-success custom-button" id="btn-reserve">예약하기</a>
+
+	<a href="#" class="btn btn-outline-primary custom-button" id="btn-rent2">대출하기</a>
+	<script src="/js/rentBook2.js"></script>
+	
+	<a href="#" class="btn btn-outline-info custom-button" id="btn-returnBook2">반납하기</a>
+	<script src="/js/returnBook2.js"></script>
+	
+	
+	
+	<a href="#"><img src="/image/emptyheart.png" class="likeimg1 likeimg1-" alt="emptyheart">찜</a>
+	</div>
+
+    </div>
     </div>
     <hr>
+    
 </c:forEach>
 </div>
-
 
 </body>
 </html>
