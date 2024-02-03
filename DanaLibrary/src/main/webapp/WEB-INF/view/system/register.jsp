@@ -107,7 +107,10 @@
 								<div class="input-group mb-3">
 									<label class="input-group-text" for="birthBox">생년월일</label> <input
 										type="date" class="form-control" name="birthDate"
+
 										id="birthDate" placeholder="YYMMDD">
+
+
 								</div>
 							</div>
 

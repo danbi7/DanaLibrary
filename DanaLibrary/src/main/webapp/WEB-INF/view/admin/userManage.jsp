@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,65 +22,23 @@
 					<th class="text-center">수정</th>
 				</tr>
 			</thead>
+			
+			 <c:forEach var="user" items="${userList}">
 			<tbody>
 				<tr>
-					<td>1</td>
-					<td>강동현</td>
-					<td>kangkangkang</td>
-					<td>kangkangkang@naver.com</td>
-					<td>2024-01-26</td>
-					<td>2000-06-06</td>
-					<td>활동회원</td>
+					<td>${user.userNum}</td>
+					<td>${user.username}</td>
+					<td>${user.userid}</td>
+					<td>${user.email}</td>
+					<td>${user.regDate}</td>
+					<td>${user.birthDate}</td>
+					<td>${user.userStatus.status}</td>
 					<td><div class="admin-edit"> <img class ="edit-btn" src="/image/icon/icon-edit-button.png">
 					<img class ="edit-btn" src="/image/icon/icon-delete-button.png"> </div></td>
 				</tr>
-				<tr>
-					<td>2</td>
-					<td>강동현</td>
-					<td>kangkangkang</td>
-					<td>kangkangkang@naver.com</td>
-					<td>2024-01-26</td>
-					<td>2000-06-06</td>
-					<td>활동회원</td>
-					<td><div class="admin-edit"> <img class ="edit-btn" src="/image/icon/icon-edit-button.png">
-					<img class ="edit-btn" src="/image/icon/icon-delete-button.png"> </div></td>
-				</tr>
-
-				<tr>
-					<td>3</td>
-					<td>강동현</td>
-					<td>kangkangkang</td>
-					<td>kangkangkang@naver.com</td>
-					<td>2024-01-26</td>
-					<td>2000-06-06</td>
-					<td>활동회원</td>
-					<td><div class="admin-edit"> <img class ="edit-btn" src="/image/icon/icon-edit-button.png">
-					<img class ="edit-btn" src="/image/icon/icon-delete-button.png"> </div></td>
-				</tr>
-				<tr>
-					<td>4</td>
-					<td>강동현</td>
-					<td>kangkangkang</td>
-					<td>kangkangkang@naver.com</td>
-					<td>2024-01-26</td>
-					<td>2000-06-06</td>
-					<td>활동회원</td>
-					<td><div class="admin-edit"> <img class ="edit-btn" src="/image/icon/icon-edit-button.png">
-					<img class ="edit-btn" src="/image/icon/icon-delete-button.png"> </div></td>
-				</tr>
-				<tr>
-					<td>5</td>
-					<td>강동현</td>
-					<td>kangkangkang</td>
-					<td>kangkangkang@naver.com</td>
-					<td>2024-01-26</td>
-					<td>2000-06-06</td>
-					<td>활동회원</td>
-					<td><div class="admin-edit"> <img class ="edit-btn" src="/image/icon/icon-edit-button.png">
-					<img class ="edit-btn" src="/image/icon/icon-delete-button.png"> </div></td>
-				</tr>
-				
+			
 			</tbody>	
+			</c:forEach>
 
 		</table>
 	</div>

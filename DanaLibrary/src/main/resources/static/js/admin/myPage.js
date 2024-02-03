@@ -16,7 +16,6 @@ let myPage = {
 
 		$("#username").prop('readonly', !$("#username").prop('readonly'));
 		$("#birthDate").prop('readonly', !$("#birthDate").prop('readonly'));
-		$("#gender").prop('readonly', !$("#gender").prop('readonly'));
 		$("#password").prop('readonly', !$("#password").prop('readonly'));
 
 		$(".edit-button").css("display", "none");
@@ -29,7 +28,6 @@ let myPage = {
 			password: $("#password").val(),
 			username: $("#username").val(),
 			birthDate: $("#birthDate").val(),
-			gender: $("#gender").val(),
 			email: $("#email").val()
 		}
 
