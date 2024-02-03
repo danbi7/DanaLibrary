@@ -1,8 +1,10 @@
 package com.dana.library.domain;
 
-import java.sql.Timestamp;
+import java.time.LocalDate;
 
-import org.springframework.data.annotation.CreatedDate;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -29,8 +31,13 @@ public class Rent {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int rentNum;
 
-	@CreatedDate
-	private Timestamp rentDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm", timezone="Asia/Seoul") //날짜 포멧 바꾸기
+    private LocalDate rentDate;
+	
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm", timezone="Asia/Seoul") //날짜 포멧 바꾸기
+    private LocalDate dueDate;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userNum")

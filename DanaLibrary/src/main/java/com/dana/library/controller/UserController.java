@@ -114,7 +114,7 @@ public class UserController {
 		User emailUser = userService.findByEmail(user);
 		System.out.println("emailUser" + emailUser);
 
-		if (emailUser.getUsername() != null && emailUser.getBirthDate() != null) {
+		if (emailUser.getUsername() != null && emailUser.getBirthDate() != null ) {
 			System.out.println(emailUser.getUsername() + user.getUsername());
 			System.out.println(emailUser.getBirthDate() + " " + user.getBirthDate());
 			if (emailUser.getUsername().equals(user.getUsername())

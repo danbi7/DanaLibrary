@@ -44,5 +44,5 @@
 	</div>
 </div>
 
-<script src="/js/insertBoard.js"></script>
+<script src="/js/board/insertBoard.js"></script>
 <%@ include file="../layout/footer.jsp"%>

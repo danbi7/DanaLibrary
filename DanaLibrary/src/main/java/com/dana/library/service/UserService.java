@@ -12,6 +12,8 @@ import com.dana.library.domain.Status;
 import com.dana.library.domain.User;
 import com.dana.library.persistence.UserRepository;
 
+import jakarta.servlet.http.HttpSession;
+
 @Service
 public class UserService {
 	
@@ -33,9 +35,6 @@ public class UserService {
 	// 회원가입
 	@Transactional
 	public void insertUser(User user) {
-		if(user.getGender() == null) {
-			user.setGender("남");
-		}
 		
 		user.setUserStatus(Status.PENDING);
 		userRepository.save(user);
@@ -87,5 +86,18 @@ public class UserService {
 		return userRepository.findAll();
 	}
 	
+
+	@Transactional
+	public void editUser(User user, HttpSession session) {
+		User editUser = userRepository.findByUserid(user.getUserid()).get();
+		editUser.setBirthDate(user.getBirthDate());
+		editUser.setPassword(user.getPassword());
+		editUser.setUsername(user.getUsername());
+		
+		System.out.println("editUser ------> " + editUser);
+		userRepository.save(editUser);
+		
+		session.setAttribute("loginUser", editUser);
+	}
 
 }

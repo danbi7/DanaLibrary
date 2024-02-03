@@ -39,6 +39,7 @@
 							</div>
 
 							<div class="col-2" style="padding-left: 0px;">
+
 								<button class="btn btn-outline-secondary" id="btn-sendEmail"
 									style="height: 58px; border-top-left-radius: 0px; border-bottom-left-radius: 0px;">인증</button>
 
@@ -81,7 +82,9 @@
 					</div>
 				</div>
 			</div>
+			</div>
+			</div>
 </section>
 
-<script src="/js/changePw.js"></script>
+<script src="/js/user/changePw.js"></script>
 <%@ include file="../layout/footer.jsp"%>
