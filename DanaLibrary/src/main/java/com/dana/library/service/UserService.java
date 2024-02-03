@@ -1,5 +1,6 @@
 package com.dana.library.service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -78,6 +79,13 @@ public class UserService {
 	        throw new RuntimeException("사용자가 존재하지 않습니다.");
 	    }
 	}
+	
+	//전체 회원 불러오기
+	@Transactional(readOnly = true)
+	public List<User> getUserList(){
+		return userRepository.findAll();
+	}
+	
 
 	@Transactional
 	public void editUser(User user, HttpSession session) {
