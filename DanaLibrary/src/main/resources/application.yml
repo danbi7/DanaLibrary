@@ -4,7 +4,7 @@ server:
     context-path: /
     encoding:
       charset: UTF-8
-      
+
 spring:
   mvc:
     view:
@@ -14,9 +14,9 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.NonRegisteringDriver
     url: jdbc:mysql://34.64.146.13/library?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-    username: ezen
-    password: 1234
-    
+    username: ezen-dana
+    password: EzenDanaLibrary8090@@
+
   jpa:
     open-in-view: true
     database-platform: org.hibernate.dialect.MySQL8Dialect
@@ -27,3 +27,23 @@ spring:
       ddl-auto: update
     properties:
       hibernate.format_sql: true
+
+  servlet:
+    multipart:
+      enabled: true
+      location: /path/to/your/upload/folder  # 업로드된 파일을 저장할 경로
+      max-request-size: 10MB  # 한 번에 최대 업로드 가능 용량
+      max-file-size: 5MB  # 하나의 파일 최대 크기
+
+  mail:
+    # Google smtp server 사용
+    host: smtp.gmail.com
+    port: 587
+    username: kang456dh0606@gmail.com 
+    password: jquxmyvlvahrqqnz 
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+          auth: true

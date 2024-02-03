@@ -39,7 +39,7 @@
 							</div>
 
 							<div class="col-2" style="padding-left: 0px;">
-								<button class="btn btn-outline-secondary" type="submit "
+								<button class="btn btn-outline-secondary" id="btn-sendEmail"
 									style="height: 58px; border-top-left-radius: 0px; border-bottom-left-radius: 0px;">인증</button>
 
 							</div>

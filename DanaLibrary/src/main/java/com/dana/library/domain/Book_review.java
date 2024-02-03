@@ -33,6 +33,9 @@ public class Book_review {
 	@JoinColumn(name = "userNum")
 	private User user;
 	
+	@ManyToOne(fetch = FetchType.EAGER)	@JoinColumn(name = "bookNum")
+	private Book book;
+	
 	@Column(nullable = false, length = 200)
 	private String content;
 	

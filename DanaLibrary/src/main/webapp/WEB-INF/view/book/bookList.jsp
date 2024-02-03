@@ -2,11 +2,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ include file="../layout/header1.jsp" %>
+<%@ include file="../layout/header2.jsp" %>
 
 <title>도서 목록</title>
 </head>
 <body>
+
+
 <div class="container-page-content-book">
+
     <div class="jumbotron">
         <div class="container" align="center">
             <h2>도서 목록</h2>
@@ -47,6 +51,7 @@
     <hr>
 </c:forEach>
 </div>
+
 </body>
 </html>
 
