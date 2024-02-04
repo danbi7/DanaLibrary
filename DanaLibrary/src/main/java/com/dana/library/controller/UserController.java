@@ -165,8 +165,9 @@ public class UserController {
 		user.setPassword(password);
 		userService.changepw(user);
 
-		// findUser 세션에서 삭제
+		// findUser 와 checkNum(인증번호) 세션에서 삭제
 		session.removeAttribute("findUser");
+		session.removeAttribute("checkNum");
 
 		return new ResponseDTO<>(HttpStatus.OK.value(), "비밀번호 변경 성공");
 	}
@@ -177,5 +178,19 @@ public class UserController {
 		session.invalidate();
 		return "redirect:/";
 	}
-
+	
+	//인증번호 비교
+	@PostMapping("/user/verifyCode")
+	@ResponseBody
+	public ResponseDTO<?> verifyCode(@RequestParam String enteredCode, HttpSession session) {
+	    String savedCode = (String) session.getAttribute("checkNum");
+	    
+	    if (savedCode != null && enteredCode.equals(savedCode)) {
+	        // 인증번호 일치하면 비밀번호 변경 페이지로 리다이렉트 또는 성공 응답
+	        return new ResponseDTO<>(HttpStatus.OK.value(), "인증 성공");
+	    } else {
+	        // 인증번호 불일치 또는 세션에 데이터가 없는 경우 실패 응답
+	        return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "인증 실패");
+	    }
+	}
 }
