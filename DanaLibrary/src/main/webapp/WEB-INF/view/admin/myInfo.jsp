@@ -34,11 +34,22 @@
               <input type="date" class="form-control" id="birthDate" value="${sessionScope.loginUser.birthDate }" readonly="readonly">
             </div>
 
-            <div class="col-md-12">
+            <div class="password1-form col-md-12">
               <label for="password" class="form-label">비밀번호</label>
               <input type="password" class="form-control" id="password" value="${sessionScope.loginUser.password }" readonly="readonly">
             </div>
-          </div>
+            
+
+            <div class="password2-form col-md-12">
+              <label for="current-password" class="form-label">현재 비밀번호</label>
+              <input type="text" class="form-control" id="current-password">
+            </div>
+            
+            <div class="password3-form col-md-12">
+              <label for="new-password" class="form-label">새로운 비밀번호</label>
+              <input type="text" class="form-control" id="new-password">
+            </div>
+            </div>
 
 	<div class="col-12 mt-4 save-change">
 		<button id="save-button" class="btn btn-outline-primary save-change">저장하기</button>

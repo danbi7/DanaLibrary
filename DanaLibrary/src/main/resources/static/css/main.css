@@ -162,3 +162,19 @@ h3.title {
 .toast{
 	display: none;
 }
+
+.notification-container {
+    position: relative;
+    display: inline-block; /* Ensures the container only takes as much width as necessary */
+}
+
+.notification-number {
+    position: absolute;
+    top: -5px;
+    right: -2px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 5px;
+    font-size: 10px;
+}
