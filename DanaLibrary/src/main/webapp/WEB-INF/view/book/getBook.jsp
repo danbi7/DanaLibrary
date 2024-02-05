@@ -52,7 +52,7 @@ display: block;
 	
 	<c:choose>
     <c:when test="${bookStatus eq 1}">
-        <button class="btn btn-outline-warning" id="btn-reserve-cancel">예약취소</button>
+        <button class="btn btn-outline-secondary" id="btn-reserve-cancel">예약취소</button>
     </c:when>
     <c:when test="${bookStatus eq 2}">
         <button class="btn btn-outline-info" id="btn-returnBook">반납하기</button>
@@ -68,14 +68,11 @@ display: block;
     </c:otherwise>
 </c:choose>
 
-	<button class="btn btn-light" onclick="history.back()">뒤로가기</button>
+	<a href="/book/view/getBookList" class="btn btn-light">뒤로가기</a>
 </div>
 
 
-<script src="/js/rentBook.js"></script>
-<script src="/js/returnBook.js"></script>
-<script src="/js/reserveBook.js"></script>
-
+<script src="/js/book/book1.js"></script>
 
 <div>
   <table class="table" style="width:70%; margin-left:200px">

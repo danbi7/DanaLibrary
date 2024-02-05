@@ -39,9 +39,10 @@
 
 			<ul class="nav ms-auto">
 				<c:if test="${sessionScope.loginUser != null }">
-					<li class="noti-icon">
-    					<img src="/image/icon/notification.png" onclick="openNotificationWindow()">
-					</li>
+					<li class="noti-icon"><div class="notification-container">
+            		<img src="/image/icon/notification.png" onclick="openNotificationWindow()">
+        <span class="notification-number">!</span>
+    </div></li>
 
 					<li class="nav-item firstNav-right"><a href="/user/logout"
 						class="nav-link link-dark px-2">로그아웃</a></li>
