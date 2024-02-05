@@ -137,7 +137,7 @@ public class UserController {
 	@PostMapping("/user/findUser")
 	public @ResponseBody ResponseDTO<?> findUser(@RequestParam String input, HttpSession session) {
 		User findUser = userService.getUserByIdOrEmail(input);
-		if (findUser != null) {
+		if (findUser.getUserid() != null) {
 			session.setAttribute("findUser", findUser);
 			return new ResponseDTO<>(HttpStatus.OK.value(), findUser.getEmail());
 		} else {
