@@ -19,7 +19,11 @@
 <link rel="stylesheet" type="text/css" href="/css/result.css">
 <link rel="stylesheet" type="text/css" href="/css/board.css">
 <link rel="stylesheet" type="text/css" href="/css/book.css">
-
+<script>
+    function openNotificationWindow() {
+        window.open('/view/notice', '_blank', 'width=500,height=300');
+    }
+</script>
 </head>
 <body>
 
@@ -35,8 +39,9 @@
 
 			<ul class="nav ms-auto">
 				<c:if test="${sessionScope.loginUser != null }">
-					<li class="noti-icon"><img src="/image/icon/notification.png"
-						data-bs-toggle="modal" data-bs-target="#notificationModal"></li>
+					<li class="noti-icon">
+    					<img src="/image/icon/notification.png" onclick="openNotificationWindow()">
+					</li>
 
 					<li class="nav-item firstNav-right"><a href="/user/logout"
 						class="nav-link link-dark px-2">로그아웃</a></li>
@@ -53,26 +58,3 @@
 			</ul>
 		</div>
 	</nav>
-
-
-
-	<!-- Modal -->
-	<div class="modal fade" id="notificationModal" tabindex="-1"
-		aria-labelledby="notificationModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="notificationModalLabel">알림</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					이처럼 사소한 것들 | 
-			
-					<button type="button" class="btn btn-outline-success">대출</button>
-					<button type="button" class="btn btn-outline-danger">취소</button>
-					
-				</div>
-			</div>
-		</div>
-	</div>

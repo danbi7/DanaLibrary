@@ -4,12 +4,19 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
+<head>
+<script>
+	function openEditWindow(userid) {
+		window.open('/view/userEdit/' + userid, '_blank',
+				'width=800,height=800');
+	}
+</script>
+</head>
 <body>
 
 	<div class="table-responsive" style="margin-top: 20px;">
 		<table class="table">
-		<thead></thead>
+			<thead></thead>
 			<thead>
 				<tr>
 					<th>번호</th>
@@ -22,22 +29,28 @@
 					<th class="text-center">수정</th>
 				</tr>
 			</thead>
-			
-			 <c:forEach var="user" items="${userList}">
-			<tbody>
-				<tr>
-					<td>${user.userNum}</td>
-					<td>${user.username}</td>
-					<td>${user.userid}</td>
-					<td>${user.email}</td>
-					<td>${user.regDate}</td>
-					<td>${user.birthDate}</td>
-					<td>${user.userStatus.status}</td>
-					<td><div class="admin-edit"> <img class ="edit-btn" src="/image/icon/icon-edit-button.png">
-					<img class ="edit-btn" src="/image/icon/icon-delete-button.png"> </div></td>
-				</tr>
-			
-			</tbody>	
+
+			<c:forEach var="user" items="${userList}">
+				<tbody>
+					<tr>
+						<td>${user.userNum}</td>
+						<td>${user.username}</td>
+						<td>${user.userid}</td>
+						<td>${user.email}</td>
+						<td>${user.regDate}</td>
+						<td>${user.birthDate}</td>
+						<td>${user.userStatus.status}</td>
+						<td>
+							<div class="admin-edit">
+								<img class="edit-btn" src="/image/icon/icon-edit-button.png"
+									onclick="openEditWindow('${user.userid}')"> 
+									
+				
+							</div>
+						</td>
+					</tr>
+
+				</tbody>
 			</c:forEach>
 
 		</table>
@@ -46,3 +59,5 @@
 </body>
 
 </html>
+      <script src="/js/admin/deleteUser.js"></script>
+
