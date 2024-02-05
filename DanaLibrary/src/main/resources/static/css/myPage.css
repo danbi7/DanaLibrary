@@ -120,3 +120,7 @@ margin-right: 10px;
 	justify-content: center;
 	display: none;
 }
+
+.password2-form, .password3-form{
+	display: none;
+}

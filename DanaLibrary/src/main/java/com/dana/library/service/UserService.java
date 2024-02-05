@@ -89,7 +89,8 @@ public class UserService {
 
 	@Transactional
 	public void editUser(User user, HttpSession session) {
-		User editUser = userRepository.findByUserid(user.getUserid()).get();
+		User editUser = (User) session.getAttribute("loginUser");
+		
 		editUser.setBirthDate(user.getBirthDate());
 		editUser.setPassword(user.getPassword());
 		editUser.setUsername(user.getUsername());
