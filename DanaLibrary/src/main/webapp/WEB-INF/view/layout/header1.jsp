@@ -19,7 +19,11 @@
 <link rel="stylesheet" type="text/css" href="/css/result.css">
 <link rel="stylesheet" type="text/css" href="/css/board.css">
 <link rel="stylesheet" type="text/css" href="/css/book.css">
-
+<script>
+    function openNotificationWindow() {
+        window.open('/view/notice', '_blank', 'width=500,height=300');
+    }
+</script>
 </head>
 <body>
 
@@ -36,7 +40,7 @@
 			<ul class="nav ms-auto">
 				<c:if test="${sessionScope.loginUser != null }">
 					<li class="noti-icon"><div class="notification-container">
-        <img src="/image/icon/notification.png" alt="Notification icon">
+            		<img src="/image/icon/notification.png" onclick="openNotificationWindow()">
         <span class="notification-number">!</span>
     </div></li>
 
