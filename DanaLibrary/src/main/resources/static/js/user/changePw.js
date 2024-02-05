@@ -42,6 +42,7 @@ let userObject = {
 				userObject.sendEmail(response.data);
 			} else {
 				alert("존재하지 않는 회원 정보입니다.");
+				
 			}
 		}).fail(function(error) {
 			alert("에러 발생 : " + error);
