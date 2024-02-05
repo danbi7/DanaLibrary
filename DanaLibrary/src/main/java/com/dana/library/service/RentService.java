@@ -47,20 +47,18 @@ public class RentService {
 	}
 
 	@Transactional
-	public boolean isRentedBySomeone(User loginUser, Book book) {
-		Rent rentedBook = rentRepository.findByUserAndBook(loginUser, book).orElseGet(new Supplier<Rent>() {
+	public boolean isRentedByUser(User loginUser, Book book) {
+		Rent rentedBook = rentRepository.findByUserAndBookAndRentStatus(loginUser, book, Status.ACTIVE).orElseGet(new Supplier<Rent>() {
 			public Rent get() {
 				return new Rent();
 			}
 		});
 
-		if (rentedBook.getRentStatus() == null || rentedBook.getRentStatus().equals(Status.INACTIVE)) {
+		if(rentedBook.getBook() == null) {
 			return false;
-		} else if (rentedBook.getRentStatus().equals(Status.ACTIVE)) {
+		}else {
 			return true;
 		}
-
-		return false;
 	}
 
 	// 매일 12시에 자동 반납 대상 도서를 자동으로 반납시키는 메소드
@@ -93,5 +91,20 @@ public class RentService {
                 iterator.remove();
             }
         }
+	}
+
+	@Transactional
+	public boolean isRentedBySomeone(Book book) {
+		Rent rentedBook = rentRepository.findByBookAndRentStatus(book, Status.ACTIVE).orElseGet(new Supplier<Rent>() {
+			public Rent get() {
+				return new Rent();
+			}
+		});
+
+		if(rentedBook.getBook() == null) {
+			return false;
+		}else {
+			return true;
+		}
 	}
 }

@@ -29,14 +29,9 @@
               <input type="email" class="form-control" id="email" value="${sessionScope.loginUser.email }" readonly="readonly">
             </div>
 
-            <div class="col-6">
+            <div class="col-12">
               <label for="birthDate" class="form-label">생년월일</label>
               <input type="date" class="form-control" id="birthDate" value="${sessionScope.loginUser.birthDate }" readonly="readonly">
-            </div>
-
-            <div class="col-6">
-              <label for="gender" class="form-label">성별</label>
-              <input type="text" class="form-control" id="gender" value="${sessionScope.loginUser.gender }" readonly="readonly">
             </div>
 
             <div class="col-md-12">
