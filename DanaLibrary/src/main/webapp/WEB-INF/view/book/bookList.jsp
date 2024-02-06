@@ -49,25 +49,25 @@
 					<c:choose>
 						<c:when test="${map[book] eq 1}">
 							<a href="#"
-								class="btn-reserve-cancel bookButton btn btn-outline-secondary custom-button"
+								class="btn-reserve-cancel btn btn-outline-secondary custom-button"
 								data-booknum="${book.bookNum }">예약취소</a>
 						</c:when>
 
 						<c:when test="${map[book] eq 2}">
 							<a href="#"
-								class="btn-returnBook bookButton btn btn-outline-info custom-button"
+								class="btn-returnBook btn btn-outline-info custom-button"
 								data-booknum="${book.bookNum }">반납하기</a>
 						</c:when>
 
 						<c:when test="${map[book] eq 3}">
 							<a href="#"
-								class="btn-reserve bookButton btn btn-outline-success custom-button"
+								class="btn-reserve btn btn-outline-success custom-button"
 								data-booknum="${book.bookNum }">예약하기</a>
 						</c:when>
 
 						<c:when test="${map[book] eq 4}">
 							<a href="#"
-								class="btn-rent bookButton btn btn-outline-primary custom-button"
+								class="btn-rent btn btn-outline-primary custom-button"
 								data-booknum="${book.bookNum }">대출하기</a>
 						</c:when>
 					</c:choose>
