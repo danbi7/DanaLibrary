@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.dana.library.domain.User;
 import com.dana.library.dto.ResponseDTO;
 import com.dana.library.dto.UserDTO;
+import com.dana.library.service.RentService;
 import com.dana.library.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -30,6 +31,9 @@ public class UserController {
 
 	@Autowired
 	private ModelMapper modelMapper;
+	
+	@Autowired
+	private RentService rentService;
 
 	// 메인 페이지
 	@GetMapping({ "", "/" })
@@ -79,6 +83,7 @@ public class UserController {
 	// 로그인 페이지
 	@GetMapping("/user/view/login")
 	public String login() {
+		rentService.autoReturnCheck();
 		return "system/login";
 	}
 
