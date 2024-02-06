@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,9 +16,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserDTO {
 	
-	@NotNull(message = "아이디 입력은 필수입니다.")
-	@NotBlank(message = "아이디 필수 입력 항목입니다.")
-	@Size(min = 1, max = 20, message = "아이디는 한 글자 이상 20자 미만으로 입력하세요")
+	@NotNull(message = "아이디는 입력은 필수입니다.")
+	@NotBlank(message = "아이디는 필수 입력 항목입니다.")
+	@Pattern(regexp = "^[a-zA-Z0-9]{1,20}$", message = "아이디는 영문 대 소문자, 숫자를 사용한 1~20자로 입력하세요. 공백은 허용되지 않습니다.")
 	private String userid;
 	
 	
@@ -29,11 +29,13 @@ public class UserDTO {
 	
 	@NotNull(message = "이름은 필수 입력 항목입니다")
 	@NotBlank(message = "이름은 필수 입력 항목입니다")
+	@Pattern(regexp = "^[가-힣]{1,20}$", message = "이름은 한글만 입력 가능합니다. 공백은 허용되지 않습니다.")
 	private String username;
 	
 	
 	@NotNull(message = "비밀번호를 입력해주세요.")
 	@NotBlank(message = "비밀번호는 필수 입력 항목입니다.")
+	@Pattern(regexp = "^(?!.*\\s)[a-zA-Z0-9\\W]{8,16}$", message = "비밀번호는 영문 대 소문자, 숫자, 특수문자를 사용한 8~16자로 입력하세요. 공백은 허용되지 않습니다.")
 	private String password;
 	
 	@NotNull(message = "생년월일 입력은 필수입니다.")

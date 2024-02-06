@@ -1,5 +1,7 @@
 package com.dana.library.service;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.dana.library.domain.Status;
 import com.dana.library.domain.User;
 import com.dana.library.persistence.UserRepository;
+
+import jakarta.servlet.http.HttpSession;
 
 @Service
 public class UserService {
@@ -31,7 +35,8 @@ public class UserService {
 	// 회원가입
 	@Transactional
 	public void insertUser(User user) {
-		user.setUserStatus(Status.ACTIVE);
+		
+		user.setUserStatus(Status.PENDING);
 		userRepository.save(user);
 	}
 	
@@ -50,7 +55,8 @@ public class UserService {
 	// 사용자 아이디 중복 여부
 	 @Transactional(readOnly = true)
 	  public boolean isUserIdDuplicate(String userid) {
-	    return userRepository.existsByUserid(userid);
+	    Optional<User> existingUser = userRepository.findByUserid(userid);
+	    return existingUser.isPresent();
 	  }
   
 	//아이디 또는 이메일로 getUser
@@ -72,6 +78,41 @@ public class UserService {
 	    } else {
 	        throw new RuntimeException("사용자가 존재하지 않습니다.");
 	    }
+	}
+	
+	//전체 회원 불러오기
+	@Transactional(readOnly = true)
+	public List<User> getUserList(){
+		return userRepository.findAll();
+	}
+	
+	
+	@Transactional
+	public void editUser(User user, HttpSession session) {
+		User editUser = (User) session.getAttribute("loginUser");
+		
+		editUser.setBirthDate(user.getBirthDate());
+		editUser.setPassword(user.getPassword());
+		editUser.setUsername(user.getUsername());
+		
+		System.out.println("editUser ------> " + editUser);
+		userRepository.save(editUser);
+		
+		session.setAttribute("loginUser", editUser);
+	}
+	
+	//관리자 회원 수정
+	@Transactional
+	public void editUserAdmin(User user) {
+		
+		User editUser = userRepository.findByUserid(user.getUserid()).get();
+		editUser.setUserid(user.getUserid());
+		editUser.setUsername(user.getUsername());
+		editUser.setPassword(user.getPassword());
+		editUser.setBirthDate(user.getBirthDate());
+		editUser.setUserStatus(user.getUserStatus());
+		editUser.setEmail(user.getEmail());
+		userRepository.save(editUser);
 	}
 
 }

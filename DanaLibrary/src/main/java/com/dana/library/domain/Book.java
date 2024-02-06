@@ -9,9 +9,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -39,11 +41,9 @@ public class Book {
 	@Column
 	private String image;
 	
-	@Column
+
+	@Column(length = 3000)
 	private String info;
-	
-	@Column
-	private float size;
 	
 	@Column
 	private int pages;

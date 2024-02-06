@@ -39,49 +39,52 @@
 							</div>
 
 							<div class="col-2" style="padding-left: 0px;">
-								<button class="btn btn-outline-secondary" type="submit "
+
+								<button class="btn btn-outline-secondary" id="btn-verify"
 									style="height: 58px; border-top-left-radius: 0px; border-bottom-left-radius: 0px;">인증</button>
 
 							</div>
 
 							<div class="col-12">
 								<div class="form-floating mb-3">
-									<input type="text" class="form-control" name="number"
-										id="number" placeholder="인증번호 입력" required> <label
-										for="number" class="form-label">인증번호</label>
+									<input type="text" class="form-control" name="enteredCode"
+										id="enteredCode" placeholder="인증번호 입력" required> <label
+										for="enteredCode" class="form-label">인증번호</label>
 								</div>
 							</div>
 
 
 							<div class="col-12">
 								<div class="d-grid">
-									<button class="btn bsb-btn-xl btn-primary" id="btn-verify">확인</button>
+									<button class="btn bsb-btn-xl btn-primary" id="btn-verifyCode">확인</button>
 								</div>
 							</div>
-							
+
 							<div class="row">
-							<div class="col-12">
-								<hr class="mt-5 mb-4 border-secondary-subtle">
-								<div
-									class="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-center">
-									<a href="/user/view/findUserId"
-										class="link-secondary text-decoration-none">아이디 찾기</a> <a
-										href="/user/view/login"
-										class="link-secondary text-decoration-none">로그인</a> <a
-										href="/user/view/insertUser"
-										class="link-secondary text-decoration-none">회원가입</a>
+								<div class="col-12">
+									<hr class="mt-5 mb-4 border-secondary-subtle">
+									<div
+										class="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-center">
+										<a href="/user/view/findUserId"
+											class="link-secondary text-decoration-none">아이디 찾기</a> <a
+											href="/user/view/login"
+											class="link-secondary text-decoration-none">로그인</a> <a
+											href="/user/view/insertUser"
+											class="link-secondary text-decoration-none">회원가입</a>
 
+									</div>
 								</div>
-						</div>
 
-						
+
 
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+		</div>
+	</div>
 </section>
 
-<script src="/js/changePw.js"></script>
+<script src="/js/user/changePw.js"></script>
 <%@ include file="../layout/footer.jsp"%>

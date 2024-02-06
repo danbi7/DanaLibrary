@@ -1,5 +1,6 @@
 package com.dana.library.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -26,5 +27,8 @@ public class Notice {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userNum")
 	private User user;
+	
+	@Column
+	private String content;
 
 }

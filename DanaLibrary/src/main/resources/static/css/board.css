@@ -1,0 +1,113 @@
+.container-board {
+	display: flex;
+	width: 50%;
+	margin: 0px auto;
+	flex-direction: column;
+}
+
+.parent{
+	width: 100%; 
+	display: flex; 
+	align-items: center;
+}
+
+.second, .thrid, .fourth, .fifth{
+	width: 100%
+}
+
+#btn-save{
+	width: 20%;
+}
+
+.third, .fifth, .container-board{
+	margin-top: 20px;
+}
+
+h4{
+	margin: 0px !important;
+}
+
+.container-head{
+	display: flex;	
+	justify-content: space-between;
+}
+
+/* styles.css */
+.title {
+    font-size: 20px;
+}
+
+.writer {
+    font-size: 18px;
+}
+
+.container-body{
+	display: flex;
+	justify-content: space-between;
+	font-size: 14px;
+}
+
+.board-button{
+	margin: 5px;
+}
+
+hr:not([size]) {
+    height: 2px;
+}
+
+.custom-textarea {
+   width: 100%;
+   margin: auto;
+   height: 250px;
+   /* 다른 스타일 속성들을 추가할 수 있습니다. */
+}
+
+#btn-searchBoard img {
+	margin-top: 4px;
+	margin-left: 8px;
+	width: 30px;
+	height: 30px;
+}
+
+#btn-searchBoard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Optional: Set the height of the container if needed */
+}
+
+.container-boardList{
+	display: flex;
+	flex-direction: column;
+	width: 80%;
+	margin: 0px auto;
+}
+
+.row{
+	margin: 0px !important;
+}
+
+.row h5{
+	width: 100px;
+	height: 23px;
+	margin: 0px;
+}
+
+.row img{
+	width: 32px; 
+	height: 32px; 
+	padding: 0px;
+}
+
+.boardList-icon{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	width: 150px;
+}
+
+#insertButton{
+	width: 106px;
+	height: 100%;
+	margin-right: 10px;
+}

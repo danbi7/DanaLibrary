@@ -23,7 +23,8 @@ let findUserIdObj = {
 			contentType: "application/json; charset=utf-8"
 		}).done(function(response) {
 			if (response.status == 200) {
-				alert("아이디 찾기 완료");	
+				alert("아이디 찾기 완료");
+				$("#findUserid").text(response.data).css("display", "flex");	
 			} else {
 				alert("회원정보 없음");
 			}
