@@ -49,30 +49,38 @@
 					<c:choose>
 						<c:when test="${map[book] eq 1}">
 							<a href="#"
-								class="btn-reserve-cancel bookButton btn btn-outline-secondary custom-button"
+								class="btn-reserve-cancel btn btn-outline-secondary custom-button"
 								data-booknum="${book.bookNum }">예약취소</a>
 						</c:when>
 
 						<c:when test="${map[book] eq 2}">
 							<a href="#"
-								class="btn-returnBook bookButton btn btn-outline-info custom-button"
+								class="btn-returnBook btn btn-outline-info custom-button"
 								data-booknum="${book.bookNum }">반납하기</a>
 						</c:when>
 
 						<c:when test="${map[book] eq 3}">
 							<a href="#"
-								class="btn-reserve bookButton btn btn-outline-success custom-button"
+								class="btn-reserve btn btn-outline-success custom-button"
 								data-booknum="${book.bookNum }">예약하기</a>
 						</c:when>
 
 						<c:when test="${map[book] eq 4}">
 							<a href="#"
-								class="btn-rent bookButton btn btn-outline-primary custom-button"
+								class="btn-rent btn btn-outline-primary custom-button"
 								data-booknum="${book.bookNum }">대출하기</a>
 						</c:when>
 					</c:choose>
-
-
+					
+					<c:choose>
+					<c:when test="${interestedBookMap[book] ne null}">
+						<a href="/book/removeInterestedBook/${book.bookNum }" class="btn btn-outline-secondary custom-button" style="font-size: 11px; width: 90px; height: 33.2px; padding: 4.1px 6px;"><img src="/image/fillheart.png" style="width: 25px; height: 25px"></a>
+					</c:when>
+					<c:otherwise>
+						<a href="/book/addInterestedBook/${book.bookNum }" class="btn btn-outline-secondary custom-button" style="font-size: 11px; width: 90px; height: 33.2px; padding: 4.1px 6px;"><img src="/image/emptyheart.png" style="width: 25px; height: 25px"></a>
+					</c:otherwise>
+					</c:choose>
+				
 				</div>
 			</div>
 			<hr>

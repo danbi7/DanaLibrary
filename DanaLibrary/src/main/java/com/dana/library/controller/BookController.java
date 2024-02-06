@@ -19,6 +19,7 @@ import com.dana.library.domain.Book_review;
 import com.dana.library.domain.User;
 import com.dana.library.dto.ResponseDTO;
 import com.dana.library.service.BookService;
+import com.dana.library.service.InterestedBookService;
 import com.dana.library.service.RentService;
 import com.dana.library.service.ReserveService;
 import com.dana.library.service.ReviewService;
@@ -39,6 +40,9 @@ public class BookController {
 	@Autowired
 	private ReserveService reserveService;
 
+	@Autowired
+	private InterestedBookService interestedBookService;
+	
 	// 도서 상세보기
 	@GetMapping("/book/getBook/{bookNum}")
 	public String getBook(@PathVariable int bookNum, HttpSession session, Model model) {
@@ -108,7 +112,6 @@ public class BookController {
 	// 도서목록
 	@GetMapping("/book/view/getBookList")
 	public String getBookList(Model model, HttpSession session) {
-		rentService.autoReturnCheck();
 		List<Book> bookList = bookService.getBookList();
 		model.addAttribute("bookList", bookList);
 
@@ -117,7 +120,8 @@ public class BookController {
 		int listStatus = 0;
 
 		Map<Book, Integer> map = new HashMap<>();
-
+		Map<Book, Integer> interestedBookMap = new HashMap<>();
+		
 		for (Book book : bookList) {
 			if (reserveService.isReservedByUser(loginUser, book)) {
 				listStatus = 1; // 내가 예약함->예약취소
@@ -128,13 +132,16 @@ public class BookController {
 			} else {
 				listStatus = 4; // 대출하기
 			}
-
-			// model.addAttribute("listStatus", listStatus);
 			map.put(book, listStatus);
-
+			
+			if(interestedBookService.isInterestedByUser(loginUser, book)) {
+				interestedBookMap.put(book, 1);
+			}
+			// model.addAttribute("listStatus", listStatus);
 		}
 
 		model.addAttribute("map", map);
+		model.addAttribute("interestedBookMap", interestedBookMap);
 		// System.out.println("listStatus" + listStatus);
 
 		return "book/bookList";
