@@ -30,5 +30,8 @@ public class Notice {
 	
 	@Column
 	private String content;
+	
+	@Column
+	private String noticeCheck;
 
 }

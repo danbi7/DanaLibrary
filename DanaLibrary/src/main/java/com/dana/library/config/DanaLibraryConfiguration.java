@@ -8,8 +8,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @ComponentScan
-public class DanaLibraryConfiguration implements WebMvcConfigurer{
-	
+public class DanaLibraryConfiguration implements WebMvcConfigurer {
+
 	@Bean
 	public ModelMapper modelMapper() {
 		return new ModelMapper();

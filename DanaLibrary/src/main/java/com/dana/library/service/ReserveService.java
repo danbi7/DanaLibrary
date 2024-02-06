@@ -1,5 +1,6 @@
 package com.dana.library.service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -62,8 +63,23 @@ public class ReserveService {
 	@Transactional
 	public List<Reserved_book> getReservedBookList(Book book) {
 		List<Reserved_book> reservedBookList = reserveRepository.findAllByBook(book);
-		return reservedBookList;
-			
+		return reservedBookList;	
 	}
+	
+	@Transactional
+	public Reserved_book rentedBookInReservedBook(Book book) {
+		List<Reserved_book> reservedBookList=reserveRepository.findAllByBook(book);
+		
+		 if (!reservedBookList.isEmpty()) {
+		        // reserveNum을 기준으로 정렬
+		        reservedBookList.sort(Comparator.comparingInt(Reserved_book::getReserveNum));
+		        
+		        Reserved_book find_reserve = reservedBookList.get(0);
+		        return find_reserve;
+		    } else {
+		        // 처리할 예외 또는 기본값 설정 등
+		        return null;
+		    }
+		}
 
 }

@@ -13,11 +13,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dana.library.domain.Book;
 import com.dana.library.domain.Rent;
+import com.dana.library.domain.Reserved_book;
 import com.dana.library.domain.Status;
 import com.dana.library.domain.User;
 import com.dana.library.dto.ResponseDTO;
 import com.dana.library.service.BookService;
+import com.dana.library.service.NoticeService;
 import com.dana.library.service.RentService;
+import com.dana.library.service.ReserveService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -29,6 +32,13 @@ public class RentController {
 
 	@Autowired
 	private BookService bookService;
+	
+	@Autowired
+	private ReserveService reserveService;
+	
+	@Autowired
+	private NoticeService noticeService;
+	
 
 	@PostMapping("/rent/rentBook/{bookNum}")
 	public @ResponseBody ResponseDTO<?> rentBook(@PathVariable int bookNum, HttpSession session) {
@@ -110,6 +120,11 @@ public class RentController {
 		if (rent.getRentNum() != 0) {
 			rent.setRentStatus(Status.INACTIVE);
 			rentService.updateRent(rent);
+			
+			//반납 후 예약이 걸려있는지 확인해서 걸려있으면 알림을 보내는 메소드 호출
+			Reserved_book findReserve = reserveService.rentedBookInReservedBook(rent.getBook());
+			noticeService.addNotice(findReserve);
+			
 			return new ResponseDTO<>(HttpStatus.OK.value(), "  책 반납하기");
 		} else {
 			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "책 반납하기 실패");

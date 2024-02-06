@@ -73,11 +73,13 @@ public class RentService {
 			if (rent.getRentStatus().equals(Status.ACTIVE) && rent.getDueDate().isEqual(today)) {
 				rent.setRentStatus(Status.INACTIVE);
 				updateRent(rent);
+				//반납 후 예약이 걸려있는지 확인해서 걸려있으면 알림을 보내는 메소드 호출
 				iterator.remove();
 			}
 		}
 	}
 	
+	//자동반납이 안됐을 때 자동반납을 시킨다
 	public void autoReturnCheck() {
 		List<Rent> rentList = getRentBookList();
 		LocalDate today = LocalDate.now();
@@ -88,11 +90,12 @@ public class RentService {
 			if (rent.getRentStatus().equals(Status.ACTIVE) && (rent.getDueDate().isBefore(today) || rent.getDueDate().isEqual(today))) {
                 rent.setRentStatus(Status.INACTIVE);
                 updateRent(rent);
+                //반납 후 예약이 걸려있는지 확인해서 걸려있으면 알림을 보내는 메소드 호출
                 iterator.remove();
             }
         }
 	}
-
+	
 	@Transactional
 	public boolean isRentedBySomeone(Book book) {
 		Rent rentedBook = rentRepository.findByBookAndRentStatus(book, Status.ACTIVE).orElseGet(new Supplier<Rent>() {
