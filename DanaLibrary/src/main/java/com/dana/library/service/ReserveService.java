@@ -18,6 +18,8 @@ public class ReserveService {
 	@Autowired
 	private ReserveRepository reserveRepository;
 	
+	
+	
 	@Transactional
 	public boolean isReserved(User user) {
 		// 로그인된 유저가 이미 예약한 도서가 존재하는지 여부 확인 과정
@@ -65,5 +67,7 @@ public class ReserveService {
 		return reservedBookList;
 			
 	}
+	
+	
 
 }
