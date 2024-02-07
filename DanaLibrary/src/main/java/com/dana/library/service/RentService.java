@@ -33,13 +33,47 @@ public class RentService {
 
 	@Transactional
 	public void updateRent(Rent rent) {
+		
+		rent.setRentStatus(Status.ACTIVE);
+		LocalDate rentDate = LocalDate.now();
+		LocalDate dueDate = LocalDate.now().plusDays(7);
+		rent.setRentDate(rentDate);
+		rent.setDueDate(dueDate);
+		
 		rentRepository.save(rent);
 	}
+	
+	@Transactional
+	public void returnBook(Rent rent) {
+		
+		rentRepository.save(rent);
+	}
+
+	
+	
+	@Transactional(readOnly = true)
+	public List<Rent> getRentList() {
+		return rentRepository.findAll();
+	}
+	
 
 	@Transactional(readOnly = true)
 	public List<Rent> getRentList(User user) {
 		return rentRepository.findAllByUser(user);
 	}
+
+	
+	@Transactional(readOnly = true)
+	public List<Rent> getRentList(Status status) {
+		return rentRepository.findAllByRentStatus(status);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Rent> getRentList(Book book) {
+		return rentRepository.findAllByBook(book);
+	}
+	
+
 
 	@Transactional
 	public List<Rent> getRentBookList() {
@@ -106,5 +140,28 @@ public class RentService {
 		}else {
 			return true;
 		}
+	}
+
+	@Transactional
+	public Rent isRentedByLoginUser(User loginUser, Book book) {
+		Rent rentedBook = rentRepository.findByUserAndBookAndRentStatus(loginUser, book, Status.ACTIVE).orElseGet(() -> {
+			return new Rent();
+		});
+		return rentedBook;
+	}
+
+
+	@Transactional
+	public Rent rentedBySomeone(Book book) {
+		Rent rentedBook = rentRepository.findByBookAndRentStatus(book, Status.ACTIVE).orElseGet(() -> {
+			return new Rent();
+		});
+		return rentedBook;
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Rent> rentedByLoginUser(User loginUser) {
+		List<Rent> rentList = rentRepository.findAllByUserAndRentStatus(loginUser, Status.ACTIVE);
+		return rentList;
 	}
 }

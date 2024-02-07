@@ -13,9 +13,10 @@
 <img src="/image/icon/icon-board.png"><h5><strong>열린 마당</strong></h5></div>
 
   <div class="col-md-6 text-center">
+<form action="/board/view/getBoardList">
     <div class="d-flex">
       <div class="dropdown">
-    <select name="order" class="btn btn-outline-primary dropdown-toggle" aria-label="Dropdown" id="category1" style="height: 100%">
+    <select name="boardCategory" class="btn btn-outline-primary dropdown-toggle" aria-label="Dropdown" id="category1" style="height: 100%">
               <c:forEach var="category" items="${Category.values()}">
                   <option value="${category}">${category.category }</option>
                   </c:forEach>
@@ -23,10 +24,12 @@
 </div>
 
 
-      <input class="form-control" type="text" placeholder="Search" id="title">
-      <a href="#" id="btn-searchBoard"><img src="/image/icon/search.png"></a>
+      <input class="form-control" type="text" placeholder="Search" name="boardTitle">
+      <button type="submit" class="btn" type="button"><img src="/image/icon/search.png"></button>
     </div>
+</form>
   </div>
+
   <a href="/board/view/insertBoard" class="btn btn-outline-primary" id="insertButton">새글 등록</a>
   
 </div>

@@ -45,9 +45,10 @@ public class Board {
 	private User user;
 	
 	@CreationTimestamp
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm", timezone="Asia/Seoul") //날짜 포멧 바꾸기
-    private Date regDate;
+	private Date regDate;
+
 	
 	@ColumnDefault("0")
 	private int views;
