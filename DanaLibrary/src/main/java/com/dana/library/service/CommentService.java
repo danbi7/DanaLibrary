@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dana.library.domain.Board;
+
 import com.dana.library.domain.Comment;
 import com.dana.library.persistence.CommentRepository;
 
@@ -33,4 +34,5 @@ public class CommentService {
     public Comment getCommentById(int commentNum) {
         return commentRepository.findById(commentNum).orElse(null);
     }
+
 }
