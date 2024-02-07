@@ -1,6 +1,5 @@
 package com.dana.library.controller;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,16 +77,6 @@ public class RentController {
 		}
 
 		// System.out.println("rent.toString() : " + rent.toString());
-
-		if (rent.getRentNum() != 0) {
-			rent.setRentStatus(Status.INACTIVE);
-			rentService.updateRent(rent);
-			return new ResponseDTO<>(HttpStatus.OK.value(), "  책 반납하기");
-		} else {
-			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "책 반납하기 실패");
-		}
-
-		return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "책 반납하기 실패");
 	}
 
 }

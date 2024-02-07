@@ -104,7 +104,7 @@ public class BookController {
 	}
 
 	//도서목록
-	@GetMapping("/book/view/getBookList")
+	@GetMapping("/public/book/view/getBookList")
 	public String getBookList(@RequestParam(required = false) String category, @RequestParam(required = false) String bookTitle, Model model, HttpSession session) {
 		rentService.autoReturnCheck();
 		
@@ -136,6 +136,7 @@ public class BookController {
 		int listStatus = 0;
 		
 		Map<Book,Integer> map = new HashMap<>();
+		Map<Book, Integer> interestedBookMap = new HashMap<>();
 		
 		for(Book book : bookList) {
 			if(reserveService.isReservedByUser(loginUser, book)) {
@@ -152,8 +153,14 @@ public class BookController {
 			//model.addAttribute("listStatus", listStatus);
 			map.put(book, listStatus);
 			
+			if(interestedBookService.isInterestedByUser(loginUser, book)) {
+				interestedBookMap.put(book, 1);
+			}
+			
 		}
 		model.addAttribute("map", map);
+		model.addAttribute("interestedBookMap", interestedBookMap);
+
 		return "book/bookList";
 	}
 	

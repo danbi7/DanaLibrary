@@ -30,7 +30,7 @@ public class AdminController {
 	@Autowired
 	private UserService userService;
 	
-	//관리자페이지 불러오기
+	// 관리자페이지 불러오기
 	@GetMapping("/view/admin")
 	public String admin(Model model) {
 		List<User> userList = userService.getUserList();
@@ -40,13 +40,13 @@ public class AdminController {
 		return "admin/admin";
 	}
 	
-	//마이페이지
+	// 마이페이지
 	@GetMapping("/view/myPage")
 	public String myPage() {
 		return "admin/myPage";
 	}
 	
-	//회원 수정 상세 페이지 불러오기
+	// 회원 수정 상세 페이지 불러오기
 	@GetMapping("/view/userEdit/{userid}")
 	public String openEditUser(@PathVariable String userid, Model model) {
 	    User user = userService.getUser(userid);
@@ -55,7 +55,7 @@ public class AdminController {
 	    return "admin/userEdit";
 	}
 	
-	//관리자 회원 수정 기능
+	// 관리자 회원 수정 기능
 	@PutMapping("/admin/editUser")
 	public @ResponseBody ResponseDTO<?> editUserAdmin(@RequestBody User user){
 		userService.editUserAdmin(user);

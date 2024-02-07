@@ -87,7 +87,15 @@
 						</c:when>
 					</c:choose>
 
-
+					<c:choose>
+					<c:when test="${interestedBookMap[book] ne null}">
+						<a href="/book/removeInterestedBook/${book.bookNum }" class="btn btn-outline-secondary custom-button" style="font-size: 11px; width: 90px; height: 33.2px; padding: 4.1px 6px;"><img src="/image/fillheart.png" style="width: 25px; height: 25px"></a>
+					</c:when>
+					<c:otherwise>
+						<a href="/book/addInterestedBook/${book.bookNum }" class="btn btn-outline-secondary custom-button" style="font-size: 11px; width: 90px; height: 33.2px; padding: 4.1px 6px;"><img src="/image/emptyheart.png" style="width: 25px; height: 25px"></a>
+					</c:otherwise>
+					</c:choose>
+					
 				</div>
 			</div>
 			<hr>
