@@ -92,7 +92,7 @@ display: block;
     <a href="#" class="btn btn-primary" id="btn-review" style="float:right;">후기 등록</a>
 </div>
 
-<script src="/js/insertReview.js"></script>
+<script src="/js/book/insertReview.js"></script>
 
 <br>
 <br>

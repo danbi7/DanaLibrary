@@ -36,11 +36,4 @@ public class NoticeService {
 		return notice;
 	}
 	
-	//public SseEmitter subscribe(User user) {
-		
-	//}
-	
-	
-	
-
 }
