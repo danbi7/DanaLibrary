@@ -71,8 +71,9 @@ display: block;
 	<a href="/book/view/getBookList" class="btn btn-light">뒤로가기</a>
 </div>
 
-
-<script src="/js/book/book1.js"></script>
+<script src="/js/rentBook.js"></script>
+<script src="/js/returnBook.js"></script>
+<script src="/js/reserveBook.js"></script>
 
 <div>
   <table class="table" style="width:70%; margin-left:200px">
