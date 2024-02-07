@@ -45,7 +45,7 @@ public class BoardController {
 	}
 
 	// 글 목록 보기 페이지
-	@GetMapping("/board/view/getBoardList")
+	@GetMapping("/public/board/view/getBoardList")
 	public String getBoardList(@RequestParam(required = false) Category boardCategory, @RequestParam(required = false) String boardTitle, Model model) {
 
 		System.out.println(boardCategory + "???????????");
