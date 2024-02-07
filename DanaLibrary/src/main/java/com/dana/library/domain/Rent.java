@@ -1,6 +1,6 @@
 package com.dana.library.domain;
 
-import java.sql.Date;
+
 import java.time.LocalDate;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -33,10 +33,17 @@ public class Rent {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int rentNum;
 
+
 	@CreationTimestamp
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm", timezone="Asia/Seoul") //날짜 포멧 바꾸기
 	private LocalDate rentDate;
+
+	@CreationTimestamp
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm", timezone="Asia/Seoul") //날짜 포멧 바꾸기
+    private LocalDate dueDate;
+
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userNum")
@@ -49,9 +56,5 @@ public class Rent {
 	@Enumerated(EnumType.STRING)
 	private Status rentStatus;
 	
-	@CreationTimestamp
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm", timezone="Asia/Seoul") //날짜 포멧 바꾸기
-	private LocalDate dueDate;
 	
 }

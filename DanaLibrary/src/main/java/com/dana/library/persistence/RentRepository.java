@@ -23,7 +23,10 @@ public interface RentRepository extends JpaRepository<Rent, Integer> {
 	
 	List<Rent> findAllByBook(Book book);
 	
-	//int findByUserAndBook(User loginUser, Book gettedBook);
+	List<Rent> findAllByUserAndRentStatus(User user, Status rentStatus);
 	
-	
+	Optional<Rent> findByUserAndBookAndRentStatus(User user, Book book, Status rentStatus);
+
+	Optional<Rent> findByBookAndRentStatus(Book book, Status rentStatus);
+
 }

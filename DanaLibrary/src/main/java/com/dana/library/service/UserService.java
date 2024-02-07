@@ -1,5 +1,6 @@
 package com.dana.library.service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -10,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.dana.library.domain.Status;
 import com.dana.library.domain.User;
 import com.dana.library.persistence.UserRepository;
+
+import jakarta.servlet.http.HttpSession;
 
 @Service
 public class UserService {
@@ -32,9 +35,6 @@ public class UserService {
 	// 회원가입
 	@Transactional
 	public void insertUser(User user) {
-		if(user.getGender() == null) {
-			user.setGender("남");
-		}
 		
 		user.setUserStatus(Status.PENDING);
 		userRepository.save(user);
@@ -78,6 +78,26 @@ public class UserService {
 	    } else {
 	        throw new RuntimeException("사용자가 존재하지 않습니다.");
 	    }
+	}
+	
+	//전체 회원 불러오기
+	@Transactional(readOnly = true)
+	public List<User> getUserList(){
+		return userRepository.findAll();
+	}
+	
+
+	@Transactional
+	public void editUser(User user, HttpSession session) {
+		User editUser = userRepository.findByUserid(user.getUserid()).get();
+		editUser.setBirthDate(user.getBirthDate());
+		editUser.setPassword(user.getPassword());
+		editUser.setUsername(user.getUsername());
+		
+		System.out.println("editUser ------> " + editUser);
+		userRepository.save(editUser);
+		
+		session.setAttribute("loginUser", editUser);
 	}
 
 }

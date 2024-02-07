@@ -1,7 +1,6 @@
 package com.dana.library.domain;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
@@ -49,6 +48,7 @@ public class Board {
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm", timezone="Asia/Seoul") //날짜 포멧 바꾸기
 	private Date regDate;
+
 	
 	@ColumnDefault("0")
 	private int views;

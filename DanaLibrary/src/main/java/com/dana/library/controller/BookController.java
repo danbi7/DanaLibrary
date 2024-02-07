@@ -1,7 +1,8 @@
 package com.dana.library.controller;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,12 +16,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dana.library.domain.Book;
 import com.dana.library.domain.Book_review;
-import com.dana.library.domain.Rent;
-import com.dana.library.domain.Status;
 import com.dana.library.domain.User;
 import com.dana.library.dto.ResponseDTO;
 import com.dana.library.service.BookService;
 import com.dana.library.service.RentService;
+import com.dana.library.service.ReserveService;
 import com.dana.library.service.ReviewService;
 
 import jakarta.servlet.http.HttpSession;
@@ -37,21 +37,42 @@ public class BookController {
 	@Autowired
 	private RentService rentService;
 	
+	@Autowired
+	private ReserveService reserveService;
+	
 	//도서 상세보기
 	@GetMapping("/book/getBook/{bookNum}")
-	public String getBook(@PathVariable int bookNum, HttpSession session) {
+	public String getBook(@PathVariable int bookNum, HttpSession session, Model model) {
 		
 		Book gettedBook = bookService.getBook(bookNum);
 		session.setAttribute("gettedBook", gettedBook);
 		
-		Rent rent = rentService.getRent(gettedBook);
-		if(rent.getRentNum()==0) { //new Rent()
-			rent.setBook(gettedBook);
+//		Rent rent = rentService.getRent(gettedBook);
+//		if(rent.getRentNum()==0) { //new Rent()
+//			rent.setBook(gettedBook);
+//		}
+//		session.setAttribute("rent", rent);
+//		System.out.println(rent.getRentStatus());
+		
+		User loginUser = (User) session.getAttribute("loginUser");
+		int bookStatus = 0;
+		
+		if(reserveService.isReservedByUser(loginUser, gettedBook)) {
+			// 본인이 이미 예약한 도서 -> 예약 취소
+			bookStatus = 1;
+		}else if(rentService.isRentedByUser(loginUser, gettedBook)) {
+			// 본인이 이미 대출한 도서 -> 반납하기
+			bookStatus = 2;
+		}else if(rentService.isRentedBySomeone(gettedBook)) {
+			// 본인이 예약하지 않았고 대출도 하지 않았으나 다른 사람이 대출중 -> 예약하기
+			bookStatus = 3;
+		}else {
+			// 본인이 예약하지 않았고 대출도 하지 않았는데 다른 사람도 대출중이 아님 -> 대출하기
+			bookStatus = 4;
 		}
-		session.setAttribute("rent", rent);
-		System.out.println(rent.getRentStatus());
 		
-		
+		System.out.println("bookStatus ----- " + bookStatus);
+		model.addAttribute("bookStatus", bookStatus);
 		
 		
 		
@@ -82,42 +103,67 @@ public class BookController {
 		return new ResponseDTO<>(HttpStatus.OK.value(),"도서 후기 컨트롤러 완료");
 	}
 
-	/*
-	 @PostMapping("/review/insertReview")
-		public @ResponseBody ResponseDTO<?> insertReview(@RequestParam Book_review review, HttpSession session){
-		User loginUser = (User)session.getAttribute("loginUser");
-		review.setUser(loginUser);
-		reviewService.insertReview(review);
-		return new ResponseDTO<>(HttpStatus.OK.value(),"도서 후기 컨트롤러 완료");
-	}
-	 */
 	
 	//도서목록
 	@GetMapping("/book/view/getBookList")
-	public String getBookList(Model model, HttpSession session) {
-		List<Book> bookList = bookService.getBookList();
-		model.addAttribute("bookList", bookList);
+	public String getBookList(@RequestParam(required = false) String category, @RequestParam(required = false) String bookTitle, Model model, HttpSession session) {
+		rentService.autoReturnCheck();
+		
+		System.out.println(category + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		System.out.println(bookTitle + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		
+		List<Book> bookList = null;
+		
+			if(category == null && bookTitle == null) {
+				bookList = bookService.getBookList();
+				System.out.println(bookList.size());
+			}else if(category.equals("전체") && bookTitle != null) {
+				bookList = bookService.searchBookByTitle(bookTitle);
+				System.out.println(bookList.size());
+			}else if(!category.equals("전체") && bookTitle == null) {
+				bookList = bookService.searchBookByCategory(category);
+				System.out.println(bookList.size());
+			}else if(!category.equals("전체") && bookTitle != null) {
+				bookList = bookService.searchBookList(category, bookTitle);
+				System.out.println(bookList.size());
+			}
+			
+			System.out.println("!!!!!!!!!!!!!bookList!!!!!!!!!!!!!!!!!" + bookList.toString());
+			model.addAttribute("bookList", bookList);
 		
 		
+		User loginUser = (User)session.getAttribute("loginUser");
+		
+		int listStatus = 0;
+		
+		Map<Book,Integer> map = new HashMap<>();
+		
+		for(Book book : bookList) {
+			if(reserveService.isReservedByUser(loginUser, book)) {
+				listStatus = 1; // 내가 예약함->예약취소
+			}else if(rentService.isRentedByUser(loginUser, book)) { //active
+				listStatus = 2; //내가 대출함->반납
+			}else if(rentService.isRentedBySomeone(book)) { //active
+				listStatus = 3; //누군가 대출함->예약하기
+			}else {
+				listStatus = 4; //대출하기
+				
+			}
+			
+			//model.addAttribute("listStatus", listStatus);
+			map.put(book, listStatus);
+			
+		}
+		model.addAttribute("map", map);
 	
+		//System.out.println("ㅅ확인욘ㅇ" + bookList.toString());
 		return "book/bookList";
 	}
 	
-	/*
-	User loginUser = (User)session.getAttribute("loginUser");
-	List<Rent> userRentList = rentService.getRentList(loginUser);
-	//List<Rent> userRentList = rentService.getRentList(Status.ACTIVE, loginUser);
-	model.addAttribute("userRentList", userRentList);
 	
-	List<Rent> activeList = rentService.getRentList(Status.ACTIVE);
-	model.addAttribute("activeList",activeList);
 	
-	//List<Rent> inactiveList = rentService.getRentList(Status.INACTIVE);
-	//model.addAttribute("inactiveList",inactiveList);
 	
-	List<Rent> rentList = rentService.getRentList();
-	model.addAttribute("rentList", rentList);
-	*/
 	
-
+	
+	
 }

@@ -8,7 +8,7 @@
         <h4 class="mb-3"><strong>${sessionScope.loginUser.username }</strong>님의 정보</h4>
         </div>
         <div class="col-3 edit-button">
-        <a href="#"><img class ="edit-img" src="/image/icon/icon-edit-button.png"><span class="edit-text">수정하기</span></a></div></div>
+        <a href="#" id="btn-edit"><img class ="edit-img" src="/image/icon/icon-edit-button.png"><span class="edit-text">수정하기</span></a></div></div>
         <hr class="my-4">
         
           <div class="row g-3">
@@ -29,14 +29,9 @@
               <input type="email" class="form-control" id="email" value="${sessionScope.loginUser.email }" readonly="readonly">
             </div>
 
-            <div class="col-6">
+            <div class="col-12">
               <label for="birthDate" class="form-label">생년월일</label>
               <input type="date" class="form-control" id="birthDate" value="${sessionScope.loginUser.birthDate }" readonly="readonly">
-            </div>
-
-            <div class="col-6">
-              <label for="gender" class="form-label">성별</label>
-              <input type="text" class="form-control" id="gender" value="${sessionScope.loginUser.gender }" readonly="readonly">
             </div>
 
             <div class="col-md-12">
@@ -45,7 +40,12 @@
             </div>
           </div>
 
+	<div class="col-12 mt-4 save-change">
+		<button id="save-button" class="btn btn-outline-primary save-change">저장하기</button>
+		</div>
           <hr class="my-4">
 
       </div>
       </div>
+      
+      <script src="/js/admin/myPage.js"></script>

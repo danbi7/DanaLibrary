@@ -26,20 +26,19 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "BOOK_REVIEW")
 public class Book_review {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int reviewNum;
-	
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userNum")
 	private User user;
-	
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "bookNum")
 	private Book book;
-	
-	
+
 	@Column(nullable = false, length = 200)
 	private String content;
 	

@@ -22,7 +22,7 @@
 
 </head>
 <body>
-	
+
 	<nav class="py-2 bg-body-tertiary border-bottom sticky-top">
 		<div class="container d-flex flex-wrap">
 			<ul class="nav me-auto">
@@ -34,20 +34,45 @@
 			</ul>
 
 			<ul class="nav ms-auto">
-			<c:if test="${sessionScope.loginUser != null }">
-				<li class="noti-icon"><img src="/image/icon/notification.png"></li>
-				<li class="nav-item firstNav-right"><a href="/user/logout"
-					class="nav-link link-dark px-2">로그아웃</a></li>
+				<c:if test="${sessionScope.loginUser != null }">
+					<li class="noti-icon"><img src="/image/icon/notification.png"
+						data-bs-toggle="modal" data-bs-target="#notificationModal"></li>
+
+					<li class="nav-item firstNav-right"><a href="/user/logout"
+						class="nav-link link-dark px-2">로그아웃</a></li>
 				</c:if>
 				<c:if test="${sessionScope.loginUser == null }">
-				<li class="nav-item firstNav-right"><a href="/user/view/login"
-					class="nav-link link-dark px-2">로그인</a></li>
-				<li class="nav-item firstNav-right"><a
-					href="/user/view/insertUser" class="nav-link link-dark px-2">회원가입</a></li>
-					</c:if>
+					<li class="nav-item firstNav-right"><a href="/user/view/login"
+						class="nav-link link-dark px-2">로그인</a></li>
+					<li class="nav-item firstNav-right"><a
+						href="/user/view/insertUser" class="nav-link link-dark px-2">회원가입</a></li>
+				</c:if>
 				<li><input type="search" class="form-control"
 					placeholder="제목으로 검색하기" aria-label="Search"></li>
 				<li><a href="#"><img src="/image/icon/search.png"></a></li>
 			</ul>
 		</div>
 	</nav>
+
+
+
+	<!-- Modal -->
+	<div class="modal fade" id="notificationModal" tabindex="-1"
+		aria-labelledby="notificationModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="notificationModalLabel">알림</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					이처럼 사소한 것들 | 
+			
+					<button type="button" class="btn btn-outline-success">대출</button>
+					<button type="button" class="btn btn-outline-danger">취소</button>
+					
+				</div>
+			</div>
+		</div>
+	</div>

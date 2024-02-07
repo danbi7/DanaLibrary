@@ -22,10 +22,7 @@ let userObject = {
 
 	verify: function() {
 		let input = $("#input").val();
-
-		// Ajax - 비동기 호출
-		// done() 함수 - 요청 처리에 성공 했을때
-		// fail() 함수 - 요청 처리에 실패 했을때
+		
 		$.ajax({
 			type: "POST", // 요청 방식
 			url: "/user/findUser", // 요청 경로
@@ -35,7 +32,8 @@ let userObject = {
 			console.log(response); // 콘솔창에 응답 메세지 출력
 			if (response.status === 200) {
 				alert("회원 정보가 확인되었습니다.");
-				location = "/user/view/changePw";
+				sendEmail(response.data);
+				
 			} else {
 				alert("존재하지 않는 회원 정보입니다.");
 
@@ -43,6 +41,12 @@ let userObject = {
 		}).fail(function(error) {
 			alert("에러 발생 : " + error)
 		});
+	},
+	
+	sendEmail: function(email){
+		$.ajax({
+			type: ""
+		})
 	},
 
 	changePw: function() {
