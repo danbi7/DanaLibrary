@@ -141,8 +141,7 @@ public class RentService {
 			return true;
 		}
 	}
-	
-	
+
 	@Transactional
 	public Rent isRentedByLoginUser(User loginUser, Book book) {
 		Rent rentedBook = rentRepository.findByUserAndBookAndRentStatus(loginUser, book, Status.ACTIVE).orElseGet(() -> {
@@ -150,15 +149,8 @@ public class RentService {
 		});
 		return rentedBook;
 	}
-	/*
-	@Transactional
-	public Rent isRentedByLoginUser2(User loginUser, Book book) {
-		Rent rentedBook = rentRepository.findByUserAndBookAndRentStatus(loginUser, book, Status.INACTIVE).orElseGet(() -> {
-			return new Rent();
-		});
-		return rentedBook;
-	}
-	*/
+
+
 	@Transactional
 	public Rent rentedBySomeone(Book book) {
 		Rent rentedBook = rentRepository.findByBookAndRentStatus(book, Status.ACTIVE).orElseGet(() -> {
@@ -172,10 +164,4 @@ public class RentService {
 		List<Rent> rentList = rentRepository.findAllByUserAndRentStatus(loginUser, Status.ACTIVE);
 		return rentList;
 	}
-	
-	
-	
-	
-	
-
 }

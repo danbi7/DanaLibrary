@@ -6,7 +6,6 @@
 <%@ include file="../layout/header1.jsp"%>
 <%@ include file="../layout/header2.jsp"%>
 
-
 	<div class="container" align="center">
 		<h2>도서 목록</h2>
 		<div class="col-md-6 text-center">
@@ -37,7 +36,7 @@
 			</div>
 			</form>
 		</div>
-		
+	
 		<c:forEach var="book" items="${bookList}">
 			<div class="row">
 
