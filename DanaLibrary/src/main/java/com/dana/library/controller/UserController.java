@@ -114,7 +114,7 @@ public class UserController {
 		User emailUser = userService.findByEmail(user);
 		System.out.println("emailUser" + emailUser);
 
-		if (emailUser.getUsername() != null && emailUser.getBirthDate() != null) {
+		if (emailUser.getUsername() != null && emailUser.getBirthDate() != null ) {
 			System.out.println(emailUser.getUsername() + user.getUsername());
 			System.out.println(emailUser.getBirthDate() + " " + user.getBirthDate());
 			if (emailUser.getUsername().equals(user.getUsername())
@@ -139,8 +139,9 @@ public class UserController {
 		User findUser = userService.getUserByIdOrEmail(input);
 		if (findUser != null) {
 			session.setAttribute("findUser", findUser);
-			return new ResponseDTO<>(HttpStatus.OK.value(), "회원 존재");
+			return new ResponseDTO<>(HttpStatus.OK.value(), findUser.getEmail());
 		} else {
+			session.setAttribute("findUser", findUser);
 			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "회원 존재하지 않음");
 		}
 	}

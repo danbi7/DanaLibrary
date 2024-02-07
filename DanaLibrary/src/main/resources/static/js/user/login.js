@@ -32,7 +32,7 @@ let loginObject = {
 				alert("로그인 성공");
 				location = "/";
 			} else {
-				alert("로그인 실패");
+				alert("로그인 실패"); 
 			}
 		}).fail(function(error) {
 			alert("에러 발생 : " + error);

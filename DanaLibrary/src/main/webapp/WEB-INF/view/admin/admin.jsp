@@ -138,7 +138,7 @@ width:20px;
 				</div>
 
 				<div id="rentManage" class="tabcontent">
-					<h3>대출 정보 내용</h3>
+					<%@ include file="rentManage.jsp"%>
 				</div>
 
 				<div id="reserveManage" class="tabcontent">
@@ -146,7 +146,7 @@ width:20px;
 				</div>
 
 				<div id="bookManage" class="tabcontent">
-					<h3>도서 정보 내용</h3>
+				<%@ include file="bookManage.jsp"%>
 				</div>
 
 				<div id="boardManage" class="tabcontent">

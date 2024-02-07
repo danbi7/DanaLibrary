@@ -17,11 +17,10 @@
 	<div class="container-body mb-3">
 		<div class="category">카테고리: ${board.category.category }</div>
 		<div class="regDate">작성일: ${board.regDate }</div>
-		<div class="cnt">조회수: ${board.views }</div>
+		<div class="view">조회수: ${board.views }</div>
 		<div class="likes">추천수: ${board.likes }</div>
 	</div>
 
-	<!-- <hr class="mt-3"> -->
 
 	<div class="form-control custom-textarea mb-3" id="content">${board.content }</div>
 	<!-- <hr class="my-3"> -->
@@ -61,9 +60,7 @@
 						class="btn btn-primary"
 						data-user-id="${sessionScope.loginUser.userid}">댓글 등록</button>
 
-					<div class="comment-content">${comment.content}</div>
-					<button class="btn btn-primary btn-delete-comment"
-						data-comment-num="${comment.commentNum}">댓글 삭제</button>
+
 				</div>
 			</div>
 
@@ -99,17 +96,22 @@
 	<c:forEach items="${commentList}" var="comment">
 		<div class="comment-container">
 			<div class="comment-meta">
-				작성자: <strong>${comment.user.username}</strong> | 작성일:
-				${comment.regDate}
+				작성자: <strong class="comment-author">${comment.user.userid}</strong>
+				| 작성일: ${comment.regDate} <input type="hidden" class="commentNum"
+					value="${comment.commentNum}">
 			</div>
 			<div class="comment-content">${comment.content}</div>
+			<c:if test="${sessionScope.loginUser.userid eq comment.user.userid}">
+				<button class="btn btn-primary btn-delete-comment"
+					data-comment-num="${comment.commentNum}">댓글 삭제</button>
+			</c:if>
 		</div>
 	</c:forEach>
 
 
-
 </div>
 </div>
+<script src="/js/board/likesBoard.js"></script>
 <script src="/js/comment/deleteComment.js"></script>
 <script src="/js/comment/insertComment.js"></script>
 <script src="/js/board/deleteBoard.js"></script>

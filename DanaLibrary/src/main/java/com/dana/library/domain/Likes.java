@@ -1,12 +1,5 @@
 package com.dana.library.domain;
 
-import java.sql.Date;
-
-import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -24,26 +17,20 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "BOOK_REVIEW")
-public class Book_review {
-
+@Table(name = "LIKES")
+public class Likes {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int reviewNum;
-
+	private int likesNum;
+	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userNum")
-	private User user;
-
+	private User userNum;
+	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "bookNum")
-	private Book book;
-
-	@Column(nullable = false, length = 200)
-	private String content;
-
-	@CreationTimestamp
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "Asia/Seoul") // 날짜 포멧 바꾸기
-	private Date regDate;
+	@JoinColumn(name = "boardNum")
+	private Board boardNum;
+	
+	
 }

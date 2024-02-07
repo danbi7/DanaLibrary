@@ -39,15 +39,18 @@ public class CommentController {
    }
 
    @DeleteMapping("/comment/delete/{commentNum}")
-   public ResponseDTO<?> deleteComment(@PathVariable int commentNum, HttpSession session) {
-       User loginUser = (User) session.getAttribute("loginUser");
+   public @ResponseBody ResponseDTO<?> deleteComment(@PathVariable int commentNum, HttpSession session) {
+       System.out.println("안녕아아아아아아아아아");
+	   User loginUser = (User) session.getAttribute("loginUser");
        Comment comment = commentService.getCommentById(commentNum);
+       System.out.println(comment.toString() + "알라알라알라아랄라");
        
        if (comment != null && loginUser != null && comment.getUser().getUserid().equals(loginUser.getUserid())) {
-           commentService.deleteComment(commentNum);
+           System.out.println("가나다라마바사아카차ㅏ");
+    	   commentService.deleteComment(commentNum);
            return new ResponseDTO<>(HttpStatus.OK.value(), "댓글 삭제 성공");
        } else {
-           return new ResponseDTO<>(HttpStatus.UNAUTHORIZED.value(), "해당 댓글을 삭제할 수 있는 권한이 없습니다.");
+           return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "해당 댓글을 삭제할 수 있는 권한이 없습니다.");
        }
 
 }
