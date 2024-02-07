@@ -1,7 +1,9 @@
 package com.dana.library.domain;
 
+
 import java.time.LocalDate;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -31,13 +33,17 @@ public class Rent {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int rentNum;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+
+	@CreationTimestamp
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm", timezone="Asia/Seoul") //날짜 포멧 바꾸기
-    private LocalDate rentDate;
-	
+	private LocalDate rentDate;
+
+	@CreationTimestamp
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm", timezone="Asia/Seoul") //날짜 포멧 바꾸기
     private LocalDate dueDate;
+
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userNum")
@@ -49,5 +55,6 @@ public class Rent {
 	
 	@Enumerated(EnumType.STRING)
 	private Status rentStatus;
+	
 	
 }

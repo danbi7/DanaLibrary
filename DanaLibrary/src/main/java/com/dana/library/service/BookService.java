@@ -20,8 +20,23 @@ public class BookService {
 		return bookRepository.findByBookNum(bookNum).get();
 	}
 
+	@Transactional(readOnly = true)
 	public List<Book> getBookList() {
 		return bookRepository.findAll();
 	}
+	
+	@Transactional(readOnly = true)
+	public List<Book> searchBookList(String category, String bookTitle) {
+		return bookRepository.findByCategoryIsAndTitleContaining(category, bookTitle);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Book> searchBookByCategory(String category) {
+		return bookRepository.findByCategory(category);
+	}
 
+	@Transactional(readOnly = true)
+	public List<Book> searchBookByTitle(String title) {
+		return bookRepository.findByTitleContaining(title);
+	}
 }

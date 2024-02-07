@@ -39,6 +39,9 @@ public class RentController {
 	@Autowired
 	private NoticeService noticeService;
 	
+	@Autowired
+	private SseController sseController;
+
 
 	@PostMapping("/rent/rentBook/{bookNum}")
 	public @ResponseBody ResponseDTO<?> rentBook(@PathVariable int bookNum, HttpSession session) {
@@ -121,9 +124,10 @@ public class RentController {
 			rent.setRentStatus(Status.INACTIVE);
 			rentService.updateRent(rent);
 			
-			//반납 후 예약이 걸려있는지 확인해서 걸려있으면 알림을 보내는 메소드 호출
-			Reserved_book findReserve = reserveService.rentedBookInReservedBook(rent.getBook());
-			noticeService.addNotice(findReserve);
+			//대출 도서중 예약 우선 순위인 정보 조회하기 reserve는 해당 예약
+			Reserved_book reserve = reserveService.rentedBookInReservedBook(rent.getBook());
+			noticeService.addNotice(reserve);
+			sseController.sendNotice(session);
 			
 			return new ResponseDTO<>(HttpStatus.OK.value(), "  책 반납하기");
 		} else {

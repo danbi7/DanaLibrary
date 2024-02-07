@@ -23,9 +23,12 @@ public class NoticeService {
 	// 예약된 도서에서 예약한 사람을 찾아서 알림 테이블에 추가
 	public void addNotice(Reserved_book findReserve) {
 		User noticeUser = findReserve.getUser();
+		String noticeContent = "도서 '" + findReserve.getBook().getTitle() + "' 대출가능";
+		
 		Notice notice = new Notice();
 
 		notice.setUser(noticeUser);
+		notice.setContent(noticeContent);
 		noticeRepository.save(notice);
 	}
 

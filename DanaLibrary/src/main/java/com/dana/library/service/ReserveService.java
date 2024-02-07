@@ -19,6 +19,8 @@ public class ReserveService {
 	@Autowired
 	private ReserveRepository reserveRepository;
 	
+	
+	
 	@Transactional
 	public boolean isReserved(User user) {
 		// 로그인된 유저가 이미 예약한 도서가 존재하는지 여부 확인 과정
@@ -66,6 +68,8 @@ public class ReserveService {
 		return reservedBookList;	
 	}
 	
+	
+	//대출도서중 예약 정보 조회
 	@Transactional
 	public Reserved_book rentedBookInReservedBook(Book book) {
 		List<Reserved_book> reservedBookList=reserveRepository.findAllByBook(book);
