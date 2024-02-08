@@ -18,7 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dana.library.domain.Board;
 import com.dana.library.domain.Category;
-
+import com.dana.library.domain.Comment;
+import com.dana.library.domain.Likes;
 import com.dana.library.domain.User;
 import com.dana.library.dto.ResponseDTO;
 import com.dana.library.service.BoardService;
@@ -80,9 +81,9 @@ public class BoardController {
 
 	// 글 목록 보기 기능
 	@PostMapping("/board/getBoardList")
-	public String searchBoard(@RequestBody Board board, Model model) {
+	public String searchBoard(Model model) {
 
-		List<Board> boardList = boardService.getBoardList(board);
+		List<Board> boardList = boardService.getBoardList();
 
 		model.addAttribute("boardList", boardList);
 
