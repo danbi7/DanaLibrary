@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dana.library.domain.Board;
+import com.dana.library.domain.Category;
 import com.dana.library.domain.Likes;
 import com.dana.library.domain.User;
 import com.dana.library.persistence.BoardRepository;
@@ -33,7 +34,6 @@ public class BoardService {
 	public Page<Board> getBoardList(Pageable pageable){
 		return boardRepository.findAll(pageable);
 	}
-	*/
 	
 	@Transactional(readOnly = true)
 	public List<Board> getBoardList(Category category){
