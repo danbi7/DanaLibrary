@@ -24,6 +24,8 @@
 <body>
 
 	<nav class="py-2 bg-body-tertiary border-bottom sticky-top">
+	
+	<form action="/book/view/getBookList">
 		<div class="container d-flex flex-wrap">
 			<ul class="nav me-auto">
 				<li class="nav-item firstNav-left"><a href="/"
@@ -47,11 +49,13 @@
 					<li class="nav-item firstNav-right"><a
 						href="/user/view/insertUser" class="nav-link link-dark px-2">회원가입</a></li>
 				</c:if>
-				<li><input type="search" class="form-control"
-					placeholder="제목으로 검색하기" aria-label="Search"></li>
-				<li><a href="#"><img src="/image/icon/search.png"></a></li>
+				<li><input type="hidden" name="category" value="전체"></li>
+				<li><input type="text" class="form-control"
+					placeholder="제목으로 검색하기" aria-label="Search" name = "bookTitle"></li>
+				<li><button type="submit" class="btn" type="button" id="btn-searchBook"><img src="/image/icon/search.png"></button>
 			</ul>
 		</div>
+	</form>
 	</nav>
 
 

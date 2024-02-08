@@ -23,13 +23,6 @@ public class BoardService {
 		return boardRepository.findAll();
 	}
 	/*
-	//페이징
-	@Transactional(readOnly = true)
-	public Page<Board> getBoardList(Pageable pageable){
-		return boardRepository.findAll(pageable);
-	}
-	*/
-	
 	@Transactional(readOnly = true)
 	public List<Board> getBoardList(Category category){
 		return boardRepository.findByCategory(category);
@@ -44,9 +37,27 @@ public class BoardService {
 	public List<Board> getBoardList(Category category, String title) {
 		return boardRepository.findByCategoryIsAndTitleContaining(category, title);
 	}
+	*/
 	
-	
-	
+	//페이징
+		@Transactional(readOnly = true)
+		public Page<Board> getBoardList(Pageable pageable){
+			return boardRepository.findAll(pageable);
+		}
+		@Transactional(readOnly = true)
+		public Page<Board> getBoardList(Category category,Pageable pageable){
+			return boardRepository.findByCategory(category,pageable);
+		}
+		
+		@Transactional(readOnly = true)
+		public Page<Board> getBoardList(String title,Pageable pageable){
+			return boardRepository.findByTitleContaining(title,pageable);
+		}
+		
+		@Transactional(readOnly = true)
+		public Page<Board> getBoardList(Category category, String title,Pageable pageable) {
+			return boardRepository.findByCategoryIsAndTitleContaining(category, title,pageable);
+		}
 	
 
 	@Transactional

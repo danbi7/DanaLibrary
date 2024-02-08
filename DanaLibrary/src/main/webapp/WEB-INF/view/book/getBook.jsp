@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.dana.library.domain.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ include file="../layout/header1.jsp" %>
 <%@ include file="../layout/header2.jsp" %>
     
@@ -47,7 +48,16 @@ display: block;
   </table>
 </div>
 <div>
-<a href="#" id="btn-interest">관심도서 수</a>
+<c:choose>
+<c:when test="${empty interestedBook.book }">
+	<button class="btn-interest btn btn-outline-success" type="submit">관심도서 추가</button>
+</c:when>
+<c:otherwise>
+	<button class="btn-interest-cancel btn btn-outline-info" type="button">관심도서 삭제</button>
+</c:otherwise>
+</c:choose>
+<br>
+관심도서 수 : ${interestCount }
 <br>
 	
 	<c:choose>
@@ -71,11 +81,8 @@ display: block;
 	<button class="btn btn-light" onclick="history.back()">뒤로가기</button>
 </div>
 
-
-
-<script src="/js/rentBook.js"></script>
-<script src="/js/returnBook.js"></script>
-<script src="/js/reserveBook.js"></script>
+<script src="/js/book/interestBook.js"></script>
+<script src="/js/book/book1.js"></script>
 
 
 <div>

@@ -12,7 +12,7 @@
 		<div class="col-md-6 text-center">
 		
 		<form action="/book/view/getBookList">
-			<div class="d-flex">
+			<div class="d-flex"><!-- 도서 검색 창 -->
 				<div class="dropdown">
 					<select name="category"
 						class="btn btn-outline-primary dropdown-toggle"
@@ -21,8 +21,8 @@
 						<option value="총류">총류
 						<option value="철학">철학
 						<option value="종교">종교
-						<option value="사회과학">사회과학
 						<option value="언어">언어
+						<option value="사회과학">사회과학
 						<option value="자연과학">자연과학
 						<option value="기술과학">기술과학
 						<option value="예술">예술
@@ -32,13 +32,13 @@
 					</select>
 				</div>
 				<input class="form-control me-2" type="text" placeholder="책 제목을 입력하세요" name="bookTitle">
-				<button type="submit" class="btn btn-primary" type="button" id="btn-searchBook">Search</button>
+				<button type="submit" class="btn btn-primary" id="btn-searchBook">Search</button>
 				
 			</div>
 			</form>
 		</div>
 		
-		<c:forEach var="book" items="${bookList}">
+		<c:forEach var="book" items="${bookList.content}">
 			<div class="row">
 
 				<div class="col-md-3" align="center"
@@ -95,6 +95,39 @@
 		</c:forEach>
 		
 	</div>
+
+<c:choose>
+	<c:when test="${bookList.first }">
+		<a class="btn btn-secondary">이전</a>
+	</c:when>
+	<c:otherwise>
+		<a href="?page=${bookList.number-1 }" class="btn btn-primary">이전</a>
+	</c:otherwise>
+</c:choose>
+
+<c:forEach begin="${startPage }" end="${endPage }" var="i">
+<c:choose>
+<c:when test="${nowPage == i }">
+<a href="/book/view/getBookList?page=${i-1}" class="btn">${i }!!!</a>
+</c:when>
+<c:otherwise>
+
+<a href="/book/view/getBookList?page=${i-1}" class="btn">${i }</a>
+</c:otherwise>
+</c:choose>
+
+</c:forEach>
+
+<c:choose>
+	<c:when test="${bookList.last }">
+		<a class="btn btn-secondary">다음</a>
+	</c:when>
+	<c:otherwise>
+		<a href="?page=${book.number+1 }" class="btn btn-primary">다음</a>
+	</c:otherwise>
+</c:choose>
+
+
 
 	<script src="/js/book/book2.js"></script>
 	

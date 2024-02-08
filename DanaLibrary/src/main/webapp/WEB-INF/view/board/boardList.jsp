@@ -6,6 +6,7 @@
 <%@ include file="../layout/header1.jsp" %>
 <%@ include file="../layout/header2.jsp" %>
 
+
 <div class="container-boardList mt-4">
 <div class="row justify-content-between">
 
@@ -48,7 +49,7 @@
 		<th>추천수</th>
 	</tr>
 	
-	<c:forEach items="${boardList }" var="boardList">
+	<c:forEach items="${boardList.content }" var="boardList">
 	<tr>
 		<td>${boardList.boardNum }</td>
 		<td><a href="/board/view/getBoard/${boardList.boardNum }">${boardList.title }</a></td>
@@ -61,6 +62,36 @@
 	</c:forEach>
 	
   </table>
+<c:choose>
+	<c:when test="${boardList.first }">
+		<a class="btn btn-secondary">이전</a>
+	</c:when>
+	<c:otherwise>
+		<a href="?page=${boardList.number-1 }" class="btn btn-primary">이전</a>
+	</c:otherwise>
+</c:choose>
+
+<c:forEach begin="${startPage }" end="${endPage }" var="i">
+<c:choose>
+<c:when test="${nowPage == i }">
+<a href="/board/view/getBoardList?page=${i-1}" class="btn">${i }!!!</a>
+</c:when>
+<c:otherwise>
+
+<a href="/board/view/getBoardList?page=${i-1}" class="btn">${i }</a>
+</c:otherwise>
+</c:choose>
+
+</c:forEach>
+
+<c:choose>
+	<c:when test="${boardList.last }">
+		<a class="btn btn-secondary">다음</a>
+	</c:when>
+	<c:otherwise>
+		<a href="?page=${boardList.number+1 }" class="btn btn-primary">다음</a>
+	</c:otherwise>
+</c:choose>
 </div>
 </div>
 
