@@ -6,6 +6,7 @@ import lombok.Getter;
 
 
 public enum Status {
-	ACTIVE, INACTIVE, PENDING, ADMIN;
+
+	ACTIVE("활성"), INACTIVE("비활성"), PENDING("대기"), ADMIN("관리자"); 
 	
 }
