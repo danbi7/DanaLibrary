@@ -14,8 +14,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://gcp.connect.psdb.cloud/danalibrary?sslMode=VERIFY_IDENTITY
-    username: aig6s2ymztamide2dzm4
-    password: pscale_pw_o9S1jQhOTEh2dWhqdddgDjDHI9cEBzHcLsMxd4gQ09O
+    username: ctnldl0ugnil0s66y421
+    password: pscale_pw_bamO0FfY1XvQAmxUCR3r9b3RAHFMmPdYjmQLbZ5BL5v
 
   jpa:
     open-in-view: true
