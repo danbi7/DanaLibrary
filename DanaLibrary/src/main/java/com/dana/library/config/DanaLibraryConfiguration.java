@@ -8,22 +8,22 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-//import com.dana.library.interceptor.Interceptor;
+import com.dana.library.interceptor.Interceptor;
 
 @Configuration
 @ComponentScan
 public class DanaLibraryConfiguration implements WebMvcConfigurer {
 
-//	@Autowired
-//	Interceptor interceptor;
+	@Autowired
+	Interceptor interceptor;
 	
 	@Bean
 	public ModelMapper modelMapper() {
 		return new ModelMapper();
 	}
 
-//	@Override
-//	public void addInterceptors(InterceptorRegistry registry) {
-//		registry.addInterceptor(interceptor).addPathPatterns("/board/**", "/view/**", "/book/**", "/rent/**", "/reserve/**").excludePathPatterns("/public/**");
-//	}
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(interceptor).addPathPatterns("/board/**", "/book/**", "/view/**", "/rent/**", "/reserve/**").excludePathPatterns("/public/**");
+	}
 }
