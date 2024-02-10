@@ -161,7 +161,7 @@ function checkUserIdAndInitBook2Obj() {
     if ($("#userid").val() === null || $("#userid").val() === "") {
         alert("로그인 후 이용 가능합니다.");
         location = "/user/view/login";
-    } else {
-        book2Obj.init();
     }
 }
+
+book2Obj.init();

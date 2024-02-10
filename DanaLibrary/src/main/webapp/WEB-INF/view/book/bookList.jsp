@@ -7,8 +7,12 @@
 <%@ include file="../layout/header2.jsp"%>
 
 <input type="hidden" value="${loginUser.userid }" id="userid">
-<div class="container" align="center">
-	<div class="col-md-6 text-center my-4">
+<div class="container-bookList mt-4" align="center">
+
+<div class="row justify-content-between">
+<div class="bookList-icon text-center">
+<img src="/image/icon/icon-book.png"><h5><strong>도서 목록</strong></h5></div>
+	<div class="col-md-6 text-center">
 
 		<form action="/public/book/view/getBookList">
 			<div class="d-flex">
@@ -31,13 +35,16 @@
 				</div>
 				<input class="form-control me-2" type="text"
 					placeholder="책 제목을 입력하세요" name="bookTitle">
-				<button type="submit" class="btn btn-primary" type="button"
-					id="btn-searchBook">Search</button>
+      <button type="submit" class="btn" type="button" style="padding: 0px"><img src="/image/icon/search.png"></button>
 
 			</div>
 		</form>
 	</div>
+	
+	<div style="width: 150px"></div>
+	</div>
 
+<div class="mt-3" style="border-top: 7px solid #205295; padding-top: 20px">
 	<c:forEach var="book" items="${bookList}">
 		<div class="row">
 
@@ -109,7 +116,7 @@
 		</div>
 		<hr>
 	</c:forEach>
-
+</div>
 </div>
 
 <script src="/js/book/book2.js"></script>
