@@ -10,32 +10,34 @@
 
 			<div class="container-tab">
 				<div class="tab">
-					<button class="tablinks" onclick="openMenu(event, 'myInfo')">나의 정보</button>
-					<button class="tablinks" onclick="openMenu(event, 'rentInfo')">대출 내역</button>
-					<button class="tablinks" onclick="openMenu(event, 'reserveInfo')">예약 내역</button>
+					<button class="tablinks" onclick="openMenu(event, 'currentRentInfo')">현재 대출 도서</button>
+					<button class="tablinks" onclick="openMenu(event, 'pastRentInfo')">지난 대출 도서</button>
 					<button class="tablinks" onclick="openMenu(event, 'interestedInfo')">관심 도서</button>
-					<button class="tablinks" onclick="openMenu(event, 'boardInfo')">나의 게시글</button>
 					<button class="tablinks" onclick="openMenu(event, 'requestInfo')">도서 신청</button>
+					<button class="tablinks" onclick="openMenu(event, 'myInfo')">나의 정보</button>
+					<button class="tablinks" onclick="openMenu(event, 'boardInfo')">나의 게시글</button>
 				</div>
 
-				<div id="myInfo" class="tabcontent">
-					<%@ include file="myInfo.jsp" %>
+				<div id="currentRentInfo" class="tabcontent">
+					<%@ include file="currentRent.jsp" %>
 				</div>
 
-				<div id="rentInfo" class="tabcontent">
-				</div>
-
-				<div id="reserveInfo" class="tabcontent">
+				<div id="pastRentInfo" class="tabcontent">
 				</div>
 
 				<div id="inerestedInfo" class="tabcontent">
 				</div>
 
-				<div id="boardInfo" class="tabcontent">
-				</div>
-
 				<div id="requestInfo" class="tabcontent">
 				</div>
+				
+				<div id="myInfo" class="tabcontent">
+					<%@ include file="myInfo.jsp" %>
+				</div>
+				
+				<div id="boardInfo" class="tabcontent">
+				</div>
+				
 			</div>
 		</div>
 	</div>

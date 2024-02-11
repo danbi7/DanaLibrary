@@ -162,6 +162,8 @@ public class RentService {
 	@Transactional(readOnly = true)
 	public List<Rent> rentedByLoginUser(User loginUser) {
 		List<Rent> rentList = rentRepository.findAllByUserAndRentStatus(loginUser, Status.ACTIVE);
+		System.out.println("-----" + rentList);
 		return rentList;
 	}
+	
 }

@@ -124,3 +124,31 @@ margin-right: 10px;
 .password2-form, .password3-form{
 	display: none;
 }
+
+.currentRent-book {
+	width: 180px; 
+	height: 290px;
+	margin-right: 34px;
+}
+
+.currentRent-book p {
+	margin-top: 10px;
+}
+
+.container-currentRent{
+	display: flex;
+	flex-direction: column;
+	width: 90%;
+	margin: 0px auto;
+}
+
+.container-small{
+	display: flex;
+}
+
+.currentRent-book img {
+	border-radius: 3px;
+	width: 180px; 
+	height: 260px; 
+    object-fit: cover;
+}

@@ -20,17 +20,17 @@
 					<select name="category"
 						class="btn btn-outline-primary dropdown-toggle"
 						aria-label="Dropdown" id="bookCategory" style="height: 100%">
-						<option value="전체">전체
-						<option value="총류">총류
-						<option value="철학">철학
-						<option value="종교">종교
-						<option value="사회과학">사회과학
-						<option value="언어">언어
-						<option value="자연과학">자연과학
-						<option value="기술과학">기술과학
-						<option value="예술">예술
-						<option value="문학">문학
-						<option value="역사">역사
+						<option value="전체">전체</option>
+						<option value="총류">총류</option>
+						<option value="철학">철학</option>
+						<option value="종교">종교</option>
+						<option value="사회과학">사회과학</option>
+						<option value="언어">언어</option>
+						<option value="자연과학">자연과학</option>
+						<option value="기술과학">기술과학</option>
+						<option value="예술">예술</option>
+						<option value="문학">문학</option>
+						<option value="역사">역사</option>
 					</select>
 				</div>
 				<input class="form-control me-2" type="text"
