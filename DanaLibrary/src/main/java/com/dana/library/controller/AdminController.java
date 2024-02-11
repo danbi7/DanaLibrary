@@ -13,9 +13,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dana.library.domain.Book;
+import com.dana.library.domain.Rent;
+import com.dana.library.domain.Reserved_book;
 import com.dana.library.domain.User;
 import com.dana.library.dto.ResponseDTO;
 import com.dana.library.service.BookService;
+import com.dana.library.service.RentService;
+import com.dana.library.service.ReserveService;
 import com.dana.library.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -30,6 +34,12 @@ public class AdminController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private RentService rentService;
+	
+	@Autowired
+	private ReserveService reserveService;
+	
 	// 관리자페이지 불러오기
 	@GetMapping("/view/admin")
 	public String admin(Model model) {
@@ -42,7 +52,14 @@ public class AdminController {
 	
 	// 마이페이지
 	@GetMapping("/view/myPage")
-	public String myPage() {
+	public String myPage(HttpSession session, Model model) {
+		User loginUser = (User) session.getAttribute("loginUser");
+		List<Rent> currentRentList = rentService.rentedByLoginUser(loginUser);
+		Reserved_book reserve = reserveService.getReservedBook(loginUser);
+		model.addAttribute("currentRentList", currentRentList);
+		if(reserve.getBook() != null) {
+			model.addAttribute("reserve", reserve);
+		}
 		return "admin/myPage";
 	}
 	
