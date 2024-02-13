@@ -1,4 +1,5 @@
 let insertUser = {
+	status: 0,
 
 	init: function() {
 		let _this = this;
@@ -14,8 +15,35 @@ let insertUser = {
 		$("#btn-idCheck").on("click", () => {
 			_this.idCheck();
 		});
+
+		/*$("#repassword").on("input", function() {
+			_this.pwcheck();
+		});
+
+		$("#userid").on("input", function() {
+			_this.reset();
+		});
+		
+		$("#username").on("input", function() {
+			_this.reset();
+		});
+		
+		$("#password").on("input", function() {
+			_this.reset();
+		});
+		
+		$("#email").on("input", function() {
+			_this.reset();
+		});
+		
+		$("#birthDate").on("input", function() {
+			_this.reset();
+		});*/
+
 	},
+
 	insertUser: function() {
+		let _this = this;
 		let user = {
 			userid: $("#userid").val(),
 			password: $("#password").val(),
@@ -23,12 +51,16 @@ let insertUser = {
 			birthDate: $("#birthDate").val(),
 		}
 
+		if (_this.status != 1) {
+			alert("아이디 중복검사는 필수입니다.");
+			return;
+		}
+
 		if ($("#emailDomain").val() === 'custom') {
 			user.email = $("#customEmail").val();
 		} else {
 			user.email = $("#emailId").val() + $("#emailDomain").val();
 		}
-
 
 		$.ajax({
 			type: "POST",
@@ -94,29 +126,64 @@ let insertUser = {
 		}
 
 	},
-	
-	   idCheck: function() {
-      let userid = $("#userid").val();
 
-      $.ajax({
-         type: "POST",
-         url: "/user/checkUserId/" + userid,
-         contentType: "application/json; charset=UTF-8"
-      }).done(function(response) {
-         console.log(response)
-         // 성공적인 응답 처리
-         // 서버로부터 받은 응답 처리
-         if (response.status === 200) {
-            // 중복이 아닌 경우
-            $("#result-userid-message").text("사용 가능한 아이디입니다.").css("color", "blue");
-         } else {
-            // 중복인 경우
-            $("#result-userid-message").text("사용 중인 아이디입니다.").css("color", "red");
-         }
-      }).fail(function(error) {
-         alert("에러 발생 : " + error)
-      });
-   }
+	idCheck: function() {
+		let _this = this;
+		let user = {
+			userid: $("#userid").val()
+		};
+
+		$.ajax({
+			type: "POST",
+			url: "/user/checkUserId",
+			data: JSON.stringify(user),
+			contentType: "application/json; charset=UTF-8"
+		}).done(function(response) {
+			console.log(response)
+			// 성공적인 응답 처리
+			// 서버로부터 받은 응답 처리
+			if (response.status === 200) {
+				// 중복이 아닌 경우
+				$("#result-userid-message").text("사용 가능한 아이디입니다.").css("color", "blue");
+				_this.status = 1;
+			} else if (response.status === 409) {
+				// 중복인 경우
+				$("#result-userid-message").text("사용 중인 아이디입니다.").css("color", "red");
+				_this.status = 0;
+			} else {
+				let errors = response["data"];
+				if (errors != null) {
+					$("#result-userid-message").text(errors.userid).css("color", "red");
+					_this.status = 0;
+				}
+			}
+
+
+		}).fail(function(error) {
+			alert("에러 발생 : " + error)
+		});
+	},
+
+	pwcheck: function() {
+
+		let password = $("#password").val();
+		let repassword = $("#repassword").val();
+		let pwcheckResult = $("#pwcheckResult");
+
+		if (password !== repassword) {
+			pwcheckResult.text("비밀번호가 일치하지 않습니다.").css("color", "red");
+		} else {
+			pwcheckResult.text("비밀번호가 일치합니다.").css("color", "blue");
+		}
+	},
+
+	reset: function() {
+		$("#result-userid-message").css("display", "none");
+		$("#result-username-message").css("display", "none");
+		$("#result-password-message").css("display", "none");
+		$("#result-email-message").css("display", "none");
+		$("#result-birthDate-message").css("display", "none");
+	}
 }
 
 insertUser.init();

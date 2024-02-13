@@ -1,14 +1,14 @@
-.container-page-content-book{
+.container-bookList {
+	display: flex;
 	width: 80%;
-	margin: auto;
+	margin: 0px auto;
+	flex-direction: column;
 }
-
 .col-md-7{
 	
 font-size: 70%;
 color: #000000;
 }
-
 
 
 .custom-button {
@@ -31,4 +31,18 @@ color: #000000;
 .btn-outline-secondary {
     color: #B4B4B8;
     border-color: #B4B4B8;
+}
+
+.d-flex img {
+	margin-top: 4px;
+	margin-left: 8px;
+	width: 30px;
+	height: 30px;
+}
+
+.bookList-icon{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	width: 150px;
 }
