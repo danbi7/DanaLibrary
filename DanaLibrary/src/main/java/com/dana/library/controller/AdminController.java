@@ -14,12 +14,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dana.library.domain.Book;
 import com.dana.library.domain.Rent;
+<<<<<<< HEAD
 import com.dana.library.domain.Reserved_book;
+=======
+>>>>>>> 60a2d6b45fd06aaf6ab089d2a7c6e0057b7ee9d8
 import com.dana.library.domain.User;
 import com.dana.library.dto.ResponseDTO;
 import com.dana.library.service.BookService;
 import com.dana.library.service.RentService;
+<<<<<<< HEAD
 import com.dana.library.service.ReserveService;
+=======
+>>>>>>> 60a2d6b45fd06aaf6ab089d2a7c6e0057b7ee9d8
 import com.dana.library.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -36,17 +42,20 @@ public class AdminController {
 	
 	@Autowired
 	private RentService rentService;
-	
+
 	@Autowired
 	private ReserveService reserveService;
-	
+
 	// 관리자페이지 불러오기
 	@GetMapping("/view/admin")
 	public String admin(Model model) {
 		List<User> userList = userService.getUserList();
 		List<Book> bookList = bookService.getBookList();
+		List<Rent> rentList = rentService.getRentListDESC();
 		model.addAttribute("bookList", bookList);
 		model.addAttribute("userList", userList);
+		model.addAttribute("rentList", rentList);
+		
 		return "admin/admin";
 	}
 	

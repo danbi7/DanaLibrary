@@ -32,6 +32,7 @@ public class InterestedBookController {
 		User loginUser = (User) session.getAttribute("loginUser");
 		
 		interestedBookService.addInterestedBook(book, loginUser);
+
 		return new ResponseDTO<>(HttpStatus.OK.value(), "관심도서 등록 완료");
 	}
 	
@@ -41,6 +42,7 @@ public class InterestedBookController {
 		User loginUser = (User) session.getAttribute("loginUser");
 		
 		interestedBookService.removeInterestedBook(book, loginUser);
+
 		return new ResponseDTO<>(HttpStatus.OK.value(), "관심도서 해제 완료");
 	}
 

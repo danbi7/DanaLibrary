@@ -19,14 +19,9 @@
 <link rel="stylesheet" type="text/css" href="/css/result.css">
 <link rel="stylesheet" type="text/css" href="/css/board.css">
 <link rel="stylesheet" type="text/css" href="/css/book.css">
-<script>
-    function openNotificationWindow() {
-        window.open('/view/notice', '_blank', 'width=500,height=300');
-    }
-</script>
+
 </head>
 <body>
-
 	<nav class="py-2 bg-body-tertiary border-bottom sticky-top">
 		<div class="container d-flex flex-wrap">
 			<ul class="nav me-auto">
@@ -39,10 +34,34 @@
 
 			<ul class="nav ms-auto">
 				<c:if test="${sessionScope.loginUser != null }">
-					<li class="noti-icon"><div class="notification-container">
-            		<img src="/image/icon/notification.png" onclick="openNotificationWindow()">
-        <span class="notification-number">!</span>
-    </div></li>
+					<li class="noti-icon">
+						<div class="notification-container">
+							<c:choose>
+								<c:when test="${sessionScope.notice != null}">
+									<div>
+										<a href="javascript:void(0);" id="notification-link"
+											onclick="openPopup('/notice/getNotice/${sessionScope.loginUser.userNum}')">
+											<img src="/image/icon/notification.png" class="btn-notice"
+											id="notification-img"> <span id="notification-number"
+											class="notification-number">!</span>
+										</a>
+									</div>
+								</c:when>
+								<c:otherwise>
+									<div>
+										<a href="javascript:void(0);" id="notification-link"
+											onclick="openPopup('/notice/getNotice/${sessionScope.loginUser.userNum}')">
+											<img src="/image/icon/notification.png" class="btn-notice"
+											id="notification-img">
+										</a>
+									</div>
+								</c:otherwise>
+							</c:choose>
+
+
+
+						</div>
+					</li>
 
 					<li class="nav-item firstNav-right"><a href="/user/logout"
 						class="nav-link link-dark px-2">로그아웃</a></li>
@@ -59,3 +78,13 @@
 			</ul>
 		</div>
 	</nav>
+	
+	<script>
+    function openPopup(url) {
+        window.open(url, 'popup', 'width=800,height=500');
+    }
+</script>
+
+
+</body>
+</html>
