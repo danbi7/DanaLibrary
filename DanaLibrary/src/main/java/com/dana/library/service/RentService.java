@@ -24,10 +24,10 @@ import com.dana.library.persistence.RentRepository;
 public class RentService {
 	@Autowired
 	private RentRepository rentRepository;
-	
+
 	@Autowired
 	private ReserveService reserveService;
-	
+
 	@Autowired
 	private NoticeService noticeService;
 
@@ -41,47 +41,41 @@ public class RentService {
 
 	@Transactional
 	public void updateRent(Rent rent) {
-		
+
 		rent.setRentStatus(Status.ACTIVE);
 		LocalDate rentDate = LocalDate.now();
 		LocalDate dueDate = LocalDate.now().plusDays(7);
 		rent.setRentDate(rentDate);
 		rent.setDueDate(dueDate);
-		
-		rentRepository.save(rent);
-	}
-	
-	@Transactional
-	public void returnBook(Rent rent) {
-		
+
 		rentRepository.save(rent);
 	}
 
-	
-	
+	@Transactional
+	public void returnBook(Rent rent) {
+
+		rentRepository.save(rent);
+	}
+
 	@Transactional(readOnly = true)
 	public List<Rent> getRentList() {
 		return rentRepository.findAll();
 	}
-	
 
 	@Transactional(readOnly = true)
 	public List<Rent> getRentList(User user) {
 		return rentRepository.findAllByUser(user);
 	}
 
-	
 	@Transactional(readOnly = true)
 	public List<Rent> getRentList(Status status) {
 		return rentRepository.findAllByRentStatus(status);
 	}
-	
+
 	@Transactional(readOnly = true)
 	public List<Rent> getRentList(Book book) {
 		return rentRepository.findAllByBook(book);
 	}
-	
-
 
 	@Transactional
 	public List<Rent> getRentBookList() {
@@ -90,15 +84,16 @@ public class RentService {
 
 	@Transactional
 	public boolean isRentedByUser(User loginUser, Book book) {
-		Rent rentedBook = rentRepository.findByUserAndBookAndRentStatus(loginUser, book, Status.ACTIVE).orElseGet(new Supplier<Rent>() {
-			public Rent get() {
-				return new Rent();
-			}
-		});
+		Rent rentedBook = rentRepository.findByUserAndBookAndRentStatus(loginUser, book, Status.ACTIVE)
+				.orElseGet(new Supplier<Rent>() {
+					public Rent get() {
+						return new Rent();
+					}
+				});
 
-		if(rentedBook.getBook() == null) {
+		if (rentedBook.getBook() == null) {
 			return false;
-		}else {
+		} else {
 			return true;
 		}
 	}
@@ -117,35 +112,36 @@ public class RentService {
 				updateRent(rent);
 				Reserved_book reserve = reserveService.rentedBookInReservedBook(rent.getBook());
 				System.out.println("테스트 예약 정보: " + reserve);
-				if(reserve!=null) {
+				if (reserve != null) {
 					noticeService.addNotice(reserve);
 				}
 				iterator.remove();
 			}
 		}
 	}
-	
-	//자동반납이 안됐을 때 자동반납을 시킨다
+
+	// 자동반납이 안됐을 때 자동반납을 시킨다
 	public void autoReturnCheck() {
 		List<Rent> rentList = getRentBookList();
 		LocalDate today = LocalDate.now();
-		
+
 		Iterator<Rent> iterator = rentList.iterator();
 		while (iterator.hasNext()) {
 			Rent rent = iterator.next();
-			if (rent.getRentStatus().equals(Status.ACTIVE) && (rent.getDueDate().isBefore(today) || rent.getDueDate().isEqual(today))) {
-                rent.setRentStatus(Status.INACTIVE);
-                updateRent(rent);
-                Reserved_book reserve = reserveService.rentedBookInReservedBook(rent.getBook());
+			if (rent.getRentStatus().equals(Status.ACTIVE)
+					&& (rent.getDueDate().isBefore(today) || rent.getDueDate().isEqual(today))) {
+				rent.setRentStatus(Status.INACTIVE);
+				updateRent(rent);
+				Reserved_book reserve = reserveService.rentedBookInReservedBook(rent.getBook());
 				System.out.println("테스트 예약 정보: " + reserve);
-				if(reserve!=null) {
+				if (reserve != null) {
 					noticeService.addNotice(reserve);
 				}
-                iterator.remove();
-            }
-        }
+				iterator.remove();
+			}
+		}
 	}
-	
+
 	@Transactional
 	public boolean isRentedBySomeone(Book book) {
 		Rent rentedBook = rentRepository.findByBookAndRentStatus(book, Status.ACTIVE).orElseGet(new Supplier<Rent>() {
@@ -154,21 +150,21 @@ public class RentService {
 			}
 		});
 
-		if(rentedBook.getBook() == null) {
+		if (rentedBook.getBook() == null) {
 			return false;
-		}else {
+		} else {
 			return true;
 		}
 	}
 
 	@Transactional
 	public Rent isRentedByLoginUser(User loginUser, Book book) {
-		Rent rentedBook = rentRepository.findByUserAndBookAndRentStatus(loginUser, book, Status.ACTIVE).orElseGet(() -> {
-			return new Rent();
-		});
+		Rent rentedBook = rentRepository.findByUserAndBookAndRentStatus(loginUser, book, Status.ACTIVE)
+				.orElseGet(() -> {
+					return new Rent();
+				});
 		return rentedBook;
 	}
-
 
 	@Transactional
 	public Rent rentedBySomeone(Book book) {
@@ -177,17 +173,23 @@ public class RentService {
 		});
 		return rentedBook;
 	}
-	
+
 	@Transactional(readOnly = true)
-	public List<Rent> rentedByLoginUser(User loginUser) {
-		List<Rent> rentList = rentRepository.findAllByUserAndRentStatus(loginUser, Status.ACTIVE);
+	public List<Rent> rentedByLoginUser(User user) {
+		List<Rent> rentList = rentRepository.findAllByUserAndRentStatus(user, Status.ACTIVE);
 		return rentList;
 	}
-	
+
 	@Transactional
-	public List<Rent> getRentListDESC(){
+	public List<Rent> pastRentList(User user) {
+		List<Rent> rentList = rentRepository.findAllByUserAndRentStatus(user, Status.INACTIVE);
+		return rentList;
+	}
+
+	@Transactional
+	public List<Rent> getRentListDESC() {
 		List<Rent> rentList = rentRepository.findAll(Sort.by(Sort.Direction.DESC, "rentNum"));
 		return rentList;
 	}
-	
+
 }

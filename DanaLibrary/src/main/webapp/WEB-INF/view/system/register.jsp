@@ -164,8 +164,6 @@
 	});
 
 </script>
-<script src="/js/user/idcheck.js"></script>
-<script src="/js/user/passwordCheck.js"></script>
 <script src="/js/user/insertUser.js"></script>
 
 <%@ include file="../layout/footer.jsp"%>

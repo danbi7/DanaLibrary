@@ -31,4 +31,5 @@ public interface RentRepository extends JpaRepository<Rent, Integer> {
 	Optional<Rent> findByBookAndRentStatus(Book book, Status rentStatus);
 	
 	List<Rent> findAll(Sort sort);
+	
 }

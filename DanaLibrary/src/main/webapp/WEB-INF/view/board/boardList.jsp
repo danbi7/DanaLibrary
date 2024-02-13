@@ -24,13 +24,15 @@
 </div>
 
 
-      <input class="form-control" type="text" placeholder="Search" name="boardTitle">
-      <button type="submit" class="btn" type="button"><img src="/image/icon/search.png"></button>
+      <input class="form-control me-2" type="text" placeholder="검색어를 입력하세요" name="boardTitle">
+      <button type="submit" class="btn" type="button" style="padding: 0px"><img src="/image/icon/search.png"></button>
     </div>
 </form>
   </div>
+  
+  
 
-  <a href="/board/view/insertBoard" class="btn btn-outline-primary" id="insertButton">새글 등록</a>
+  <a href="/board/view/insertBoard" id="insertButton"><img src="/image/icon/icon-edit-button.png">새 글 등록</a>
   
 </div>
 <script src="/js/board/searchBoard.js"></script>

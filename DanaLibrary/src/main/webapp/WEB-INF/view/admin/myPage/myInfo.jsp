@@ -9,7 +9,7 @@
         </div>
         <div class="col-3 edit-button">
         <a href="#" id="btn-edit"><img class ="edit-img" src="/image/icon/icon-edit-button.png"><span class="edit-text">수정하기</span></a></div></div>
-        <hr class="my-4">
+        <hr class="mt-4">
         
           <div class="row g-3">
             <div class="col-sm-12">
