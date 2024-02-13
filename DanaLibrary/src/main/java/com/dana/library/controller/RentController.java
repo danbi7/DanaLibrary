@@ -1,7 +1,5 @@
 package com.dana.library.controller;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,10 +34,9 @@ public class RentController {
 
 		User loginUser = (User) session.getAttribute("loginUser");
 		
-		
 		//로그인 유저의 active인 list
 		List<Rent> rentList = rentService.rentedByLoginUser(loginUser);
-		
+
 		int renting = rentList.size();
 		System.out.println("rentList size : " + renting);
 
@@ -57,7 +54,6 @@ public class RentController {
 			rentService.updateRent(rent);
 			return new ResponseDTO<>(HttpStatus.OK.value(), "책 빌리기");
 		}
-		
 	}
 	
 	@PutMapping("/rent/returnBook/{bookNum}")
@@ -68,7 +64,6 @@ public class RentController {
 		
 		Rent rent = rentService.isRentedByLoginUser(loginUser, gettedBook);
 		
-		
 		if(rent.getRentNum()!=0) {
 			rent.setRentStatus(Status.INACTIVE);
 			rentService.returnBook(rent);
@@ -76,9 +71,6 @@ public class RentController {
 		}else {
 			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "책 반납하기 실패");
 		}
-		
-		
 	}
-
 
 }

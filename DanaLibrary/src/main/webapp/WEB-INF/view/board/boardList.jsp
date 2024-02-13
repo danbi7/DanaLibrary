@@ -74,11 +74,11 @@
 <c:forEach begin="${startPage }" end="${endPage }" var="i">
 <c:choose>
 <c:when test="${nowPage == i }">
-<a href="/board/view/getBoardList?page=${i-1}" class="btn">${i }!!!</a>
+<a href="/public/board/view/getBoardList?page=${i-1}" class="btn">${i }!!!</a>
 </c:when>
 <c:otherwise>
 
-<a href="/board/view/getBoardList?page=${i-1}" class="btn">${i }</a>
+<a href="/public/board/view/getBoardList?page=${i-1}" class="btn">${i }</a>
 </c:otherwise>
 </c:choose>
 

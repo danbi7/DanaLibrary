@@ -20,35 +20,34 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "BOOK")
 public class Book {
-	
+
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int bookNum;
-	
+
 	@Column(nullable = false)
 	private String title;
-	
+
 	@Column(nullable = false)
 	private String author;
-	
+
 	@Column(nullable = false)
 	private String publisher;
 
-	
 	@Column(nullable = false)
 	private String category;
-	
+
 	@Column
 	private String image;
-	
 
 	@Column(length = 3000)
 	private String info;
-	
+
 	@Column
 	private int pages;
-	
+
 	@Column
 	private Date publicationDate;
-	
+
 }

@@ -86,10 +86,11 @@ public class UserService {
 		return userRepository.findAll();
 	}
 	
-
+	
 	@Transactional
 	public void editUser(User user, HttpSession session) {
-		User editUser = userRepository.findByUserid(user.getUserid()).get();
+		User editUser = (User) session.getAttribute("loginUser");
+		
 		editUser.setBirthDate(user.getBirthDate());
 		editUser.setPassword(user.getPassword());
 		editUser.setUsername(user.getUsername());
@@ -98,6 +99,20 @@ public class UserService {
 		userRepository.save(editUser);
 		
 		session.setAttribute("loginUser", editUser);
+	}
+	
+	//관리자 회원 수정
+	@Transactional
+	public void editUserAdmin(User user) {
+		
+		User editUser = userRepository.findByUserid(user.getUserid()).get();
+		editUser.setUserid(user.getUserid());
+		editUser.setUsername(user.getUsername());
+		editUser.setPassword(user.getPassword());
+		editUser.setBirthDate(user.getBirthDate());
+		editUser.setUserStatus(user.getUserStatus());
+		editUser.setEmail(user.getEmail());
+		userRepository.save(editUser);
 	}
 
 }

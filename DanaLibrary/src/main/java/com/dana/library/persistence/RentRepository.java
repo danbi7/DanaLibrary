@@ -28,5 +28,4 @@ public interface RentRepository extends JpaRepository<Rent, Integer> {
 	Optional<Rent> findByUserAndBookAndRentStatus(User user, Book book, Status rentStatus);
 
 	Optional<Rent> findByBookAndRentStatus(Book book, Status rentStatus);
-
 }

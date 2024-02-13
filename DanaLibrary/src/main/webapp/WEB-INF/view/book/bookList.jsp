@@ -1,18 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.dana.library.domain.*" %>
+<%@ page import="com.dana.library.domain.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ include file="../layout/header1.jsp"%>
 <%@ include file="../layout/header2.jsp"%>
 
+<input type="hidden" value="${loginUser.userid }" id="userid">
 
 	<div class="container" align="center">
 		<h2>도서 목록</h2>
 		<div class="col-md-6 text-center">
-		
-		<form action="/book/view/getBookList">
-			<div class="d-flex"><!-- 도서 검색 창 -->
+
+	<form action="/public/book/view/getBookList">
+			<div class="d-flex">
 				<div class="dropdown">
 					<select name="category"
 						class="btn btn-outline-primary dropdown-toggle"
@@ -28,73 +29,91 @@
 						<option value="예술">예술
 						<option value="문학">문학
 						<option value="역사">역사
-						
 					</select>
 				</div>
-				<input class="form-control me-2" type="text" placeholder="책 제목을 입력하세요" name="bookTitle">
-				<button type="submit" class="btn btn-primary" id="btn-searchBook">Search</button>
 				
+				<input class="form-control me-2" type="text" placeholder="책 제목을 입력하세요" name="bookTitle">
+				<button type="submit" class="btn btn-primary" type="button"
+					id="btn-searchBook">Search</button>
+
 			</div>
-			</form>
-		</div>
-		
-		<c:forEach var="book" items="${bookList.content}">
-			<div class="row">
+		</form>
+	</div>
 
-				<div class="col-md-3" align="center"
-					style="display: flex; justify-content: center;">
-					<img src="${book.image}" style="width: 130px; height: 180px;">
+	<c:forEach var="book" items="${bookList.content}">
+		<div class="row">
 
-				</div>
+			<div class="col-md-3" align="center"
+				style="display: flex; justify-content: center;">
+				<img src="${book.image}" style="width: 130px; height: 180px;">
 
-				<div class="col-md-7">
-					<p>
-					<h6>
-						<b>${book.title}</b>
-					</h6>
-					<p>${book.author}&nbsp| &nbsp ${book.publisher} &nbsp | &nbsp
-						${book.category}
-					<p style="padding-top: 20px;">
-						<c:choose>
-							<c:when test="${fn:length(book.info) <= 200}">
+			</div>
+
+			<div class="col-md-7" style="text-align: left">
+				<h6 class="mt-3">
+					<b>${book.title}</b>
+				</h6>
+				<p>${book.author}&nbsp|&nbsp ${book.publisher} &nbsp | &nbsp
+					${book.category}
+				<p style="padding-top: 20px;">
+					<c:choose>
+						<c:when test="${fn:length(book.info) <= 200}">
                         ${book.info}
                     </c:when>
-							<c:otherwise>
+						<c:otherwise>
                         ${fn:substring(book.info, 0, 200)}...
                     </c:otherwise>
-						</c:choose>
-					</p>
-				</div>
-
-				<div class="col-md-2 buttons">
-
-					<a href="/book/getBook/${ book.bookNum }"
-						class="btn btn-outline-danger custom-button" type="button">상세정보</a>
-					<c:choose>
-						<c:when test="${map[book] eq 1}">
-							<button class="btn-reserve-cancel btn btn-outline-secondary custom-button" type="button" data-booknum="${book.bookNum }">예약취소</button>
-						</c:when>
-
-						<c:when test="${map[book] eq 2}">
-							<button class="btn-returnBook btn btn-outline-info custom-button" type="button" data-booknum="${book.bookNum }">반납하기</button>
-						</c:when>
-
-						<c:when test="${map[book] eq 3}">
-							<button class="btn-reserve btn btn-outline-success custom-button" type="button" data-booknum="${book.bookNum }">예약하기</button>
-						</c:when>
-
-						<c:when test="${map[book] eq 4}">
-							<button class="btn-rent btn btn-outline-primary custom-button" type="button" data-booknum="${book.bookNum }">대출하기</button>
-						</c:when>
 					</c:choose>
-
-
-				</div>
+				</p>
 			</div>
-			<hr>
-		</c:forEach>
-		
-	</div>
+
+			<div class="col-md-2 buttons">
+
+				<a href="/book/getBook/${ book.bookNum }"
+					class="btn btn-outline-danger custom-button" type="button">상세정보</a>
+				<c:choose>
+					<c:when test="${map[book] eq 1}">
+						<button
+							class="btn-reserve-cancel btn btn-outline-secondary custom-button"
+							type="button" data-booknum="${book.bookNum }">예약취소</button>
+					</c:when>
+
+					<c:when test="${map[book] eq 2}">
+						<button class="btn-returnBook btn btn-outline-info custom-button"
+							type="button" data-booknum="${book.bookNum }">반납하기</button>
+					</c:when>
+
+					<c:when test="${map[book] eq 3}">
+						<button class="btn-reserve btn btn-outline-success custom-button"
+							type="button" data-booknum="${book.bookNum }">예약하기</button>
+					</c:when>
+
+					<c:when test="${map[book] eq 4}">
+						<button class="btn-rent btn btn-outline-primary custom-button"
+							type="button" data-booknum="${book.bookNum }">대출하기</button>
+					</c:when>
+				</c:choose>
+
+				<c:choose>
+					<c:when test="${interestedBookMap[book] ne null}">
+						<button class="btn-removeInterest btn btn-outline-secondary custom-button"
+							style="font-size: 11px; width: 90px; height: 33.2px; padding: 4.1px 6px;" data-booknum="${book.bookNum }"><img
+							src="/image/fillheart.png" style="width: 25px; height: 25px"></button>
+					</c:when>
+					<c:otherwise>
+						<button class="btn-addInterest btn btn-outline-secondary custom-button"
+							style="font-size: 11px; width: 90px; height: 33.2px; padding: 4.1px 6px;" data-booknum="${book.bookNum }"><img
+							src="/image/emptyheart.png" style="width: 25px; height: 25px"></button>
+					</c:otherwise>
+				</c:choose>
+
+			</div>
+		</div>
+		<hr>
+	</c:forEach>
+
+</div>
+
 
 <c:choose>
 	<c:when test="${bookList.first }">
@@ -108,11 +127,11 @@
 <c:forEach begin="${startPage }" end="${endPage }" var="i">
 <c:choose>
 <c:when test="${nowPage == i }">
-<a href="/book/view/getBookList?page=${i-1}" class="btn">${i }!!!</a>
+<a href="/public/book/view/getBookList?page=${i-1}" class="btn">${i }!!!</a>
 </c:when>
 <c:otherwise>
 
-<a href="/book/view/getBookList?page=${i-1}" class="btn">${i }</a>
+<a href="/public/book/view/getBookList?page=${i-1}" class="btn">${i }</a>
 </c:otherwise>
 </c:choose>
 
@@ -123,12 +142,11 @@
 		<a class="btn btn-secondary">다음</a>
 	</c:when>
 	<c:otherwise>
-		<a href="?page=${book.number+1 }" class="btn btn-primary">다음</a>
+		<a href="?page=${bookList.number+1 }" class="btn btn-primary">다음</a>
 	</c:otherwise>
 </c:choose>
 
 
+<script src="/js/book/book2.js"></script>
 
-	<script src="/js/book/book2.js"></script>
-	
 <%@ include file="../layout/footer.jsp"%>

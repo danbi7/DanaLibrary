@@ -27,3 +27,8 @@ color: #000000;
 	align-items: center;
 	justify-content: center;
 }
+
+.btn-outline-secondary {
+    color: #B4B4B8;
+    border-color: #B4B4B8;
+}
