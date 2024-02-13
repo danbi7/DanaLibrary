@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.function.Supplier;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -182,4 +183,11 @@ public class RentService {
 		List<Rent> rentList = rentRepository.findAllByUserAndRentStatus(loginUser, Status.ACTIVE);
 		return rentList;
 	}
+	
+	@Transactional
+	public List<Rent> getRentListDESC(){
+		List<Rent> rentList = rentRepository.findAll(Sort.by(Sort.Direction.DESC, "rentNum"));
+		return rentList;
+	}
+	
 }
