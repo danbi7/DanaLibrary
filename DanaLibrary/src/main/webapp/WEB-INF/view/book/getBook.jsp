@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="com.dana.library.domain.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ include file="../layout/header1.jsp"%>
 <%@ include file="../layout/header2.jsp"%>
 
@@ -10,13 +11,30 @@
 <head>
 <meta charset="UTF-8">
 <title>getBook</title>
+
 <style>
-a {
-	display: block;
+.comment-meta {
+	font-size: 12px;
+	color: #777;
+}
+
+.comment-container {
+	border-bottom: 1px solid #ddd; /* 선 스타일 추가 */
+	padding-bottom: 15px; /* 선과 댓글 사이의 간격 조절 */
+	margin-bottom: 10px;
+	text-align: left; /* 댓글을 왼쪽으로 정렬 */
+	margin-top: 10px; /* 댓글을 아래로 내리는 여백 조절 */
+}
+
+.comment-content {
+	font-size: 14px;
+	color: #333;
+	margin-bottom: 5px;
+	margin-top: 15px;
 }
 </style>
-
 </head>
+
 <body>
 
 	<div class="container main">
@@ -25,28 +43,42 @@ a {
 			style="width: 150px; height: 150px; float: left; margin-left: 200px;">
 			<img src="${gettedBook.image }" class="img-thumbnail" alt="책 이미지">
 		</div>
+		<input type="hidden" id="userid" value="${loginUser.userid }">
 		<input type="hidden" id="bookNum" value="${gettedBook.bookNum }">
 		<div class="container mt-3">
 			<table class="table"
 				style="width: 30%; float: left; margin-left: 50px; margin-right: 50px;">
 				<tr>
-					<td colspan=2><Strong>제목 </Strong>&nbsp ${gettedBook.title }</td>
+					<td colspan=2><Strong>제목 </Strong> ${gettedBook.title }</td>
 				</tr>
 				<tr>
-					<td colspan=2><Strong>저자 </Strong>&nbsp ${gettedBook.author }</td>
+					<td colspan=2><Strong>저자 </Strong> ${gettedBook.author }</td>
 				</tr>
 				<tr>
-					<td colspan=2><Strong>출판사 </Strong>&nbsp ${gettedBook.publisher }</td>
+					<td colspan=2><Strong>출판사 </Strong> ${gettedBook.publisher }</td>
 				</tr>
 				<tr>
-					<td colspan=2><Strong>분류 </Strong>&nbsp ${gettedBook.category }</td>
+					<td colspan=2><Strong>분류 </Strong> ${gettedBook.category }</td>
 				</tr>
 				<tr>
-					<td colspan=2><Strong>페이지 </Strong> &nbsp  ${gettedBook.pages }</td>
+					<td colspan=2><Strong>페이지 </Strong> ${gettedBook.pages }</td>
+
 				</tr>
 			</table>
 		</div>
 		<div>
+
+			<c:choose>
+				<c:when test="${empty interestedBook.book }">
+					<button class="btn-interest btn btn-outline-secondary" type="submit">
+					<img src="/image/emptyheart.png" style="width: 25px; height: 25px"></button>
+				</c:when>
+				<c:otherwise>
+					<button class="btn-interest-cancel btn btn-outline-secondary" type="button">
+					<img src="/image/fillheart.png" style="width: 25px; height: 25px"></button>
+				</c:otherwise>
+			</c:choose>
+			관심도서 수 : ${interestCount } <br>
 
 			<c:choose>
 				<c:when test="${bookStatus eq 1}">
@@ -82,30 +114,32 @@ a {
 			</table>
 		</div>
 
+		<br>
+		<br>
+		<br>
+		<br>
 
-		<div class="review" style="width: 70%; margin-left: 200px;">
-			<label for="content">도서 후기 등록하기</label> <input type="text"
-				id="content" name="content" class="form-control"> <a
-				href="#" class="btn btn-primary" id="btn-review"
-				style="float: right;">후기 등록</a>
-		</div>
+		<div class="content-container" style="width: 70%; margin-left: 200px;">
+			<label for="content">도서 후기 등록하기</label>
+			<input type="text" id="content" name="content" class="form-control">
+			<button type="submit" class="btn btn-primary" id="btn-review2">후기 등록</button> 
+			<br> <br> <br> <br>
 
-
-<script src="/js/book/insertReview.js"></script>
-
-
-		<br> <br>
-		<div class="container mt-3" style="width: 70%; margin-left: 200px;">
 			<c:forEach items="${reviewList }" var="views">
-				<div class="card">
-					<div class="card-body">
-						<p>${views.content }</p>
+				<div class="comment-container">
+					<div class="comment-meta">
+						작성자: <strong>${views.user.userid}</strong> | 작성일: ${views.regDate}
 					</div>
+					<div class="comment-content">${views.content }</div>
 				</div>
 			</c:forEach>
 		</div>
 	</div>
 
-	<%@ include file="../layout/footer.jsp"%>
+	<script src="/js/book/interestBook.js"></script>
+	<script src="/js/book/book1.js"></script>
+
+<%@ include file="../layout/footer.jsp"%>
+
 </body>
 </html>

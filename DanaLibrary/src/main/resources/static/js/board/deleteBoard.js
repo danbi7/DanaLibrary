@@ -15,7 +15,7 @@ let boardObject = {
          contentType: "application/json; charset=utf-8"
       }).done(function(response) { // done 대신 success 사용
       	 alert("게시글이 삭제되었습니다.")
-         location.href = "/board/view/getBoardList"; // location 속성 수정
+         location.href = "/public/board/view/getBoardList"; // location 속성 수정
       }).fail(function(error) { // fail 대신 error 사용
 
          alert("에러 발생: " + error.responseText);
