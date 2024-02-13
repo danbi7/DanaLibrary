@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.function.Supplier;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dana.library.domain.Book;
 import com.dana.library.domain.Rent;
+import com.dana.library.domain.Reserved_book;
 import com.dana.library.domain.Status;
 import com.dana.library.domain.User;
 import com.dana.library.persistence.RentRepository;
@@ -22,6 +24,12 @@ import com.dana.library.persistence.RentRepository;
 public class RentService {
 	@Autowired
 	private RentRepository rentRepository;
+	
+	@Autowired
+	private ReserveService reserveService;
+	
+	@Autowired
+	private NoticeService noticeService;
 
 	@Transactional(readOnly = true)
 	public Rent getRent(Book book) {
@@ -107,11 +115,17 @@ public class RentService {
 			if (rent.getRentStatus().equals(Status.ACTIVE) && rent.getDueDate().isEqual(today)) {
 				rent.setRentStatus(Status.INACTIVE);
 				updateRent(rent);
+				Reserved_book reserve = reserveService.rentedBookInReservedBook(rent.getBook());
+				System.out.println("테스트 예약 정보: " + reserve);
+				if(reserve!=null) {
+					noticeService.addNotice(reserve);
+				}
 				iterator.remove();
 			}
 		}
 	}
 	
+	//자동반납이 안됐을 때 자동반납을 시킨다
 	public void autoReturnCheck() {
 		List<Rent> rentList = getRentBookList();
 		LocalDate today = LocalDate.now();
@@ -122,11 +136,16 @@ public class RentService {
 			if (rent.getRentStatus().equals(Status.ACTIVE) && (rent.getDueDate().isBefore(today) || rent.getDueDate().isEqual(today))) {
                 rent.setRentStatus(Status.INACTIVE);
                 updateRent(rent);
+                Reserved_book reserve = reserveService.rentedBookInReservedBook(rent.getBook());
+				System.out.println("테스트 예약 정보: " + reserve);
+				if(reserve!=null) {
+					noticeService.addNotice(reserve);
+				}
                 iterator.remove();
             }
         }
 	}
-
+	
 	@Transactional
 	public boolean isRentedBySomeone(Book book) {
 		Rent rentedBook = rentRepository.findByBookAndRentStatus(book, Status.ACTIVE).orElseGet(new Supplier<Rent>() {
@@ -164,4 +183,11 @@ public class RentService {
 		List<Rent> rentList = rentRepository.findAllByUserAndRentStatus(loginUser, Status.ACTIVE);
 		return rentList;
 	}
+	
+	@Transactional
+	public List<Rent> getRentListDESC(){
+		List<Rent> rentList = rentRepository.findAll(Sort.by(Sort.Direction.DESC, "rentNum"));
+		return rentList;
+	}
+	
 }

@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dana.library.domain.Book;
+import com.dana.library.domain.Rent;
 import com.dana.library.domain.User;
 import com.dana.library.dto.ResponseDTO;
 import com.dana.library.service.BookService;
+import com.dana.library.service.RentService;
 import com.dana.library.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -30,13 +32,19 @@ public class AdminController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private RentService rentService;
+	
 	// 관리자페이지 불러오기
 	@GetMapping("/view/admin")
 	public String admin(Model model) {
 		List<User> userList = userService.getUserList();
 		List<Book> bookList = bookService.getBookList();
+		List<Rent> rentList = rentService.getRentListDESC();
 		model.addAttribute("bookList", bookList);
 		model.addAttribute("userList", userList);
+		model.addAttribute("rentList", rentList);
+		
 		return "admin/admin";
 	}
 	

@@ -47,7 +47,7 @@ public class ReserveController {
 		Reserved_book reserve = new Reserved_book();
 		reserve.setBook(bookService.getBook(bookNum));
 		reserve.setUser(loginUser);
-		
+		System.out.println("예약 취소");
 		reserveService.cancelReservation(reserve);
 		return new ResponseDTO<>(HttpStatus.OK.value(), "예약 취소 완료");
 	}

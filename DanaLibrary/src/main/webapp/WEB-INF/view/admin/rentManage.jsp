@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+	
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,32 +22,37 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>1</td>
-					<td>kang</td>
-					<td>이것이 자바다</td>
-					<td>2024-01-29</td>
-					<td>2024-02-12</td>
-					<td>대출중</td>
-					
-					<td><div class="admin-edit"> <img class ="edit-btn" src="/image/icon/icon-edit-button.png">
-					<img class ="edit-btn" src="/image/icon/icon-delete-button.png"> </div></td>
-				</tr>
+        <c:forEach var="rent" items="${rentList}">
+            <tr>
+                <td>${rent.rentNum}</td>
+                <td>${rent.user.userid}</td>
+              
+               <td> <c:choose>
+                    <c:when test="${fn:length(rent.book.title) <= 7}">
+                        ${rent.book.title}
+                    </c:when>
+                    <c:otherwise>
+                        ${fn:substring(rent.book.title, 0, 7)}...
+                    </c:otherwise>
+               		 </c:choose></td>
+                <td>${rent.rentDate}</td>
+                <td>${rent.dueDate}</td>
+				<td>
+					<c:choose>
+						<c:when test="${rent.rentStatus eq 'ACTIVE'}">대출중</c:when>
+						<c:when test="${rent.rentStatus eq 'INACTIVE'}">반납</c:when>
+						<c:otherwise>기타 상태</c:otherwise>
+					</c:choose>
+				</td>
 				
-				<tr>
-					<td>2</td>
-					<td>kang</td>
-					<td>이것이 자바다</td>
-					<td>2024-01-29</td>
-					<td>2024-02-12</td>
-					<td>대출중</td>
-					
-					<td><div class="admin-edit"> <img class ="edit-btn" src="/image/icon/icon-edit-button.png">
-					<img class ="edit-btn" src="/image/icon/icon-delete-button.png"> </div></td>
-				</tr>
-				
-				
-			</tbody>	
+				<td>
+                    <div class="admin-edit">
+                        <img class="edit-btn" src="/image/icon/icon-edit-button.png">
+                    </div>
+                </td>
+            </tr>
+        </c:forEach>
+    </tbody>	
 
 		</table>
 	</div>
