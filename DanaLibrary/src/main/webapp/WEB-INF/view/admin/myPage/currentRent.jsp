@@ -15,7 +15,8 @@
 <div class="currentRent-book">
 	<a href="/book/getBook/${rent.book.bookNum }">
   <img src="${rent.book.image }" alt="Card image cap"></a>
-    <a href="/book/getBook/${rent.book.bookNum }"><p class="card-text" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${rent.book.title }</p></a>
+    <a href="/book/getBook/${rent.book.bookNum }"><p class="card-text">${rent.book.title }</p></a>
+    <button class="btn-returnBook btn btn-outline-info" data-booknum="${rent.book.bookNum }">반납하기</button>
 </div>
 
 </c:forEach>
@@ -32,9 +33,12 @@
 <c:if test="${reserve ne null }">
 <div class="currentRent-book">
 	<a href="/book/getBook/${reserve.book.bookNum }">
-  <img src="${reserve.book.image }" alt="Card image cap">
-    <p class="card-text" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">${reserve.book.title }</p></a>
+  <img src="${reserve.book.image }" alt="Card image cap"></a>
+  <a href="/book/getBook/${rent.book.bookNum }"><p class="card-text">${reserve.book.title }</p></a>
+      <button class="btn-reserve-cancel btn btn-outline-secondary" data-booknum="${reserve.book.bookNum }">예약취소</button>
 </div>
 </c:if>
 </div>
 </div>
+
+<script src="/js/book/book2.js"></script>

@@ -60,6 +60,9 @@ public class AdminController {
 		if(reserve.getBook() != null) {
 			model.addAttribute("reserve", reserve);
 		}
+		
+		List<Rent> pastRentList = rentService.pastRentList(loginUser);
+		model.addAttribute("pastRentList", pastRentList);
 		return "admin/myPage";
 	}
 	
