@@ -68,18 +68,6 @@ public class ReserveService {
 
 	}
 	
-	@Transactional
-	public Reserved_book getReservedBook(User user) {
-		Reserved_book reserve = reserveRepository.findByUser(user).orElseGet(new Supplier<Reserved_book>() {
-			public Reserved_book get() {
-				return new Reserved_book();
-			}
-		});
-		
-		return reserve;
-	}
-	
-	
 	//대출도서중 예약 정보 조회
 	@Transactional
 	public Reserved_book rentedBookInReservedBook(Book book) {
