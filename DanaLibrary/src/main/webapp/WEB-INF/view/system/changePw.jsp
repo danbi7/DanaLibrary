@@ -42,8 +42,10 @@
 										id="repassword" placeholder="비밀번호 재입력" required> <label
 										for="number" class="form-label">비밀번호 재입력</label>
 								</div>
-								<div id="repasswordError" style="color: red;"></div>
 							</div>
+							
+							<div class="result"><span id="result-message"></span></div>
+							
 
 
 							<div class="col-12">
@@ -76,6 +78,6 @@
 	</div>
 
 </section>
-<script src="/js/changePw.js"></script>
+<script src="/js/user/changePw.js"></script>
 
 <%@ include file="../layout/footer.jsp"%>

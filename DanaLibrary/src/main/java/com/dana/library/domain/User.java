@@ -1,9 +1,11 @@
 package com.dana.library.domain;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -42,13 +44,13 @@ public class User {
 	@Column
 	private Date birthDate;
 	
-	@Column
-	private String gender;
-	
 	@Enumerated(EnumType.STRING)
 	private Status userStatus;
 	
 	@CreationTimestamp
-	private Timestamp regDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm", timezone="Asia/Seoul") //날짜 포멧 바꾸기
+    private Date regDate;
+
 
 }

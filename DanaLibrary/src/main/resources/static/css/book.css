@@ -1,0 +1,34 @@
+.container-page-content-book{
+	width: 80%;
+	margin: auto;
+}
+
+.col-md-7{
+	
+font-size: 70%;
+color: #000000;
+}
+
+
+
+.custom-button {
+    width: 90px; /* Set the desired width */
+    font-size: 80%;
+    margin: 10px;
+}
+
+.col-md-2{
+	margin:0 auto;
+}
+
+.buttons{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.btn-outline-secondary {
+    color: #B4B4B8;
+    border-color: #B4B4B8;
+}

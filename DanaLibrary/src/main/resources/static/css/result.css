@@ -1,0 +1,14 @@
+.result{
+    margin-top: 0px;
+    padding-top: 0px;
+	justify-content: space-between;
+}
+
+#result-message, #result-username-message, 
+#result-userid-message, #result-password-message, 
+#result-repassword-message, #result-email-message, 
+#result-idCheck-message, #result-birthDate-message{
+    font-size: 12px;
+	font-weight: bold;
+	color: #ff0000;
+}

@@ -1,5 +1,6 @@
 package com.dana.library.domain;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -26,5 +27,9 @@ public class Notice {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userNum")
 	private User user;
-
+	
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "reserveNum")
+    private Reserved_book reserved_book;
+	
 }

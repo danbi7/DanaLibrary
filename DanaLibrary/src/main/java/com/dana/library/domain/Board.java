@@ -1,11 +1,12 @@
 package com.dana.library.domain;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.annotation.CreatedDate;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -44,7 +45,10 @@ public class Board {
 	private User user;
 	
 	@CreationTimestamp
-	private Timestamp regDate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm", timezone="Asia/Seoul") //날짜 포멧 바꾸기
+	private Date regDate;
+
 	
 	@ColumnDefault("0")
 	private int views;
@@ -55,7 +59,9 @@ public class Board {
 	@Enumerated(EnumType.STRING)
 	private Category category;
 	
-	@Column
+	@CreationTimestamp
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm.ss.SSS")
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm", timezone="Asia/Seoul") //날짜 포멧 바꾸기
 	private Date updateDate;
 	
 }

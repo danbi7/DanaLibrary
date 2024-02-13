@@ -33,15 +33,7 @@
                     <label for="password" class="form-label">비밀번호</label>
                   </div>
                 </div>
-                <div class="col-12">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" name="remember_me" id="remember_me">
-                    <label class="form-check-label text-secondary" for="remember_me">
-                      로그인 상태 유지
-                    </label>
-                   
-                  </div>
-                </div>
+                
                 <div class="col-12">
                   <div class="d-grid">
                     <button id="btn-login" class="btn bsb-btn-xl btn-primary" >로그인</button>
@@ -66,5 +58,5 @@
     </div>
   </div>
 </section>
-<script src="/js/login.js"></script>
+<script src="/js/user/login.js"></script>
 <%@ include file="../layout/footer.jsp" %>
