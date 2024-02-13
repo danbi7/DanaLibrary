@@ -1,10 +1,13 @@
 package com.dana.library.interceptor;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.dana.library.domain.User;
+
 import com.dana.library.service.NoticeService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,7 +19,7 @@ public class Interceptor implements HandlerInterceptor{
 	
 	@Autowired
 	private NoticeService noticeService;
-	
+
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception{
 		HttpSession session = request.getSession();
@@ -32,5 +35,4 @@ public class Interceptor implements HandlerInterceptor{
 	
 		return true;
 	}
-	
 }
