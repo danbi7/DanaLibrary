@@ -84,7 +84,7 @@ hr:not([size]) {
 }
 
 .row{
-	margin: 0px !important;
+	margin: 10px 0px !important;
 }
 
 .row h5{
