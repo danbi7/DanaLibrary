@@ -113,6 +113,7 @@ public class RentController {
 		Rent rent = rentService.isRentedByLoginUser(loginUser, gettedBook);
 		
 		if(rent.getRentNum()!=0) {
+			rent.setDueDate(LocalDate.now());
 			rent.setRentStatus(Status.INACTIVE);
 			rentService.returnBook(rent);
 			Reserved_book reserve = reserveService.rentedBookInReservedBook(rent.getBook());

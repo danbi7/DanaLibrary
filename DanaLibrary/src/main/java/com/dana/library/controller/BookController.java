@@ -19,6 +19,7 @@ import com.dana.library.domain.Book_review;
 import com.dana.library.domain.User;
 import com.dana.library.dto.ResponseDTO;
 import com.dana.library.service.BookService;
+import com.dana.library.service.CacheService;
 import com.dana.library.service.InterestedBookService;
 import com.dana.library.service.RentService;
 import com.dana.library.service.ReserveService;
@@ -43,6 +44,9 @@ public class BookController {
 
 	@Autowired
 	private InterestedBookService interestedBookService;
+	
+	@Autowired
+	private CacheService cacheService;
 	
 	// 도서 상세보기
 	@GetMapping("/book/getBook/{bookNum}")
@@ -103,65 +107,115 @@ public class BookController {
 		return new ResponseDTO<>(HttpStatus.OK.value(), "도서 후기 컨트롤러 완료");
 	}
 
-	//도서목록
+//	//도서목록
+//	@GetMapping("/public/book/view/getBookList")
+//	public String getBookList(@RequestParam(required = false) String category, @RequestParam(required = false) String bookTitle, Model model, HttpSession session) {
+//		
+//		List<Book> bookList = null;
+//		
+//			if(category == null && bookTitle == null) {
+//				bookList = bookService.getBookList();
+//				System.out.println(bookList.size());
+//			}else if(category.equals("전체") && bookTitle != null) {
+//				bookList = bookService.searchBookByTitle(bookTitle);
+//				System.out.println(bookList.size());
+//			}else if(!category.equals("전체") && bookTitle == null) {
+//				bookList = bookService.searchBookByCategory(category);
+//				System.out.println(bookList.size());
+//			}else if(!category.equals("전체") && bookTitle != null) {
+//				bookList = bookService.searchBookList(category, bookTitle);
+//				System.out.println(bookList.size());
+//			}
+//			
+//			model.addAttribute("bookList", bookList);
+//		
+//		
+//		User loginUser = (User)session.getAttribute("loginUser");
+//		
+//		int listStatus = 0;
+//		
+//		Map<Book,Integer> map = new HashMap<>();
+//		Map<Book, Integer> interestedBookMap = new HashMap<>();
+//		
+//		for(Book book : bookList) {
+//			if(reserveService.isReservedByUser(loginUser, book)) {
+//				listStatus = 1; // 내가 예약함->예약취소
+//			}else if(rentService.isRentedByUser(loginUser, book)) { //active
+//				listStatus = 2; //내가 대출함->반납
+//			}else if(rentService.isRentedBySomeone(book)) { //active
+//				listStatus = 3; //누군가 대출함->예약하기
+//			}else {
+//				listStatus = 4; //대출하기
+//				
+//			}
+//			
+//			model.addAttribute("listStatus", listStatus);
+//			map.put(book, listStatus);
+//			
+//			if(interestedBookService.isInterestedByUser(loginUser, book)) {
+//				interestedBookMap.put(book, 1);
+//			}
+//			
+//		}
+//		model.addAttribute("map", map);
+//		model.addAttribute("interestedBookMap", interestedBookMap);
+//
+//		return "book/bookList";
+//	}
+	
 	@GetMapping("/public/book/view/getBookList")
 	public String getBookList(@RequestParam(required = false) String category, @RequestParam(required = false) String bookTitle, Model model, HttpSession session) {
-		rentService.autoReturnCheck();
-		
-		System.out.println(category + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-		System.out.println(bookTitle + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-		
-		List<Book> bookList = null;
-		
-			if(category == null && bookTitle == null) {
-				bookList = bookService.getBookList();
-				System.out.println(bookList.size());
-			}else if(category.equals("전체") && bookTitle != null) {
-				bookList = bookService.searchBookByTitle(bookTitle);
-				System.out.println(bookList.size());
-			}else if(!category.equals("전체") && bookTitle == null) {
-				bookList = bookService.searchBookByCategory(category);
-				System.out.println(bookList.size());
-			}else if(!category.equals("전체") && bookTitle != null) {
-				bookList = bookService.searchBookList(category, bookTitle);
-				System.out.println(bookList.size());
-			}
-			
-			System.out.println("!!!!!!!!!!!!!bookList!!!!!!!!!!!!!!!!!" + bookList.toString());
-			model.addAttribute("bookList", bookList);
-		
-		
-		User loginUser = (User)session.getAttribute("loginUser");
-		
-		int listStatus = 0;
-		
-		Map<Book,Integer> map = new HashMap<>();
-		Map<Book, Integer> interestedBookMap = new HashMap<>();
-		
-		for(Book book : bookList) {
-			if(reserveService.isReservedByUser(loginUser, book)) {
-				listStatus = 1; // 내가 예약함->예약취소
-			}else if(rentService.isRentedByUser(loginUser, book)) { //active
-				listStatus = 2; //내가 대출함->반납
-			}else if(rentService.isRentedBySomeone(book)) { //active
-				listStatus = 3; //누군가 대출함->예약하기
-			}else {
-				listStatus = 4; //대출하기
-				
-			}
-			
-			//model.addAttribute("listStatus", listStatus);
-			map.put(book, listStatus);
-			
-			if(interestedBookService.isInterestedByUser(loginUser, book)) {
-				interestedBookMap.put(book, 1);
-			}
-			
-		}
-		model.addAttribute("map", map);
-		model.addAttribute("interestedBookMap", interestedBookMap);
+	    List<Book> bookList = null;
 
-		return "book/bookList";
+	    if (category == null && bookTitle == null) {
+	        bookList = getBookListFromCache("allBooks");
+	    } else if (category.equals("전체") && bookTitle != null) {
+	        bookList = bookService.searchBookByTitle(bookTitle);
+	    } else if (!category.equals("전체") && bookTitle == null) {
+	        bookList = bookService.searchBookByCategory(category);
+	    } else if (!category.equals("전체") && bookTitle != null) {
+	        bookList = bookService.searchBookList(category, bookTitle);
+	    }
+
+	    model.addAttribute("bookList", bookList);
+
+	    User loginUser = (User) session.getAttribute("loginUser");
+
+	    Map<Book, Map<String, Object>> bookStatusMap = new HashMap<>();
+
+	    for (Book book : bookList) {
+	        Map<String, Object> statusInfo = new HashMap<>();
+	        
+	        int listStatus;
+	        if (reserveService.isReservedByUser(loginUser, book)) {
+	            listStatus = 1; // 내가 예약함->예약취소
+	        } else if (rentService.isRentedByUser(loginUser, book)) {
+	            listStatus = 2; // 내가 대출함->반납
+	        } else if (rentService.isRentedBySomeone(book)) {
+	            listStatus = 3; // 누군가 대출함->예약하기
+	        } else {
+	            listStatus = 4; // 대출하기
+	        }
+	        statusInfo.put("status", listStatus);
+	        
+	        boolean interested = interestedBookService.isInterestedByUser(loginUser, book);
+	        statusInfo.put("interested", interested);
+	        
+	        bookStatusMap.put(book, statusInfo);
+	    }
+
+	    model.addAttribute("bookStatusMap", bookStatusMap);
+
+	    return "book/bookList";
 	}
-	
+
+	private List<Book> getBookListFromCache(String key) {
+	    List<Book> bookList = cacheService.get(key);
+	    if (bookList == null) {
+	        bookList = bookService.getBookList();
+	        cacheService.put(key, bookList);
+	    }
+	    return bookList;
+	}
+
 }
