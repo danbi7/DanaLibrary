@@ -24,6 +24,8 @@ public class DanaLibraryConfiguration implements WebMvcConfigurer {
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
+
 		registry.addInterceptor(interceptor).addPathPatterns("/board/**", "/book/**", "/view/**", "/rent/**", "/reserve/**").excludePathPatterns("/public/**");
+
 	}
 }

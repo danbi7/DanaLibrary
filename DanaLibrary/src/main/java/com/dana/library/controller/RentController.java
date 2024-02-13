@@ -71,6 +71,8 @@ public class RentController {
 		}else {
 			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "책 반납하기 실패");
 		}
+
+		// System.out.println("rent.toString() : " + rent.toString());
 	}
 
 }

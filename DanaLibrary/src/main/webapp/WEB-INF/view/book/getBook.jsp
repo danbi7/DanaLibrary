@@ -38,6 +38,7 @@
 
 <body>
 
+
 	<div class="container main">
 
 
@@ -140,6 +141,7 @@
 	<script src="/js/book/book1.js"></script>
 
 
-	<%@ include file="../layout/footer.jsp"%>
+<%@ include file="../layout/footer.jsp"%>
+
 </body>
 </html>

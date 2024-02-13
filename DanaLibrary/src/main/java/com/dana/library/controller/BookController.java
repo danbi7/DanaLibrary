@@ -62,7 +62,6 @@ public class BookController {
 
 		Book gettedBook = bookService.getBook(bookNum);
 		session.setAttribute("gettedBook", gettedBook);
-		
 		User loginUser = (User) session.getAttribute("loginUser");
 		int bookStatus = 0;
 
@@ -92,7 +91,6 @@ public class BookController {
 		model.addAttribute("interestCount", interestCount);
 		System.out.println(interestCount);
 		
-
 		//bookNum에 따른 책 리뷰 불러오기
 		List<Book_review> reviewList = reviewService.getReviewList(gettedBook);
 		session.setAttribute("reviewList", reviewList);
@@ -106,6 +104,7 @@ public class BookController {
 		User loginUser = (User) session.getAttribute("loginUser");
 
 		Book gettedBook = (Book) session.getAttribute("gettedBook");
+
 
 		bookReview.setUser(loginUser);
 		bookReview.setBook(gettedBook);
@@ -215,4 +214,6 @@ public class BookController {
 		return new ResponseDTO<>(HttpStatus.OK.value(),"관심도서 삭제하기");
 	}
 
+
+	
 }

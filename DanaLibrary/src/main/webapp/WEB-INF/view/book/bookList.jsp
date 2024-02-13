@@ -6,6 +6,7 @@
 <%@ include file="../layout/header1.jsp"%>
 <%@ include file="../layout/header2.jsp"%>
 
+
 <input type="hidden" value="${loginUser.userid }" id="userid">
 
 	<div class="container" align="center">
@@ -37,8 +38,8 @@
 					id="btn-searchBook">Search</button>
 
 			</div>
-		</form>
-	</div>
+			</form>
+		</div>
 
 	<c:forEach var="book" items="${bookList.content}">
 		<div class="row">
@@ -111,8 +112,8 @@
 		</div>
 		<hr>
 	</c:forEach>
-
 </div>
+
 
 
 <c:choose>
