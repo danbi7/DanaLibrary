@@ -96,7 +96,6 @@ public class UserController {
 		if (findUser != null) {
 			if (password.equals(findUser.getPassword())) {
 				session.setAttribute("loginUser", findUser);
-				
 				return new ResponseDTO<>(HttpStatus.OK.value(), findUser.getUsername() + "님, 환영합니다.");
 			} else {
 				return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "회원 정보가 일치하지 않습니다.");

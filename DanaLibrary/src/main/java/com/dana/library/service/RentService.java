@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dana.library.domain.Book;
 import com.dana.library.domain.Rent;
+import com.dana.library.domain.Reserved_book;
 import com.dana.library.domain.Status;
 import com.dana.library.domain.User;
 import com.dana.library.persistence.RentRepository;
@@ -22,6 +23,12 @@ import com.dana.library.persistence.RentRepository;
 public class RentService {
 	@Autowired
 	private RentRepository rentRepository;
+	
+	@Autowired
+	private ReserveService reserveService;
+	
+	@Autowired
+	private NoticeService noticeService;
 
 	@Transactional(readOnly = true)
 	public Rent getRent(Book book) {
@@ -107,7 +114,11 @@ public class RentService {
 			if (rent.getRentStatus().equals(Status.ACTIVE) && rent.getDueDate().isEqual(today)) {
 				rent.setRentStatus(Status.INACTIVE);
 				updateRent(rent);
-				//반납 후 예약이 걸려있는지 확인해서 걸려있으면 알림을 보내는 메소드 호출
+				Reserved_book reserve = reserveService.rentedBookInReservedBook(rent.getBook());
+				System.out.println("테스트 예약 정보: " + reserve);
+				if(reserve!=null) {
+					noticeService.addNotice(reserve);
+				}
 				iterator.remove();
 			}
 		}
@@ -124,7 +135,11 @@ public class RentService {
 			if (rent.getRentStatus().equals(Status.ACTIVE) && (rent.getDueDate().isBefore(today) || rent.getDueDate().isEqual(today))) {
                 rent.setRentStatus(Status.INACTIVE);
                 updateRent(rent);
-                //반납 후 예약이 걸려있는지 확인해서 걸려있으면 알림을 보내는 메소드 호출
+                Reserved_book reserve = reserveService.rentedBookInReservedBook(rent.getBook());
+				System.out.println("테스트 예약 정보: " + reserve);
+				if(reserve!=null) {
+					noticeService.addNotice(reserve);
+				}
                 iterator.remove();
             }
         }

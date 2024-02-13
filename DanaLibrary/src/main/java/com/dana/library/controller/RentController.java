@@ -38,14 +38,10 @@ public class RentController {
 	
 	@Autowired
 	private NoticeService noticeService;
-	
-	@Autowired
-	private SseController sseController;
-
 
 	@PostMapping("/rent/rentBook/{bookNum}")
 	public @ResponseBody ResponseDTO<?> rentBook(@PathVariable int bookNum, HttpSession session) {
-
+		System.out.println("rentBook 실행");
 		User loginUser = (User) session.getAttribute("loginUser");
 
 		/*
@@ -113,26 +109,25 @@ public class RentController {
 		User loginUser = (User) session.getAttribute("loginUser");
 
 		Book gettedBook = bookService.getBook(bookNum);
-
+		
 		Rent rent = rentService.isRentedByLoginUser(loginUser, gettedBook);
-
-		// Rent rent = rentService.getRent(gettedBook);
-
-		// System.out.println("rent.toString() : " + rent.toString());
-
-		if (rent.getRentNum() != 0) {
+		
+		if(rent.getRentNum()!=0) {
 			rent.setRentStatus(Status.INACTIVE);
-			rentService.updateRent(rent);
-			
-			//대출 도서중 예약 우선 순위인 정보 조회하기 reserve는 해당 예약
+			rentService.returnBook(rent);
 			Reserved_book reserve = reserveService.rentedBookInReservedBook(rent.getBook());
-			noticeService.addNotice(reserve);
-			sseController.sendNotice(session);
+			System.out.println("테스트 예약 정보: " + reserve);
+			if(reserve!=null) {
+				noticeService.addNotice(reserve);
+			}
 			
 			return new ResponseDTO<>(HttpStatus.OK.value(), "  책 반납하기");
-		} else {
+		}else {
 			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "책 반납하기 실패");
 		}
+
+		// System.out.println("rent.toString() : " + rent.toString());
+	}
 
 		/*
 		 * if (rent.getRentNum() != 0) { if (rent.getUser().getUserNum() ==
@@ -145,7 +140,5 @@ public class RentController {
 		 * 
 		 * return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "책 반납하기 실패");
 		 */
-
-	}
 
 }

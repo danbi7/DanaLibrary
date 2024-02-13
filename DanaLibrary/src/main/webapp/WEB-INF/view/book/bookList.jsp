@@ -7,10 +7,10 @@
 <%@ include file="../layout/header2.jsp"%>
 
 	<div class="container" align="center">
-		<h2>도서 목록</h2>
+		<br>
 		<div class="col-md-6 text-center">
 		
-		<form action="/book/view/getBookList">
+		<form action="/public/book/view/getBookList">
 			<div class="d-flex">
 				<div class="dropdown">
 					<select name="category"
@@ -36,6 +36,8 @@
 			</div>
 			</form>
 		</div>
+		
+		<br>
 	
 		<c:forEach var="book" items="${bookList}">
 			<div class="row">

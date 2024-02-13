@@ -30,19 +30,19 @@ a {
 			<table class="table"
 				style="width: 30%; float: left; margin-left: 50px; margin-right: 50px;">
 				<tr>
-					<td colspan=2><Strong>제목 </Strong> ${gettedBook.title }</td>
+					<td colspan=2><Strong>제목 </Strong>&nbsp ${gettedBook.title }</td>
 				</tr>
 				<tr>
-					<td colspan=2><Strong>저자 </Strong> ${gettedBook.author }</td>
+					<td colspan=2><Strong>저자 </Strong>&nbsp ${gettedBook.author }</td>
 				</tr>
 				<tr>
-					<td colspan=2><Strong>출판사 </Strong> ${gettedBook.publisher }</td>
+					<td colspan=2><Strong>출판사 </Strong>&nbsp ${gettedBook.publisher }</td>
 				</tr>
 				<tr>
-					<td colspan=2><Strong>분류 </Strong> ${gettedBook.category }</td>
+					<td colspan=2><Strong>분류 </Strong>&nbsp ${gettedBook.category }</td>
 				</tr>
 				<tr>
-					<td colspan=2><Strong>페이지 </Strong> ${gettedBook.pages }</td>
+					<td colspan=2><Strong>페이지 </Strong> &nbsp  ${gettedBook.pages }</td>
 				</tr>
 			</table>
 		</div>
@@ -66,12 +66,10 @@ a {
 				</c:otherwise>
 			</c:choose>
 
-			<a href="/book/view/getBookList" class="btn btn-light">뒤로가기</a>
+			<a href="/public/book/view/getBookList" class="btn btn-light">뒤로가기</a>
 		</div>
 
-		<script src="/js/rentBook.js"></script>
-		<script src="/js/returnBook.js"></script>
-		<script src="/js/reserveBook.js"></script>
+		<script src="/js/book/book1.js"></script>
 
 		<div>
 			<table class="table" style="width: 70%; margin-left: 200px">

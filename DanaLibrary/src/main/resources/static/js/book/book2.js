@@ -39,10 +39,9 @@ let book2Obj = {
 			
 			if (response.status === 200) {
                 alert("대출 완료");
-                location = "/book/getBook/"+bookNumber;
-            }else {
+                location = "/public/book/view/getBookList";
                 alert(response.data);
-				location = "/book/getBook/"+bookNumber;
+                location = "/public/book/view/getBookList";
             }
 		}).fail(function(error){
 			alert("에러 발생: " + error);
@@ -59,8 +58,7 @@ let book2Obj = {
 		}).done(function(response) {
 			if (response.status === 200) {
                 alert("예약 완료");
-                location = "/book/getBook/" + bookNumber;       
-
+                location = "/public/book/view/getBookList";
             }else {
                 alert(response.data);
             }
@@ -78,7 +76,7 @@ let book2Obj = {
 		}).done(function(response) {
 			if (response.status === 200) {
 				alert("예약 취소 완료");
-				location = "/book/getBook/" + bookNumber;       
+                location = "/public/book/view/getBookList";
             }else {
                 alert(response.data);
             }
@@ -99,14 +97,11 @@ let book2Obj = {
 			if (response.status === 200) {
 
                 alert("반납성공" + response.data);
-                location = "/book/view/getBookList";
-
-                alert("반납 완료");
-                location = "/book/getBook/"+bookNumber;
+                location = "/public/book/view/getBookList";
 
             }else {
                 alert("반납할 수 없음"+ response.data);
-				location = "/book/getBook/"+bookNumber;
+                location = "/public/book/view/getBookList";
             }
 			
 		}).fail(function(error){

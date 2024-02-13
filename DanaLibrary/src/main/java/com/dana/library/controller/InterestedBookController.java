@@ -28,7 +28,7 @@ public class InterestedBookController {
 		User loginUser = (User) session.getAttribute("loginUser");
 		
 		interestedBookService.addInterestedBook(book, loginUser);
-		return "redirect:/book/view/getBookList";
+		return "redirect:/public/book/view/getBookList";
 	}
 	
 	@GetMapping("/book/removeInterestedBook/{bookNum}")
@@ -37,7 +37,7 @@ public class InterestedBookController {
 		User loginUser = (User) session.getAttribute("loginUser");
 		
 		interestedBookService.removeInterestedBook(book, loginUser);
-		return "redirect:/book/view/getBookList";
+		return "redirect:/public/book/view/getBookList";
 	}
 
 }

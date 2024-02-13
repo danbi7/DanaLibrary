@@ -84,6 +84,14 @@ public class ReserveService {
 		        // 처리할 예외 또는 기본값 설정 등
 		        return null;
 		    }
-		}
+	}
+	
+	@Transactional
+	public Reserved_book getReserveByUser(User user) {
+	    return reserveRepository.findByUser(user).orElseGet(() -> {
+	        return null;
+	    });
+	}
+
 
 }

@@ -19,43 +19,9 @@
 <link rel="stylesheet" type="text/css" href="/css/result.css">
 <link rel="stylesheet" type="text/css" href="/css/board.css">
 <link rel="stylesheet" type="text/css" href="/css/book.css">
-<script>
-    function openNotificationWindow() {
-        window.open('/view/notice', '_blank', 'width=500,height=300');
-    }
-</script>
-
-
-<script>
-    // SSE를 지원하는 브라우저에서만 실행되도록 체크
-    if (EventSource) {
-        const eventSource = new EventSource('/sse/subscribe');
-
-        eventSource.onmessage = function (event) {
-            // 이벤트가 발생할 때마다 실행될 코드
-            const notificationContainer = document.getElementById('notification-container');
-            const notificationNumber = document.getElementById('notification-number');
-
-            // 알림이 있는지 여부에 따라 표시 여부 조절
-            if (event.data && event.data.trim() !== "") {
-                notificationContainer.innerHTML = `Received notification: ${event.data}`;
-                // 알림이 있으면 알림 숫자 표시
-                notificationNumber.style.display = 'block';
-            } else {
-                notificationContainer.innerHTML = ''; // 알림이 없으면 내용 초기화
-                // 알림이 없으면 알림 숫자 숨김
-                notificationNumber.style.display = 'none';
-            }
-        };
-    } else {
-        // SSE를 지원하지 않는 경우에 대한 처리
-        console.log('Server-Sent Events (SSE) is not supported.');
-    }
-</script>
 
 </head>
 <body>
-
 	<nav class="py-2 bg-body-tertiary border-bottom sticky-top">
 		<div class="container d-flex flex-wrap">
 			<ul class="nav me-auto">
@@ -68,11 +34,34 @@
 
 			<ul class="nav ms-auto">
 				<c:if test="${sessionScope.loginUser != null }">
-					<li class="noti-icon"><div class="notification-container">
-            		<img src="/image/icon/notification.png" onclick="openNotificationWindow()">
-            		
-        			<span id="notification-number" class="notification-number">!</span>
-    </div></li>
+					<li class="noti-icon">
+						<div class="notification-container">
+							<c:choose>
+								<c:when test="${sessionScope.notice != null}">
+									<div>
+										<a href="javascript:void(0);" id="notification-link"
+											onclick="openPopup('/notice/getNotice/${sessionScope.loginUser.userNum}')">
+											<img src="/image/icon/notification.png" class="btn-notice"
+											id="notification-img"> <span id="notification-number"
+											class="notification-number">!</span>
+										</a>
+									</div>
+								</c:when>
+								<c:otherwise>
+									<div>
+										<a href="javascript:void(0);" id="notification-link"
+											onclick="openPopup('/notice/getNotice/${sessionScope.loginUser.userNum}')">
+											<img src="/image/icon/notification.png" class="btn-notice"
+											id="notification-img">
+										</a>
+									</div>
+								</c:otherwise>
+							</c:choose>
+
+
+
+						</div>
+					</li>
 
 					<li class="nav-item firstNav-right"><a href="/user/logout"
 						class="nav-link link-dark px-2">로그아웃</a></li>
@@ -89,3 +78,13 @@
 			</ul>
 		</div>
 	</nav>
+	
+	<script>
+    function openPopup(url) {
+        window.open(url, 'popup', 'width=800,height=500');
+    }
+</script>
+
+
+</body>
+</html>
