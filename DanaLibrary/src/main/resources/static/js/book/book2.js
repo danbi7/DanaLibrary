@@ -1,5 +1,4 @@
 let book2Obj = {
-
 	init: function() {
 		let _this = this;
 
@@ -86,6 +85,7 @@ let book2Obj = {
 		}).done(function(response) {
 			if (response.status === 200) {
 				alert("예약 취소 완료");
+
 				location = "/public/book/view/getBookList";
 			} else {
 				alert(response.data);

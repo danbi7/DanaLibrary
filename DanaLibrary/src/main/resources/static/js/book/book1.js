@@ -18,6 +18,10 @@ let book1Obj = {
 		$("#btn-returnBook").on("click",()=>{
 			_this.returnBook();
 		});
+		
+		$("#btn-review2").on("click",()=>{
+			_this.insertReview();
+		});
 	},
 	
 	rentBook: function(){
@@ -96,6 +100,28 @@ let book1Obj = {
             }
 			
 		}).fail(function(error){
+			alert("에러 발생: " + error);
+		});
+	},
+	
+	insertReview: function() {
+		alert("도서 후기가 요청되었습니다" + $("#content").val() + $("#bookNum").val()+$("#userid").val());
+		
+		let bookReview = {
+			content : $("#content").val(),
+			bookNum : $("#bookNum").val(),
+			userid : $("#userid").val()
+			}
+		
+		$.ajax({
+			type: "POST",
+			url: "/review/insertReview",
+			data: JSON.stringify(bookReview),
+			contentType: "application/json; charset=utf-8"
+		}).done(function(response) {
+			alert("리뷰 등록 완료");
+			location = "/book/getBook/"+$("#bookNum").val();
+		}).fail(function(error) {
 			alert("에러 발생: " + error);
 		});
 	}

@@ -66,7 +66,6 @@ public class RentController {
 
 			Book gettedBook = bookService.getBook(bookNum);
 			System.out.println("gettedBook.toString() : " + gettedBook.toString());
-
 			Rent rent = new Rent();
 
 			rent.setBook(gettedBook);
@@ -79,29 +78,6 @@ public class RentController {
 			rentService.updateRent(rent);
 			return new ResponseDTO<>(HttpStatus.OK.value(), "책 빌리기");
 		}
-
-		// }else {
-		// return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "책 빌리기 실패");
-		// }
-		/*
-		 * Rent rent = rentService.getRent(gettedBook);
-		 * 
-		 * 
-		 * Rent newRent = new Rent(); if (rent.getRentStatus() != Status.ACTIVE) { //
-		 * 해당도서가 대출중인지? newRent.setBook(gettedBook); newRent.setUser(loginUser);
-		 * newRent.setRentStatus(Status.ACTIVE); LocalDate rentDate = LocalDate.now();
-		 * LocalDate dueDate = LocalDate.now().plusDays(7);
-		 * newRent.setRentDate(rentDate); newRent.setDueDate(dueDate);
-		 * 
-		 * rentService.updateRent(newRent); System.out.println("newRent.toString() : " +
-		 * newRent.toString()); return new ResponseDTO<>(HttpStatus.OK.value(),
-		 * "책 빌리기"); } else {
-		 * 
-		 * return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "책 빌리기 실패"); }
-		 */
-
-		// }
-
 	}
 
 	@PutMapping("/rent/returnBook/{bookNum}")
@@ -127,19 +103,6 @@ public class RentController {
 			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "책 반납하기 실패");
 		}
 
-		// System.out.println("rent.toString() : " + rent.toString());
 	}
-
-		/*
-		 * if (rent.getRentNum() != 0) { if (rent.getUser().getUserNum() ==
-		 * loginUser.getUserNum()) { rent.setRentStatus(Status.INACTIVE);
-		 * 
-		 * System.out.println(rent.toString());
-		 * 
-		 * rentService.updateRent(rent); return new ResponseDTO<>(HttpStatus.OK.value(),
-		 * "  책 반납하기"); } }
-		 * 
-		 * return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "책 반납하기 실패");
-		 */
 
 }
