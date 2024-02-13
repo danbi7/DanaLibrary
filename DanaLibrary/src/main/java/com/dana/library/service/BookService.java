@@ -20,27 +20,7 @@ public class BookService {
 	public Book getBook(int bookNum) {
 		return bookRepository.findByBookNum(bookNum).get();
 	}
-	/*
-	@Transactional(readOnly = true)
-	public List<Book> getBookList() {
-		return bookRepository.findAll();
-	}
-	
-	@Transactional(readOnly = true)
-	public List<Book> searchBookList(String category, String bookTitle) {
-		return bookRepository.findByCategoryIsAndTitleContaining(category, bookTitle);
-	}
-	
-	@Transactional(readOnly = true)
-	public List<Book> searchBookByCategory(String category) {
-		return bookRepository.findByCategory(category);
-	}
 
-	@Transactional(readOnly = true)
-	public List<Book> searchBookByTitle(String title) {
-		return bookRepository.findByTitleContaining(title);
-	}
-	*/
 	@Transactional(readOnly = true)
 	public Page<Book> getBookList(Pageable pageable) {
 		return bookRepository.findAll(pageable);
@@ -60,4 +40,5 @@ public class BookService {
 	public Page<Book> searchBookByTitle(String title,Pageable pageable) {
 		return bookRepository.findByTitleContaining(title,pageable);
 	}
+
 }

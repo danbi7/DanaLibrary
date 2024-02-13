@@ -8,46 +8,50 @@
 
 
 <input type="hidden" value="${loginUser.userid }" id="userid">
+<div class="container-bookList mt-4" align="center">
 
-	<div class="container" align="center">
-		<h2>도서 목록</h2>
-		<div class="col-md-6 text-center">
+<div class="row justify-content-between">
+<div class="bookList-icon text-center">
+<img src="/image/icon/icon-book.png"><h5><strong>도서 목록</strong></h5></div>
+	<div class="col-md-6 text-center">
 
-	<form action="/public/book/view/getBookList">
+		<form action="/public/book/view/getBookList">
 			<div class="d-flex">
 				<div class="dropdown">
 					<select name="category"
 						class="btn btn-outline-primary dropdown-toggle"
 						aria-label="Dropdown" id="bookCategory" style="height: 100%">
-						<option value="전체">전체
-						<option value="총류">총류
-						<option value="철학">철학
-						<option value="종교">종교
-						<option value="언어">언어
-						<option value="사회과학">사회과학
-						<option value="자연과학">자연과학
-						<option value="기술과학">기술과학
-						<option value="예술">예술
-						<option value="문학">문학
-						<option value="역사">역사
+						<option value="전체">전체</option>
+						<option value="총류">총류</option>
+						<option value="철학">철학</option>
+						<option value="종교">종교</option>
+						<option value="사회과학">사회과학</option>
+						<option value="언어">언어</option>
+						<option value="자연과학">자연과학</option>
+						<option value="기술과학">기술과학</option>
+						<option value="예술">예술</option>
+						<option value="문학">문학</option>
+						<option value="역사">역사</option>
 					</select>
 				</div>
-				
-				<input class="form-control me-2" type="text" placeholder="책 제목을 입력하세요" name="bookTitle">
-				<button type="submit" class="btn btn-primary" type="button"
-					id="btn-searchBook">Search</button>
+				<input class="form-control me-2" type="text"
+					placeholder="책 제목을 입력하세요" name="bookTitle">
+      <button type="submit" class="btn" type="button" style="padding: 0px"><img src="/image/icon/search.png"></button>
 
 			</div>
-			</form>
-		</div>
+		</form>
+	</div>
+	
+	<div style="width: 150px"></div>
+	</div>
 
-	<c:forEach var="book" items="${bookList.content}">
+<div class="mt-3" style="border-top: 7px solid #205295; padding-top: 20px">
+	<c:forEach var="book" items="${bookList}">
 		<div class="row">
 
 			<div class="col-md-3" align="center"
 				style="display: flex; justify-content: center;">
 				<img src="${book.image}" style="width: 130px; height: 180px;">
-
 			</div>
 
 			<div class="col-md-7" style="text-align: left">
@@ -114,8 +118,6 @@
 	</c:forEach>
 </div>
 
-
-
 <c:choose>
 	<c:when test="${bookList.first }">
 		<a class="btn btn-secondary">이전</a>
@@ -146,7 +148,6 @@
 		<a href="?page=${bookList.number+1 }" class="btn btn-primary">다음</a>
 	</c:otherwise>
 </c:choose>
-
 
 <script src="/js/book/book2.js"></script>
 

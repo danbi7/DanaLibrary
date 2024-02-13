@@ -117,7 +117,6 @@ public class BookController {
 	//도서목록
 	@GetMapping("/public/book/view/getBookList")
 	public String getBookList(@RequestParam(required = false) String category, @RequestParam(required = false) String bookTitle, Model model, HttpSession session, @PageableDefault(size=5,sort="bookNum",direction = Sort.Direction.DESC)Pageable pageable) {
-
 		rentService.autoReturnCheck();
 		
 		System.out.println(category + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
@@ -162,13 +161,7 @@ public class BookController {
 		
 		Map<Book,Integer> map = new HashMap<>();
 		Map<Book, Integer> interestedBookMap = new HashMap<>();
-		/*
-		List<Book> pageToList = new ArrayList<>();
-		
-		for(Book books : bookList) {
-			pageToList.add(books);
-		}
-		*/
+
 		for(Book book : bookList) {
 			if(reserveService.isReservedByUser(loginUser, book)) {
 				listStatus = 1; // 내가 예약함->예약취소
@@ -191,8 +184,6 @@ public class BookController {
 		}
 		model.addAttribute("map", map);
 		model.addAttribute("interestedBookMap", interestedBookMap);
-		
-		//System.out.println("ㅅ확인욘ㅇ" + bookList.toString());
 		return "book/bookList";
 	}
 	

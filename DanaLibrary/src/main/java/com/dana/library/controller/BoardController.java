@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -54,7 +55,6 @@ public class BoardController {
 	}
 
 	// 글 목록 보기 페이지
-
 	@GetMapping("/public/board/view/getBoardList")
 	public String getBoardList(@RequestParam(required = false) Category boardCategory, @RequestParam(required = false) String boardTitle, Model model, @PageableDefault(size=2,sort="boardNum",direction = Sort.Direction.DESC)Pageable pageable) {
 
@@ -109,7 +109,17 @@ public class BoardController {
 
 		return "board/boardList";
 	}
+  
+	// 글 목록 보기 기능
+	@PostMapping("/board/getBoardList")
+	public String searchBoard(Model model) {
 
+		List<Board> boardList = boardService.getBoardList();
+
+		model.addAttribute("boardList", boardList);
+
+		return "board/boardList";
+	}
 
 	// 글 상세 보기 페이지
 	@GetMapping("/board/view/getBoard/{boardNum}")

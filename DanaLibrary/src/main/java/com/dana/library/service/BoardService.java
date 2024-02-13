@@ -48,7 +48,6 @@ public class BoardService {
 		public Page<Board> getBoardList(Category category, String title,Pageable pageable) {
 			return boardRepository.findByCategoryIsAndTitleContaining(category, title,pageable);
 		}
-	
 
 	@Transactional
 	public void writeBoard(Board board) {
