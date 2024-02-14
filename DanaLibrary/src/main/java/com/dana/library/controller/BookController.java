@@ -28,6 +28,7 @@ import com.dana.library.domain.Rent;
 import com.dana.library.domain.User;
 import com.dana.library.dto.ResponseDTO;
 import com.dana.library.service.BookService;
+
 import com.dana.library.service.InterestService;
 import com.dana.library.service.InterestedBookService;
 import com.dana.library.service.RentService;
@@ -53,6 +54,9 @@ public class BookController {
 
 	@Autowired
 	private InterestedBookService interestedBookService;
+	
+//	@Autowired
+//	private CacheService cacheService;
 	
 	@Autowired
 	private InterestService interestService;
@@ -122,14 +126,8 @@ public class BookController {
 		}
 	}
 
-	//도서목록
 	@GetMapping("/public/book/view/getBookList")
 	public String getBookList(@RequestParam(required = false) String category, @RequestParam(required = false) String bookTitle, Model model, HttpSession session, @PageableDefault(size=5,sort="bookNum",direction = Sort.Direction.DESC)Pageable pageable) {
-		rentService.autoReturnCheck();
-		
-		System.out.println(category + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-		System.out.println(bookTitle + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-		
 		//List<Book> bookList = null;
 		Page<Book> bookList = null;
 		
@@ -147,7 +145,6 @@ public class BookController {
 			//System.out.println(bookList.size());
 		}
 			
-		System.out.println("!!!!!!!!!!!!!bookList!!!!!!!!!!!!!!!!!" + bookList.toString());
 		model.addAttribute("bookList", bookList);
 		
 		int nowPage = bookList.getPageable().getPageNumber()+1; //0부터 시작
@@ -165,34 +162,32 @@ public class BookController {
 		
 		User loginUser = (User)session.getAttribute("loginUser");
 		
-		int listStatus = 0;
-		
-		Map<Book,Integer> map = new HashMap<>();
-		Map<Book, Integer> interestedBookMap = new HashMap<>();
+		Map<Book, Map<String, Object>> bookStatusMap = new HashMap<>();
 
-		for(Book book : bookList) {
-			if(reserveService.isReservedByUser(loginUser, book)) {
-				listStatus = 1; // 내가 예약함->예약취소
-			}else if(rentService.isRentedByUser(loginUser, book)) { //active
-				listStatus = 2; //내가 대출함->반납
-			}else if(rentService.isRentedBySomeone(book)) { //active
-				listStatus = 3; //누군가 대출함->예약하기
-			}else {
-				listStatus = 4; //대출하기
-				
-			}
-			
-			//model.addAttribute("listStatus", listStatus);
-			map.put(book, listStatus);
-			
-			if(interestedBookService.isInterestedByUser(loginUser, book)) {
-				interestedBookMap.put(book, 1);
-			}
-			
-		}
-		model.addAttribute("map", map);
-		model.addAttribute("interestedBookMap", interestedBookMap);
-		return "book/bookList";
+	    for (Book book : bookList) {
+	        Map<String, Object> statusInfo = new HashMap<>();
+	        
+	        int listStatus;
+	        if (reserveService.isReservedByUser(loginUser, book)) {
+	            listStatus = 1; // 내가 예약함->예약취소
+	        } else if (rentService.isRentedByUser(loginUser, book)) {
+	            listStatus = 2; // 내가 대출함->반납
+	        } else if (rentService.isRentedBySomeone(book)) {
+	            listStatus = 3; // 누군가 대출함->예약하기
+	        } else {
+	            listStatus = 4; // 대출하기
+	        }
+	        statusInfo.put("status", listStatus);
+	        
+	        boolean interested = interestedBookService.isInterestedByUser(loginUser, book);
+	        statusInfo.put("interested", interested);
+	        
+	        bookStatusMap.put(book, statusInfo);
+	    }
+
+	    model.addAttribute("bookStatusMap", bookStatusMap);
+
+	    return "book/bookList";
 	}
 	
 	@PostMapping("/book/addInterest")

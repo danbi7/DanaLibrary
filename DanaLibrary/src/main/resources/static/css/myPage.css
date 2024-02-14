@@ -125,13 +125,19 @@ margin-right: 10px;
 	display: none;
 }
 
-.currentRent-book, .pastRent-book {
+.currentRent-book {
 	width: 180px; 
 	height: 330px;
 	margin-right: 34px;
 }
 
-.currentRent-book p, .pastRent-book p {
+.pastRent-book {
+	width: 180px; 
+	height: 330px;
+	margin-right: 34px;
+}
+
+.card-text p {
 	margin-top: 10px;
 }
 
@@ -153,8 +159,19 @@ margin-right: 10px;
     object-fit: cover;
 }
 
-p{
+.card-text, .card-text-date{
 	overflow: hidden; 
 	white-space: nowrap; 
 	text-overflow: ellipsis;
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+
+.card-text-date{
+	font-size: 14px;
+	margin: 0px;
+}
+
+.card-text-date p{
+	margin: 0px;
 }
