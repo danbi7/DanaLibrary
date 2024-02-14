@@ -6,9 +6,8 @@
 <html lang="en">
 <head>
 <script>
-	function openEditRent(userid) {
-		window.open('/view/rentEdit/' + rentNum, '_blank',
-				'width=800,height=800');
+	function openEditRent(rentNum) {
+		window.open('/view/rentEdit/' + rentNum, '_blank', 'width=800,height=400');
 	}	
 </script>
 </head>
@@ -54,7 +53,8 @@
 				
 				<td>
                     <div class="admin-edit">
-                        <img class="edit-btn" src="/image/icon/icon-edit-button.png">
+                        <img class="edit-btn" src="/image/icon/icon-edit-button.png" 
+                        onclick="openEditRent('${rent.rentNum}')">
                     </div>
                 </td>
             </tr>
