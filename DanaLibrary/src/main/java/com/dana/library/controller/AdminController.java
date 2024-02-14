@@ -74,6 +74,14 @@ public class AdminController {
 		model.addAttribute("user", user);
 		return "admin/userEdit";
 	}
+	
+	// 대출 정보 상세 페이지 불러오기
+		@GetMapping("/view/rentEdit/{rentNum}")
+		public String openEditRent(@PathVariable int rentNum, Model model) {
+			Rent rent = rentService.getRent(rentNum);
+			model.addAttribute("rent", rent);
+			return "admin/rentEdit";
+		}
 
 	// 관리자 회원 수정 기능
 	@PutMapping("/admin/editUser")

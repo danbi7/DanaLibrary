@@ -33,7 +33,6 @@ public class Rent {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int rentNum;
 
-
 	@CreationTimestamp
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm", timezone="Asia/Seoul") //날짜 포멧 바꾸기
@@ -44,7 +43,6 @@ public class Rent {
     @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm", timezone="Asia/Seoul") //날짜 포멧 바꾸기
     private LocalDate dueDate;
 
-	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userNum")
 	private User user;
@@ -56,5 +54,7 @@ public class Rent {
 	@Enumerated(EnumType.STRING)
 	private Status rentStatus;
 	
+	@Enumerated(EnumType.STRING)
+	private Status renewalStatus = Status.INACTIVE;
 	
 }

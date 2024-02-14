@@ -4,7 +4,13 @@
 	
 <!DOCTYPE html>
 <html lang="en">
-
+<head>
+<script>
+	function openEditRent(rentNum) {
+		window.open('/view/rentEdit/' + rentNum, '_blank', 'width=800,height=400');
+	}	
+</script>
+</head>
 <body>
 
 	<div class="table-responsive" style="margin-top: 20px;">
@@ -47,7 +53,8 @@
 				
 				<td>
                     <div class="admin-edit">
-                        <img class="edit-btn" src="/image/icon/icon-edit-button.png">
+                        <img class="edit-btn" src="/image/icon/icon-edit-button.png" 
+                        onclick="openEditRent('${rent.rentNum}')">
                     </div>
                 </td>
             </tr>
