@@ -5,7 +5,13 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
+<head>
+<script>
+	function openEditBook(bookNum) {
+		window.open('/view/bookEdit/' + bookNum, '_blank', 'width=800,height=800');
+	}	
+</script>
+</head>
 <body>
 	<div class="table-responsive" style="margin-top: 20px;">
 		<table class="table">
@@ -59,8 +65,10 @@
                         ${fn:substring(book.image, 0, 10)}...
                     </c:otherwise>
                		 </c:choose></td>
-					<td><div class="admin-edit"> <img class ="edit-btn" src="/image/icon/icon-edit-button.png">
-					<img class ="edit-btn" src="/image/icon/icon-delete-button.png"> </div></td>
+					<td><div class="admin-edit">
+                        <img class="edit-btn" src="/image/icon/icon-edit-button.png" 
+                        onclick="openEditBook('${book.bookNum}')">
+                    </div></td>
 				</tr>
 				</c:forEach>
 				

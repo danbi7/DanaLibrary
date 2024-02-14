@@ -76,12 +76,12 @@ public class AdminController {
 	}
 	
 	// 대출 정보 상세 페이지 불러오기
-		@GetMapping("/view/rentEdit/{rentNum}")
-		public String openEditRent(@PathVariable int rentNum, Model model) {
-			Rent rent = rentService.getRent(rentNum);
-			model.addAttribute("rent", rent);
-			return "admin/rentEdit";
-		}
+	@GetMapping("/view/rentEdit/{rentNum}")
+	public String openEditRent(@PathVariable int rentNum, Model model) {
+		Rent rent = rentService.getRent(rentNum);
+		model.addAttribute("rent", rent);
+		return "admin/rentEdit";
+	}
 
 	// 관리자 회원 수정 기능
 	@PutMapping("/admin/editUser")
@@ -95,6 +95,14 @@ public class AdminController {
 	public @ResponseBody ResponseDTO<?> editUser(@RequestBody User user, HttpSession session) {
 		userService.editUser(user, session);
 		return new ResponseDTO<>(HttpStatus.OK.value(), "회원 정보 수정 완료");
+	}
+	
+	//도서 상세 정보 페이지 불러오기
+	@PutMapping("/view/bookEdit{bookNum}")
+	public String openEditBook(@PathVariable int bookNum, Model model) {
+		Book book = bookService.getBook(bookNum);
+		model.addAttribute("book", book);
+		return null;
 	}
 
 }
