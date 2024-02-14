@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.dana.library.domain.User;
 import com.dana.library.dto.ResponseDTO;
 import com.dana.library.dto.UserDTO;
+import com.dana.library.dto.UseridDTO;
 import com.dana.library.service.RentService;
 import com.dana.library.service.UserService;
 
@@ -28,7 +28,7 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-
+	
 	@Autowired
 	private ModelMapper modelMapper;
 	
@@ -54,10 +54,11 @@ public class UserController {
 	}
 
 	// 아이디 중복검사 기능
-	@PostMapping("/user/checkUserId/{userid}")
-	public @ResponseBody ResponseDTO<?> checkUserId(@PathVariable String userid) {
+	@PostMapping("/user/checkUserId")
+	public @ResponseBody ResponseDTO<?> checkUserId(@Valid @RequestBody UseridDTO useridDTO, BindingResult bindingResult) {
+		User user = modelMapper.map(useridDTO, User.class);
 		// userService로 아이디 중복 확인
-		boolean isDuplicate = userService.isUserIdDuplicate(userid);
+		boolean isDuplicate = userService.isUserIdDuplicate(user.getUserid());
 		// 중복에 따라 결과 출력
 		if (isDuplicate) {
 			// 중복일 경우 CONFLICT 상태 코드와 아이디 중복 메시지 출력
@@ -68,7 +69,6 @@ public class UserController {
 		}
 
 	}
-		
 
 	// 회원가입 기능
 	@PostMapping("/user/insertUser")

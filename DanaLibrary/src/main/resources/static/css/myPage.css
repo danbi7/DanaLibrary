@@ -124,3 +124,37 @@ margin-right: 10px;
 .password2-form, .password3-form{
 	display: none;
 }
+
+.currentRent-book, .pastRent-book {
+	width: 180px; 
+	height: 330px;
+	margin-right: 34px;
+}
+
+.currentRent-book p, .pastRent-book p {
+	margin-top: 10px;
+}
+
+.container-currentRent, .container-pastRent{
+	display: flex;
+	flex-direction: column;
+	width: 90%;
+	margin: 0px auto;
+}
+
+.container-small{
+	display: flex;
+}
+
+.currentRent-book img, .pastRent-book img {
+	border-radius: 3px;
+	width: 180px; 
+	height: 260px; 
+    object-fit: cover;
+}
+
+p{
+	overflow: hidden; 
+	white-space: nowrap; 
+	text-overflow: ellipsis;
+}

@@ -4,6 +4,7 @@ package com.dana.library.persistence;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -30,4 +31,5 @@ public interface RentRepository extends JpaRepository<Rent, Integer> {
 	Optional<Rent> findByBookAndRentStatus(Book book, Status rentStatus);
 	
 	List<Rent> findByBookAndUser(Book book, User user); //빌린 적 있는지
+
 }

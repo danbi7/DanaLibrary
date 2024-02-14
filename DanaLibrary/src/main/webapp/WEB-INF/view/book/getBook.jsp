@@ -6,7 +6,6 @@
 <%@ include file="../layout/header1.jsp"%>
 <%@ include file="../layout/header2.jsp"%>
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,9 +37,7 @@
 
 <body>
 
-
 	<div class="container main">
-
 
 		<div
 			style="width: 150px; height: 150px; float: left; margin-left: 200px;">
@@ -65,10 +62,12 @@
 				</tr>
 				<tr>
 					<td colspan=2><Strong>페이지 </Strong> ${gettedBook.pages }</td>
+
 				</tr>
 			</table>
 		</div>
 		<div>
+
 			<c:choose>
 				<c:when test="${empty interestedBook.book }">
 					<button class="btn-interest btn btn-outline-secondary"
@@ -105,7 +104,6 @@
 
 			<a href="/public/book/view/getBookList" class="btn btn-light">뒤로가기</a>
 		</div>
-
 
 
 		<div>
@@ -151,7 +149,7 @@
 	<script src="/js/book/book1.js"></script>
 
 
-	<%@ include file="../layout/footer.jsp"%>
 
+	<%@ include file="../layout/footer.jsp"%>
 </body>
 </html>

@@ -16,4 +16,6 @@ public interface ReserveRepository extends JpaRepository<Reserved_book, Integer>
 	Optional<Reserved_book> findByUserAndBook(User user, Book book);
 	
 	List<Reserved_book> findAllByBook(Book book);
+	
+	//Reserved_book findTopByOrderByReserveNumAsc(Book book);
 }

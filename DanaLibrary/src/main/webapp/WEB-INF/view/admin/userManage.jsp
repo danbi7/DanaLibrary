@@ -9,7 +9,7 @@
 	function openEditWindow(userid) {
 		window.open('/view/userEdit/' + userid, '_blank',
 				'width=800,height=800');
-	}
+	}	
 </script>
 </head>
 <body>

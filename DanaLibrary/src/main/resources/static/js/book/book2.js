@@ -1,5 +1,4 @@
 let book2Obj = {
-	
 	init: function() {
 		let _this = this;
 
@@ -45,18 +44,18 @@ let book2Obj = {
 			//data: JSON.stringify($("#bookNum").val()),
 			contentType: "application/json; charset=utf-8"
 		}).done(function(response) {
-		
+
 			if (response.status === 200) {
-                alert("대출 완료");
-                location = "/book/getBook/"+bookNumber;
-            }else {
-                alert(response.data);
-				location = "/book/getBook/"+bookNumber;
-            }
-		}).fail(function(error){
+				alert("대출 완료");
+				location = "/public/book/view/getBookList";
+			} else {
+				alert(response.data);
+				location = "/public/book/view/getBookList";
+			}
+		}).fail(function(error) {
 			alert("에러 발생: " + error);
 		});
-		
+
 	},
 
 	reserveBook: function(bookNumber) {
@@ -78,6 +77,7 @@ let book2Obj = {
 	},
 
 	cancelReserve: function(bookNumber) {
+
 		$.ajax({
 			type: "DELETE",
 			url: "/reserve/cancelReservation/" + bookNumber,
@@ -86,16 +86,14 @@ let book2Obj = {
 			if (response.status === 200) {
 				alert("예약 취소 완료");
 
-				location = "/book/getBook/" + bookNumber;       
-            }else {
-                alert(response.data);
-            }
-		}).fail(function(error){
+				location = "/public/book/view/getBookList";
+			} else {
+				alert(response.data);
+			}
+		}).fail(function(error) {
 			alert("에러 발생: " + error);
 		});
 	},
-	
-	
 
 	returnBook: function(bookNumber) {
 
@@ -105,23 +103,21 @@ let book2Obj = {
 			//data: JSON.stringify($("#bookNum").val()),
 			contentType: "application/json; charset=utf-8"
 		}).done(function(response) {
-			
+
 			if (response.status === 200) {
 
-                alert("반납성공" + response.data);
-                location = "/public/book/view/getBookList";
+				alert("반납성공" + response.data);
+				location = "/public/book/view/getBookList";
 
-            }else {
-                alert("반납할 수 없음"+ response.data);
+			} else {
+				alert("반납할 수 없음" + response.data);
 				location = "/public/book/getBook/" + bookNumber;
-            }
-			
-		}).fail(function(error){
+			}
+
+		}).fail(function(error) {
 			alert("에러 발생: " + error);
 		});
 	},
-	
-
 
 	addInterest: function(bookNumber) {
 		$.ajax({
@@ -165,8 +161,6 @@ function checkUserIdAndInitBook2Obj() {
     if ($("#userid").val() === null || $("#userid").val() === "") {
         alert("로그인 후 이용 가능합니다.");
         location = "/user/view/login";
-    } else {
-        book2Obj.init();
     }
 }
 
