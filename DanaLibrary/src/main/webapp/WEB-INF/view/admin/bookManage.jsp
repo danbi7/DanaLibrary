@@ -32,7 +32,7 @@
 			</thead>
 			
 			<tbody>
-			 <c:forEach var="book" items="${bookList}">
+			 <c:forEach var="book" items="${bookList.content}">
 				<tr>
 					<td>${book.bookNum}</td>
 					<td> <c:choose>
