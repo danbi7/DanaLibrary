@@ -4,7 +4,14 @@
 	
 <!DOCTYPE html>
 <html lang="en">
-
+<head>
+<script>
+	function openEditRent(userid) {
+		window.open('/view/rentEdit/' + rentNum, '_blank',
+				'width=800,height=800');
+	}	
+</script>
+</head>
 <body>
 
 	<div class="table-responsive" style="margin-top: 20px;">
