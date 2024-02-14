@@ -12,5 +12,5 @@ import com.dana.library.domain.Book_review;
 @Repository
 public interface ReviewRepository extends JpaRepository<Book_review, Integer>{
 
-	List<Book_review> findAllByBook(Book book);
+	List<Book_review> findByBookOrderByReviewNumDesc(Book book);
 }
