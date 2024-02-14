@@ -44,15 +44,6 @@ public class RentController {
 		System.out.println("rentBook 실행");
 		User loginUser = (User) session.getAttribute("loginUser");
 
-		/*
-		 * List<Rent> gettedList = rentService.getRentList(loginUser); //
-		 * System.out.println(rentList.toString());
-		 * 
-		 * List<Rent> rentList = new ArrayList<Rent>();
-		 * 
-		 * for (Rent rent : gettedList) { if (rent.getRentStatus() == Status.ACTIVE) {
-		 * rentList.add(rent); } }
-		 */
 		// 로그인 유저의 active인 list
 		List<Rent> rentList = rentService.rentedByLoginUser(loginUser);
 
@@ -78,8 +69,9 @@ public class RentController {
 			rentService.updateRent(rent);
 			return new ResponseDTO<>(HttpStatus.OK.value(), "책 빌리기");
 		}
-	}
 
+	}
+	//세션과 bookNum으로 반납하기
 	@PutMapping("/rent/returnBook/{bookNum}")
 	public @ResponseBody ResponseDTO<?> returnBook(@PathVariable int bookNum, HttpSession session) {
 		User loginUser = (User) session.getAttribute("loginUser");
@@ -102,7 +94,39 @@ public class RentController {
 		}else {
 			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "책 반납하기 실패");
 		}
-
+	}
+	
+	//rentNum으로 반납시키기
+	@PutMapping("/rent/returnRent/{rentNum}")
+	public @ResponseBody ResponseDTO<?> returnRent(@PathVariable int rentNum){
+		Rent rent = rentService.getRent(rentNum);
+		if(rent.getRentStatus().equals(Status.INACTIVE)) {
+			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "이미 반납된 도서입니다.");
+		}
+		rent.setRentStatus(Status.INACTIVE);
+		rentService.returnBook(rent);
+		return new ResponseDTO<>(HttpStatus.OK.value(), "반납 완료되었습니다.");
+	}
+	
+	//대출 연장
+	@PutMapping("/rent/renewalRent/{rentNum}")
+	public @ResponseBody ResponseDTO<?> renewalRent(@PathVariable int rentNum){
+		Rent rent = rentService.getRent(rentNum);
+		if(rent.getRentStatus().equals(Status.INACTIVE) || rent.getRenewalStatus().equals(Status.ACTIVE)) {
+			return new ResponseDTO<>(HttpStatus.BAD_GATEWAY.value(), "대출 연장이 불가능합니다.");
+		}
+		
+		//예약테이블에서 검사
+		Reserved_book reserve = reserveService.getReserve(rent.getBook().getBookNum());
+		System.out.println("예약: " +reserve);
+		if(reserve==null) {
+			//3일 연장
+			rentService.renewalRent(rent);
+			return new ResponseDTO<>(HttpStatus.OK.value(),"대출 연장이 완료되었습니다.");
+		}
+		else {
+			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "이미 예약된 도서입니다.");
+		}
 	}
 
 }
