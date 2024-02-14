@@ -71,12 +71,16 @@
 		<div>
 			<c:choose>
 				<c:when test="${empty interestedBook.book }">
-					<button class="btn-interest btn btn-outline-secondary" type="submit">
-					<img src="/image/emptyheart.png" style="width: 25px; height: 25px"></button>
+					<button class="btn-interest btn btn-outline-secondary"
+						type="button">
+						<img src="/image/emptyheart.png" style="width: 25px; height: 25px">
+					</button>
 				</c:when>
 				<c:otherwise>
-					<button class="btn-interest-cancel btn btn-outline-secondary" type="button">
-					<img src="/image/fillheart.png" style="width: 25px; height: 25px"></button>
+					<button class="btn-interest-cancel btn btn-outline-secondary"
+						type="button">
+						<img src="/image/fillheart.png" style="width: 25px; height: 25px">
+					</button>
 				</c:otherwise>
 			</c:choose>
 			관심도서 수 : ${interestCount } <br>
@@ -102,7 +106,7 @@
 			<a href="/public/book/view/getBookList" class="btn btn-light">뒤로가기</a>
 		</div>
 
-		
+
 
 		<div>
 			<table class="table" style="width: 70%; margin-left: 200px">
@@ -115,15 +119,13 @@
 			</table>
 		</div>
 
-		<br>
-		<br>
-		<br>
-		<br>
+		<br> <br> <br> <br>
 
 		<div class="content-container" style="width: 70%; margin-left: 200px;">
-			<label for="content">도서 후기 등록하기</label>
-			<input type="text" id="content" name="content" class="form-control">
-			<button type="submit" class="btn btn-primary" id="btn-review2">후기 등록</button> 
+			<label for="content">도서 후기 등록하기</label> <input type="text"
+				id="content" name="content" class="form-control">
+			<button class="btn btn-primary" id="btn-review2">후기 등록</button>
+
 			<br> <br> <br> <br>
 
 			<c:forEach items="${reviewList }" var="views">
@@ -132,6 +134,14 @@
 						작성자: <strong>${views.user.userid}</strong> | 작성일: ${views.regDate}
 					</div>
 					<div class="comment-content">${views.content }</div>
+
+
+					<c:if test="${views.user.userid eq loginUser.userid }">
+						<button type="button" class="btn-deleteReview btn btn-primary"
+							data-reviewnum="${views.reviewNum }">후기 삭제</button>
+					</c:if>
+
+
 				</div>
 			</c:forEach>
 		</div>
@@ -141,7 +151,7 @@
 	<script src="/js/book/book1.js"></script>
 
 
-<%@ include file="../layout/footer.jsp"%>
+	<%@ include file="../layout/footer.jsp"%>
 
 </body>
 </html>

@@ -163,4 +163,9 @@ public class RentService {
 		List<Rent> rentList = rentRepository.findAllByUserAndRentStatus(loginUser, Status.ACTIVE);
 		return rentList;
 	}
+	
+	@Transactional(readOnly = true) //빌린 적 있니
+	public List<Rent> haveRented(Book book, User user) {
+		return rentRepository.findByBookAndUser(book, user);
+	}
 }

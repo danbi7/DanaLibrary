@@ -24,8 +24,14 @@ let insertReviewObj = {
 			//contentType: "application/json; charset=utf-8"
 		}).done(function(response) {
 			
-			alert("리뷰 등록 완료");
-			location = "/book/getBook/"+$("#bookNum").val();
+			if (response.status === 200) {
+                alert("리뷰 등록 완료");
+                location = "/book/getBook/"+$("#bookNum").val();
+            }else {
+                alert("리뷰 등록할 수 없음");
+				location = "/book/getBook/"+$("#bookNum").val();
+            }
+			
 		}).fail(function(error) {
 			alert("에러 발생: " + error);
 		});

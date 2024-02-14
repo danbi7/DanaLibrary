@@ -22,6 +22,12 @@ let book1Obj = {
 		$("#btn-review2").on("click",()=>{
 			_this.insertReview();
 		});
+		
+		
+		$(".btn-deleteReview").on("click", function() {
+			let reviewNumber = $(this).data('reviewnum');
+			_this.deleteReview(reviewNumber);
+		});
 	},
 	
 	rentBook: function(){
@@ -105,13 +111,11 @@ let book1Obj = {
 	},
 	
 	insertReview: function() {
-		alert("도서 후기가 요청되었습니다" + $("#content").val() + $("#bookNum").val()+$("#userid").val());
+		alert("도서 후기가 요청되었습니다");
 		
 		let bookReview = {
-			content : $("#content").val(),
-			bookNum : $("#bookNum").val(),
-			userid : $("#userid").val()
-			}
+			content : $("#content").val()
+		}
 		
 		$.ajax({
 			type: "POST",
@@ -119,9 +123,39 @@ let book1Obj = {
 			data: JSON.stringify(bookReview),
 			contentType: "application/json; charset=utf-8"
 		}).done(function(response) {
-			alert("리뷰 등록 완료");
-			location = "/book/getBook/"+$("#bookNum").val();
+			
+			if (response.status === 200) {
+                alert("리뷰 등록 완료1 " + response.data);
+                location = "/book/getBook/"+$("#bookNum").val();
+            }else {
+                alert("리뷰 등록할 수 없음1 " + response.data);
+				location = "/book/getBook/"+$("#bookNum").val();
+            }
+			
 		}).fail(function(error) {
+			alert("에러 발생: " + error);
+		});
+	},
+	
+	deleteReview: function(reviewNumber) {
+		
+		alert("도서 후기 삭제 요청");
+		
+		
+		
+		$.ajax({
+			type: "DELETE",
+			url: "/review/deleteReview/" + reviewNumber,
+			//data: JSON.stringify(review),
+			contentType: "application/json; charset=utf-8"
+		}).done(function(response) {
+			if (response.status === 200) {
+				alert("리뷰 삭제 완료");
+				location = "/book/getBook/" + $("#bookNum").val();
+            }else {
+                alert(response.data);
+            }
+		}).fail(function(error){
 			alert("에러 발생: " + error);
 		});
 	}
