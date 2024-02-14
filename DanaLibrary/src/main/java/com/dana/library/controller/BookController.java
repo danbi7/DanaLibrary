@@ -1,24 +1,34 @@
 package com.dana.library.controller;
 
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dana.library.domain.Book;
 import com.dana.library.domain.Book_review;
+import com.dana.library.domain.Interested_book;
+import com.dana.library.domain.Rent;
 import com.dana.library.domain.User;
 import com.dana.library.dto.ResponseDTO;
 import com.dana.library.service.BookService;
+import com.dana.library.service.InterestService;
 import com.dana.library.service.InterestedBookService;
 import com.dana.library.service.RentService;
 import com.dana.library.service.ReserveService;
@@ -44,20 +54,15 @@ public class BookController {
 	@Autowired
 	private InterestedBookService interestedBookService;
 	
+	@Autowired
+	private InterestService interestService;
+	
 	// 도서 상세보기
 	@GetMapping("/book/getBook/{bookNum}")
 	public String getBook(@PathVariable int bookNum, HttpSession session, Model model) {
 
 		Book gettedBook = bookService.getBook(bookNum);
 		session.setAttribute("gettedBook", gettedBook);
-
-//		Rent rent = rentService.getRent(gettedBook);
-//		if(rent.getRentNum()==0) { //new Rent()
-//			rent.setBook(gettedBook);
-//		}
-//		session.setAttribute("rent", rent);
-//		System.out.println(rent.getRentStatus());
-
 		User loginUser = (User) session.getAttribute("loginUser");
 		int bookStatus = 0;
 
@@ -78,6 +83,14 @@ public class BookController {
 		System.out.println("bookStatus ----- " + bookStatus);
 		model.addAttribute("bookStatus", bookStatus);
 		
+		//관심도서
+		Interested_book interestedBook = interestService.getInterestedBook(gettedBook, loginUser);
+		model.addAttribute("interestedBook", interestedBook);
+		
+		//총 관심도서 수
+		int interestCount = interestService.getInterestList().size();
+		model.addAttribute("interestCount", interestCount);
+		System.out.println(interestCount);
 		
 		//bookNum에 따른 책 리뷰 불러오기
 		List<Book_review> reviewList = reviewService.getReviewList(gettedBook);
@@ -87,48 +100,67 @@ public class BookController {
 
 	// 책 리뷰 등록
 	@PostMapping("/review/insertReview")
-	public @ResponseBody ResponseDTO<?> insertReview(@RequestParam String content, HttpSession session) {
+	public @ResponseBody ResponseDTO<?> insertReview(@RequestBody Book_review bookReview, HttpSession session) {
+		System.out.println("insertReview 컨트롤러");
+		System.out.println(bookReview.toString());
+		
 		User loginUser = (User) session.getAttribute("loginUser");
-
 		Book gettedBook = (Book) session.getAttribute("gettedBook");
+		
+		List<Rent> rentList = rentService.haveRented(gettedBook, loginUser);
+		System.out.println(rentList.toString());
+		
+		if(rentList.isEmpty()) {
+			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(),"도서 대출 내역이 있어야 후기를 작성할 수 있습니다");
+		}else {
+			bookReview.setUser(loginUser);
+			bookReview.setBook(gettedBook);
+			System.out.println("review : " + bookReview.toString());
 
-		Book_review review = new Book_review();
-
-		review.setUser(loginUser);
-		review.setContent(content);
-		review.setBook(gettedBook);
-		System.out.println("review : " + review.toString());
-
-		reviewService.insertReview(review);
-		return new ResponseDTO<>(HttpStatus.OK.value(), "도서 후기 컨트롤러 완료");
+			reviewService.insertReview(bookReview);
+			return new ResponseDTO<>(HttpStatus.OK.value(), "도서 후기 컨트롤러 완료222");
+		}
 	}
 
 	//도서목록
 	@GetMapping("/public/book/view/getBookList")
-	public String getBookList(@RequestParam(required = false) String category, @RequestParam(required = false) String bookTitle, Model model, HttpSession session) {
+	public String getBookList(@RequestParam(required = false) String category, @RequestParam(required = false) String bookTitle, Model model, HttpSession session, @PageableDefault(size=5,sort="bookNum",direction = Sort.Direction.DESC)Pageable pageable) {
 		rentService.autoReturnCheck();
 		
 		System.out.println(category + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		System.out.println(bookTitle + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		
-		List<Book> bookList = null;
+		//List<Book> bookList = null;
+		Page<Book> bookList = null;
 		
-			if(category == null && bookTitle == null) {
-				bookList = bookService.getBookList();
-				System.out.println(bookList.size());
-			}else if(category.equals("전체") && bookTitle != null) {
-				bookList = bookService.searchBookByTitle(bookTitle);
-				System.out.println(bookList.size());
-			}else if(!category.equals("전체") && bookTitle == null) {
-				bookList = bookService.searchBookByCategory(category);
-				System.out.println(bookList.size());
-			}else if(!category.equals("전체") && bookTitle != null) {
-				bookList = bookService.searchBookList(category, bookTitle);
-				System.out.println(bookList.size());
-			}
+		if(category == null && bookTitle == null) {
+			bookList = bookService.getBookList(pageable);
+			//System.out.println(bookList.size());
+		}else if(category.equals("전체") && bookTitle != null) {
+			bookList = bookService.searchBookByTitle(bookTitle,pageable);
+			//System.out.println(bookList.size());
+		}else if(!category.equals("전체") && bookTitle == null) {
+			bookList = bookService.searchBookByCategory(category,pageable);
+			//System.out.println(bookList.size());
+		}else if(!category.equals("전체") && bookTitle != null) {
+			bookList = bookService.searchBookList(category, bookTitle,pageable);
+			//System.out.println(bookList.size());
+		}
 			
-			System.out.println("!!!!!!!!!!!!!bookList!!!!!!!!!!!!!!!!!" + bookList.toString());
-			model.addAttribute("bookList", bookList);
+		System.out.println("!!!!!!!!!!!!!bookList!!!!!!!!!!!!!!!!!" + bookList.toString());
+		model.addAttribute("bookList", bookList);
+		
+		int nowPage = bookList.getPageable().getPageNumber()+1; //0부터 시작
+		int startPage = 1;
+		int endPage = bookList.getTotalPages();
+		
+		model.addAttribute("nowPage", nowPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		
+		System.out.println(nowPage);
+		System.out.println(startPage);
+		System.out.println(endPage);
 		
 		
 		User loginUser = (User)session.getAttribute("loginUser");
@@ -137,7 +169,7 @@ public class BookController {
 		
 		Map<Book,Integer> map = new HashMap<>();
 		Map<Book, Integer> interestedBookMap = new HashMap<>();
-		
+
 		for(Book book : bookList) {
 			if(reserveService.isReservedByUser(loginUser, book)) {
 				listStatus = 1; // 내가 예약함->예약취소
@@ -160,8 +192,32 @@ public class BookController {
 		}
 		model.addAttribute("map", map);
 		model.addAttribute("interestedBookMap", interestedBookMap);
-
 		return "book/bookList";
+	}
+	
+	@PostMapping("/book/addInterest")
+	public @ResponseBody ResponseDTO<?> addInterest(@RequestBody Book book, HttpSession session) {
+		System.out.println(book.toString());
+		User loginUser = (User)session.getAttribute("loginUser");
+		Interested_book interestBook = new Interested_book();
+		interestBook.setBook(book);
+		interestBook.setUser(loginUser);
+		
+		interestService.updateInterest(interestBook);
+		return new ResponseDTO<>(HttpStatus.OK.value(),"관심도서 추가하기");
+	}
+	
+	@DeleteMapping("/book/cancelInterest")
+	public @ResponseBody ResponseDTO<?> cancelInterest(@RequestBody Book book) {
+		interestService.deleteInterest(book);
+		return new ResponseDTO<>(HttpStatus.OK.value(),"관심도서 삭제하기");
+	}
+
+	@DeleteMapping("/review/deleteReview/{reviewNum}")
+	public @ResponseBody ResponseDTO<?> deleteReview(@PathVariable int reviewNum){
+		//System.out.println("북 리뷰!!!!!!!!!!" + bookReview.toString());
+		reviewService.deleteReview(reviewNum);
+		return new ResponseDTO<>(HttpStatus.OK.value(),"리뷰 삭제하기");
 	}
 	
 }

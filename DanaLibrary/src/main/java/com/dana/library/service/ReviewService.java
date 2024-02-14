@@ -21,16 +21,13 @@ public class ReviewService {
 		reviewRepository.save(review);
 	}
 	
-	/*
-	@Transactional(readOnly = true)
-	public List<Book_review> getReviewList() {
-		return reviewRepository.findAll();
-	}
-	*/
-	
 	@Transactional(readOnly = true)
 	public List<Book_review> getReviewList(Book book){
-		return reviewRepository.findAllByBook(book);
+		return reviewRepository.findByBookOrderByReviewNumDesc(book);
 	}
 	
+	@Transactional
+	public void deleteReview(int reviewNum) {
+		reviewRepository.deleteById(reviewNum);
+	}
 }

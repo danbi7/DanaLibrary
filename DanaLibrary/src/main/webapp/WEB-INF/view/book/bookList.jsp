@@ -6,6 +6,7 @@
 <%@ include file="../layout/header1.jsp"%>
 <%@ include file="../layout/header2.jsp"%>
 
+
 <input type="hidden" value="${loginUser.userid }" id="userid">
 <div class="container-bookList mt-4" align="center">
 
@@ -51,7 +52,6 @@
 			<div class="col-md-3" align="center"
 				style="display: flex; justify-content: center;">
 				<img src="${book.image}" style="width: 130px; height: 180px;">
-
 			</div>
 
 			<div class="col-md-7" style="text-align: left">
@@ -117,7 +117,37 @@
 		<hr>
 	</c:forEach>
 </div>
-</div>
+
+<c:choose>
+	<c:when test="${bookList.first }">
+		<a class="btn btn-secondary">이전</a>
+	</c:when>
+	<c:otherwise>
+		<a href="?page=${bookList.number-1 }" class="btn btn-primary">이전</a>
+	</c:otherwise>
+</c:choose>
+
+<c:forEach begin="${startPage }" end="${endPage }" var="i">
+<c:choose>
+<c:when test="${nowPage == i }">
+<a href="/public/book/view/getBookList?page=${i-1}" class="btn">${i }!!!</a>
+</c:when>
+<c:otherwise>
+
+<a href="/public/book/view/getBookList?page=${i-1}" class="btn">${i }</a>
+</c:otherwise>
+</c:choose>
+
+</c:forEach>
+
+<c:choose>
+	<c:when test="${bookList.last }">
+		<a class="btn btn-secondary">다음</a>
+	</c:when>
+	<c:otherwise>
+		<a href="?page=${bookList.number+1 }" class="btn btn-primary">다음</a>
+	</c:otherwise>
+</c:choose>
 
 <script src="/js/book/book2.js"></script>
 

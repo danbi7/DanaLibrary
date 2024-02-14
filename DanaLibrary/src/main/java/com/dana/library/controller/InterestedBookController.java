@@ -11,6 +11,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.dana.library.domain.Book;
 import com.dana.library.domain.User;
 import com.dana.library.dto.ResponseDTO;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.dana.library.domain.Book;
+import com.dana.library.domain.User;
+import com.dana.library.dto.ResponseDTO;
 import com.dana.library.service.BookService;
 import com.dana.library.service.InterestedBookService;
 
@@ -24,10 +33,9 @@ public class InterestedBookController {
 	
 	@Autowired
 	private BookService bookService;
-	
-	
+
 	@PostMapping("/book/addInterestedBook/{bookNum}")
-	public @ResponseBody ResponseDTO<?> addInterestedBook(@PathVariable int bookNum, HttpSession session){
+	public @ResponseBody ResponseDTO<?> addInterestedBook(@PathVariable int bookNum, HttpSession session) {
 		Book book = bookService.getBook(bookNum);
 		User loginUser = (User) session.getAttribute("loginUser");
 		

@@ -57,7 +57,6 @@ public class RentController {
 
 			Book gettedBook = bookService.getBook(bookNum);
 			System.out.println("gettedBook.toString() : " + gettedBook.toString());
-
 			Rent rent = new Rent();
 
 			rent.setBook(gettedBook);
@@ -128,6 +127,5 @@ public class RentController {
 			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "이미 예약된 도서입니다.");
 		}
 	}
-	
 
 }

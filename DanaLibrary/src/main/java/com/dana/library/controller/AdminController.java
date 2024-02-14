@@ -3,6 +3,8 @@ package com.dana.library.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,9 +43,11 @@ public class AdminController {
 
 	// 관리자페이지 불러오기
 	@GetMapping("/view/admin")
-	public String admin(Model model) {
+	public String admin(Model model,Pageable pageable) {
 		List<User> userList = userService.getUserList();
-		List<Book> bookList = bookService.getBookList();
+
+		Page<Book> bookList = bookService.getBookList(pageable);
+
 		List<Rent> rentList = rentService.getRentListDESC();
 		model.addAttribute("bookList", bookList);
 		model.addAttribute("userList", userList);

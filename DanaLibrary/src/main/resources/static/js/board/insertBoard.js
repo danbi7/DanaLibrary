@@ -22,7 +22,7 @@ let postObject = {
       }).done(function(response) { // done 대신 success 사용
          console.log(response);
          alert("글등록");
-         location.href = "/board/view/getBoardList"; // location 속성 수정
+         location.href = "/public/board/view/getBoardList"; // location 속성 수정
       }).fail(function(error) { // fail 대신 error 사용
 
          alert("에러 발생: " + error.responseText);
