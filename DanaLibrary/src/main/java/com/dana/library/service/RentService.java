@@ -180,6 +180,12 @@ public class RentService {
 		return rentList;
 	}
 
+	
+	@Transactional(readOnly = true) //빌린 적 있니
+	public List<Rent> haveRented(Book book, User user) {
+		return rentRepository.findByBookAndUser(book, user);
+	}
+
 	@Transactional
 	public List<Rent> pastRentList(User user) {
 		List<Rent> rentList = rentRepository.findAllByUserAndRentStatus(user, Status.INACTIVE);
@@ -191,5 +197,4 @@ public class RentService {
 		List<Rent> rentList = rentRepository.findAll(Sort.by(Sort.Direction.DESC, "rentNum"));
 		return rentList;
 	}
-
 }

@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.dana.library.domain.Book;
 import com.dana.library.domain.Book_review;
 import com.dana.library.domain.Interested_book;
+import com.dana.library.domain.Rent;
 import com.dana.library.domain.User;
 import com.dana.library.dto.ResponseDTO;
 import com.dana.library.service.BookService;
@@ -105,17 +106,24 @@ public class BookController {
 	@PostMapping("/review/insertReview")
 	public @ResponseBody ResponseDTO<?> insertReview(@RequestBody Book_review bookReview, HttpSession session) {
 		System.out.println("insertReview 컨트롤러");
+		System.out.println(bookReview.toString());
+		
 		User loginUser = (User) session.getAttribute("loginUser");
-
 		Book gettedBook = (Book) session.getAttribute("gettedBook");
+		
+		List<Rent> rentList = rentService.haveRented(gettedBook, loginUser);
+		System.out.println(rentList.toString());
+		
+		if(rentList.isEmpty()) {
+			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(),"도서 대출 내역이 있어야 후기를 작성할 수 있습니다");
+		}else {
+			bookReview.setUser(loginUser);
+			bookReview.setBook(gettedBook);
+			System.out.println("review : " + bookReview.toString());
 
-
-		bookReview.setUser(loginUser);
-		bookReview.setBook(gettedBook);
-		System.out.println("review : " + bookReview.toString());
-
-		reviewService.insertReview(bookReview);
-		return new ResponseDTO<>(HttpStatus.OK.value(), "도서 후기 컨트롤러 완료");
+			reviewService.insertReview(bookReview);
+			return new ResponseDTO<>(HttpStatus.OK.value(), "도서 후기 컨트롤러 완료222");
+		}
 	}
 
 	@GetMapping("/public/book/view/getBookList")
@@ -200,4 +208,11 @@ public class BookController {
 		return new ResponseDTO<>(HttpStatus.OK.value(),"관심도서 삭제하기");
 	}
 
+	@DeleteMapping("/review/deleteReview/{reviewNum}")
+	public @ResponseBody ResponseDTO<?> deleteReview(@PathVariable int reviewNum){
+		//System.out.println("북 리뷰!!!!!!!!!!" + bookReview.toString());
+		reviewService.deleteReview(reviewNum);
+		return new ResponseDTO<>(HttpStatus.OK.value(),"리뷰 삭제하기");
+	}
+	
 }
