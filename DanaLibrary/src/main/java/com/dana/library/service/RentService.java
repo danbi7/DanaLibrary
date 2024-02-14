@@ -197,4 +197,18 @@ public class RentService {
 		List<Rent> rentList = rentRepository.findAll(Sort.by(Sort.Direction.DESC, "rentNum"));
 		return rentList;
 	}
+
+	
+	@Transactional
+	public Rent getRent(int rentNum) {
+		Rent rent= rentRepository.findById(rentNum).orElse(null);
+		return rent;
+	}
+	
+	//3일 연장
+	@Transactional
+	public void renewalRent(Rent rent) {
+		rent.setDueDate(rent.getDueDate().plusDays(3));
+		rent.setRenewalStatus(Status.ACTIVE);
+	}
 }

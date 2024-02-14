@@ -91,5 +91,12 @@ public class ReserveService {
 	        return null;
 	    });
 	}
+	
+	//bookNum으로 예약 정보 검사
+	@Transactional
+	public Reserved_book getReserve(int bookNum) {
+		Reserved_book reserve= reserveRepository.findByBook_BookNum(bookNum);
+		return reserve;
+	}
 
 }
