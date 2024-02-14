@@ -7,7 +7,7 @@
 <%@ include file="../layout/header2.jsp" %>
 
 
-<div class="container-boardList mt-4">
+<div class="container-boardList mt-4" align="center">
 <div class="row justify-content-between">
 
 <div class="boardList-icon text-center">
@@ -64,6 +64,9 @@
 	</c:forEach>
 	
   </table>
+  </div>
+  
+  <div class="mt-2">
 <c:choose>
 	<c:when test="${boardList.first }">
 		<a class="btn btn-secondary">이전</a>
@@ -76,7 +79,7 @@
 <c:forEach begin="${startPage }" end="${endPage }" var="i">
 <c:choose>
 <c:when test="${nowPage == i }">
-<a href="/public/board/view/getBoardList?page=${i-1}" class="btn">${i }!!!</a>
+<a href="/public/board/view/getBoardList?page=${i-1}" class="btn">${i }</a>
 </c:when>
 <c:otherwise>
 

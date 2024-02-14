@@ -28,7 +28,6 @@ import com.dana.library.domain.User;
 import com.dana.library.dto.ResponseDTO;
 import com.dana.library.service.BookService;
 
-import com.dana.library.service.CacheService;
 import com.dana.library.service.InterestService;
 import com.dana.library.service.InterestedBookService;
 import com.dana.library.service.RentService;
@@ -55,8 +54,8 @@ public class BookController {
 	@Autowired
 	private InterestedBookService interestedBookService;
 	
-	@Autowired
-	private CacheService cacheService;
+//	@Autowired
+//	private CacheService cacheService;
 	
 	@Autowired
 	private InterestService interestService;
@@ -176,11 +175,6 @@ public class BookController {
 //	}
 
 	public String getBookList(@RequestParam(required = false) String category, @RequestParam(required = false) String bookTitle, Model model, HttpSession session, @PageableDefault(size=5,sort="bookNum",direction = Sort.Direction.DESC)Pageable pageable) {
-		rentService.autoReturnCheck();
-		
-		System.out.println(category + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-		System.out.println(bookTitle + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-		
 		//List<Book> bookList = null;
 		Page<Book> bookList = null;
 		
