@@ -9,7 +9,11 @@
 <script>
 	function openEditBook(bookNum) {
 		window.open('/view/bookEdit/' + bookNum, '_blank', 'width=800,height=800');
-	}	
+	}
+	
+	function openAddBook() {
+		window.open('/view/addBook', '_blank', 'width=800,height=800');
+	}
 </script>
 </head>
 <body>
@@ -22,7 +26,7 @@
 					<th>도서명</th>
 					<th>저자</th>
 					<th>출판사</th>
-					<th>출판일</th>
+					<th>출간일</th>
 					<th>분류</th>
 					<th>페이지</th>
 				
@@ -71,15 +75,13 @@
                     </div></td>
 				</tr>
 				</c:forEach>
-				
-				
-				
 			</tbody>	
 
 		</table>
+		<div class="container my-2 d-flex">
+			<button class="btn btn-outline-dark ms-auto ms-auto" type="button" onclick="openAddBook()">새 도서 등록</button>
+		</div>
 		
-		<input type="file" accept=".jpg,.png">
-		<button onclick="uploadImage()">업로드</button>
 	</div>
 
 </body>

@@ -41,13 +41,6 @@ public class RentService {
 
 	@Transactional
 	public void updateRent(Rent rent) {
-
-		rent.setRentStatus(Status.ACTIVE);
-		LocalDate rentDate = LocalDate.now();
-		LocalDate dueDate = LocalDate.now().plusDays(7);
-		rent.setRentDate(rentDate);
-		rent.setDueDate(dueDate);
-
 		rentRepository.save(rent);
 	}
 
