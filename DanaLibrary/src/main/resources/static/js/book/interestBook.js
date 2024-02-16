@@ -11,7 +11,6 @@ let interestObject = {
       });
    },
    interest: function() {
-      alert("관심도서 추가");
 
      let interestBook = {
         bookNum: $("#bookNum").val()
@@ -23,19 +22,16 @@ let interestObject = {
          data: JSON.stringify(interestBook),
          contentType: "application/json; charset=utf-8"
       }).done(function(response) { // done 대신 success 사용
-         console.log(response);
-         alert("관심도서 추가하기");
-         location.href = "/book/getBook/" + $("#bookNum").val(); // location 속성 수정
+         alert(response.data);
+         location.reload();
       }).fail(function(error) { // fail 대신 error 사용
-
-         alert("에러 발생: " + error.responseText);
+         alert("에러 발생: " + error);
 
       });
 
    },
    
    interestCancel: function() {
-      alert("관심도서 삭제");
 
      let interestBook = {
         bookNum: $("#bookNum").val()
@@ -47,11 +43,9 @@ let interestObject = {
          data: JSON.stringify(interestBook),
          contentType: "application/json; charset=utf-8"
       }).done(function(response) { // done 대신 success 사용
-         console.log(response);
-         alert("관심도서 삭제하기");
-         location.href = "/book/getBook/" + $("#bookNum").val();// location 속성 수정
+         alert(response.data);
+         location.reload();
       }).fail(function(error) { // fail 대신 error 사용
-
          alert("에러 발생: " + error.responseText);
 
       });

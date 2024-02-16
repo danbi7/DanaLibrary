@@ -1,5 +1,6 @@
 package com.dana.library.persistence;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,5 +14,7 @@ import com.dana.library.domain.User;
 public interface InterestedBookRepository extends JpaRepository<Interested_book, Integer>{
 
 	Optional<Interested_book> findByUserAndBook(User loginUser, Book book);
+
+	List<Interested_book> findByUser(User user);
 
 }

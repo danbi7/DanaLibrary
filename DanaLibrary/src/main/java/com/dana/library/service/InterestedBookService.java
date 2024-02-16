@@ -1,5 +1,6 @@
 package com.dana.library.service;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,12 @@ public class InterestedBookService {
 		}else {
 			return true;
 		}
+	}
+	
+	@Transactional
+	public List<Interested_book> getInterestedBookListByUser(User user){
+		List<Interested_book> interestedBookList = interestedBookRepository.findByUser(user);
+		return interestedBookList;
 	}
 
 }
