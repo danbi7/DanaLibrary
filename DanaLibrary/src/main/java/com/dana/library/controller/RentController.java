@@ -48,15 +48,12 @@ public class RentController {
 		List<Rent> rentList = rentService.rentedByLoginUser(loginUser);
 
 		int renting = rentList.size();
-		System.out.println("rentList size : " + renting);
 
 		if (renting >= 5) { // size는 0부터 시작하니깐
-			System.out.println("대출도서가 5권을 초과함");
-			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "대출도서가 5권을 초과");
+			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "도서 대출은 다섯권까지만 가능합니다.");
 		} else {
 
 			Book gettedBook = bookService.getBook(bookNum);
-			System.out.println("gettedBook.toString() : " + gettedBook.toString());
 			Rent rent = new Rent();
 
 			rent.setBook(gettedBook);
@@ -65,13 +62,12 @@ public class RentController {
 			LocalDate dueDate = LocalDate.now().plusDays(7);
 			rent.setDueDate(dueDate);
 			
-			System.out.println("반납일:" + rent.getDueDate());
-			rentService.updateRent(rent);
-			System.out.println("반납일:" + rent.getDueDate());
-			return new ResponseDTO<>(HttpStatus.OK.value(), "책 빌리기");
+			return new ResponseDTO<>(HttpStatus.OK.value(), "도서 대출 완료");
+		
 		}
 
 	}
+	
 	//세션과 bookNum으로 반납하기
 	@PutMapping("/rent/returnBook/{bookNum}")
 	public @ResponseBody ResponseDTO<?> returnBook(@PathVariable int bookNum, HttpSession session) {
@@ -86,14 +82,13 @@ public class RentController {
 			rent.setRentStatus(Status.INACTIVE);
 			rentService.returnBook(rent);
 			Reserved_book reserve = reserveService.rentedBookInReservedBook(rent.getBook());
-			System.out.println("테스트 예약 정보: " + reserve);
 			if(reserve!=null) {
 				noticeService.addNotice(reserve);
 			}
 			
-			return new ResponseDTO<>(HttpStatus.OK.value(), "  책 반납하기");
+			return new ResponseDTO<>(HttpStatus.OK.value(), "도서 반납 완료");
 		}else {
-			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "책 반납하기 실패");
+			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "도서 반납 실패");
 		}
 	}
 	

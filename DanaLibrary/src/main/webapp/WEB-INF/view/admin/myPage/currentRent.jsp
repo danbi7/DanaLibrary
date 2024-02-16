@@ -15,8 +15,11 @@
 <div class="currentRent-book">
 	<a href="/book/getBook/${rent.book.bookNum }">
   <img src="${rent.book.image }" alt="Card image cap"></a>
-    <a href="/book/getBook/${rent.book.bookNum }"><p class="card-text">${rent.book.title }</p></a>
-    <button class="btn-returnBook btn btn-outline-info" data-booknum="${rent.book.bookNum }">반납하기</button>
+    <p class="card-text"><a href="/book/getBook/${rent.book.bookNum }"><strong>${rent.book.title }</strong></a></p>
+    <p class="card-text-date">${rent.rentDate } ~ ${rent.dueDate }</p>
+    <button class="btn-returnBook btn btn-outline-info mt-2" data-booknum="${rent.book.bookNum }">반납하기</button>
+    <c:if test="${rent.renewalStatus ne 'ACTIVE' }">
+    <button class="btn-renewal btn btn-outline-primary mt-2" data-rent-num="${rent.rentNum }">연장하기</button></c:if>
 </div>
 
 </c:forEach>
@@ -34,11 +37,9 @@
 <div class="currentRent-book">
 	<a href="/book/getBook/${reserve.book.bookNum }">
   <img src="${reserve.book.image }" alt="Card image cap"></a>
-  <a href="/book/getBook/${rent.book.bookNum }"><p class="card-text">${reserve.book.title }</p></a>
+  <p class="card-text"><a href="/book/getBook/${rent.book.bookNum }"><strong>${reserve.book.title }</strong></a></p>
       <button class="btn-reserve-cancel btn btn-outline-secondary" data-booknum="${reserve.book.bookNum }">예약취소</button>
 </div>
 </c:if>
 </div>
 </div>
-
-<script src="/js/book/book2.js"></script>
