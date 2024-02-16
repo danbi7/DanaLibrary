@@ -13,7 +13,8 @@
 <link href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css"
 	rel="stylesheet">
 <script src="/webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
-<script src="/webjars/jquery/3.6.0/dist/jquery.min.js"></script></head>
+<script src="/webjars/jquery/3.6.0/dist/jquery.min.js"></script>
+</head>
 <body>
 	
 	<div class="container mt-5 d-flex justify-content-center">

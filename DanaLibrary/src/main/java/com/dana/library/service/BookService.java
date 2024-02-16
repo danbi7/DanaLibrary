@@ -40,5 +40,10 @@ public class BookService {
 	public Page<Book> searchBookByTitle(String title,Pageable pageable) {
 		return bookRepository.findByTitleContaining(title,pageable);
 	}
+	
+	@Transactional
+	public void insertBook(Book book) {
+		bookRepository.save(book);
+	}
 
 }

@@ -142,7 +142,7 @@ margin-right: 10px;
 	margin-top: 10px;
 }
 
-.container-currentRent, .container-pastRent {
+.container-currentRent, .container-pastRent, .container-interestedBook {
 	display: flex;
 	flex-direction: column;
 	width: 90%;
