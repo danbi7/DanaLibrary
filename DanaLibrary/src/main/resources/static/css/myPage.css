@@ -107,11 +107,19 @@ margin-right: 10px;
 	justify-content: flex-end;
 }
 
-.container-myInfo{
+.container-myInfo, .container-interestedBook{
 	display: flex;
 	justify-content: center;
 	align-items: flex-start;
 	width: 60%;
+	margin: 0px auto;
+}
+
+.container-bookRequest {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	width: 90%;
 	margin: 0px auto;
 }
 
@@ -125,15 +133,8 @@ margin-right: 10px;
 	display: none;
 }
 
-.currentRent-book {
+.currentRent-book, .interested-book, .pastRent-book {
 	width: 180px; 
-	height: 330px;
-	margin-right: 34px;
-}
-
-.pastRent-book {
-	width: 180px; 
-	height: 330px;
 	margin-right: 34px;
 }
 
@@ -141,7 +142,7 @@ margin-right: 10px;
 	margin-top: 10px;
 }
 
-.container-currentRent, .container-pastRent{
+.container-currentRent, .container-pastRent {
 	display: flex;
 	flex-direction: column;
 	width: 90%;
@@ -150,9 +151,10 @@ margin-right: 10px;
 
 .container-small{
 	display: flex;
+	margin-bottom: 10px;
 }
 
-.currentRent-book img, .pastRent-book img {
+.currentRent-book img, .pastRent-book img, .interested-book img{
 	border-radius: 3px;
 	width: 180px; 
 	height: 260px; 
@@ -167,11 +169,13 @@ margin-right: 10px;
 	margin-bottom: 5px;
 }
 
-.card-text-date{
-	font-size: 14px;
-	margin: 0px;
+hr{
+	background-color: #205295;
+	border-top: 2px solid #205295;
+	opacity: 100%;
 }
 
-.card-text-date p{
+.card-text-date{
+	font-size: 14px;
 	margin: 0px;
 }

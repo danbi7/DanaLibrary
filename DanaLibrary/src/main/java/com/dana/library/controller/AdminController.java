@@ -15,11 +15,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dana.library.domain.Book;
+import com.dana.library.domain.Interested_book;
 import com.dana.library.domain.Rent;
 import com.dana.library.domain.Reserved_book;
 import com.dana.library.domain.User;
 import com.dana.library.dto.ResponseDTO;
 import com.dana.library.service.BookService;
+import com.dana.library.service.InterestedBookService;
 import com.dana.library.service.RentService;
 import com.dana.library.service.ReserveService;
 import com.dana.library.service.UserService;
@@ -40,6 +42,9 @@ public class AdminController {
 
 	@Autowired
 	private ReserveService reserveService;
+	
+	@Autowired
+	private InterestedBookService interestedBookService;
 
 	// 관리자페이지 불러오기
 	@GetMapping("/view/admin")
@@ -67,6 +72,9 @@ public class AdminController {
 
 		List<Rent> pastRentList = rentService.pastRentList(loginUser);
 		model.addAttribute("pastRentList", pastRentList);
+		
+		List<Interested_book> interestedBookList = interestedBookService.getInterestedBookListByUser(loginUser);
+		model.addAttribute("interestedBookList", interestedBookList);
 		return "admin/myPage";
 	}
 

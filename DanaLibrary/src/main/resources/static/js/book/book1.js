@@ -38,15 +38,9 @@ let book1Obj = {
 			//data: JSON.stringify($("#bookNum").val()),
 			contentType: "application/json; charset=utf-8"
 		}).done(function(response) {
-			
-			if (response.status === 200) {
-                alert("대출 완료");
-                location = "/book/getBook/"+$("#bookNum").val();
-            }else {
-                alert(response.data);
-				location = "/book/getBook/"+$("#bookNum").val();
-            }
-		}).fail(function(error){
+			alert(response.data);
+			location.reload();
+		}).fail(function(error) {
 			alert("에러 발생: " + error);
 		});
 	},
@@ -58,14 +52,9 @@ let book1Obj = {
 			url: "/reserve/reserveBook/" + $("#bookNum").val(),
 			contentType: "application/json; charset=utf-8"
 		}).done(function(response) {
-			if (response.status === 200) {
-                alert("예약 완료");
-                location = "/book/getBook/" + $("#bookNum").val();       
-
-            }else {
-                alert(response.data);
-            }
-		}).fail(function(error){
+			alert(response.data);
+			location.reload();
+		}).fail(function(error) {
 			alert("에러 발생: " + error);
 		});
 	},
@@ -77,13 +66,9 @@ let book1Obj = {
 			url: "/reserve/cancelReservation/" + $("#bookNum").val(),
 			contentType: "application/json; charset=utf-8"
 		}).done(function(response) {
-			if (response.status === 200) {
-				alert("예약 취소 완료");
-				location = "/book/getBook/" + $("#bookNum").val();       
-            }else {
-                alert(response.data);
-            }
-		}).fail(function(error){
+			alert(response.data);
+			location.reload();
+		}).fail(function(error) {
 			alert("에러 발생: " + error);
 		});
 	},
@@ -96,23 +81,14 @@ let book1Obj = {
 			//data: JSON.stringify($("#bookNum").val()),
 			contentType: "application/json; charset=utf-8"
 		}).done(function(response) {
-			
-			if (response.status === 200) {
-                alert("반납 완료");
-                location = "/book/getBook/"+$("#bookNum").val();
-            }else {
-                alert("반납할 수 없음");
-				location = "/book/getBook/"+$("#bookNum").val();
-            }
-			
-		}).fail(function(error){
+			alert(response.data);
+			location.reload();
+		}).fail(function(error) {
 			alert("에러 발생: " + error);
 		});
 	},
 	
 	insertReview: function() {
-		alert("도서 후기가 요청되었습니다");
-		
 		let bookReview = {
 			content : $("#content").val()
 		}
@@ -138,10 +114,6 @@ let book1Obj = {
 	},
 	
 	deleteReview: function(reviewNumber) {
-		
-		alert("도서 후기 삭제 요청");
-		
-		
 		
 		$.ajax({
 			type: "DELETE",
