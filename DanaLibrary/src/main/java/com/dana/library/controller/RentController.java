@@ -62,11 +62,12 @@ public class RentController {
 			rent.setBook(gettedBook);
 			rent.setUser(loginUser);
 			rent.setRentStatus(Status.ACTIVE);
-			LocalDate rentDate = LocalDate.now();
 			LocalDate dueDate = LocalDate.now().plusDays(7);
-			rent.setRentDate(rentDate);
 			rent.setDueDate(dueDate);
+			
+			System.out.println("반납일:" + rent.getDueDate());
 			rentService.updateRent(rent);
+			System.out.println("반납일:" + rent.getDueDate());
 			return new ResponseDTO<>(HttpStatus.OK.value(), "책 빌리기");
 		}
 

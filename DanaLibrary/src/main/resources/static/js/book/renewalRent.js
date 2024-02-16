@@ -38,7 +38,6 @@ let renewalRent = {
 	
 	return: function(rentNum) {
 		
-		
 		$.ajax({
 			type: "PUT",
 			url: "/rent/returnRent/" + rentNum,
