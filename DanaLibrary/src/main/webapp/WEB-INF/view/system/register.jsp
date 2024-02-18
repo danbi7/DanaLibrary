@@ -34,7 +34,7 @@
 
 							<div class="col-2" style="padding-left: 0px">
 								<button type="button" class="btn btn-secondary" id="btn-idCheck"
-									style="height: 58px; border-top-left-radius: 0px; border-bottom-left-radius: 0px">중복
+									style="height: 58px; border-top-left-radius: 0px; border-bottom-left-radius: 0px; font-size: smaller;">중복
 									확인</button>
 							</div>
 

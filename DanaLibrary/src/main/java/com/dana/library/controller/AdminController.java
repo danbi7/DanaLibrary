@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,11 +28,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.dana.library.domain.Board;
 import com.dana.library.domain.Book;
+import com.dana.library.domain.Book_request;
 import com.dana.library.domain.Interested_book;
 import com.dana.library.domain.Rent;
 import com.dana.library.domain.Reserved_book;
 import com.dana.library.domain.User;
+import com.dana.library.dto.BookRequestDTO;
 import com.dana.library.dto.ResponseDTO;
+import com.dana.library.service.BookRequestService;
 import com.dana.library.service.BoardService;
 import com.dana.library.service.BookService;
 import com.dana.library.service.InterestedBookService;
@@ -39,6 +44,7 @@ import com.dana.library.service.ReserveService;
 import com.dana.library.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @Controller
 public class AdminController {
@@ -56,6 +62,15 @@ public class AdminController {
 	private ReserveService reserveService;
 	
 	@Autowired
+	private InterestedBookService interestedBookService;
+	
+	@Autowired
+	private BookRequestService bookRequestService;
+	
+	@Autowired
+	private ModelMapper modelMapper;
+  
+  @Autowired
 	private BoardService boardService;
 
 
@@ -91,6 +106,9 @@ public class AdminController {
 		
 		List<Interested_book> interestedBookList = interestedBookService.getInterestedBookListByUser(loginUser);
 		model.addAttribute("interestedBookList", interestedBookList);
+		
+		List<Book_request> bookRequestList = bookRequestService.getBookRequestList();
+		model.addAttribute("bookRequestList", bookRequestList);
 		return "admin/myPage";
 	}
 
@@ -205,6 +223,21 @@ public class AdminController {
 	        // 파일 처리 중 에러가 발생한 경우 예외 처리
 	        return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "도서 등록 실패");
 	    }
+	}
+	
+	@PostMapping("/admin/bookRequest")
+	public @ResponseBody ResponseDTO<?> bookRequest(@Valid @RequestBody BookRequestDTO bookDTO, BindingResult bindingResult, HttpSession session) {
+		Book_request book = modelMapper.map(bookDTO, Book_request.class);
+		
+		User user = (User) session.getAttribute("loginUser");
+		book.setUser(user);
+		bookRequestService.addBook(book);
+		return new ResponseDTO<>(HttpStatus.OK.value(), "희망도서 신청 완료");
+	}
+	
+	@GetMapping("/view/bookRequest")
+	public String bookRequest() {
+		return "admin/myPage/bookRequest";
 	}
 
 }

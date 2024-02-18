@@ -16,30 +16,6 @@ let insertUser = {
 			_this.idCheck();
 		});
 
-		/*$("#repassword").on("input", function() {
-			_this.pwcheck();
-		});
-
-		$("#userid").on("input", function() {
-			_this.reset();
-		});
-		
-		$("#username").on("input", function() {
-			_this.reset();
-		});
-		
-		$("#password").on("input", function() {
-			_this.reset();
-		});
-		
-		$("#email").on("input", function() {
-			_this.reset();
-		});
-		
-		$("#birthDate").on("input", function() {
-			_this.reset();
-		});*/
-
 	},
 
 	insertUser: function() {
