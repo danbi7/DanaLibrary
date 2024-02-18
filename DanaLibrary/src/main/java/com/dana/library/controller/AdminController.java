@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,6 +32,7 @@ import com.dana.library.domain.Interested_book;
 import com.dana.library.domain.Rent;
 import com.dana.library.domain.Reserved_book;
 import com.dana.library.domain.User;
+import com.dana.library.dto.BookRequestDTO;
 import com.dana.library.dto.ResponseDTO;
 import com.dana.library.service.BookRequestService;
 import com.dana.library.service.BookService;
@@ -39,6 +42,7 @@ import com.dana.library.service.ReserveService;
 import com.dana.library.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @Controller
 public class AdminController {
@@ -60,6 +64,9 @@ public class AdminController {
 	
 	@Autowired
 	private BookRequestService bookRequestService;
+	
+	@Autowired
+	private ModelMapper modelMapper;
 
 	// 관리자페이지 불러오기
 	@GetMapping("/view/admin")
@@ -210,7 +217,9 @@ public class AdminController {
 	}
 	
 	@PostMapping("/admin/bookRequest")
-	public @ResponseBody ResponseDTO<?> bookRequest(@RequestBody Book_request book, HttpSession session) {
+	public @ResponseBody ResponseDTO<?> bookRequest(@Valid @RequestBody BookRequestDTO bookDTO, BindingResult bindingResult, HttpSession session) {
+		Book_request book = modelMapper.map(bookDTO, Book_request.class);
+		
 		User user = (User) session.getAttribute("loginUser");
 		book.setUser(user);
 		bookRequestService.addBook(book);

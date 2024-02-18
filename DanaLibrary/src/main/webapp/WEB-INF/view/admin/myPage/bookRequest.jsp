@@ -13,6 +13,7 @@
 <script src="/webjars/summernote/0.8.10/summernote-bs4.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/css/main.css">
 <link rel="stylesheet" type="text/css" href="/css/myPage.css">
+<link rel="stylesheet" type="text/css" href="/css/result.css">
 </head>
 <body>
 <div class="container-bookRequest">
@@ -28,6 +29,10 @@
 					type="text" class="form-control" id="title"
 					placeholder="예시) 운수 좋은 날">
 			</div>
+			
+			<div class="result">
+				<span id="result-title-message"></span>
+			</div>
 
 			<div class="col-12">
 				<label for="author" class="form-label">저자 *</label>
@@ -35,6 +40,10 @@
 					<input type="text" class="form-control" id="author"
 						placeholder="예시) 현진건">
 				</div>
+			</div>
+			
+			<div class="result">
+				<span id="result-author-message"></span>
 			</div>
 
 			<div class="col-12">

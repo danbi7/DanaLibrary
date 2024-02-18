@@ -8,6 +8,7 @@
         <th>도서 제목</th>
         <th>저자</th>
         <th>신청자</th>
+        <th>신청 날짜</th>
         <th>상태</th>
       </tr>
     </thead>
@@ -17,6 +18,7 @@
         <td>${book.title }</td>
         <td>${book.author }</td>
         <td>${book.user.userid }</td>
+        <td>${book.requestDate }
         <td>${book.requestStatus.status }</td>
       </tr>
       </c:forEach>
@@ -31,6 +33,6 @@
 <script>
 	function openEditWindow() {
 		window.open('/view/bookRequest','_blank',
-				'width=700,height=500');
+				'width=800,height=550');
 	}	
 </script>

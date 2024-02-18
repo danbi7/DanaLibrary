@@ -23,9 +23,20 @@ let bookReq = {
 			data: JSON.stringify(book),
 			contentType: "application/json; charset=utf-8"
 		}).done(function(response) {
-			alert(response.data);
-			window.close();
-			location = "/view/bookRequest";
+			if(response.status == 200){
+				alert(response.data);
+				window.close();
+			}else{
+				let errors = response["data"];
+				if(errors.title != null){
+					$("#result-title-message").text(errors.title);
+				}
+				
+				if(errors.author != null){
+					$("#result-author-message").text(errors.author);
+				}
+			}
+			
 		}).fail(function(error) {
 			let message = error.responseJSON.data; // 'responseJSON'으로 수정
 			alert("에러 발생 : " + message)

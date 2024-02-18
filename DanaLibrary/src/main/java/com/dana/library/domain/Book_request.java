@@ -1,5 +1,12 @@
 package com.dana.library.domain;
 
+import java.time.LocalDate;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -41,4 +48,9 @@ public class Book_request {
 	
 	@Enumerated(EnumType.STRING)
 	private Status requestStatus = Status.PENDING;
+	
+	@CreationTimestamp
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm", timezone="Asia/Seoul") //날짜 포멧 바꾸기
+	private LocalDate requestDate;
 }
