@@ -100,6 +100,9 @@ justify-content: space-around;
 .edit-btn{
 width:20px;
 }
+.delete-btn{
+width:20px;
+}
 
 
 </style>
@@ -150,7 +153,7 @@ width:20px;
 				</div>
 
 				<div id="boardManage" class="tabcontent">
-					<h3>게시판 내용</h3>
+					<%@ include file="boardManage.jsp"%>
 				</div>
 			</div>
 		</div>

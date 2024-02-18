@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.dana.library.domain.Board;
 import com.dana.library.domain.Book;
 import com.dana.library.domain.Book_request;
 import com.dana.library.domain.Interested_book;
@@ -35,6 +36,7 @@ import com.dana.library.domain.User;
 import com.dana.library.dto.BookRequestDTO;
 import com.dana.library.dto.ResponseDTO;
 import com.dana.library.service.BookRequestService;
+import com.dana.library.service.BoardService;
 import com.dana.library.service.BookService;
 import com.dana.library.service.InterestedBookService;
 import com.dana.library.service.RentService;
@@ -67,6 +69,10 @@ public class AdminController {
 	
 	@Autowired
 	private ModelMapper modelMapper;
+  
+  @Autowired
+	private BoardService boardService;
+
 
 	// 관리자페이지 불러오기
 	@GetMapping("/view/admin")
@@ -74,12 +80,15 @@ public class AdminController {
 		List<User> userList = userService.getUserList();
 
 		Page<Book> bookList = bookService.getBookList(pageable);
-
+		
 		List<Rent> rentList = rentService.getRentListDESC();
+		
+		List<Board> boardList = boardService.getBoardListDESC();
+		
 		model.addAttribute("bookList", bookList);
 		model.addAttribute("userList", userList);
 		model.addAttribute("rentList", rentList);
-
+		model.addAttribute("boardList", boardList);
 		return "admin/admin";
 	}
 

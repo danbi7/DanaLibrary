@@ -5,12 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dana.library.domain.Board;
 import com.dana.library.domain.Category;
 import com.dana.library.domain.Likes;
+import com.dana.library.domain.Rent;
 import com.dana.library.domain.User;
 import com.dana.library.persistence.BoardRepository;
 import com.dana.library.persistence.LikesRepository;
@@ -100,4 +102,10 @@ public class BoardService {
         board.setLikes(likesCount);
         boardRepository.save(board);
     }
+	
+	@Transactional
+	public List<Board> getBoardListDESC() {
+		List<Board> boardList = boardRepository.findAll(Sort.by(Sort.Direction.DESC, "boardNum"));
+		return boardList;
+	}
 }
