@@ -44,7 +44,7 @@
 				</div>
 
 				<div id="requestInfo" class="tabcontent">
-					<%@ include file="myPage/bookRequest.jsp" %>
+					<%@ include file="myPage/bookRequestList.jsp" %>
 				</div>
 
 				<div id="myInfo" class="tabcontent">

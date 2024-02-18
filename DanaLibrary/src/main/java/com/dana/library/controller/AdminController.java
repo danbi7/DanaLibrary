@@ -25,11 +25,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.dana.library.domain.Book;
+import com.dana.library.domain.Book_request;
 import com.dana.library.domain.Interested_book;
 import com.dana.library.domain.Rent;
 import com.dana.library.domain.Reserved_book;
 import com.dana.library.domain.User;
 import com.dana.library.dto.ResponseDTO;
+import com.dana.library.service.BookRequestService;
 import com.dana.library.service.BookService;
 import com.dana.library.service.InterestedBookService;
 import com.dana.library.service.RentService;
@@ -55,6 +57,9 @@ public class AdminController {
 	
 	@Autowired
 	private InterestedBookService interestedBookService;
+	
+	@Autowired
+	private BookRequestService bookRequestService;
 
 	// 관리자페이지 불러오기
 	@GetMapping("/view/admin")
@@ -85,6 +90,9 @@ public class AdminController {
 		
 		List<Interested_book> interestedBookList = interestedBookService.getInterestedBookListByUser(loginUser);
 		model.addAttribute("interestedBookList", interestedBookList);
+		
+		List<Book_request> bookRequestList = bookRequestService.getBookRequestList();
+		model.addAttribute("bookRequestList", bookRequestList);
 		return "admin/myPage";
 	}
 
@@ -199,6 +207,19 @@ public class AdminController {
 	        // 파일 처리 중 에러가 발생한 경우 예외 처리
 	        return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "도서 등록 실패");
 	    }
+	}
+	
+	@PostMapping("/admin/bookRequest")
+	public @ResponseBody ResponseDTO<?> bookRequest(@RequestBody Book_request book, HttpSession session) {
+		User user = (User) session.getAttribute("loginUser");
+		book.setUser(user);
+		bookRequestService.addBook(book);
+		return new ResponseDTO<>(HttpStatus.OK.value(), "희망도서 신청 완료");
+	}
+	
+	@GetMapping("/view/bookRequest")
+	public String bookRequest() {
+		return "admin/myPage/bookRequest";
 	}
 
 }
