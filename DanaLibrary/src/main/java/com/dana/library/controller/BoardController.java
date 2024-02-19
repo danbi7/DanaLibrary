@@ -154,7 +154,7 @@ public class BoardController {
 
 	// 글 삭제 기능
 	@DeleteMapping("/board/deleteBoard/{boardNum}")
-	public @ResponseBody ResponseDTO<?> deletePost(@PathVariable int boardNum) {
+	public @ResponseBody ResponseDTO<?> deletePost(@PathVariable int boardNum) {		
 		boardService.deleteBoard(boardNum);
 		return new ResponseDTO<>(HttpStatus.OK.value(), "글 삭제 컨트롤러 실행");
 	}

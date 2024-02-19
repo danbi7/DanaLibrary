@@ -20,7 +20,7 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	
 	Optional<User> findByEmail(String email);
 	
-	
 	Optional<User> findByBirthDate(Date birthDate);
+	
 	
 }
