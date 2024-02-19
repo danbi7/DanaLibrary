@@ -26,7 +26,7 @@ public class EmailController {
         Random random = new Random();
         int checkNum = random.nextInt(888888) + 111111;
         
-       session.setAttribute("checkNum", String.valueOf(checkNum));
+        session.setAttribute("checkNum", String.valueOf(checkNum));
         
         String body = "다음 6자리 코드를 입력해서 본인 인증을 완료해주세요. \n\n"  + String.valueOf(checkNum);
         emailService.sendEmail(to, subject, body);
