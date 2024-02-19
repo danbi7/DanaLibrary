@@ -57,9 +57,6 @@ public class BoardController {
 	// 글 목록 보기 페이지
 	@GetMapping("/public/board/view/getBoardList")
 	public String getBoardList(@RequestParam(required = false) Category boardCategory, @RequestParam(required = false) String boardTitle, Model model, @PageableDefault(size=10,sort="boardNum",direction = Sort.Direction.DESC)Pageable pageable) {
-
-		System.out.println(boardCategory + "???????????");
-		System.out.println(boardTitle + "????????????");
 		
 		Page<Board> boardList = null;
 		

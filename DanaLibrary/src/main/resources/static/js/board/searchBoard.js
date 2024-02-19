@@ -32,7 +32,7 @@ let searchBoardObj = {
 		*/
 		
 		$.ajax({
-			type: "POST",
+			type: "GET",
 			url: "/board/getBoardList",
 			data: JSON.stringify(board),
 			/*{

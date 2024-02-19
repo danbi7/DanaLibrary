@@ -54,31 +54,19 @@
 <div class="notice-box">
 	<h3 class="title blue-line">최근 공지글</h3>
 	<ul class="noticeList">
-		<li><a href="#">공지글 예시로 아무거나 써봤음</a>
-		<span class="date">2024-01-01</span></li>
-		<li><a href="#">공지글 예시로 아무거나 써봤음</a>
-		<span class="date">2024-01-01</span></li>
-		<li><a href="#">공지글 예시로 아무거나 써봤음</a>
-		<span class="date">2024-01-01</span></li>
-		<li><a href="#">공지글 예시로 아무거나 써봤음</a>
-		<span class="date">2024-01-01</span></li>
-		<li><a href="#">공지글 예시로 아무거나 써봤음</a>
-		<span class="date">2024-01-01</span></li>
+        <c:forEach var="board" items="${recentNoticeBoard}">
+		<li><a href="/board/view/getBoard/${board.boardNum }">${board.title }</a>
+		<span class="date">${board.regDate }</span></li>
+		</c:forEach>
 	</ul>
 </div>
 <div class="notice-box">
-	<h3 class="title blue-line">인기 게시글</h3>
+	<h3 class="title blue-line">최근 게시글</h3>
 	<ul class="noticeList">
-		<li><a href="#">게시글 예시로 아무거나 써봤음</a>
-		<span class="date">2024-01-01</span></li>
-		<li><a href="#">게시글 예시로 아무거나 써봤음</a>
-		<span class="date">2024-01-01</span></li>
-		<li><a href="#">게시글 예시로 아무거나 써봤음</a>
-		<span class="date">2024-01-01</span></li>
-		<li><a href="#">게시글 예시로 아무거나 써봤음</a>
-		<span class="date">2024-01-01</span></li>
-		<li><a href="#">게시글 예시로 아무거나 써봤음</a>
-		<span class="date">2024-01-01</span></li>
+		<c:forEach var="board" items="${recentFreeBoard}">
+		<li><a href="/board/view/getBoard/${board.boardNum }">${board.title }</a>
+		<span class="date">${board.regDate }</span></li>
+		</c:forEach>
 	</ul>
 </div>
 </div>
