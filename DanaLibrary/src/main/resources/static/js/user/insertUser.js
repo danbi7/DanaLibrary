@@ -25,6 +25,7 @@ let insertUser = {
 		$("#btn-numCheck").on("click", () => {
 			_this.verifyCode();
 		});
+
 	},
 
 	insertUser: function() {

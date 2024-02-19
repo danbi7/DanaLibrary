@@ -55,9 +55,9 @@
 
 		</table>
 	</div>
+      <script src="/js/admin/deleteUser.js"></script>
 
 </body>
 
 </html>
-      <script src="/js/admin/deleteUser.js"></script>
 
