@@ -44,11 +44,11 @@ let insertUser = {
 		}
 
 		else if (_this.checkEmail != 1) {
-			alert("이미 가입된 이메일입니다.");
+			alert("이메일 인증은 필수입니다.");
 			return;
 		}
 		else if (_this.checkNum != 1) {
-			alert("이메일 인증은 필수입니다.");
+			alert("이메일 인증을 완료해주세요.");
 			return;
 		}
 
