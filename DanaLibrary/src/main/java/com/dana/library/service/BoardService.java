@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.dana.library.domain.Board;
 import com.dana.library.domain.Category;
 import com.dana.library.domain.Likes;
-import com.dana.library.domain.Rent;
 import com.dana.library.domain.User;
 import com.dana.library.persistence.BoardRepository;
 import com.dana.library.persistence.LikesRepository;
@@ -48,7 +47,7 @@ public class BoardService {
 		
 		@Transactional(readOnly = true)
 		public Page<Board> getBoardList(Category category, String title,Pageable pageable) {
-			return boardRepository.findByCategoryIsAndTitleContaining(category, title,pageable);
+			return boardRepository.findByCategoryIsAndTitleContaining(category, title, pageable);
 		}
 
 	@Transactional
@@ -107,5 +106,16 @@ public class BoardService {
 	public List<Board> getBoardListDESC() {
 		List<Board> boardList = boardRepository.findAll(Sort.by(Sort.Direction.DESC, "boardNum"));
 		return boardList;
+	}
+
+	@Transactional
+	public List<Board> getRecentNoticeBoard() {
+		List<Board> recentNoticeBoard = boardRepository.findTop5ByCategoryOrderByBoardNumDesc(Category.NOTICE);		
+		return recentNoticeBoard;
+	}
+	
+	public List<Board> getRecentFreeBoard(){
+		List<Board> recentFreeBoard = boardRepository.findTop5ByCategoryNotOrderByBoardNumDesc(Category.NOTICE);
+		return recentFreeBoard;
 	}
 }

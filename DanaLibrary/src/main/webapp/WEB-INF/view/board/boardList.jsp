@@ -14,7 +14,7 @@
 <img src="/image/icon/icon-board.png"><h5><strong>열린 마당</strong></h5></div>
 
   <div class="col-md-6 text-center">
-<form action="/board/view/getBoardList">
+<form action="/public/board/view/getBoardList">
     <div class="d-flex">
       <div class="dropdown">
     <select name="boardCategory" class="btn btn-outline-primary dropdown-toggle" aria-label="Dropdown" id="category1" style="height: 100%">

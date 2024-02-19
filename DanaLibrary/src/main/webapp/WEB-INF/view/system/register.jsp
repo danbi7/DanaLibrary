@@ -83,7 +83,7 @@
 										class="form-select" id="emailDomain" name="emailDomain">
 										<option value="@naver.com">naver.com</option>
 										<option value="@gmail.com">gmail.com</option>
-										<option value="@hanmai.net">hanmai.net</option>
+										<option value="@hanmail.net">hanmail.net</option>
 										<option value="custom">직접 입력</option>
 
 

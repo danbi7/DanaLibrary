@@ -17,6 +17,7 @@ import com.dana.library.domain.User;
 import com.dana.library.dto.ResponseDTO;
 import com.dana.library.dto.UserDTO;
 import com.dana.library.dto.UseridDTO;
+import com.dana.library.service.BoardService;
 import com.dana.library.service.RentService;
 import com.dana.library.service.UserService;
 
@@ -34,10 +35,15 @@ public class UserController {
 	
 	@Autowired
 	private RentService rentService;
+	
+	@Autowired
+	private BoardService boardService;
 
 	// 메인 페이지
 	@GetMapping({ "", "/" })
-	public String main() {
+	public String main(Model model) {
+		model.addAttribute("recentNoticeBoard", boardService.getRecentNoticeBoard());
+		model.addAttribute("recentFreeBoard", boardService.getRecentFreeBoard());
 		return "main";
 	}
 	
