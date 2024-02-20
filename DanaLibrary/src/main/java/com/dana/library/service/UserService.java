@@ -114,5 +114,12 @@ public class UserService {
 		editUser.setEmail(user.getEmail());
 		userRepository.save(editUser);
 	}
+	
+	//이메일 중복 여부
+	@Transactional
+	public boolean isDuplicateEmail(String eamil) {
+		Optional<User> user = userRepository.findByEmail(eamil);
+		return user.isPresent();
+	}
 
 }

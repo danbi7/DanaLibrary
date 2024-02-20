@@ -157,6 +157,7 @@ public class AdminController {
 		return "admin/addBook";
 	}
 	
+	//신규 도서 추가
 	@PostMapping("/admin/addBook")
 	public @ResponseBody ResponseDTO<?> addBook(@RequestParam("title") String title,
 	        @RequestParam("author") String author,

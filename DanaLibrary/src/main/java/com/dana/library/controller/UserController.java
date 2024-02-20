@@ -195,13 +195,24 @@ public class UserController {
 	@ResponseBody
 	public ResponseDTO<?> verifyCode(@RequestParam String enteredCode, HttpSession session) {
 	    String savedCode = (String) session.getAttribute("checkNum");
+	    session.removeAttribute("checkNum");
 	    
 	    if (savedCode != null && enteredCode.equals(savedCode)) {
 	        // 인증번호 일치하면 비밀번호 변경 페이지로 리다이렉트 또는 성공 응답
 	        return new ResponseDTO<>(HttpStatus.OK.value(), "인증 성공");
 	    } else {
 	        // 인증번호 불일치 또는 세션에 데이터가 없는 경우 실패 응답
-	        return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "인증 실패");
+	        return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "이메일 인증을 다시 진행해주세요");
 	    }
+	}
+	
+	@PostMapping("/user/checkEmail")
+	public @ResponseBody ResponseDTO<?> checkEmail(@RequestParam String email){
+		if(userService.isDuplicateEmail(email)) {
+			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "이미 가입된 이메일입니다");
+		}
+		else {
+			return new ResponseDTO<>(HttpStatus.OK.value(), "사용 가능한 이메일입니다.");
+		}
 	}
 }
