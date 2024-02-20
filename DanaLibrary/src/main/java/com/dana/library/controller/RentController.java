@@ -61,6 +61,7 @@ public class RentController {
 			rent.setRentStatus(Status.ACTIVE);
 			LocalDate dueDate = LocalDate.now().plusDays(7);
 			rent.setDueDate(dueDate);
+			rentService.updateRent(rent);
 			
 			return new ResponseDTO<>(HttpStatus.OK.value(), "도서 대출 완료");
 		
