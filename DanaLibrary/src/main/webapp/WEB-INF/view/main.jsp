@@ -19,11 +19,7 @@
   <!-- The slideshow/carousel -->
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="/image/example.png" alt="Los Angeles" class="d-block" style="width:100%; height: 350px;">
-      <div class="carousel-caption">
-        <h3>Los Angeles</h3>
-        <p>We had such a great time in LA!</p>
-      </div>
+      <img src="/image/slide-1.png" alt="Los Angeles" class="d-block" style="width:100%; height: 350px;">
     </div>
     <div class="carousel-item">
       <img src="/image/image1.jpeg" alt="Chicago" class="d-block" style="width:100%; height: 350px;">
