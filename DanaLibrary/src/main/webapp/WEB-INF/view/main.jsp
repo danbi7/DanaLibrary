@@ -22,18 +22,10 @@
       <img src="/image/slide-1.png" alt="Los Angeles" class="d-block" style="width:100%; height: 350px;">
     </div>
     <div class="carousel-item">
-      <img src="/image/image1.jpeg" alt="Chicago" class="d-block" style="width:100%; height: 350px;">
-      <div class="carousel-caption">
-        <h3>Chicago</h3>
-        <p>Thank you, Chicago!</p>
-      </div> 
+      <img src="/image/slide-2.png" alt="Chicago" class="d-block" style="width:100%; height: 350px;">
     </div>
     <div class="carousel-item">
-      <img src="/image/image1.jpeg" alt="New York" class="d-block" style="width:100%; height: 350px;">
-      <div class="carousel-caption">
-        <h3>New York</h3>
-        <p>We love the Big Apple!</p>
-      </div>  
+      <img src="/image/slide-3.png" alt="New York" class="d-block" style="width:100%; height: 350px;">
     </div>
   </div>
   

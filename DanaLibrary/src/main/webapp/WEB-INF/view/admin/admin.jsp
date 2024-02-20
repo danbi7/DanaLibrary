@@ -130,8 +130,6 @@ width:20px;
 
 				<div id="home" class="tabcontent">
 				
-					
-					
 				</div>
 
 				<div id="userManage" class="tabcontent">

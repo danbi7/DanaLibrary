@@ -29,8 +29,6 @@
 					게시글</button>
 			</div>
 
-				<div id="home" class="tabcontent"></div>
-
 				<div id="currentRent" class="tabcontent">
 					<%@ include file="myPage/currentRent.jsp"%>
 				</div>
