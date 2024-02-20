@@ -54,5 +54,27 @@ public class InterestedBookService {
 		List<Interested_book> interestedBookList = interestedBookRepository.findByUser(user);
 		return interestedBookList;
 	}
+	
+	@Transactional(readOnly = true)
+	public Interested_book getInterestedBook(Book book, User loginUser) {
+		Interested_book interested_Book = interestedBookRepository.findByUserAndBook(loginUser, book).orElseGet(() -> {
+			return new Interested_book();
+		});
+		return interested_Book;
+	}
+	
+	@Transactional
+	public void updateInterest(Interested_book interestBook) {
+		interestedBookRepository.save(interestBook);
+	}
 
+	@Transactional
+	public void deleteInterest(Book book) {
+		interestedBookRepository.deleteByBook(book);
+	}
+	
+	@Transactional(readOnly = true)
+	   public List<Interested_book> getInterestList(Book book){
+	      return interestedBookRepository.findByBook(book);
+	   }
 }

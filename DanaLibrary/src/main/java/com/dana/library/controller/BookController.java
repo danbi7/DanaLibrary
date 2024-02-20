@@ -29,7 +29,6 @@ import com.dana.library.domain.User;
 import com.dana.library.dto.ResponseDTO;
 import com.dana.library.service.BookService;
 
-import com.dana.library.service.InterestService;
 import com.dana.library.service.InterestedBookService;
 import com.dana.library.service.RentService;
 import com.dana.library.service.ReserveService;
@@ -54,12 +53,6 @@ public class BookController {
 
 	@Autowired
 	private InterestedBookService interestedBookService;
-	
-//	@Autowired
-//	private CacheService cacheService;
-	
-	@Autowired
-	private InterestService interestService;
 	
 	// 도서 상세보기
 	@GetMapping("/book/getBook/{bookNum}")
@@ -88,11 +81,11 @@ public class BookController {
 		model.addAttribute("bookStatus", bookStatus);
 		
 		//관심도서
-		Interested_book interestedBook = interestService.getInterestedBook(gettedBook, loginUser);
+		Interested_book interestedBook = interestedBookService.getInterestedBook(gettedBook, loginUser);
 		model.addAttribute("interestedBook", interestedBook);
 		
 		//총 관심도서 수
-		int interestCount = interestService.getInterestList().size();
+		int interestCount = interestedBookService.getInterestList(gettedBook).size();
 		model.addAttribute("interestCount", interestCount);
 		System.out.println(interestCount);
 		
@@ -198,13 +191,13 @@ public class BookController {
 		interestBook.setBook(book);
 		interestBook.setUser(loginUser);
 		
-		interestService.updateInterest(interestBook);
+		interestedBookService.updateInterest(interestBook);
 		return new ResponseDTO<>(HttpStatus.OK.value(),"관심도서 추가하기");
 	}
 	
 	@DeleteMapping("/book/cancelInterest")
 	public @ResponseBody ResponseDTO<?> cancelInterest(@RequestBody Book book) {
-		interestService.deleteInterest(book);
+		interestedBookService.deleteInterest(book);
 		return new ResponseDTO<>(HttpStatus.OK.value(),"관심도서 삭제하기");
 	}
 
