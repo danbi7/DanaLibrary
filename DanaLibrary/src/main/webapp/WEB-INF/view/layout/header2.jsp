@@ -8,7 +8,7 @@
 		<ul class="nav header-nav-item secondNav">
 			<li class="nav-item"><a href="/view/libraryInfo" class="nav-link">도서관 소개</a></li>
 			<li class="nav-item"><a href="/public/book/view/getBookList" class="nav-link">전체 도서 목록</a></li>
-			<li class="nav-item"><a href="/public/book/view/getBookList" class="nav-link">인기 도서 목록</a></li>
+			<li class="nav-item"><a href="/public/book/view/getPopularBookList" class="nav-link">인기 도서 목록</a></li>
 			<c:if test="${loginUser.userStatus ne Status.ADMIN }">
 			<li class="nav-item"><a href="/view/myPage" class="nav-link">나의 도서관</a></li></c:if>
 			<c:if test="${loginUser.userStatus eq Status.ADMIN }">
