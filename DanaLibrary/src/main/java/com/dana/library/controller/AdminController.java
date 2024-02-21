@@ -70,7 +70,7 @@ public class AdminController {
 	@Autowired
 	private ModelMapper modelMapper;
   
-  @Autowired
+	@Autowired
 	private BoardService boardService;
 
 
@@ -85,10 +85,13 @@ public class AdminController {
 		
 		List<Board> boardList = boardService.getBoardListDESC();
 		
+		List<Book_request> bookRequest = bookRequestService.getBookRequestList();
+		
 		model.addAttribute("bookList", bookList);
 		model.addAttribute("userList", userList);
 		model.addAttribute("rentList", rentList);
 		model.addAttribute("boardList", boardList);
+		model.addAttribute("bookRequest", bookRequest);
 		return "admin/admin";
 	}
 
