@@ -38,7 +38,8 @@ public class RentController {
 	
 	@Autowired
 	private NoticeService noticeService;
-
+	
+	//대출하기
 	@PostMapping("/rent/rentBook/{bookNum}")
 	public @ResponseBody ResponseDTO<?> rentBook(@PathVariable int bookNum, HttpSession session) {
 		System.out.println("rentBook 실행");
@@ -61,9 +62,11 @@ public class RentController {
 			rent.setRentStatus(Status.ACTIVE);
 			LocalDate dueDate = LocalDate.now().plusDays(7);
 			rent.setDueDate(dueDate);
+			rentService.updateRent(rent);
+			gettedBook.setRentCount(gettedBook.getRentCount()+1);
+			bookService.updateBook(gettedBook);
 			
 			return new ResponseDTO<>(HttpStatus.OK.value(), "도서 대출 완료");
-		
 		}
 
 	}
