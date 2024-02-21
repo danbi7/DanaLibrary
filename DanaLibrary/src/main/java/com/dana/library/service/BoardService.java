@@ -114,8 +114,15 @@ public class BoardService {
 		return recentNoticeBoard;
 	}
 	
+	@Transactional
 	public List<Board> getRecentFreeBoard(){
 		List<Board> recentFreeBoard = boardRepository.findTop5ByCategoryNotOrderByBoardNumDesc(Category.NOTICE);
 		return recentFreeBoard;
+	}
+
+	@Transactional
+	public List<Board> getMyBoardList(User loginUser) {
+		List<Board> myBoard = boardRepository.findByUser(loginUser);
+		return myBoard;
 	}
 }

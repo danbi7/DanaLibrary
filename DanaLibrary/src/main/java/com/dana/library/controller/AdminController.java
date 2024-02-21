@@ -109,6 +109,9 @@ public class AdminController {
 		
 		List<Book_request> bookRequestList = bookRequestService.getBookRequestList();
 		model.addAttribute("bookRequestList", bookRequestList);
+		
+		List<Board> myBoardList = boardService.getMyBoardList(loginUser);
+		model.addAttribute("myBoardList", myBoardList);
 		return "admin/myPage";
 	}
 

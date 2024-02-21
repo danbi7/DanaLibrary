@@ -70,4 +70,7 @@ public class Board {
 	@OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
 	private List<Comment> commentList;
 	
+	@OneToMany(mappedBy = "boardNum", cascade = CascadeType.REMOVE)
+	private List<Likes> likesList;
+	
 }

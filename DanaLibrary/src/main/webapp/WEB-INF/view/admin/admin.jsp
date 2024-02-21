@@ -129,8 +129,6 @@ width:20px;
 				</div>
 
 				<div id="home" class="tabcontent">
-				
-					<p>dd<p>
 					
 				</div>
 
