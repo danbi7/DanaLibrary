@@ -4,7 +4,7 @@
 <%@ include file="./layout/header1.jsp" %>
 <%@ include file="./layout/header2.jsp" %>
 	
-<div class="container mt-3">
+<div class="container mb-3">
 
 <!-- Carousel -->
 <div id="demo" class="carousel slide" data-bs-ride="carousel">
@@ -38,9 +38,10 @@
   </button>
 </div>
 
-<div class="container-main">
+<div class="container-main my-4">
 <div class="notice-box">
-	<h3 class="title blue-line">최근 공지글</h3>
+
+	<h3 class="title blue-line"><a href="/public/board/view/getBoardList">공지글</a></h3>
 	<ul class="noticeList">
         <c:forEach var="board" items="${recentNoticeBoard}">
 		<li><a href="/board/view/getBoard/${board.boardNum }">${board.title }</a>
@@ -49,7 +50,7 @@
 	</ul>
 </div>
 <div class="notice-box">
-	<h3 class="title blue-line">최근 게시글</h3>
+	<h3 class="title blue-line"><a href="/public/board/view/getBoardList">게시글</a></h3>
 	<ul class="noticeList">
 		<c:forEach var="board" items="${recentFreeBoard}">
 		<li><a href="/board/view/getBoard/${board.boardNum }">${board.title }</a>
@@ -59,67 +60,58 @@
 </div>
 </div>
 
-<div class="container-main">
-<h3>" 다나 도서관의 추천 도서 목록 "</h3>
-</div>
+<div class="my-4 overflow-auto">
+<h3 class="text-center">" 다나 도서관의 추천 도서 목록 "</h3>
 
-<div class="container-main">
-<div class="rec-book">
-  <img src="/image/book3.png" alt="Card image cap">
-  <p>올해의 추천 도서 : <br><strong>물고기는 존재하지 않는다</strong></p> 
+<div class="container-main my-4">
+<div class="book-container">
+<img src="/image/book/fish.jpg">
+	<p class="card-text"><strong>물고기는 존재하지 않는다.</strong></p>
 </div>
-
-<div class="rec-book">
-  <img src="/image/book3.png" alt="Card image cap">
-  <p>올해의 추천 도서 : <br><strong>물고기는 존재하지 않는다</strong></p>
+<div class="book-container">
+<img src="/image/book/fish.jpg">
+	<p class="card-text"><strong>물고기는 존재하지 않는다.</strong></p>
 </div>
-
-<div class="rec-book">
-  <img src="/image/book1.png" alt="Card image cap">
-    <p class="card-text">이번달의 신간 도서 : <br><strong>종의 기원</strong></p>
+<div class="book-container">
+<img src="/image/book/fish.jpg">
+	<p class="card-text"><strong>물고기는 존재하지 않는다.</strong></p>
 </div>
-
-<div class="rec-book">
-  <img src="/image/book2.png" alt="Card image cap">
-    <p class="card-text">다나 도서관의 추천 도서 : <br><strong>이기적 유전자</strong></p>
+<div class="book-container">
+<img src="/image/book/fish.jpg">
+	<p class="card-text"><strong>물고기는 존재하지 않는다.</strong></p>
 </div>
-
-<div class="rec-book">
-  <img src="/image/book4.png" alt="Card image cap">
-    <p class="card-text">주목할만한 도서 : <br><strong>데일 카네기-인간관계론</strong></p>
+<div class="book-container">
+<img src="/image/book/fish.jpg">
+	<p class="card-text"><strong>물고기는 존재하지 않는다.</strong></p>
 </div>
 </div>
 
-<div class="container-main">
-<div class="rec-book">
-  <img src="/image/book3.png" alt="Card image cap">
-  <p>올해의 추천 도서 : <br><strong>물고기는 존재하지 않는다</strong></p> 
+<div class="container-main my-4">
+<div class="book-container">
+<img src="/image/book/fish.jpg">
+	<p class="card-text"><strong>물고기는 존재하지 않는다.</strong></p>
 </div>
-
-<div class="rec-book">
-  <img src="/image/book3.png" alt="Card image cap">
-  <p>올해의 추천 도서 : <br><strong>물고기는 존재하지 않는다</strong></p>
+<div class="book-container">
+<img src="/image/book/fish.jpg">
+	<p class="card-text"><strong>물고기는 존재하지 않는다.</strong></p>
 </div>
-
-<div class="rec-book">
-  <img src="/image/book1.png" alt="Card image cap">
-    <p class="card-text">이번달의 신간 도서 : <br><strong>종의 기원</strong></p>
+<div class="book-container">
+<img src="/image/book/fish.jpg">
+	<p class="card-text"><strong>물고기는 존재하지 않는다.</strong></p>
 </div>
-
-<div class="rec-book">
-  <img src="/image/book2.png" alt="Card image cap">
-    <p class="card-text">다나 도서관의 추천 도서 : <br><strong>이기적 유전자</strong></p>
+<div class="book-container">
+<img src="/image/book/fish.jpg">
+	<p class="card-text"><strong>물고기는 존재하지 않는다.</strong></p>
 </div>
-
-<div class="rec-book">
-  <img src="/image/book4.png" alt="Card image cap">
-    <p class="card-text">주목할만한 도서 : <br><strong>데일 카네기-인간관계론</strong></p>
+<div class="book-container">
+<img src="/image/book/fish.jpg">
+	<p class="card-text"><strong>물고기는 존재하지 않는다.</strong></p>
+</div>
 </div>
 </div>
 
-<div class="container-main banner">
+<div class="container-main justify-content-center my-4">
 <img alt="광고" src="/image/advertisement.png">
 </div>
-
 </div>
 <%@ include file="./layout/footer.jsp" %>
