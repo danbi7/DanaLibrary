@@ -1,9 +1,12 @@
 package com.dana.library.controller;
 
 
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -188,6 +191,76 @@ public class BookController {
 	    model.addAttribute("bookStatusMap", bookStatusMap);
 
 	    return "book/bookList";
+	}
+	
+	//인기 도서순으로 getBookList
+	@GetMapping("/public/book/view/getPopularBookList")
+	public String getPopularBookList(@RequestParam(required = false) String category, @RequestParam(required = false) String bookTitle, Model model, HttpSession session, @PageableDefault(size=5,sort="bookNum",direction = Sort.Direction.DESC)Pageable pageable) {
+		//List<Book> bookList = null;
+		Page<Book> bookList = bookService.getBookListOrderByRentCount(pageable);
+		for (Book book : bookList.getContent()) {
+		    System.out.println("Title: " + book.getTitle() + ", Rent Count: " + book.getRentCount());
+		}
+		if(category == null && bookTitle == null) {
+			bookList = bookService.getBookListOrderByRentCount(pageable);
+			//System.out.println(bookList.size());
+		}else if(category.equals("전체") && bookTitle != null) {
+			bookList = bookService.searchBookByTitleRentCount(bookTitle,pageable);
+			//System.out.println(bookList.size());
+		}else if(!category.equals("전체") && bookTitle == null) {
+			bookList = bookService.searchBookByCategoryRentCount(category,pageable);
+			//System.out.println(bookList.size());
+		}else if(!category.equals("전체") && bookTitle != null) {
+			bookList = bookService.searchBookListRentCount(category, bookTitle,pageable);
+			//System.out.println(bookList.size());
+		}
+		
+		System.out.println("-------------------------인기도서-------------------------");
+		for (Book book : bookList.getContent()) {
+		    System.out.println("Title: " + book.getTitle() + ", Rent Count: " + book.getRentCount());
+		}
+		model.addAttribute("bookList", bookList);
+		
+		int nowPage = bookList.getPageable().getPageNumber()+1; //0부터 시작
+		int startPage = 1;
+		int endPage = bookList.getTotalPages();
+		
+		model.addAttribute("nowPage", nowPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		
+		System.out.println(nowPage);
+		System.out.println(startPage);
+		System.out.println(endPage);
+		
+		User loginUser = (User)session.getAttribute("loginUser");
+		
+		Map<Book, Map<String, Object>> bookStatusMap = new LinkedHashMap<>();
+
+		for (Book book : bookList) {
+		    Map<String, Object> statusInfo = new HashMap<>();
+		    
+		    int listStatus;
+		    if (reserveService.isReservedByUser(loginUser, book)) {
+		        listStatus = 1; // 내가 예약함->예약취소
+		    } else if (rentService.isRentedByUser(loginUser, book)) {
+		        listStatus = 2; // 내가 대출함->반납
+		    } else if (rentService.isRentedBySomeone(book)) {
+		        listStatus = 3; // 누군가 대출함->예약하기
+		    } else {
+		        listStatus = 4; // 대출하기
+		    }
+		    statusInfo.put("status", listStatus);
+		    
+		    boolean interested = interestedBookService.isInterestedByUser(loginUser, book);
+		    statusInfo.put("interested", interested);
+		    
+		    bookStatusMap.put(book, statusInfo);
+		}
+
+		model.addAttribute("bookStatusMap", bookStatusMap);
+
+	    return "book/popularBookList";
 	}
 	
 	@PostMapping("/book/addInterest")
