@@ -8,7 +8,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum Category {
 
-	QUESTION("질문글"), NOTICE("공지사항"), FREE("자유글"), REQUEST("도서신청"),TOTAL("전체글");
+	TOTAL("전체글"), NOTICE("공지사항"), QUESTION("질문글"), FREE("자유글");
 	
 	private String category;
 
