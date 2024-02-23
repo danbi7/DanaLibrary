@@ -32,7 +32,6 @@
 </div>
 </c:if>
 </c:forEach>
-</c:if>
-
 </div>
+</c:if>
 </div>

@@ -6,38 +6,7 @@
 <%@ include file="../layout/header1.jsp"%>
 <%@ include file="../layout/header2.jsp"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>getBook</title>
-
-<style>
-.comment-meta {
-	font-size: 12px;
-	color: #777;
-}
-
-.comment-container {
-	border-bottom: 1px solid #ddd; /* 선 스타일 추가 */
-	padding-bottom: 15px; /* 선과 댓글 사이의 간격 조절 */
-	margin-bottom: 10px;
-	text-align: left; /* 댓글을 왼쪽으로 정렬 */
-	margin-top: 10px; /* 댓글을 아래로 내리는 여백 조절 */
-}
-
-.comment-content {
-	font-size: 14px;
-	color: #333;
-	margin-bottom: 5px;
-	margin-top: 15px;
-}
-</style>
-</head>
-
-<body>
-
-	<div class="container main">
+	<div class="container mt-4">
 
 		<div
 			style="width: 150px; height: 150px; float: left; margin-left: 200px;">
@@ -114,40 +83,36 @@
 				</tr>
 			</table>
 		</div>
+		</div>
 
-		<br> <br> <br> <br>
-
-		<div class="content-container" style="width: 70%; margin-left: 200px;">
-			<label for="content">도서 후기 등록하기</label> <input type="text"
-				id="content" name="content" class="form-control">
-			<button class="btn btn-primary" id="btn-review2">후기 등록</button>
-
-			<br> <br> <br> <br>
+<div class="container" style="margin-left: 250px; margin-top: 100px">
+			<div class="row" style="width: 75%;">
+			<label for="content">도서 후기 등록하기</label>
+			<div class="col-10" style="padding-right: 2px">
+			<input type="text"
+				id="content" name="content" class="form-control"></div>
+				<div class="col-2" style="padding-left: 2px">
+			<button class="btn btn-outline-primary" id="btn-review2">후기 등록</button></div></div>
 
 			<c:forEach items="${reviewList }" var="views">
-				<div class="comment-container">
-					<div class="comment-meta">
+			<hr class="my-4" style="width: 72%">
+				<div class="row" style="width: 70%;">
+					<div class="comment-meta col-11">
 						작성자: <strong>${views.user.userid}</strong> | 작성일: ${views.regDate}
 					</div>
-					<div class="comment-content">${views.content }</div>
-
-
 					<c:if test="${views.user.userid eq loginUser.userid }">
-						<button type="button" class="btn-deleteReview btn btn-primary"
-							data-reviewnum="${views.reviewNum }">후기 삭제</button>
+						<a href="#" class="comment-meta btn-deleteReview col-1"
+							data-reviewnum="${views.reviewNum }">삭제</a>
 					</c:if>
+					<div class="col-12">${views.content }</div>
 
 
 				</div>
 			</c:forEach>
-		</div>
-	</div>
-
+</div>
 	<script src="/js/book/interestBook.js"></script>
 	<script src="/js/book/book1.js"></script>
 
 
 
 	<%@ include file="../layout/footer.jsp"%>
-</body>
-</html>
