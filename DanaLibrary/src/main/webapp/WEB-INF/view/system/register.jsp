@@ -34,7 +34,7 @@
 
 							<div class="col-2" style="padding-left: 0px">
 								<button type="button" class="btn btn-secondary" id="btn-idCheck"
-									style="height: 58px; border-top-left-radius: 0px; border-bottom-left-radius: 0px">중복
+									style="height: 58px; border-top-left-radius: 0px; border-bottom-left-radius: 0px; font-size: smaller;">중복
 									확인</button>
 							</div>
 
@@ -75,32 +75,41 @@
 								<span id="result-username-message"></span>
 							</div>
 
-							<div class="col-12">
-								<div class="input-group mb-3">
-									<input type="text" class="form-control" name="emailId"
-										id="emailId" placeholder="아이디"> <label
-										class="input-group-text" for="emailDropdown">@</label> <select
-										class="form-select" id="emailDomain" name="emailDomain">
-										<option value="@naver.com">naver.com</option>
-										<option value="@gmail.com">gmail.com</option>
-										<option value="@hanmai.net">hanmai.net</option>
-										<option value="custom">직접 입력</option>
-
-
-									</select>
-									<div class="col-12" id="customEmail-box" style="display: none; height: 37px">
-										<div class="input-group mb-3">
-											<input type="email" class="form-control" name="customEmail"
-												id="customEmail" placeholder="ex) abc123@naver.com"
-												style="display: none;">
-										</div>
-									</div>
+							<div class="col-10" style="padding-right: 0px">
+								<div class="form-floating mb-3">
+									<input type="email" class="form-control" name="email"
+										id="email"
+										style="border-top-right-radius: 0px; border-bottom-right-radius: 0px">
+									<label for="이메일" class="form-label">이메일</label>
 
 								</div>
-								
+							</div>
+
+							<div class="col-2" style="padding-left: 0px">
+								<button type="button" class="btn btn-secondary" id="btn-send"
+									style="height: 58px; border-top-left-radius: 0px; border-bottom-left-radius: 0px">
+									인증</button>
+							</div>
+							
 							<div class="result">
 								<span id="result-email-message"></span>
 							</div>
+							
+							
+							<div class="col-10" style="padding-right: 0px">
+								<div class="form-floating mb-3">
+									<input type="text" class="form-control" name="checkNum"
+										id="checkNum"
+										style="border-top-right-radius: 0px; border-bottom-right-radius: 0px">
+									<label for="인증번호" class="form-label">인증번호</label>
+
+								</div>
+							</div>
+
+							<div class="col-2" style="padding-left: 0px">
+								<button type="button" class="btn btn-secondary" id="btn-numCheck"
+									style="height: 58px; border-top-left-radius: 0px; border-bottom-left-radius: 0px">
+									확인</button>
 							</div>
 
 							<div class="col-12">
@@ -109,8 +118,6 @@
 										type="date" class="form-control" name="birthDate"
 
 										id="birthDate" placeholder="YYMMDD">
-
-
 								</div>
 							</div>
 
@@ -137,10 +144,10 @@
 										class="link-secondary text-decoration-none">로그인</a> <a
 										href="/user/view/findUserId"
 										class="link-secondary text-decoration-none">아이디 찾기</a>
-
 								</div>
 							</div>
 						</div>
+						
 					</div>
 				</div>
 			</div>
@@ -148,22 +155,6 @@
 	</div>
 </section>
 
-
-<script>
-	$(document).ready(function() {
-		$("#emailDomain").change(function() {
-			if ($(this).val() === 'custom') {
-				$("#customEmail-box").show();
-				$("#customEmail").show();
-				$("#emailId").prop('disabled', true);
-			} else {
-				$("#customEmail").hide();
-				$("#emailId").prop('disabled', false);
-			}
-		});
-	});
-
-</script>
 <script src="/js/user/insertUser.js"></script>
 
 <%@ include file="../layout/footer.jsp"%>

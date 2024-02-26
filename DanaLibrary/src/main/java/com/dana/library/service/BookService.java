@@ -40,5 +40,39 @@ public class BookService {
 	public Page<Book> searchBookByTitle(String title,Pageable pageable) {
 		return bookRepository.findByTitleContaining(title,pageable);
 	}
-
+		
+	@Transactional
+	public void insertBook(Book book) {
+		bookRepository.save(book);
+	}
+	
+	//대출 횟수 순으로 getBookList
+	@Transactional
+	public Page<Book> getBookListOrderByRentCount(Pageable pageable){
+		return bookRepository.findAllByOrderByRentCountDesc(pageable);
+	}
+	
+	//대출 횟수 순으로 제목으로 검색
+	@Transactional
+	public Page<Book> searchBookByTitleRentCount(String bookTitle, Pageable pageable) {
+        return bookRepository.findByTitleContainingOrderByRentCountDesc(bookTitle, pageable);
+    }
+	
+	//대출 횟수 순으로 분류별 검색
+	@Transactional
+	public Page<Book> searchBookByCategoryRentCount(String category, Pageable pageable) {
+        return bookRepository.findByCategoryOrderByRentCountDesc(category, pageable);
+    }
+	
+	@Transactional
+	public Page<Book> searchBookListRentCount(String category, String bookTitle, Pageable pageable) {
+        return bookRepository.findByCategoryAndTitleContainingOrderByRentCountDesc(category, bookTitle, pageable);
+    }
+	
+	@Transactional
+	public void updateBook(Book book) {
+		bookRepository.save(book);
+	}
+	
+	
 }

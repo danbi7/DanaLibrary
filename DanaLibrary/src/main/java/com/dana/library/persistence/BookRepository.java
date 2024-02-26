@@ -1,6 +1,5 @@
 package com.dana.library.persistence;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -21,4 +20,15 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
 
 	Page<Book> findByTitleContaining(String title, Pageable pageable);
 	
+	
+    Page<Book> findAllByOrderByRentCountAsc(Pageable pageable);
+    
+    Page<Book> findAllByOrderByRentCountDesc(Pageable pageable);
+
+    Page<Book> findByTitleContainingOrderByRentCountDesc(String title, Pageable pageable);
+
+    Page<Book> findByCategoryOrderByRentCountDesc(String category, Pageable pageable);
+
+    Page<Book> findByCategoryAndTitleContainingOrderByRentCountDesc(String category, String title, Pageable pageable);
+
 }

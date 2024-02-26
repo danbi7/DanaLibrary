@@ -37,7 +37,8 @@ public class ReserveController {
 			reserve.setUser(loginUser);
 			
 			reserveService.reserveBook(reserve);
-			return new ResponseDTO<>(HttpStatus.OK.value(), "예약이 완료되었습니다.");
+			int turn = reserveService.reserveTurn(bookNum);
+			return new ResponseDTO<>(HttpStatus.OK.value(), "도서 예약 완료. " + turn +"번째 예약자 입니다.");
 		}
 	}
 	
@@ -49,7 +50,7 @@ public class ReserveController {
 		reserve.setUser(loginUser);
 		System.out.println("예약 취소");
 		reserveService.cancelReservation(reserve);
-		return new ResponseDTO<>(HttpStatus.OK.value(), "예약 취소 완료");
+		return new ResponseDTO<>(HttpStatus.OK.value(), "도서 예약 취소");
 	}
 
 }

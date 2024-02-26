@@ -1,0 +1,46 @@
+hr {
+	background-color: #205295;
+	border-top: 2px solid #205295;
+	opacity: 100%;
+}
+
+h4 {
+	display: block;
+	font-size: 1.17em;
+	margin-block-start: 1em;
+	margin-block-end: 1em;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
+	font-weight: bold;
+}
+
+.container-left p {
+	font-size: 16px;
+	margin: 10px;
+	line-height: 2;
+}
+
+.container-right img {
+	width: 608px;
+	border-radius: 5px;
+	border: 2px solid #EEEEEE;
+}
+
+.container-box {
+	display: flex;
+}
+
+.container-left {
+	margin-left: 40px;
+	flex: 1;
+}
+
+.container-right {
+	margin-right: 40px;
+	flex: 1;
+}
+
+.control-button{
+	color: black;
+	font-size: 30px;
+}

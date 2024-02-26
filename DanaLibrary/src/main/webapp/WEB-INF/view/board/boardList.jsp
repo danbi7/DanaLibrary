@@ -7,14 +7,14 @@
 <%@ include file="../layout/header2.jsp" %>
 
 
-<div class="container-boardList mt-4">
+<div class="container-boardList mt-4" align="center">
 <div class="row justify-content-between">
 
 <div class="boardList-icon text-center">
 <img src="/image/icon/icon-board.png"><h5><strong>열린 마당</strong></h5></div>
 
   <div class="col-md-6 text-center">
-<form action="/board/view/getBoardList">
+<form action="/public/board/view/getBoardList">
     <div class="d-flex">
       <div class="dropdown">
     <select name="boardCategory" class="btn btn-outline-primary dropdown-toggle" aria-label="Dropdown" id="category1" style="height: 100%">
@@ -54,7 +54,8 @@
 	<c:forEach items="${boardList.content }" var="boardList">
 	<tr>
 		<td>${boardList.boardNum }</td>
-		<td><a href="/board/view/getBoard/${boardList.boardNum }">${boardList.title }</a></td>
+		<td style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><a class="btn-increase"
+               data-comment-num="${boardList.boardNum}">${boardList.title}</a></td>
 		<td>${boardList.user.userid }</td>
 		<td>${boardList.category.category }</td>
 		<td>${boardList.regDate }</td>
@@ -64,6 +65,11 @@
 	</c:forEach>
 	
   </table>
+  </div>
+  
+  <script src="/js/board/increaseViews.js"></script>
+  
+  <div class="mt-2">
 <c:choose>
 	<c:when test="${boardList.first }">
 		<a class="btn btn-secondary">이전</a>
@@ -76,7 +82,7 @@
 <c:forEach begin="${startPage }" end="${endPage }" var="i">
 <c:choose>
 <c:when test="${nowPage == i }">
-<a href="/public/board/view/getBoardList?page=${i-1}" class="btn">${i }!!!</a>
+<a href="/public/board/view/getBoardList?page=${i-1}" class="btn">${i }</a>
 </c:when>
 <c:otherwise>
 

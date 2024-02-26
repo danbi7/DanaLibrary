@@ -37,7 +37,6 @@ let userObject = {
 			if (response.status === 200) {
 				alert("회원 정보가 확인되었습니다.");
 				alert("이메일로 인증번호를 발송하였습니다.");
-
 				// 이메일 보내기
 				userObject.sendEmail(response.data);
 			} else {

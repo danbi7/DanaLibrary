@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.dana.library.domain.Status;
 import com.dana.library.domain.User;
 import com.dana.library.dto.ResponseDTO;
 import com.dana.library.dto.UserDTO;
 import com.dana.library.dto.UseridDTO;
+import com.dana.library.service.BoardService;
 import com.dana.library.service.RentService;
 import com.dana.library.service.UserService;
 
@@ -34,10 +36,15 @@ public class UserController {
 	
 	@Autowired
 	private RentService rentService;
+	
+	@Autowired
+	private BoardService boardService;
 
 	// 메인 페이지
 	@GetMapping({ "", "/" })
-	public String main() {
+	public String main(Model model) {
+		model.addAttribute("recentNoticeBoard", boardService.getRecentNoticeBoard());
+		model.addAttribute("recentFreeBoard", boardService.getRecentFreeBoard());
 		return "main";
 	}
 	
@@ -91,17 +98,20 @@ public class UserController {
 	@PostMapping("/user/login")
 	public @ResponseBody ResponseDTO<?> login(@RequestParam String input, @RequestParam String password,
 			HttpSession session) {
-		System.out.println("222" + input + password);
 		User findUser = userService.getUserByIdOrEmail(input);
 		if (findUser != null) {
-			if (password.equals(findUser.getPassword())) {
-				session.setAttribute("loginUser", findUser);
-				return new ResponseDTO<>(HttpStatus.OK.value(), findUser.getUsername() + "님, 환영합니다.");
-			} else {
-				return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "회원 정보가 일치하지 않습니다.");
+			if(findUser.getUserStatus().equals(Status.ACTIVE) || findUser.getUserStatus().equals(Status.ADMIN)) {
+				if (password.equals(findUser.getPassword())) {
+					session.setAttribute("loginUser", findUser);
+					return new ResponseDTO<>(HttpStatus.OK.value(), findUser.getUsername() + "님, 환영합니다.");
+				} else {
+					return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "회원 정보가 일치하지 않습니다.");
+				}
+			}else {
+				return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "로그인 전 관리자의 승인이 필요합니다.");
 			}
 		} else {
-			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "회원 존재하지 않음");
+			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "회원 정보가 존재하지 않습니다.");
 		}
 	}
 
@@ -189,13 +199,24 @@ public class UserController {
 	@ResponseBody
 	public ResponseDTO<?> verifyCode(@RequestParam String enteredCode, HttpSession session) {
 	    String savedCode = (String) session.getAttribute("checkNum");
+	    session.removeAttribute("checkNum");
 	    
 	    if (savedCode != null && enteredCode.equals(savedCode)) {
 	        // 인증번호 일치하면 비밀번호 변경 페이지로 리다이렉트 또는 성공 응답
 	        return new ResponseDTO<>(HttpStatus.OK.value(), "인증 성공");
 	    } else {
 	        // 인증번호 불일치 또는 세션에 데이터가 없는 경우 실패 응답
-	        return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "인증 실패");
+	        return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "이메일 인증을 다시 진행해주세요");
 	    }
+	}
+	
+	@PostMapping("/user/checkEmail")
+	public @ResponseBody ResponseDTO<?> checkEmail(@RequestParam String email){
+		if(userService.isDuplicateEmail(email)) {
+			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "이미 가입된 이메일입니다");
+		}
+		else {
+			return new ResponseDTO<>(HttpStatus.OK.value(), "사용 가능한 이메일입니다.");
+		}
 	}
 }

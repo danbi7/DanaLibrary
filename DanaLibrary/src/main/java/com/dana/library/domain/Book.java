@@ -48,5 +48,8 @@ public class Book {
 
 	@Column
 	private Date publicationDate;
+	
+	@Column(nullable = false, columnDefinition = "int default 0")
+	private int rentCount;
 
 }

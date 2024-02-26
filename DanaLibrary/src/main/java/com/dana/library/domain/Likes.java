@@ -1,5 +1,6 @@
 package com.dana.library.domain;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -27,7 +28,7 @@ public class Likes {
 	@JoinColumn(name = "userNum")
 	private User userNum;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "boardNum")
 	private Board boardNum;
 	

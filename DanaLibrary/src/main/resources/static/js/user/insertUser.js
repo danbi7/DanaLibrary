@@ -1,5 +1,7 @@
 let insertUser = {
 	status: 0,
+	checkEmail: 0,
+	checkNum: 0,
 
 	init: function() {
 		let _this = this;
@@ -16,29 +18,13 @@ let insertUser = {
 			_this.idCheck();
 		});
 
-		/*$("#repassword").on("input", function() {
-			_this.pwcheck();
+		$("#btn-send").on("click", () => {
+			_this.isDuplicatedEmail();
 		});
 
-		$("#userid").on("input", function() {
-			_this.reset();
+		$("#btn-numCheck").on("click", () => {
+			_this.verifyCode();
 		});
-		
-		$("#username").on("input", function() {
-			_this.reset();
-		});
-		
-		$("#password").on("input", function() {
-			_this.reset();
-		});
-		
-		$("#email").on("input", function() {
-			_this.reset();
-		});
-		
-		$("#birthDate").on("input", function() {
-			_this.reset();
-		});*/
 
 	},
 
@@ -49,6 +35,7 @@ let insertUser = {
 			password: $("#password").val(),
 			username: $("#username").val(),
 			birthDate: $("#birthDate").val(),
+			email: $("#email").val()
 		}
 
 		if (_this.status != 1) {
@@ -56,11 +43,15 @@ let insertUser = {
 			return;
 		}
 
-		if ($("#emailDomain").val() === 'custom') {
-			user.email = $("#customEmail").val();
-		} else {
-			user.email = $("#emailId").val() + $("#emailDomain").val();
+		else if (_this.checkEmail != 1) {
+			alert("이메일 인증은 필수입니다.");
+			return;
 		}
+		else if (_this.checkNum != 1) {
+			alert("이메일 인증을 완료해주세요.");
+			return;
+		}
+
 
 		$.ajax({
 			type: "POST",
@@ -161,6 +152,70 @@ let insertUser = {
 
 		}).fail(function(error) {
 			alert("에러 발생 : " + error)
+		});
+	},
+	
+	isDuplicatedEmail: function() {
+		let _this = this;
+		let email = $("#email").val();
+
+		$.ajax({
+			type: "POST",
+			url: "/user/checkEmail",
+			data: { email: email },
+			contentType: "application/x-www-form-urlencoded; charset=UTF-8"
+		}).done(function(response) {
+			console.log(response);
+			if (response.status === 200) {
+				alert(response.data);
+				_this.checkEmail = 1;
+				 _this.sendEmail();
+			} else {
+				alert(response.data);
+			}
+		}).fail(function(error) {
+			alert("에러 발생 : " + error);
+		});
+	},
+
+	sendEmail: function() {
+		let email = $("#email").val();
+		
+		alert("이메일로 인증번호를 전송하였습니다.");
+		$.ajax({
+			type: "POST",
+			url: "/send/email",
+			data: { email: email },
+			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+			success: function(response) {
+				console.log(response);
+			},
+			error: function(error) {
+				console.error("Error sending email:", error);
+				// Handle error (if needed)
+			}
+		});
+	},
+
+	verifyCode: function() {
+		let _this = this;
+		
+		$.ajax({
+			type: "POST",
+			url: "/user/verifyCode",
+			data: { enteredCode: $("#checkNum").val() },
+			contentType: "application/x-www-form-urlencoded; charset=UTF-8"
+		}).done(function(response) {
+			console.log(response);
+			if (response.status === 200) {
+				alert("인증 성공");
+				_this.checkNum = 1;
+				
+			} else {
+				alert("인증 실패");
+			}
+		}).fail(function(error) {
+			alert("에러 발생 : " + error);
 		});
 	},
 
