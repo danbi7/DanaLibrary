@@ -266,8 +266,9 @@ public class BookController {
 	}
 	
 	@DeleteMapping("/book/cancelInterest")
-	public @ResponseBody ResponseDTO<?> cancelInterest(@RequestBody Book book) {
-		interestedBookService.deleteInterest(book);
+	public @ResponseBody ResponseDTO<?> cancelInterest(@RequestBody Book book,HttpSession session) {
+		User loginUser = (User)session.getAttribute("loginUser");
+		interestedBookService.deleteInterest(book, loginUser);
 		return new ResponseDTO<>(HttpStatus.OK.value(),"관심도서 삭제하기");
 	}
 
