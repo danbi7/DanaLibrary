@@ -10,7 +10,6 @@ let loginObject = {
 
 
 	login: function() {
-		alert("로그인 요청됨");
 
 		let inputData = {
 			input: $("#input").val(),
@@ -26,15 +25,10 @@ let loginObject = {
 			},
 			contentType: "application/x-www-form-urlencoded"
 		}).done(function(response) {
-			console.log(response); //콘솔창에 응답 메세지 출력
+			alert(response.data);
 
 			if (response.status === 200) {
-
 				location = "/";
-			} else {
-
-				alert("로그인 실패");
-
 			}
 		}).fail(function(error) {
 			alert("에러 발생 : " + error);
