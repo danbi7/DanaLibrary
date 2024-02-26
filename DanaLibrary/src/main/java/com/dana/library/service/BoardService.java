@@ -30,25 +30,26 @@ public class BoardService {
 		return boardRepository.findAll();
 	}
 
-	//페이징
-		@Transactional(readOnly = true)
-		public Page<Board> getBoardList(Pageable pageable){
-			return boardRepository.findAll(pageable);
-		}
-		@Transactional(readOnly = true)
-		public Page<Board> getBoardList(Category category,Pageable pageable){
-			return boardRepository.findByCategory(category,pageable);
-		}
-		
-		@Transactional(readOnly = true)
-		public Page<Board> getBoardList(String title,Pageable pageable){
-			return boardRepository.findByTitleContaining(title,pageable);
-		}
-		
-		@Transactional(readOnly = true)
-		public Page<Board> getBoardList(Category category, String title,Pageable pageable) {
-			return boardRepository.findByCategoryIsAndTitleContaining(category, title, pageable);
-		}
+	// 페이징
+	@Transactional(readOnly = true)
+	public Page<Board> getBoardList(Pageable pageable) {
+		return boardRepository.findAll(pageable);
+	}
+
+	@Transactional(readOnly = true)
+	public Page<Board> getBoardList(Category category, Pageable pageable) {
+		return boardRepository.findByCategory(category, pageable);
+	}
+
+	@Transactional(readOnly = true)
+	public Page<Board> getBoardList(String title, Pageable pageable) {
+		return boardRepository.findByTitleContaining(title, pageable);
+	}
+
+	@Transactional(readOnly = true)
+	public Page<Board> getBoardList(Category category, String title, Pageable pageable) {
+		return boardRepository.findByCategoryIsAndTitleContaining(category, title, pageable);
+	}
 
 	@Transactional
 	public void writeBoard(Board board) {
@@ -95,13 +96,13 @@ public class BoardService {
 	public int getLikesCount(Board boardNum) {
 		return likesRepository.countByBoardNum(boardNum);
 	}
-	
+
 	@Transactional
-    public void increaseLikes(Board board, int likesCount) {
-        board.setLikes(likesCount);
-        boardRepository.save(board);
-    }
-	
+	public void increaseLikes(Board board, int likesCount) {
+		board.setLikes(likesCount);
+		boardRepository.save(board);
+	}
+
 	@Transactional
 	public List<Board> getBoardListDESC() {
 		List<Board> boardList = boardRepository.findAll(Sort.by(Sort.Direction.DESC, "boardNum"));
@@ -110,12 +111,12 @@ public class BoardService {
 
 	@Transactional
 	public List<Board> getRecentNoticeBoard() {
-		List<Board> recentNoticeBoard = boardRepository.findTop5ByCategoryOrderByBoardNumDesc(Category.NOTICE);		
+		List<Board> recentNoticeBoard = boardRepository.findTop5ByCategoryOrderByBoardNumDesc(Category.NOTICE);
 		return recentNoticeBoard;
 	}
-	
+
 	@Transactional
-	public List<Board> getRecentFreeBoard(){
+	public List<Board> getRecentFreeBoard() {
 		List<Board> recentFreeBoard = boardRepository.findTop5ByCategoryNotOrderByBoardNumDesc(Category.NOTICE);
 		return recentFreeBoard;
 	}
