@@ -112,7 +112,7 @@
 </div>
 
 <div class="container-main justify-content-center" style="margin-top: 80px;">
-<a href="https://gp.ezenac.co.kr/ezen/curriculum/?idx=1824"><img alt="광고" src="/image/ezen.png"></a>
+<a href="https://gp.ezenac.co.kr/ezen/curriculum/?idx=1824" target="_blank"><img alt="광고" src="/image/ezen.png"></a>
 </div>
 </div>
 <%@ include file="./layout/footer.jsp" %>
