@@ -56,27 +56,8 @@ public class RentService {
 
 		rentRepository.save(rent);
 	}
-
-	@Transactional(readOnly = true)
-	public List<Rent> getRentList() {
-		return rentRepository.findAll();
-	}
-
-	@Transactional(readOnly = true)
-	public List<Rent> getRentList(User user) {
-		return rentRepository.findAllByUser(user);
-	}
-
-	@Transactional(readOnly = true)
-	public List<Rent> getRentList(Status status) {
-		return rentRepository.findAllByRentStatus(status);
-	}
-
-	@Transactional(readOnly = true)
-	public List<Rent> getRentList(Book book) {
-		return rentRepository.findAllByBook(book);
-	}
-
+	
+	
 	@Transactional
 	public List<Rent> getRentBookList() {
 		return rentRepository.findAll();
@@ -166,13 +147,6 @@ public class RentService {
 		return rentedBook;
 	}
 
-	@Transactional
-	public Rent rentedBySomeone(Book book) {
-		Rent rentedBook = rentRepository.findByBookAndRentStatus(book, Status.ACTIVE).orElseGet(() -> {
-			return new Rent();
-		});
-		return rentedBook;
-	}
 
 	@Transactional(readOnly = true)
 	public List<Rent> rentedByLoginUser(User user) {

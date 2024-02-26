@@ -14,7 +14,7 @@
 <img src="/image/icon/icon-board.png"><h5><strong>열린 마당</strong></h5></div>
 
   <div class="col-md-6 text-center">
-<form action="/board/view/getBoardList">
+<form action="/public/board/view/getBoardList">
     <div class="d-flex">
       <div class="dropdown">
     <select name="boardCategory" class="btn btn-outline-primary dropdown-toggle" aria-label="Dropdown" id="category1" style="height: 100%">
@@ -36,7 +36,6 @@
   <a href="/board/view/insertBoard" id="insertButton"><img src="/image/icon/icon-edit-button.png">새 글 등록</a>
   
 </div>
-<script src="/js/board/searchBoard.js"></script>
 
 <div class="mt-3" style="border-top: 7px solid #205295; padding-top: 20px"> 
      

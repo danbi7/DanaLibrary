@@ -46,7 +46,7 @@
 	</div>
 
 <div class="mt-3" style="border-top: 7px solid #205295; padding-top: 20px">
-	<c:forEach var="book" items="${bookList}">
+	<c:forEach var="book" items="${bookList.content}">
 		<div class="row">
 
 			<div class="col-md-3" align="center"

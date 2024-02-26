@@ -1,5 +1,6 @@
 package com.dana.library.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,16 +65,12 @@ public class RentController {
 		} else {
 
 			Book gettedBook = bookService.getBook(bookNum);
-			System.out.println("gettedBook.toString() : " + gettedBook.toString());
+			//System.out.println("gettedBook.toString() : " + gettedBook.toString());
 			Rent rent = new Rent();
 
 			rent.setBook(gettedBook);
 			rent.setUser(loginUser);
-			rent.setRentStatus(Status.ACTIVE);
-			LocalDate rentDate = LocalDate.now();
-			LocalDate dueDate = LocalDate.now().plusDays(7);
-			rent.setRentDate(rentDate);
-			rent.setDueDate(dueDate);
+			
 			rentService.updateRent(rent);
 			return new ResponseDTO<>(HttpStatus.OK.value(), "책 빌리기");
 		}

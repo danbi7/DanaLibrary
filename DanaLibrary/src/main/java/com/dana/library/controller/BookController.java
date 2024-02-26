@@ -88,7 +88,7 @@ public class BookController {
 		model.addAttribute("interestedBook", interestedBook);
 		
 		//총 관심도서 수
-		int interestCount = interestService.getInterestList().size();
+		int interestCount = interestService.getInterestList(gettedBook).size();
 		model.addAttribute("interestCount", interestCount);
 		System.out.println(interestCount);
 		
@@ -208,8 +208,9 @@ public class BookController {
 	}
 	
 	@DeleteMapping("/book/cancelInterest")
-	public @ResponseBody ResponseDTO<?> cancelInterest(@RequestBody Book book) {
-		interestService.deleteInterest(book);
+	public @ResponseBody ResponseDTO<?> cancelInterest(@RequestBody Book book,HttpSession session) {
+		User loginUser = (User)session.getAttribute("loginUser");
+		interestService.deleteInterest(book, loginUser);
 		return new ResponseDTO<>(HttpStatus.OK.value(),"관심도서 삭제하기");
 	}
 

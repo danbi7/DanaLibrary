@@ -31,13 +31,13 @@ public class InterestService {
 	}
 	
 	@Transactional
-	public void deleteInterest(Book book) {
-		interestRepository.deleteByBook(book);
+	public void deleteInterest(Book book, User loginUser) {
+		interestRepository.deleteByBookAndUser(book, loginUser);
 	}
 	
 	@Transactional(readOnly = true)
-	public List<Interested_book> getInterestList(){
-		return interestRepository.findAll();
+	public List<Interested_book> getInterestList(Book book){
+		return interestRepository.findByBook(book);
 	}
 
 }

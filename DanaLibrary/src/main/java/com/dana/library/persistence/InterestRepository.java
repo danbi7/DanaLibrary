@@ -1,5 +1,6 @@
 package com.dana.library.persistence;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,6 +15,8 @@ public interface InterestRepository extends JpaRepository<Interested_book, Integ
 
 	Optional<Interested_book> findByBookAndUser(Book book, User loginUser);
 	
-	void deleteByBook(Book book);
+	void deleteByBookAndUser(Book book, User loginUser);
+	
+	List<Interested_book> findByBook(Book book);
 	
 }

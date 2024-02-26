@@ -103,13 +103,13 @@ public class BoardController {
 			//System.out.println(boardList.size());
 		}
 		*/
-		//List<Board> boardList = boardService.getBoardList();
+		
 		System.out.println("boardList: " + boardList);
 		model.addAttribute("boardList", boardList);
 
 		return "board/boardList";
 	}
-  
+	/*
 	// 글 목록 보기 기능
 	@PostMapping("/board/getBoardList")
 	public String searchBoard(Model model) {
@@ -120,7 +120,8 @@ public class BoardController {
 
 		return "board/boardList";
 	}
-
+	*/
+	
 	// 글 상세 보기 페이지
 	@GetMapping("/board/view/getBoard/{boardNum}")
 	public String getBoard(@PathVariable int boardNum, Model model) {
