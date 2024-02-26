@@ -4,6 +4,7 @@
 	margin: 0px auto;
 	flex-direction: column;
 }
+
 .col-md-7{
 	
 font-size: 70%;
@@ -34,8 +35,6 @@ color: #000000;
 }
 
 .d-flex img {
-	margin-top: 4px;
-	margin-left: 8px;
 	width: 30px;
 	height: 30px;
 }
@@ -45,4 +44,24 @@ color: #000000;
 	justify-content: flex-start;
 	align-items: center;
 	width: 150px;
+}
+
+.comment-meta {
+	font-size: 12px;
+	color: #777;
+}
+
+.comment-container {
+	border-bottom: 1px solid #ddd; /* 선 스타일 추가 */
+	padding-bottom: 15px; /* 선과 댓글 사이의 간격 조절 */
+	margin-bottom: 10px;
+	text-align: left; /* 댓글을 왼쪽으로 정렬 */
+	margin-top: 10px; /* 댓글을 아래로 내리는 여백 조절 */
+}
+
+.comment-content {
+	font-size: 14px;
+	color: #333;
+	margin-bottom: 5px;
+	margin-top: 15px;
 }

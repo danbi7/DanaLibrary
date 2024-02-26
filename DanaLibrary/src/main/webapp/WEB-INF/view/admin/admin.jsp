@@ -128,7 +128,9 @@ width:20px;
 				</div>
 
 				<div id="home" class="tabcontent">
+
 					<%@ include file="requestManage.jsp"%>
+
 				</div>
 
 				<div id="userManage" class="tabcontent">
