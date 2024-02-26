@@ -37,7 +37,8 @@ public class ReserveController {
 			reserve.setUser(loginUser);
 			
 			reserveService.reserveBook(reserve);
-			return new ResponseDTO<>(HttpStatus.OK.value(), "도서 예약 완료");
+			int turn = reserveService.reserveTurn(bookNum);
+			return new ResponseDTO<>(HttpStatus.OK.value(), "도서 예약 완료. " + turn +"번째 예약자 입니다.");
 		}
 	}
 	

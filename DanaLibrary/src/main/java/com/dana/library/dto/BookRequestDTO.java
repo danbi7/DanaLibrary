@@ -18,5 +18,7 @@ public class BookRequestDTO {
 	@NotNull(message = "저자는 필수 입력 항목입니다.")
 	@NotBlank(message = "저자는 필수 입력 항목입니다.")
 	private String author;
+	
+	private String publisher;
 
 }

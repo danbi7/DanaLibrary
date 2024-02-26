@@ -99,4 +99,9 @@ public class ReserveService {
 		return reserve;
 	}
 
+	@Transactional
+	public int reserveTurn(int bookNum) {
+		return reserveRepository.findAllByBook_BookNum(bookNum).size();
+	}
+
 }
