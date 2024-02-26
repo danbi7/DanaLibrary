@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <style>
 .truncate-text {
     white-space: nowrap;
@@ -13,10 +14,11 @@
     max-width: 100px; /* Adjust the max-width according to your needs */
 }
 </style>
+
 <script>
-	function openEditWindow(userid) {
-		window.open('/view/userEdit/' + userid, '_blank',
-				'width=800,height=800');
+	function openRequestEdit(requestNum) {
+		window.open('/view/requestEdit/' + requestNum, '_blank',
+				'width=800,height=550');
 	}	
 </script>
 </head>
@@ -33,7 +35,7 @@
                 <th>신청자</th>
                 <th>신청일</th>
                 <th>신청 상태</th>
-                <th>확인</th>
+                <th class="text-center">확인</th>
             </tr>
         </thead>
 
@@ -62,7 +64,9 @@
                     <td>${request.requestStatus}</td>
                     <td>
                         <div class="admin-edit">
-                            <img class="edit-btn" src="/image/icon/icon-edit-button.png"> 
+                            <img class="edit-btn" src="/image/icon/icon-edit-button.png"
+                            onclick="openRequestEdit('${request.requestNum}')"> 
+                            
                         </div>
                     </td>
                 </tr>

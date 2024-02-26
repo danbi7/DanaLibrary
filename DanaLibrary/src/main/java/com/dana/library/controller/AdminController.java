@@ -112,6 +112,9 @@ public class AdminController {
 		
 		List<Book_request> bookRequestList = bookRequestService.getBookRequestList();
 		model.addAttribute("bookRequestList", bookRequestList);
+		
+		List<Board> myBoardList = boardService.getMyBoardList(loginUser);
+		model.addAttribute("myBoardList", myBoardList);
 		return "admin/myPage";
 	}
 
@@ -242,6 +245,14 @@ public class AdminController {
 	@GetMapping("/view/bookRequest")
 	public String bookRequest() {
 		return "admin/myPage/bookRequest";
+	}
+	
+	//도서 신청 상세 페이지 
+	@GetMapping("/view/requestEdit/{requestNum}")
+	public String getBookRequest(@PathVariable int requestNum, Model model) {
+		Book_request request = bookRequestService.getBookRequest(requestNum);
+		model.addAttribute("request", request);
+		return "admin/requestEdit";
 	}
 
 }

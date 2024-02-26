@@ -49,12 +49,12 @@
             <div class="row">
                 <div class="col-md-3" align="center"
                      style="display: flex; justify-content: center;">
-                    <img src="${book.image}" style="width: 130px; height: 180px;">
+                    <a href="/book/getBook/${ book.bookNum }"><img src="${book.image}" style="width: 130px; height: 180px;"></a>
                 </div>
 
                 <div class="col-md-7" style="text-align: left">
                     <h6 class="mt-3">
-                        <b>${book.title}</b>
+                       <a href="/book/getBook/${ book.bookNum }"><b>${book.title}</b></a>
                     </h6>
                     <p>${book.author}&nbsp|&nbsp ${book.publisher} &nbsp | &nbsp
                         ${book.category}

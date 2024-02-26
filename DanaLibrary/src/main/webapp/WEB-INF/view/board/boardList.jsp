@@ -54,7 +54,7 @@
 	<c:forEach items="${boardList.content }" var="boardList">
 	<tr>
 		<td>${boardList.boardNum }</td>
-		<td><a href="/board/view/getBoard/${boardList.boardNum }">${boardList.title }</a></td>
+		<td style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><a href="/board/view/getBoard/${boardList.boardNum }">${boardList.title }</a></td>
 		<td>${boardList.user.userid }</td>
 		<td>${boardList.category.category }</td>
 		<td>${boardList.regDate }</td>

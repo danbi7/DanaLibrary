@@ -67,22 +67,20 @@
 			</table>
 		</div>
 		<div>
-
 			<c:choose>
 				<c:when test="${empty interestedBook.book }">
 					<button class="btn-interest btn btn-outline-secondary"
 						type="button">
-						<img src="/image/emptyheart.png" style="width: 25px; height: 25px">
+						<img src="/image/emptyheart.png" style="width: 25px; height: 25px"> ${interestCount }
 					</button>
 				</c:when>
 				<c:otherwise>
 					<button class="btn-interest-cancel btn btn-outline-secondary"
 						type="button">
-						<img src="/image/fillheart.png" style="width: 25px; height: 25px">
+						<img src="/image/fillheart.png" style="width: 25px; height: 25px"> ${interestCount }
 					</button>
 				</c:otherwise>
 			</c:choose>
-			관심도서 수 : ${interestCount } <br>
 
 			<c:choose>
 				<c:when test="${bookStatus eq 1}">

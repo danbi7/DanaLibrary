@@ -24,5 +24,11 @@ public class BookRequestService {
 	public List<Book_request> getBookRequestList() {
 		return bookRequestRepository.findAll();
 	}
+	
+	@Transactional
+	public Book_request getBookRequest(int requestNum) {
+		Book_request request =bookRequestRepository.findById(requestNum).orElse(null);
+		return request;
+	}
 
 }

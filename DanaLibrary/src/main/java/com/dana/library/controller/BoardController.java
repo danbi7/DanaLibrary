@@ -156,6 +156,7 @@ public class BoardController {
 		return new ResponseDTO<>(HttpStatus.OK.value(), "글 삭제 컨트롤러 실행");
 	}
 
+	// 글 추천 기능
 	@PostMapping("/board/likesBoard/{boardNum}")
 	public @ResponseBody ResponseDTO<?> likesBoard(@PathVariable int boardNum, HttpSession session) {
 		User user = (User) session.getAttribute("loginUser");

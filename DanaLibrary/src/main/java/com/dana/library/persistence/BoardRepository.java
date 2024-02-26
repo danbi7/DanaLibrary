@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.dana.library.domain.Board;
 import com.dana.library.domain.Category;
+import com.dana.library.domain.User;
 
 @Repository
 public interface BoardRepository extends JpaRepository<Board, Integer>{
@@ -22,6 +23,8 @@ public interface BoardRepository extends JpaRepository<Board, Integer>{
     List<Board> findTop5ByCategoryOrderByBoardNumDesc(Category category);
     
     List<Board> findTop5ByCategoryNotOrderByBoardNumDesc(Category category);
+
+	List<Board> findByUser(User user);
 
 
 }

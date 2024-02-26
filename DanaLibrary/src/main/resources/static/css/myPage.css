@@ -178,3 +178,7 @@ hr{
 	font-size: 14px;
 	margin: 0px;
 }
+
+#currentRent {
+	display: flex;
+}

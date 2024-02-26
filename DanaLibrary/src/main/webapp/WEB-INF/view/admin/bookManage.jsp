@@ -69,10 +69,13 @@
                         ${fn:substring(book.image, 0, 10)}...
                     </c:otherwise>
                		 </c:choose></td>
-					<td><div class="admin-edit">
-                        <img class="edit-btn" src="/image/icon/icon-edit-button.png" 
-                        onclick="openEditBook('${book.bookNum}')">
-                    </div></td>
+               		 
+					<td>
+						<div class="admin-edit">
+                        	<img class="edit-btn" src="/image/icon/icon-edit-button.png" 
+                        	onclick="openEditBook('${book.bookNum}')">
+                    	</div>
+                    </td>
 				</tr>
 				</c:forEach>
 			</tbody>	
