@@ -129,12 +129,7 @@ width:20px;
 				</div>
 
 				<div id="home" class="tabcontent">
-				
-<<<<<<< HEAD
-=======
-					<p>dd<p>
-					
->>>>>>> 0c3070f2b3cd84c61e56737901619ab8d94e2dc8
+
 				</div>
 
 				<div id="userManage" class="tabcontent">
