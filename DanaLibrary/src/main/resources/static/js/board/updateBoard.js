@@ -7,15 +7,12 @@ let updateBoardObject = {
       });
    },
    updateboard: function() {
-      //alert("수정완료" + $("#title").val() + $("#content").val() + $("#boardNum").val());
       let board = {
          category: $("#category").val(),
          title: $("#title").val(),
          content: $("#content").val(),
          boardNum: $("#boardNum").val()
       };
-      
-      //alert( " " + board.title + " " + board.content + " " +board.boardNum);
       
       $.ajax({
          type: "PUT",

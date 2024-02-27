@@ -41,10 +41,11 @@
     </script>
 
       </div>
+       <div class="text-center">
       <button id="update-board" class="btn btn-primary">수정 완료</button>
       <a href="/board/view/getBoard/${board.boardNum}"
          class="btn btn-secondary">취소</a>
-
+   </div>
 
 <%@ include file="../layout/footer.jsp"%>
 <script src="/js/board/updateBoard.js"></script>
