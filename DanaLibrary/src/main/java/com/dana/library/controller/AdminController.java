@@ -179,22 +179,19 @@ public class AdminController {
 	        @RequestPart("file") MultipartFile file) {
 
 	    try {
-	        // 문자열을 Date로 변환
 	        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	        Date parsedDate = dateFormat.parse(publicationDate);
 	        java.sql.Date sqlDate = new java.sql.Date(parsedDate.getTime());
 
-	        // 파일 데이터를 바이트 배열로 변환
 	        byte[] fileData = file.getBytes();
-
 	        // 업로드할 파일의 원본 이름
 	        String originalFilename = file.getOriginalFilename();
 
-	        // timestamp를 이용하여 파일 이름 생성
+	        //파일 이름 생성
 	        long timestamp = System.currentTimeMillis();
 	        String fileName = timestamp + "_" + originalFilename;
 
-	        // 프로젝트 내의 특정 폴더에 파일 저장 (예시: resources/upload 폴더)
+	        // 파일할 위치 설정
 	        String uploadDir = "src/main/resources/static/image/book/";
 	        String image = "/image/book/" + fileName;
 	        String filePath = uploadDir + fileName;
@@ -208,7 +205,7 @@ public class AdminController {
 
 	        FileCopyUtils.copy(fileData, imgFile);
 
-	        // Book 객체 생성 및 필드 설정
+	        // 도서 객체 생성 및 도서 정보 설정
 	        Book book = new Book();
 	        book.setTitle(title);
 	        book.setAuthor(author);
@@ -219,19 +216,16 @@ public class AdminController {
 	        book.setImage(image);
 	        book.setInfo(info);
 
-	        // Book 객체를 데이터베이스에 저장
 	        bookService.insertBook(book);
 
 	        return new ResponseDTO<>(HttpStatus.OK.value(), "도서 등록 성공");
 
 	    } catch (ParseException e) {
 	        e.printStackTrace();
-	        // 날짜 파싱 중 에러가 발생한 경우 예외 처리
 	        return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "날짜 형식이 올바르지 않습니다.");
 
 	    } catch (IOException e) {
 	        e.printStackTrace();
-	        // 파일 처리 중 에러가 발생한 경우 예외 처리
 	        return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "도서 등록 실패");
 	    }
 	}

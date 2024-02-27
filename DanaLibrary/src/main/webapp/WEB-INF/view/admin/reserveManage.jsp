@@ -17,9 +17,8 @@
                <th>번호</th>
                <th>회원 아이디</th>
                <th>예약 도서</th>
-               <th>예약 순번</th>
               
-               <th class="text-center">수정</th>
+               <th>수정</th>
             </tr>
          </thead>
          <tbody>
@@ -29,11 +28,11 @@
                 <td>${reserve.user.userid}</td>
               
                <td> <c:choose>
-                    <c:when test="${fn:length(reserve.book.title) <= 10}">
+                    <c:when test="${fn:length(reserve.book.title) <= 15}">
                         ${reserve.book.title}
                     </c:when>
                     <c:otherwise>
-                        ${fn:substring(reserve.book.title, 0, 10)}...
+                        ${fn:substring(reserve.book.title, 0, 15)}...
                     </c:otherwise>
                       </c:choose></td>
              
