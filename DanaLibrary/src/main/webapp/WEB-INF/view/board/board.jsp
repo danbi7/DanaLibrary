@@ -42,6 +42,7 @@
 	<div class="container-body mb-3">
 		<div class="category">카테고리: ${board.category.category }</div>
 		<div class="regDate">작성일: ${board.regDate }</div>
+		<div class="updateDate">수정일: ${board.updateDate }</div>
 		<div class="view">조회수: ${board.views }</div>
 		<div class="likes">추천수: ${board.likes }</div>
 	</div>
@@ -70,6 +71,7 @@
 		<input type="hidden" id="boardNum" value="${board.boardNum}">
 		<div class="text-center">
 			<button id="btn-insert-comment" type="submit" class="btn btn-primary"
+				
 				data-user-id="${sessionScope.loginUser.userid}">댓글 등록</button>
 		</div>
 
