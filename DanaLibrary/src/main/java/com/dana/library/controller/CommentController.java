@@ -44,7 +44,6 @@ public class CommentController {
        System.out.println("안녕아아아아아아아아아");
 	   User loginUser = (User) session.getAttribute("loginUser");
        Comment comment = commentService.getCommentById(commentNum);
-       System.out.println(comment.toString() + "알라알라알라아랄라");
        
        if (comment != null && loginUser != null && comment.getUser().getUserid().equals(loginUser.getUserid())) {
            System.out.println("가나다라마바사아카차ㅏ");
