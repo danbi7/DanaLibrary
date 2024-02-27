@@ -42,33 +42,31 @@ public class RentController {
 	//대출하기
 	@PostMapping("/rent/rentBook/{bookNum}")
 	public @ResponseBody ResponseDTO<?> rentBook(@PathVariable int bookNum, HttpSession session) {
-		System.out.println("rentBook 실행");
 		User loginUser = (User) session.getAttribute("loginUser");
 
-		// 로그인 유저의 active인 list
+		// 로그인 유저의 active 상태인 대출리스트 가져오기
 		List<Rent> rentList = rentService.rentedByLoginUser(loginUser);
 
 		int renting = rentList.size();
-
-		if (renting >= 5) { // size는 0부터 시작하니깐
+		//대출도서 5권인지 확인하기
+		if (renting >= 5) { 
 			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "도서 대출은 다섯권까지만 가능합니다.");
 		} else {
-
+			//대출할 도서 가져오기
 			Book gettedBook = bookService.getBook(bookNum);
 			Rent rent = new Rent();
 
-			rent.setBook(gettedBook);
-			rent.setUser(loginUser);
+			rent.setBook(gettedBook); //대출할 도서 
+			rent.setUser(loginUser); //대출하는 회원
 			rent.setRentStatus(Status.ACTIVE);
-			LocalDate dueDate = LocalDate.now().plusDays(7);
-			rent.setDueDate(dueDate);
+			LocalDate dueDate = LocalDate.now().plusDays(7); //대출 기간 7일 설정
+			rent.setDueDate(dueDate); //반납일
 			rentService.updateRent(rent);
-			gettedBook.setRentCount(gettedBook.getRentCount()+1);
+			gettedBook.setRentCount(gettedBook.getRentCount()+1); //대출 횟수 증가시키기
 			bookService.updateBook(gettedBook);
 			
 			return new ResponseDTO<>(HttpStatus.OK.value(), "도서 대출 완료");
 		}
-
 	}
 	
 	//세션과 bookNum으로 반납하기
@@ -107,25 +105,29 @@ public class RentController {
 		return new ResponseDTO<>(HttpStatus.OK.value(), "반납 완료되었습니다.");
 	}
 	
-	//대출 연장
+	// 대출 연장
 	@PutMapping("/rent/renewalRent/{rentNum}")
-	public @ResponseBody ResponseDTO<?> renewalRent(@PathVariable int rentNum){
-		Rent rent = rentService.getRent(rentNum);
-		if(rent.getRentStatus().equals(Status.INACTIVE) || rent.getRenewalStatus().equals(Status.ACTIVE)) {
-			return new ResponseDTO<>(HttpStatus.BAD_GATEWAY.value(), "대출 연장이 불가능합니다.");
-		}
-		
-		//예약테이블에서 검사
-		Reserved_book reserve = reserveService.getReserve(rent.getBook().getBookNum());
-		System.out.println("예약: " +reserve);
-		if(reserve==null) {
-			//3일 연장
-			rentService.renewalRent(rent);
-			return new ResponseDTO<>(HttpStatus.OK.value(),"대출 연장이 완료되었습니다.");
-		}
-		else {
-			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "이미 예약된 도서입니다.");
-		}
+	public @ResponseBody ResponseDTO<?> renewalRent(@PathVariable int rentNum) {
+	    Rent rent = rentService.getRent(rentNum);
+
+	    // 대출 상태 확인 및 연장 여부 판단
+	    if (rent.getRentStatus().equals(Status.INACTIVE) || rent.getRenewalStatus().equals(Status.ACTIVE)) {
+	        return new ResponseDTO<>(HttpStatus.BAD_GATEWAY.value(), "대출 연장이 불가능합니다.");
+	    }
+
+	    //대출 연장하려는 도서가 예약 되어있는지 검사
+	    Reserved_book reserve = reserveService.getReserve(rent.getBook().getBookNum());
+	    System.out.println("예약: " + reserve);
+
+	    if (reserve == null) {
+	        //예약이 없으면 대출 3일 연장
+	        rentService.renewalRent(rent);
+	        return new ResponseDTO<>(HttpStatus.OK.value(), "대출 연장이 완료되었습니다.");
+	    } else {
+	    	//예약되어 있으면 연장 불가
+	        return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "이미 예약된 도서입니다.");
+	    }
 	}
+
 
 }

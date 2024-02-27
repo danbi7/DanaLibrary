@@ -20,32 +20,25 @@ public class NoticeService {
 	@Autowired
 	private NoticeRepository noticeRepository;
 
-	// 예약된 도서에서 예약한 사람을 찾아서 알림 테이블에 추가
+	//예약한 회원을 찾아서 알림 테이블에 추가(예약한 도서가 반납되었을때 실행)
 	@Transactional
 	public void addNotice(Reserved_book findReserve) {
-		User noticeUser = findReserve.getUser();
-		System.out.println("addNotice : noticeUser " + noticeUser );
-		System.out.println("addNotice : noticeContent " + noticeUser );
+		User noticeUser = findReserve.getUser();		
 		Notice notice = new Notice();
-
 		notice.setUser(noticeUser);
 		notice.setReserved_book(findReserve);
-		System.out.println("addNotice : notice " + notice);
 		noticeRepository.save(notice);
 	}
 
-	// 해당 회원 알림 검사
+	//해당 회원 알림 검사
 	@Transactional
 	public Notice findNotice(User user) {
-		System.out.println("findNotice의 user : " + user);
 		Notice notice = noticeRepository.findByUser(user);
 		return notice;
 	}
 	
-	//알림 계속 보내기
+	//알림 계속 보내기(인터셉터 등록)
 	public void sendNotice(HttpSession session) {
-		System.out.println("sendNotice 실행");
-	
 		User loginUser = (User) session.getAttribute("loginUser");
 		if (loginUser != null) {
 			// 알림 테이블에서 해당 회원의 알림을 가져옴
