@@ -7,15 +7,13 @@ let updateBoardObject = {
       });
    },
    updateboard: function() {
-      alert("수정완료" + $("#title").val() + $("#content").val() + $("#boardNum").val());
+
       let board = {
-         //category: $("#category").val(),
+         category: $("#category").val(),
          title: $("#title").val(),
          content: $("#content").val(),
          boardNum: $("#boardNum").val()
       };
-      
-      alert( " " + board.title + " " + board.content + " " +board.boardNum);
       
       $.ajax({
          type: "PUT",
@@ -25,7 +23,8 @@ let updateBoardObject = {
       }).done(function(response) { // done 대신 success 사용
          console.log(response);
          alert("글 수정완료");
-         location.href = "/board/view/getBoard/" + $("#boardNum").val(); // location 속성 수정
+
+         location.href = "/public/board/view/getBoardList"; // location 속성 수정
       }).fail(function(error) { // fail 대신 error 사용
 
          alert("에러 발생: " + error.responseText);
@@ -35,5 +34,4 @@ let updateBoardObject = {
    }
 
 };
-
 updateBoardObject.init();

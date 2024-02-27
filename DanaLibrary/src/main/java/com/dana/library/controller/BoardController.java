@@ -54,42 +54,40 @@ public class BoardController {
 		return null;
 	}
 
-	// 글 목록 보기 페이지
+	// 글 목록 보기 
 	@GetMapping("/public/board/view/getBoardList")
-	public String getBoardList(@RequestParam(required = false) Category boardCategory,
-			@RequestParam(required = false) String boardTitle, Model model,
-			@PageableDefault(size = 10, sort = "boardNum", direction = Sort.Direction.DESC) Pageable pageable) {
-
+	public String getBoardList(@RequestParam(required = false) Category boardCategory, @RequestParam(required = false) 
+	String boardTitle, Model model, @PageableDefault(size=10,sort="boardNum",direction = Sort.Direction.DESC)Pageable pageable) {
+		
 		Page<Board> boardList = null;
-
-		if (boardCategory == null && boardTitle == null) {
+		
+		if(boardCategory == null && boardTitle == null) {
 			boardList = boardService.getBoardList(pageable);
-		} else if (!boardCategory.equals(Category.TOTAL) && boardTitle == null) {
-			boardList = boardService.getBoardList(boardCategory, pageable);
-		} else if (boardCategory.equals(Category.TOTAL) && boardTitle != null) {
-			boardList = boardService.getBoardList(boardTitle, pageable);
-		} else if (!boardCategory.equals(Category.TOTAL) && boardTitle != null) {
-			boardList = boardService.getBoardList(boardCategory, boardTitle, pageable);
+	
+		}else if(!boardCategory.equals(Category.TOTAL) && boardTitle == null) {
+			boardList = boardService.getBoardList(boardCategory,pageable);
+			
+		}else if(boardCategory.equals(Category.TOTAL) && boardTitle !=  null) {
+			boardList = boardService.getBoardList(boardTitle,pageable);
+			
+		}else if(!boardCategory.equals(Category.TOTAL) && boardTitle != null) {
+			boardList = boardService.getBoardList(boardCategory, boardTitle,pageable);
 		}
-
-		int nowPage = boardList.getPageable().getPageNumber() + 1; // 0부터 시작
+		
+		int nowPage = boardList.getPageable().getPageNumber()+1; //0부터 시작
 		int startPage = 1;
 		int endPage = boardList.getTotalPages();
-
+		
 		model.addAttribute("nowPage", nowPage);
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
-
-		System.out.println(nowPage);
-		System.out.println(startPage);
-		System.out.println(endPage);
-
+		
 		System.out.println("boardList: " + boardList);
 		model.addAttribute("boardList", boardList);
 
 		return "board/boardList";
 	}
-
+  
 	// 글 목록 보기 기능
 	@PostMapping("/board/getBoardList")
 	public String searchBoard(Model model) {
@@ -101,7 +99,7 @@ public class BoardController {
 		return "board/boardList";
 	}
 
-	// 글 상세 보기 페이지
+	// 글 상세 보기
 	@GetMapping("/board/view/getBoard/{boardNum}")
 	public String getBoard(@PathVariable int boardNum, Model model) {
 		Board board = boardService.getBoardById(boardNum);
@@ -109,6 +107,11 @@ public class BoardController {
 
 		List<Comment> commentList = commentService.getComment(board);
 		model.addAttribute("commentList", commentList);
+
+		if (board != null) {
+			//조회수 증가
+			boardService.increaseViews(board);
+		}
 
 		return "board/board";
 	}
@@ -120,7 +123,7 @@ public class BoardController {
 		model.addAttribute("board", board);
 		return "board/updateBoard";
 	}
-
+	
 	// 글 수정 기능
 	@PutMapping("/board/updateBoard/{boardNum}")
 	public @ResponseBody ResponseDTO<?> updatePost(@PathVariable int boardNum, @RequestBody Board board) {
@@ -130,7 +133,7 @@ public class BoardController {
 
 	// 글 삭제 기능
 	@DeleteMapping("/board/deleteBoard/{boardNum}")
-	public @ResponseBody ResponseDTO<?> deletePost(@PathVariable int boardNum) {
+	public @ResponseBody ResponseDTO<?> deletePost(@PathVariable int boardNum) {		
 		boardService.deleteBoard(boardNum);
 		return new ResponseDTO<>(HttpStatus.OK.value(), "글 삭제 컨트롤러 실행");
 	}
@@ -156,16 +159,6 @@ public class BoardController {
 			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "중복 추천을 불가능합니다.");
 		}
 
-	}
-
-	@PutMapping("/board/view/updateViews/{boardNum}")
-	public @ResponseBody ResponseDTO<?> insertViews(@PathVariable int boardNum, Model model) {
-		Board board = boardService.getBoardById(boardNum);
-		if (board != null) {
-			boardService.increaseViews(board);
-		}
-
-		return new ResponseDTO<>(HttpStatus.OK.value(), "조회수 완료");
 	}
 
 }

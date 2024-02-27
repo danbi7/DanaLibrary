@@ -48,7 +48,7 @@
 		<th>카테고리</th>
 		<th>작성일</th>
 		<th>조회수</th>
-		<th>추천수</th>
+		<th>추천</th>
 	</tr>
 	
 	<c:forEach items="${boardList.content }" var="boardList">

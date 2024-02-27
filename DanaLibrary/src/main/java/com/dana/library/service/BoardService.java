@@ -1,5 +1,6 @@
 package com.dana.library.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +63,7 @@ public class BoardService {
 		board.setTitle(requestBoard.getTitle());
 		board.setContent(requestBoard.getContent());
 		board.setCategory(requestBoard.getCategory());
+		board.setUpdateDate(new Date(System.currentTimeMillis()));
 		boardRepository.save(board);
 	}
 
