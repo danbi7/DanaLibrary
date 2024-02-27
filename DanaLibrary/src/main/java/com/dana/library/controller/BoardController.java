@@ -33,7 +33,7 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class BoardController {
-
+  
 	@Autowired
 	private BoardService boardService;
 

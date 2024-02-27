@@ -21,21 +21,15 @@
 						<div id="findUserid" style="display: none"></div>
 						
 						<div class="row gy-3 overflow-hidden">
-							<div class="col-10" style="padding-right: 0px;">
+							<div class="col-12">
 								<div class="form-floating mb-3">
 									<input
-										style="border-top-right-radius: 0px; border-bottom-right-radius: 0px;"
 										type="text" class="form-control" name="email" id="email"
 										placeholder="이메일" required> <label for="email"
 										class="form-label">이메일</label>
 								</div>
 							</div>
 
-							<div class="col-2" style="padding-left: 0px;">
-								<button class="btn btn-outline-secondary"
-									style="height: 58px; border-top-left-radius: 0px; border-bottom-left-radius: 0px;">인증</button>
-
-							</div>
 							<div class="col-12">
 								<div class="form-floating mb-3">
 									<input type="text" class="form-control" name="username"

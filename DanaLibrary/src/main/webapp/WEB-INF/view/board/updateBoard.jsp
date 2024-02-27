@@ -29,6 +29,7 @@
 		<div class="form-group">
 			<label for="content">내용</label>
 			  <textarea rows="5" id="content" name="content" class="form-control">${board.content }</textarea>
+      
     </div>
 
     <script>
