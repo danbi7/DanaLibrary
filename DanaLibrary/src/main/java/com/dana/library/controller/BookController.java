@@ -115,7 +115,7 @@ public class BookController {
 			System.out.println("review : " + bookReview.toString());
 
 			reviewService.insertReview(bookReview);
-			return new ResponseDTO<>(HttpStatus.OK.value(), "도서 후기 컨트롤러 완료222");
+			return new ResponseDTO<>(HttpStatus.OK.value(), "도서 후기가 등록되었습니다");
 		}
 	}
 
@@ -182,7 +182,7 @@ public class BookController {
 
 	    return "book/bookList";
 	}
-	
+
 	//인기 도서순으로 getBookList
 	@GetMapping("/public/book/view/getPopularBookList")
 	public String getPopularBookList(@RequestParam(required = false) String category, @RequestParam(required = false) String bookTitle, Model model, HttpSession session, @PageableDefault(size=5,sort="bookNum",direction = Sort.Direction.DESC)Pageable pageable) {
@@ -252,7 +252,7 @@ public class BookController {
 
 	    return "book/popularBookList";
 	}
-	
+
 	@PostMapping("/book/addInterest")
 	public @ResponseBody ResponseDTO<?> addInterest(@RequestBody Book book, HttpSession session) {
 		System.out.println(book.toString());
@@ -264,7 +264,7 @@ public class BookController {
 		interestedBookService.updateInterest(interestBook);
 		return new ResponseDTO<>(HttpStatus.OK.value(),"관심도서 추가하기");
 	}
-	
+
 	@DeleteMapping("/book/cancelInterest")
 	public @ResponseBody ResponseDTO<?> cancelInterest(@RequestBody Book book,HttpSession session) {
 		User loginUser = (User)session.getAttribute("loginUser");
