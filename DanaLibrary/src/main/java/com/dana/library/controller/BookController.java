@@ -126,7 +126,7 @@ public class BookController {
 		
 		Page<Book> bookList = null;
 		
-		if(category == null && bookTitle == null) {
+		if((category == null || category == "") && (bookTitle == null || bookTitle == "")) {
 			bookList = bookService.getBookList(pageable);
 		}else if(category.equals("전체") && bookTitle != null) {
 			bookList = bookService.searchBookByTitle(bookTitle,pageable);
@@ -145,6 +145,9 @@ public class BookController {
 		model.addAttribute("nowPage", nowPage);
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
+		model.addAttribute("category", category);
+		model.addAttribute("title", bookTitle);
+
 		
 		User loginUser = (User)session.getAttribute("loginUser");
 		
@@ -184,7 +187,7 @@ public class BookController {
 		for (Book book : bookList.getContent()) {
 		    System.out.println("Title: " + book.getTitle() + ", Rent Count: " + book.getRentCount());
 		}
-		if(category == null && bookTitle == null) {
+		if((category == null || category == "") && (bookTitle == null || bookTitle == "")) {
 			bookList = bookService.getBookListOrderByRentCount(pageable);
 			//System.out.println(bookList.size());
 		}else if(category.equals("전체") && bookTitle != null) {
@@ -211,6 +214,8 @@ public class BookController {
 		model.addAttribute("nowPage", nowPage);
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
+		model.addAttribute("category", category);
+		model.addAttribute("title", bookTitle);
 		
 		System.out.println(nowPage);
 		System.out.println(startPage);

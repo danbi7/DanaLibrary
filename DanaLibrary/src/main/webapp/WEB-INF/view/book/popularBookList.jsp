@@ -115,7 +115,7 @@
             <hr>
         </c:forEach>
     </div>
-  <div class="mt-2">
+ <div class="mt-2">
   <c:choose>
 	<c:when test="${bookList.first }">
 		<a class="btn btn-secondary">이전</a>
@@ -128,11 +128,23 @@
 <c:forEach begin="${startPage }" end="${endPage }" var="i">
 <c:choose>
 <c:when test="${nowPage == i }">
-<a href="/public/book/view/getPopularBookList?page=${i-1}" class="btn">${i }</a>
+<c:url value="/public/book/view/getPopularBookList" var="encodedUrl">
+    <c:param name="category" value="${category}" />
+    <c:param name="bookTitle" value="${title}" />
+    <c:param name="page" value="${i - 1}" />
+</c:url>
+
+<a href="${encodedUrl}" class="btn">${i}</a>
 </c:when>
 <c:otherwise>
 
-<a href="/public/book/view/getPopularBookList?page=${i-1}" class="btn">${i }</a>
+<c:url value="/public/book/view/getPopularBookList" var="encodedUrl">
+    <c:param name="category" value="${category}" />
+    <c:param name="bookTitle" value="${title}" />
+    <c:param name="page" value="${i - 1}" />
+</c:url>
+
+<a href="${encodedUrl}" class="btn">${i}</a>
 </c:otherwise>
 </c:choose>
 
@@ -143,7 +155,13 @@
 		<a class="btn btn-secondary">다음</a>
 	</c:when>
 	<c:otherwise>
-		<a href="?page=${bookList.number+1 }" class="btn btn-primary">다음</a>
+<c:url value="/public/book/view/getPopularBookList" var="encodedUrl">
+    <c:param name="category" value="${category}" />
+    <c:param name="bookTitle" value="${title}" />
+    <c:param name="page" value="${bookList.number + 1}" />
+</c:url>
+
+<a href="${encodedUrl}" class="btn btn-primary">다음</a>
 	</c:otherwise>
 </c:choose>
 </div>
