@@ -39,12 +39,16 @@
                 </tbody>
             </table>
             <div class="col-12 mt-4 text-center">
-                <button id="btn-check" class="btn btn-outline-primary">확인</button>
-                <button id="btn-cancel" class="btn btn-outline-danger">반려</button>
+                
+                <button class="btn btn-requestCheck btn-outline-primary" data-request-num="${request.requestNum}">확인</button>
+                <button class="btn btn-requestCancel btn-outline-danger" data-request-num="${request.requestNum}">반려</button>
             </div>
             <hr class="my-4">
         </div>
     </div>
+
+    <!-- JavaScript 파일 추가 -->
+    <script src="/js/admin/request.js"></script>
 
 </body>
 </html>

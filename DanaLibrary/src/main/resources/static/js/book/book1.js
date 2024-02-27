@@ -101,10 +101,10 @@ let book1Obj = {
 		}).done(function(response) {
 			
 			if (response.status === 200) {
-                alert("리뷰 등록 완료1 " + response.data);
+                alert(response.data);
                 location = "/book/getBook/"+$("#bookNum").val();
             }else {
-                alert("리뷰 등록할 수 없음1 " + response.data);
+                alert(response.data);
 				location = "/book/getBook/"+$("#bookNum").val();
             }
 			

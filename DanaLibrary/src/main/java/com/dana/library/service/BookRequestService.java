@@ -30,5 +30,10 @@ public class BookRequestService {
 		Book_request request =bookRequestRepository.findById(requestNum).orElse(null);
 		return request;
 	}
+	
+	@Transactional
+	public void updateRequest(Book_request request) {
+		bookRequestRepository.save(request);
+	}
 
 }

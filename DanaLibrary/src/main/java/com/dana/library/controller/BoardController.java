@@ -54,24 +54,24 @@ public class BoardController {
 		return null;
 	}
 
-	// 글 목록 보기 페이지
+	// 글 목록 보기 
 	@GetMapping("/public/board/view/getBoardList")
-	public String getBoardList(@RequestParam(required = false) Category boardCategory, @RequestParam(required = false) String boardTitle, Model model, @PageableDefault(size=10,sort="boardNum",direction = Sort.Direction.DESC)Pageable pageable) {
+	public String getBoardList(@RequestParam(required = false) Category boardCategory, @RequestParam(required = false) 
+	String boardTitle, Model model, @PageableDefault(size=10,sort="boardNum",direction = Sort.Direction.DESC)Pageable pageable) {
 		
 		Page<Board> boardList = null;
 		
 		if(boardCategory == null && boardTitle == null) {
 			boardList = boardService.getBoardList(pageable);
-			//System.out.println(boardList.size());
+	
 		}else if(!boardCategory.equals(Category.TOTAL) && boardTitle == null) {
 			boardList = boardService.getBoardList(boardCategory,pageable);
-			//System.out.println(boardList.size());
+			
 		}else if(boardCategory.equals(Category.TOTAL) && boardTitle !=  null) {
 			boardList = boardService.getBoardList(boardTitle,pageable);
-			//System.out.println(boardList.size());
+			
 		}else if(!boardCategory.equals(Category.TOTAL) && boardTitle != null) {
 			boardList = boardService.getBoardList(boardCategory, boardTitle,pageable);
-			//System.out.println(boardList.size());
 		}
 		
 		int nowPage = boardList.getPageable().getPageNumber()+1; //0부터 시작
@@ -82,25 +82,6 @@ public class BoardController {
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
 		
-		System.out.println(nowPage);
-		System.out.println(startPage);
-		System.out.println(endPage);
-		/*
-		if(boardCategory == null && boardTitle == null) {
-			boardList = boardService.getBoardList();
-			//System.out.println(boardList.size());
-		}else if(!boardCategory.equals(Category.TOTAL) && boardTitle == null) {
-			boardList = boardService.getBoardList(boardCategory);
-			//System.out.println(boardList.size());
-		}else if(boardCategory.equals(Category.TOTAL) && boardTitle !=  null) {
-			boardList = boardService.getBoardList(boardTitle);
-			//System.out.println(boardList.size());
-		}else if(!boardCategory.equals(Category.TOTAL) && boardTitle != null) {
-			boardList = boardService.getBoardList(boardCategory, boardTitle);
-			//System.out.println(boardList.size());
-		}
-		*/
-		//List<Board> boardList = boardService.getBoardList();
 		System.out.println("boardList: " + boardList);
 		model.addAttribute("boardList", boardList);
 
@@ -118,7 +99,7 @@ public class BoardController {
 		return "board/boardList";
 	}
 
-	// 글 상세 보기 페이지
+	// 글 상세 보기
 	@GetMapping("/board/view/getBoard/{boardNum}")
 	public String getBoard(@PathVariable int boardNum, Model model) {
 		Board board = boardService.getBoardById(boardNum);
@@ -128,6 +109,7 @@ public class BoardController {
 		model.addAttribute("commentList", commentList);
 
 		if (board != null) {
+			//조회수 증가
 			boardService.increaseViews(board);
 		}
 

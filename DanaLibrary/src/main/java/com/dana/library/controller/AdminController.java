@@ -32,6 +32,7 @@ import com.dana.library.domain.Book_request;
 import com.dana.library.domain.Interested_book;
 import com.dana.library.domain.Rent;
 import com.dana.library.domain.Reserved_book;
+import com.dana.library.domain.Status;
 import com.dana.library.domain.User;
 import com.dana.library.dto.BookRequestDTO;
 import com.dana.library.dto.ResponseDTO;
@@ -254,5 +255,20 @@ public class AdminController {
 		model.addAttribute("request", request);
 		return "admin/requestEdit";
 	}
-
+	
+	@PutMapping("/admin/requestCheck/{requestNum}")
+	public @ResponseBody ResponseDTO<?> updateRequest(@PathVariable int requestNum){	
+		Book_request request = bookRequestService.getBookRequest(requestNum);
+		request.setRequestStatus(Status.ACCEPTED);
+		bookRequestService.updateRequest(request);
+		return new ResponseDTO<>(HttpStatus.OK.value(), "도서 신청 확인 완료");
+	}
+	
+	@PutMapping("/admin/requestCancel/{requestNum}")
+	public @ResponseBody ResponseDTO<?> cancelRequest(@PathVariable int requestNum){	
+		Book_request request = bookRequestService.getBookRequest(requestNum);
+		request.setRequestStatus(Status.DENIED);
+		bookRequestService.updateRequest(request);
+		return new ResponseDTO<>(HttpStatus.OK.value(), "도서 신청 반려");
+	}
 }

@@ -61,7 +61,7 @@
                     </c:choose>
                     <td>${request.user.userid}</td>
                     <td>${request.requestDate}</td>
-                    <td>${request.requestStatus}</td>
+                    <td>${request.requestStatus.status}</td>
                     <td>
                         <div class="admin-edit">
                             <img class="edit-btn" src="/image/icon/icon-edit-button.png"
