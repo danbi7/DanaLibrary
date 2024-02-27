@@ -29,7 +29,7 @@
 			</div>
 			<c:set var="count" value="${count + 1}" />
 			<c:if test="${count % 5 eq 0 or count eq fn:length(pastRentList)}">
-</div>
+
 </c:if>
 </c:forEach>
 </div>

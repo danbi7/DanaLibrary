@@ -32,6 +32,7 @@ import com.dana.library.domain.Book_request;
 import com.dana.library.domain.Interested_book;
 import com.dana.library.domain.Rent;
 import com.dana.library.domain.Reserved_book;
+import com.dana.library.domain.Status;
 import com.dana.library.domain.User;
 import com.dana.library.dto.BookRequestDTO;
 import com.dana.library.dto.ResponseDTO;
@@ -70,7 +71,7 @@ public class AdminController {
 	@Autowired
 	private ModelMapper modelMapper;
   
-  @Autowired
+	@Autowired
 	private BoardService boardService;
 
 
@@ -85,10 +86,13 @@ public class AdminController {
 		
 		List<Board> boardList = boardService.getBoardListDESC();
 		
+		List<Book_request> bookRequest = bookRequestService.getBookRequestList();
+		
 		model.addAttribute("bookList", bookList);
 		model.addAttribute("userList", userList);
 		model.addAttribute("rentList", rentList);
 		model.addAttribute("boardList", boardList);
+		model.addAttribute("bookRequest", bookRequest);
 		return "admin/admin";
 	}
 
@@ -243,5 +247,28 @@ public class AdminController {
 	public String bookRequest() {
 		return "admin/myPage/bookRequest";
 	}
-
+	
+	//도서 신청 상세 페이지 
+	@GetMapping("/view/requestEdit/{requestNum}")
+	public String getBookRequest(@PathVariable int requestNum, Model model) {
+		Book_request request = bookRequestService.getBookRequest(requestNum);
+		model.addAttribute("request", request);
+		return "admin/requestEdit";
+	}
+	
+	@PutMapping("/admin/requestCheck/{requestNum}")
+	public @ResponseBody ResponseDTO<?> updateRequest(@PathVariable int requestNum){	
+		Book_request request = bookRequestService.getBookRequest(requestNum);
+		request.setRequestStatus(Status.ACCEPTED);
+		bookRequestService.updateRequest(request);
+		return new ResponseDTO<>(HttpStatus.OK.value(), "도서 신청 확인 완료");
+	}
+	
+	@PutMapping("/admin/requestCancel/{requestNum}")
+	public @ResponseBody ResponseDTO<?> cancelRequest(@PathVariable int requestNum){	
+		Book_request request = bookRequestService.getBookRequest(requestNum);
+		request.setRequestStatus(Status.DENIED);
+		bookRequestService.updateRequest(request);
+		return new ResponseDTO<>(HttpStatus.OK.value(), "도서 신청 반려");
+	}
 }

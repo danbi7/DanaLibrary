@@ -25,10 +25,11 @@ public class ReserveController {
 	@Autowired
 	private BookService bookService;
 	
+	//도서 예약하기
 	@PostMapping("/reserve/reserveBook/{bookNum}")
 	public @ResponseBody ResponseDTO<?> reserveBook(@PathVariable int bookNum, HttpSession session){
 		User loginUser = (User)session.getAttribute("loginUser");
-		
+		//회원의 예약 도서 존재 여부 확인
 		if(reserveService.isReserved(loginUser)) {
 			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "이미 예약한 도서가 있습니다.");
 		}else {
