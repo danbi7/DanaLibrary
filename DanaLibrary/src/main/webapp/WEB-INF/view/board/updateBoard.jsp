@@ -5,7 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="com.dana.library.domain.*"%>
 
-<div class="container">
+<div class="container-board">
 	<h2>글 수정</h2>
 
 		<div class="form-group">
@@ -40,7 +40,7 @@
         });
     </script>
 		</div>
-		 <div class="text-center">
+		 <div class="text-center mt-4">
 		<button id="update-board" class="btn btn-primary">수정 완료</button>
 		<a href="/board/view/getBoard/${board.boardNum}"
 			class="btn btn-secondary">취소</a>

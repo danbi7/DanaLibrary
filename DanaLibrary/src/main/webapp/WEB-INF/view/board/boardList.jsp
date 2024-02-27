@@ -6,7 +6,7 @@
 <%@ include file="../layout/header1.jsp" %>
 <%@ include file="../layout/header2.jsp" %>
 
-
+<input type="hidden" value="${loginUser.userid }" id="userid">
 <div class="container-boardList mt-4" align="center">
 <div class="row justify-content-between">
 
@@ -54,8 +54,7 @@
 	<c:forEach items="${boardList.content }" var="boardList">
 	<tr>
 		<td>${boardList.boardNum }</td>
-		<td style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><a class="btn-increase"
-               data-comment-num="${boardList.boardNum}">${boardList.title}</a></td>
+		<td style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><a class="btn-increase" data-board-num="${boardList.boardNum}">${boardList.title}</a></td>
 		<td>${boardList.user.userid }</td>
 		<td>${boardList.category.category }</td>
 		<td>${boardList.regDate }</td>
