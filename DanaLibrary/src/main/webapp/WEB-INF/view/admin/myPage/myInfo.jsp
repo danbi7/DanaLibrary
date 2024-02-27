@@ -55,6 +55,9 @@
 		<button id="save-button" class="btn btn-outline-primary save-change">저장하기</button>
 		</div>
           <hr class="my-4">
-
+          <div class="col-12 text-center">
+             <a class="btn-deleteUser">회원 탈퇴</a></div>
+      </div>      
       </div>
-      </div>
+      
+      <script src="/js/admin/deleteUser.js"></script>
