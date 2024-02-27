@@ -115,8 +115,7 @@ width:20px;
 
 			<div class="container-tab">
 				<div class="tab">
-					<button class="tablinks" onclick="openMenu(event, 'home')">관리자
-						홈</button>
+					<button class="tablinks" onclick="openMenu(event, 'home')">도서 신청</button>
 					<button class="tablinks" onclick="openMenu(event, 'userManage')">회원
 						정보</button>
 					<button class="tablinks" onclick="openMenu(event, 'rentManage')">대출
@@ -129,6 +128,8 @@ width:20px;
 				</div>
 
 				<div id="home" class="tabcontent">
+
+					<%@ include file="requestManage.jsp"%>
 
 				</div>
 

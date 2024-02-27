@@ -115,27 +115,25 @@ public class BookController {
 			System.out.println("review : " + bookReview.toString());
 
 			reviewService.insertReview(bookReview);
-			return new ResponseDTO<>(HttpStatus.OK.value(), "도서 후기 컨트롤러 완료222");
+			return new ResponseDTO<>(HttpStatus.OK.value(),"도서 후기 등록 완료");
 		}
 	}
-
+	
+	//도서 목록 보기
 	@GetMapping("/public/book/view/getBookList")
-	public String getBookList(@RequestParam(required = false) String category, @RequestParam(required = false) String bookTitle, Model model, HttpSession session, @PageableDefault(size=5,sort="bookNum",direction = Sort.Direction.DESC)Pageable pageable) {
-		//List<Book> bookList = null;
+	public String getBookList(@RequestParam(required = false) String category, @RequestParam(required = false) String bookTitle, Model model, 
+			HttpSession session, @PageableDefault(size=5,sort="bookNum",direction = Sort.Direction.DESC)Pageable pageable) {
+		
 		Page<Book> bookList = null;
 		
 		if(category == null && bookTitle == null) {
 			bookList = bookService.getBookList(pageable);
-			//System.out.println(bookList.size());
 		}else if(category.equals("전체") && bookTitle != null) {
 			bookList = bookService.searchBookByTitle(bookTitle,pageable);
-			//System.out.println(bookList.size());
 		}else if(!category.equals("전체") && bookTitle == null) {
 			bookList = bookService.searchBookByCategory(category,pageable);
-			//System.out.println(bookList.size());
 		}else if(!category.equals("전체") && bookTitle != null) {
 			bookList = bookService.searchBookList(category, bookTitle,pageable);
-			//System.out.println(bookList.size());
 		}
 			
 		model.addAttribute("bookList", bookList);
@@ -148,11 +146,6 @@ public class BookController {
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
 		
-		System.out.println(nowPage);
-		System.out.println(startPage);
-		System.out.println(endPage);
-		
-		
 		User loginUser = (User)session.getAttribute("loginUser");
 		
 		Map<Book, Map<String, Object>> bookStatusMap = new HashMap<>();
@@ -162,13 +155,13 @@ public class BookController {
 	        
 	        int listStatus;
 	        if (reserveService.isReservedByUser(loginUser, book)) {
-	            listStatus = 1; // 내가 예약함->예약취소
+	            listStatus = 1; // 내가 예약함-> 예약취소 버튼
 	        } else if (rentService.isRentedByUser(loginUser, book)) {
-	            listStatus = 2; // 내가 대출함->반납
+	            listStatus = 2; // 내가 대출함-> 반납 버튼
 	        } else if (rentService.isRentedBySomeone(book)) {
-	            listStatus = 3; // 누군가 대출함->예약하기
+	            listStatus = 3; // 누군가 대출함-> 예약 버튼
 	        } else {
-	            listStatus = 4; // 대출하기
+	            listStatus = 4; // 대출 버튼
 	        }
 	        statusInfo.put("status", listStatus);
 	        
