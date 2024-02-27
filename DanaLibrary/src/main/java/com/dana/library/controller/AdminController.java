@@ -88,11 +88,14 @@ public class AdminController {
 		
 		List<Book_request> bookRequest = bookRequestService.getBookRequestList();
 		
+		List<Reserved_book> reserve = reserveService.getResersveList();
+		
 		model.addAttribute("bookList", bookList);
 		model.addAttribute("userList", userList);
 		model.addAttribute("rentList", rentList);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("bookRequest", bookRequest);
+		model.addAttribute("reserveList", reserve);
 		return "admin/admin";
 	}
 

@@ -144,7 +144,7 @@ width:20px;
 				</div>
 
 				<div id="reserveManage" class="tabcontent">
-					<h3>예약 정보 내용</h3>
+					<%@ include file="reserveManage.jsp"%>
 				</div>
 
 				<div id="bookManage" class="tabcontent">

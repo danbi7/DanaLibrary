@@ -103,5 +103,10 @@ public class ReserveService {
 	public int reserveTurn(int bookNum) {
 		return reserveRepository.findAllByBook_BookNum(bookNum).size();
 	}
+	
+	@Transactional
+	public List<Reserved_book> getResersveList(){
+		return reserveRepository.findAll();
+	}
 
 }
