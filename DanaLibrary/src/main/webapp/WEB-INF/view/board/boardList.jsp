@@ -54,7 +54,8 @@
 	<c:forEach items="${boardList.content }" var="boardList">
 	<tr>
 		<td>${boardList.boardNum }</td>
-		<td style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><a href="/board/view/getBoard/${boardList.boardNum }">${boardList.title }</a></td>
+		<td style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><a class="btn-increase"
+               data-comment-num="${boardList.boardNum}">${boardList.title}</a></td>
 		<td>${boardList.user.userid }</td>
 		<td>${boardList.category.category }</td>
 		<td>${boardList.regDate }</td>
@@ -65,6 +66,8 @@
 	
   </table>
   </div>
+  
+  <script src="/js/board/increaseViews.js"></script>
   
   <div class="mt-2">
 <c:choose>

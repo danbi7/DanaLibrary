@@ -21,4 +21,6 @@ public interface InterestedBookRepository extends JpaRepository<Interested_book,
 	
 	List<Interested_book> findByBook(Book book);
 
+	void deleteByBookAndUser(Book book, User loginUser);
+
 }
