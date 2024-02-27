@@ -7,14 +7,12 @@ let updateBoardObject = {
       });
    },
    updateboard: function() {
-
       let board = {
          category: $("#category").val(),
          title: $("#title").val(),
          content: $("#content").val(),
          boardNum: $("#boardNum").val()
       };
-      
       
       $.ajax({
          type: "PUT",
@@ -24,7 +22,7 @@ let updateBoardObject = {
       }).done(function(response) { // done 대신 success 사용
          console.log(response);
          alert("글 수정완료");
-         location.href = "/public/board/view/getBoardList";
+         location.href = "/public/board/view/getBoardList"; // location 속성 수정
       }).fail(function(error) { // fail 대신 error 사용
 
          alert("에러 발생: " + error.responseText);
