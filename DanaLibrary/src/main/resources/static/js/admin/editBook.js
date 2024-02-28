@@ -1,17 +1,18 @@
-let addBook = {
+let editBook = {
 
     init: function() {
         let _this = this;
 
-        $(".btn-add").on("click", function() {
-
-            _this.insertBook();
+        $(".btn-edit").on("click", function() {
+			alert("확인");
+            _this.updateBook();
         });
     },
 
 
-    insertBook: function() {
+    updateBook: function() {
         var formData = new FormData();
+        formData.append("bookNum", $("#bookNum").val());
         formData.append("title", $("#title").val());
         formData.append("author", $("#author").val());
         formData.append("publisher", $("#publisher").val());
@@ -22,21 +23,21 @@ let addBook = {
        	formData.append("file", $("#file")[0].files[0]);
 
         $.ajax({
-            type: "POST",
-          	url: "/admin/addBook",
+            type: "PUT",
+          	url: "/admin/updateBook/" + $("#bookNum").val(),
             data: formData,
             processData: false,
             contentType: false,
             success: function (response) {
-                alert("도서를 추가하였습니다");
+                alert("도서 정보가 수정되었습니다.");
                 window.close();
             },
             error: function (error) {
-                alert("도서 추가를 실패하였습니다");
+                alert("도서 정보 수정에 실패했습니다.");
             }
         });
     }
 
 }
 
-addBook.init();
+editBook.init();
