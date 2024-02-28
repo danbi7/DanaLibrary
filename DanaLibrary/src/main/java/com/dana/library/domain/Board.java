@@ -37,10 +37,10 @@ public class Board {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int boardNum;
 	
-	@Column(nullable = false, length = 45)
+	@Column(nullable = false, length = 100)
 	private String title;
 	
-	@Column(nullable = false, length = 200)
+	@Column(nullable = false, length = 1000)
 	private String content;
 	
 	@ManyToOne(fetch = FetchType.EAGER)

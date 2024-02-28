@@ -28,10 +28,10 @@
 					style="width: 100%" data-booknum="${book.book.bookNum }">관심
 					도서 등록 해제</button>
 			</div>
-			<c:set var="count" value="${count + 1}" />
-			<c:if test="${count % 5 eq 0 or count eq fn:length(pastRentList)}">
-</div>
-			</c:if>
+			<c:set var="count" value="${count + 1}"/>
+                <c:if test="${count % 5 eq 0 or count eq fn:length(interestedBookList)}">
+                    </div>
+                </c:if>
 		</c:forEach>
 </c:if>
 </div>

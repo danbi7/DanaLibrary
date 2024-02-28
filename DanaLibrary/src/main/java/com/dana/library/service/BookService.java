@@ -1,6 +1,8 @@
 package com.dana.library.service;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -50,6 +52,12 @@ public class BookService {
 	@Transactional
 	public Page<Book> getBookListOrderByRentCount(Pageable pageable){
 		return bookRepository.findAllByOrderByRentCountDesc(pageable);
+	}
+	
+	//전체 도서 가져오기
+	@Transactional
+	public List<Book> getBookAll(){
+		return bookRepository.findAll();
 	}
 	
 	//대출 횟수 순으로 제목으로 검색

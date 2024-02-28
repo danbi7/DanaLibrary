@@ -95,7 +95,7 @@ public class BookController {
 		return "book/getBook";
 	}
 
-	// 책 리뷰 등록
+	// 도서 후기 등록(도서 대출 내역이 있어야 후기 작성 가능)
 	@PostMapping("/review/insertReview")
 	public @ResponseBody ResponseDTO<?> insertReview(@RequestBody Book_review bookReview, HttpSession session) {
 		System.out.println("insertReview 컨트롤러");
@@ -105,16 +105,14 @@ public class BookController {
 		Book gettedBook = (Book) session.getAttribute("gettedBook");
 		
 		List<Rent> rentList = rentService.haveRented(gettedBook, loginUser);
-		System.out.println(rentList.toString());
+
 		
 		if(rentList.isEmpty()) {
 			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(),"도서 대출 내역이 있어야 후기를 작성할 수 있습니다");
 		}else {
 			bookReview.setUser(loginUser);
 			bookReview.setBook(gettedBook);
-			System.out.println("review : " + bookReview.toString());
-
-		
+			reviewService.insertReview(bookReview);
 			return new ResponseDTO<>(HttpStatus.OK.value(),"도서 후기 등록 완료");
 		}
 	}

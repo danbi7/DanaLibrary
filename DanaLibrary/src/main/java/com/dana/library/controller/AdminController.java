@@ -77,10 +77,10 @@ public class AdminController {
 
 	// 관리자페이지 불러오기
 	@GetMapping("/view/admin")
-	public String admin(Model model, Pageable pageable) {
+	public String admin(Model model) {
 		List<User> userList = userService.getUserList();
 
-		Page<Book> bookList = bookService.getBookList(pageable);
+		List<Book> bookList = bookService.getBookAll();
 
 		List<Rent> rentList = rentService.getRentListDESC();
 
