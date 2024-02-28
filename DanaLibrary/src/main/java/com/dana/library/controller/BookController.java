@@ -112,6 +112,7 @@ public class BookController {
 		}else {
 			bookReview.setUser(loginUser);
 			bookReview.setBook(gettedBook);
+
 			reviewService.insertReview(bookReview);
 			return new ResponseDTO<>(HttpStatus.OK.value(),"도서 후기 등록 완료");
 		}
