@@ -5,19 +5,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="com.dana.library.domain.*"%>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 <div class="container-board">
 	<h2>글 수정</h2>
-=======
-<div class="container">
-   <h2>글 수정</h2>
->>>>>>> 378949c8204a914ae95fbff18d9b47e6706ef8c3
-=======
-<div class="container-board">
-	<h2>글 수정</h2>
->>>>>>> bab38cda267e2827922595aa362c90834b7134eb
-
 		<div class="form-group">
 			<label for="title">제목</label> 
 			<input type="text" class="form-control"
@@ -26,13 +15,11 @@
 		<div class="form-group">
 			<label for="category">카테고리</label> <select class="form-control"
 				id="category" name="category">
-				<c:forEach var="category" items="${Category.values()}">
-
-					<option value="${category}">${category.category}</option>
-
-				</c:forEach>
-
-			
+					<c:if test="${loginUser.userStatus eq Status.ADMIN }">
+					<option value="${Category.NOTICE }">공지글</option></c:if>
+					<c:if test="${loginUser.userStatus eq Status.ACTIVE }">
+					<option value="${Category.FREE}">자유글</option>
+					<option value="${Category.QUESTION }">질문글</option></c:if>
 			</select>
 		</div>
 		<input type="hidden"value="${board.boardNum }" id="boardNum" readonly>
@@ -50,28 +37,13 @@
             });
         });
     </script>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> bab38cda267e2827922595aa362c90834b7134eb
-		</div>
+
 		 <div class="text-center mt-4">
 		<button id="update-board" class="btn btn-primary">수정 완료</button>
 		<a href="/board/view/getBoard/${board.boardNum}"
 			class="btn btn-secondary">취소</a>
 	</div>
-<<<<<<< HEAD
-=======
-
-      </div>
-       <div class="text-center">
-      <button id="update-board" class="btn btn-primary">수정 완료</button>
-      <a href="/board/view/getBoard/${board.boardNum}"
-         class="btn btn-secondary">취소</a>
-   </div>
->>>>>>> 378949c8204a914ae95fbff18d9b47e6706ef8c3
-=======
->>>>>>> bab38cda267e2827922595aa362c90834b7134eb
+	</div>
 
 <%@ include file="../layout/footer.jsp"%>
 <script src="/js/board/updateBoard.js"></script>
