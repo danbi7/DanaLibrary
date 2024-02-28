@@ -230,8 +230,10 @@ public class AdminController {
 	    }
 	}
 	
+	//희망 도서 신청
 	@PostMapping("/admin/bookRequest")
-	public @ResponseBody ResponseDTO<?> bookRequest(@Valid @RequestBody BookRequestDTO bookDTO, BindingResult bindingResult, HttpSession session) {
+	public @ResponseBody ResponseDTO<?> bookRequest(@Valid @RequestBody BookRequestDTO bookDTO, 
+			BindingResult bindingResult, HttpSession session) {
 		Book_request book = modelMapper.map(bookDTO, Book_request.class);
 		
 		User user = (User) session.getAttribute("loginUser");
