@@ -131,7 +131,7 @@
     <ul class="pagination justify-content-center">
   <c:choose>
 	<c:when test="${bookList.first }">
-		<a class="btn btn-secondary">이전</a>
+		<a class="btn btn-outline-secondary" style="margin-right: 1px;">이전</a>
 	</c:when>
 	<c:otherwise>
 	<c:url value="/public/book/view/getBookList" var="encodedUrl">
@@ -139,7 +139,7 @@
     <c:param name="bookTitle" value="${title}" />
     <c:param name="page" value="${bookList.number - 1}" />
 </c:url>
-		<a href="${encodedUrl}" class="btn btn-primary">이전</a>
+		<a href="${encodedUrl}" class="btn btn-outline-primary" style="margin-right: 1px;">이전</a>
 	</c:otherwise>
 </c:choose>
   
@@ -168,7 +168,7 @@
 
 <c:choose>
 	<c:when test="${bookList.last }">
-		<a class="btn btn-secondary">다음</a>
+		<a class="btn btn-outline-secondary">다음</a>
 	</c:when>
 	<c:otherwise>
 <c:url value="/public/book/view/getBookList" var="encodedUrl">
@@ -177,7 +177,7 @@
     <c:param name="page" value="${bookList.number + 1}" />
 </c:url>
 
-<a href="${encodedUrl}" class="btn btn-primary">다음</a>
+<a href="${encodedUrl}" class="btn btn-outline-primary">다음</a>
 	</c:otherwise>
 </c:choose>
 </ul>
