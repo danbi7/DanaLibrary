@@ -108,11 +108,6 @@ public class BoardController {
 		List<Comment> commentList = commentService.getComment(board);
 		model.addAttribute("commentList", commentList);
 
-		if (board != null) {
-			// 조회수 증가
-			boardService.increaseViews(board);
-		}
-
 		return "board/board";
 	}
 
