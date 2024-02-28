@@ -115,13 +115,19 @@
             <hr>
         </c:forEach>
     </div>
- <div class="mt-2">
+  <div class="mt-4">
+    <ul class="pagination justify-content-center">
   <c:choose>
 	<c:when test="${bookList.first }">
 		<a class="btn btn-secondary">이전</a>
 	</c:when>
 	<c:otherwise>
-		<a href="?page=${bookList.number-1 }" class="btn btn-primary">이전</a>
+	<c:url value="/public/book/view/getPopularBookList" var="encodedUrl">
+    <c:param name="category" value="${category}" />
+    <c:param name="bookTitle" value="${title}" />
+    <c:param name="page" value="${bookList.number - 1}" />
+</c:url>
+		<a href="${encodedUrl}" class="btn btn-primary">이전</a>
 	</c:otherwise>
 </c:choose>
   
@@ -134,8 +140,7 @@
     <c:param name="page" value="${i - 1}" />
 </c:url>
 
-<a href="${encodedUrl}" class="btn">${i}</a>
-</c:when>
+<li class="page-item"><a href="${encodedUrl}" class="page-link"><strong>${i}</strong></a></li></c:when>
 <c:otherwise>
 
 <c:url value="/public/book/view/getPopularBookList" var="encodedUrl">
@@ -144,10 +149,9 @@
     <c:param name="page" value="${i - 1}" />
 </c:url>
 
-<a href="${encodedUrl}" class="btn">${i}</a>
+<li class="page-item"><a href="${encodedUrl}" class="page-link">${i}</a></li>
 </c:otherwise>
 </c:choose>
-
 </c:forEach>
 
 <c:choose>
@@ -164,6 +168,7 @@
 <a href="${encodedUrl}" class="btn btn-primary">다음</a>
 	</c:otherwise>
 </c:choose>
+</ul>
 </div>
 </div>
 <script src="/js/book/book2.js"></script>
