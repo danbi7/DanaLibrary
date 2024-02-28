@@ -12,7 +12,7 @@
 			<c:if test="${loginUser.userStatus ne Status.ADMIN }">
 			<li class="nav-item"><a href="/view/myPage" class="nav-link">나의 도서관</a></li></c:if>
 			<c:if test="${loginUser.userStatus eq Status.ADMIN }">
-			<li class="nav-item"><a href="/view/admin" class="nav-link">나의 도서관</a></li></c:if>
+			<li class="nav-item"><a href="/view/admin" class="nav-link">관리자 페이지</a></li></c:if>
 			<li class="nav-item"><a href="/public/board/view/getBoardList" class="nav-link">열린 마당</a></li>
 		</ul>
 	</header>
