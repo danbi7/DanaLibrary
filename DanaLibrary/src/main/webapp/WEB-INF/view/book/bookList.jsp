@@ -128,6 +128,7 @@
 <c:forEach begin="${startPage }" end="${endPage }" var="i">
 <c:choose>
 <c:when test="${nowPage == i }">
+<<<<<<< HEAD
 <c:url value="/public/book/view/getBookList" var="encodedUrl">
     <c:param name="category" value="${category}" />
     <c:param name="bookTitle" value="${title}" />
@@ -145,6 +146,13 @@
 </c:url>
 
 <a href="${encodedUrl}" class="btn">${i}</a>
+=======
+<a href="?page=${i-1}" class="btn">${i }</a>
+</c:when>
+<c:otherwise>
+
+<a href="?page=${i-1}" class="btn">${i }</a>
+>>>>>>> 378949c8204a914ae95fbff18d9b47e6706ef8c3
 </c:otherwise>
 </c:choose>
 

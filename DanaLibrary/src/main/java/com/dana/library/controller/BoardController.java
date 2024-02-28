@@ -34,25 +34,25 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class BoardController {
 
-	@Autowired
-	private BoardService boardService;
+   @Autowired
+   private BoardService boardService;
 
-	@Autowired
-	private CommentService commentService;
+   @Autowired
+   private CommentService commentService;
 
-	// 글 등록 페이지
-	@GetMapping("/board/view/insertBoard")
-	public String insertBoard() {
-		return "board/insertBoard";
-	}
+   // 글 등록 페이지
+   @GetMapping("/board/view/insertBoard")
+   public String insertBoard() {
+      return "board/insertBoard";
+   }
 
-	// 글 등록 기능
-	@PostMapping("/board/writePost")
-	public @ResponseBody ResponseDTO<?> writePost(@RequestBody Board board, HttpSession session) {
-		board.setUser((User) session.getAttribute("loginUser"));
-		boardService.writeBoard(board);
-		return null;
-	}
+   // 글 등록 기능
+   @PostMapping("/board/writePost")
+   public @ResponseBody ResponseDTO<?> writePost(@RequestBody Board board, HttpSession session) {
+      board.setUser((User) session.getAttribute("loginUser"));
+      boardService.writeBoard(board);
+      return null;
+   }
 
 	// 글 목록 보기
 	@GetMapping("/public/board/view/getBoardList")
@@ -93,29 +93,29 @@ public class BoardController {
 	@PostMapping("/board/getBoardList")
 	public String searchBoard(Model model) {
 
-		List<Board> boardList = boardService.getBoardList();
+      List<Board> boardList = boardService.getBoardList();
 
-		model.addAttribute("boardList", boardList);
+      model.addAttribute("boardList", boardList);
 
-		return "board/boardList";
-	}
+      return "board/boardList";
+   }
 
-	// 글 상세 보기
-	@GetMapping("/board/view/getBoard/{boardNum}")
-	public String getBoard(@PathVariable int boardNum, Model model) {
-		Board board = boardService.getBoardById(boardNum);
-		model.addAttribute("board", board);
+   // 글 상세 보기
+   @GetMapping("/board/view/getBoard/{boardNum}")
+   public String getBoard(@PathVariable int boardNum, Model model) {
+      Board board = boardService.getBoardById(boardNum);
+      model.addAttribute("board", board);
 
-		List<Comment> commentList = commentService.getComment(board);
-		model.addAttribute("commentList", commentList);
+      List<Comment> commentList = commentService.getComment(board);
+      model.addAttribute("commentList", commentList);
 
 		if (board != null) {
 			// 조회수 증가
 			boardService.increaseViews(board);
 		}
 
-		return "board/board";
-	}
+      return "board/board";
+   }
 
 	// 글 수정 페이지
 	@GetMapping("/board/view/updateBoard/{boardNum}")
@@ -139,28 +139,28 @@ public class BoardController {
 		return new ResponseDTO<>(HttpStatus.OK.value(), "글 삭제 컨트롤러 실행");
 	}
 
-	// 글 추천 기능
-	@PostMapping("/board/likesBoard/{boardNum}")
-	public @ResponseBody ResponseDTO<?> likesBoard(@PathVariable int boardNum, HttpSession session) {
-		User user = (User) session.getAttribute("loginUser");
-		Board board = boardService.getBoardById(boardNum);
-		if (user == null || board == null) {
-			return null;
-		}
-		Likes likes = boardService.getLikesByUserNumAndBoardNum(user, board);
-		if (likes == null) {
-			likes = new Likes();
-			likes.setUserNum(user);
-			likes.setBoardNum(board);
-			boardService.likesBoard(likes);
-			int likesCount = boardService.getLikesCount(board);
-			boardService.increaseLikes(board, likesCount);
-			return new ResponseDTO<>(HttpStatus.OK.value(), "글 추천 컨트롤러 실행");
-		} else {
-			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "중복 추천을 불가능합니다.");
-		}
+   // 글 추천 기능
+   @PostMapping("/board/likesBoard/{boardNum}")
+   public @ResponseBody ResponseDTO<?> likesBoard(@PathVariable int boardNum, HttpSession session) {
+      User user = (User) session.getAttribute("loginUser");
+      Board board = boardService.getBoardById(boardNum);
+      if (user == null || board == null) {
+         return null;
+      }
+      Likes likes = boardService.getLikesByUserNumAndBoardNum(user, board);
+      if (likes == null) {
+         likes = new Likes();
+         likes.setUserNum(user);
+         likes.setBoardNum(board);
+         boardService.likesBoard(likes);
+         int likesCount = boardService.getLikesCount(board);
+         boardService.increaseLikes(board, likesCount);
+         return new ResponseDTO<>(HttpStatus.OK.value(), "글 추천 컨트롤러 실행");
+      } else {
+         return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "중복 추천을 불가능합니다.");
+      }
 
-	}
+   }
 
 	// 글 조회수 기능
 	@PutMapping("/board/view/updateViews/{boardNum}")
@@ -174,3 +174,4 @@ public class BoardController {
 	}
 
 }
+
