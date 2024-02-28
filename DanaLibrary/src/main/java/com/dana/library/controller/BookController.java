@@ -151,7 +151,7 @@ public class BookController {
 		
 		User loginUser = (User)session.getAttribute("loginUser");
 		
-		Map<Book, Map<String, Object>> bookStatusMap = new HashMap<>();
+		Map<Book, Map<String, Object>> bookStatusMap = new LinkedHashMap<>();
 
 	    for (Book book : bookList) {
 	        Map<String, Object> statusInfo = new HashMap<>();
