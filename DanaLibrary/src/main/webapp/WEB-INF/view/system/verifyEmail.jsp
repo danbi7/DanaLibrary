@@ -41,7 +41,7 @@
 							<div class="col-2" style="padding-left: 0px;">
 
 								<button class="btn btn-outline-secondary" id="btn-verify"
-									style="height: 58px; border-top-left-radius: 0px; border-bottom-left-radius: 0px;">인증</button>
+									style="width:100%; height: 58px; font-size:smaller; border-top-left-radius: 0px; border-bottom-left-radius: 0px;">인증</button>
 
 							</div>
 

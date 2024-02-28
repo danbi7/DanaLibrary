@@ -33,7 +33,7 @@
 							</div>
 
 							<div class="col-2" style="padding-left: 0px">
-								<button type="button" class="btn btn-secondary" id="btn-idCheck"
+								<button type="button" class="btn btn-outline-secondary" id="btn-idCheck"
 									style="height: 58px; border-top-left-radius: 0px; border-bottom-left-radius: 0px; font-size: smaller;">중복
 									확인</button>
 							</div>
@@ -86,8 +86,8 @@
 							</div>
 
 							<div class="col-2" style="padding-left: 0px">
-								<button type="button" class="btn btn-secondary" id="btn-send"
-									style="height: 58px; border-top-left-radius: 0px; border-bottom-left-radius: 0px">
+								<button type="button" class="btn btn-outline-secondary" id="btn-send"
+									style="width:100%; height: 58px; font-size:smaller; border-top-left-radius: 0px; border-bottom-left-radius: 0px">
 									인증</button>
 							</div>
 							
@@ -107,8 +107,8 @@
 							</div>
 
 							<div class="col-2" style="padding-left: 0px">
-								<button type="button" class="btn btn-secondary" id="btn-numCheck"
-									style="height: 58px; border-top-left-radius: 0px; border-bottom-left-radius: 0px">
+								<button type="button" class="btn btn-outline-secondary" id="btn-numCheck"
+									style="width:100%; height: 58px; font-size:smaller; border-top-left-radius: 0px; border-bottom-left-radius: 0px">
 									확인</button>
 							</div>
 

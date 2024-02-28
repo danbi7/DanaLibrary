@@ -66,6 +66,7 @@
     	    success: function(response) {
     	        // 성공적으로 처리할 경우 페이지를 새로 고치거나 UI를 업데이트합니다.
     	        alert("게시판이 성공적으로 삭제되었습니다.");
+    	        location.reload();
     	    },
     	    error: function(error) {
     	        alert('게시판 삭제 중 오류가 발생했습니다.');
