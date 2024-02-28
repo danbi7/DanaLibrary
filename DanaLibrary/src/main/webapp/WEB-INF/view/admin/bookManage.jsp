@@ -36,7 +36,7 @@
 			</thead>
 			
 			<tbody>
-			 <c:forEach var="book" items="${bookList.content}">
+			 <c:forEach var="book" items="${bookList}">
 				<tr>
 					<td>${book.bookNum}</td>
 					<td> <c:choose>
