@@ -121,7 +121,7 @@ public class BookController {
 	//도서 목록 보기
 	@GetMapping("/public/book/view/getBookList")
 	public String getBookList(@RequestParam(required = false) String category, @RequestParam(required = false) String bookTitle, Model model, 
-			HttpSession session, @PageableDefault(size=5,sort="bookNum",direction = Sort.Direction.DESC)Pageable pageable) {
+			HttpSession session, @PageableDefault(size=10,sort="bookNum",direction = Sort.Direction.DESC)Pageable pageable) {
 		
 		Page<Book> bookList = null;
 		
@@ -180,7 +180,7 @@ public class BookController {
 
 	//인기 도서순으로 getBookList
 	@GetMapping("/public/book/view/getPopularBookList")
-	public String getPopularBookList(@RequestParam(required = false) String category, @RequestParam(required = false) String bookTitle, Model model, HttpSession session, @PageableDefault(size=5,sort="bookNum",direction = Sort.Direction.DESC)Pageable pageable) {
+	public String getPopularBookList(@RequestParam(required = false) String category, @RequestParam(required = false) String bookTitle, Model model, HttpSession session, @PageableDefault(size=10,sort="bookNum",direction = Sort.Direction.DESC)Pageable pageable) {
 		//List<Book> bookList = null;
 		Page<Book> bookList = bookService.getBookListOrderByRentCount(pageable);
 		for (Book book : bookList.getContent()) {
@@ -271,7 +271,6 @@ public class BookController {
 
 	@DeleteMapping("/review/deleteReview/{reviewNum}")
 	public @ResponseBody ResponseDTO<?> deleteReview(@PathVariable int reviewNum){
-		//System.out.println("북 리뷰!!!!!!!!!!" + bookReview.toString());
 		reviewService.deleteReview(reviewNum);
 		return new ResponseDTO<>(HttpStatus.OK.value(),"리뷰 삭제하기");
 	}

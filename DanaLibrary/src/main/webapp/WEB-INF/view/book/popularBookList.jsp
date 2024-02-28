@@ -45,6 +45,18 @@
     </div>
 
     <div class="mt-3" style="border-top: 7px solid #205295; padding-top: 20px">
+    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb breadcrumb-chevron bg-body-tertiary mx-4">
+      <li class="breadcrumb-item">
+		인기 도서 목록
+      </li>
+      <li class="breadcrumb-item">
+<c:if test="${category == null || category == ''}">전체</c:if>
+      		 <c:if test="${category ne null }">${category }</c:if>
+		</li>
+    </ol>
+  </nav>
+ <hr>
         <c:forEach var="book" items="${bookStatusMap.keySet()}">
             <div class="row">
                 <div class="col-md-3" align="center"
