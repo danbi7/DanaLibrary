@@ -51,7 +51,6 @@ let book2Obj = {
 		$.ajax({
 			type: "POST",
 			url: "/rent/rentBook/" + bookNumber,
-			//data: JSON.stringify($("#bookNum").val()),
 			contentType: "application/json; charset=utf-8"
 		}).done(function(response) {
 			alert(response.data);
@@ -95,7 +94,6 @@ let book2Obj = {
 		$.ajax({
 			type: "PUT",
 			url: "/rent/returnBook/" + bookNumber,
-			//data: JSON.stringify($("#bookNum").val()),
 			contentType: "application/json; charset=utf-8"
 		}).done(function(response) {
 			alert(response.data);
@@ -109,7 +107,6 @@ let book2Obj = {
 		$.ajax({
 			type: "POST",
 			url: "/book/addInterestedBook/" + bookNumber,
-			//data: JSON.stringify($("#bookNum").val()),
 			contentType: "application/json; charset=utf-8"
 		}).done(function(response) {
 			alert(response.data);
@@ -124,7 +121,6 @@ let book2Obj = {
 		$.ajax({
 			type: "DELETE",
 			url: "/book/removeInterestedBook/" + bookNumber,
-			//data: JSON.stringify($("#bookNum").val()),
 			contentType: "application/json; charset=utf-8"
 		}).done(function(response) {
 			alert(response.data);

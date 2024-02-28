@@ -51,7 +51,6 @@
 	<div class="form-control custom-textarea mb-3" id="content">${board.content }</div>
 
 	<div class="board-button text-center">
-		<button class="btn btn-secondary" onclick="history.back()">뒤로가기</button>
 		<c:if test="${sessionScope.loginUser.userid != null }">
 			<c:if test="${sessionScope.loginUser.userid eq board.user.userid }">
 				<a href="/board/view/updateBoard/${board.boardNum }"
@@ -60,38 +59,39 @@
 			</c:if>
 		</c:if>
 		<button id="btn-like" class="btn btn-secondary">추천하기</button>
-</div>
+		<a class="btn btn-secondary" href="/public/board/view/getBoardList">뒤로가기</a>
 
-		<div class="form-group mb-3">
-			<label for="comment-content"></label>
-			<textarea id="comment-content" name="content"
-				style="width: 100%; height: 80px;" placeholder="댓글을 입력하세요..."></textarea>
-		</div>
-
-		<input type="hidden" id="boardNum" value="${board.boardNum}">
-		<div class="text-center">
-			<button id="btn-insert-comment" type="submit" class="btn btn-primary"
-				
-				data-user-id="${sessionScope.loginUser.userid}">댓글 등록</button>
-		</div>
-
-
-
-
-<c:forEach items="${commentList}" var="comment">
-	<div class="comment-container">
-		<div class="comment-meta">
-			작성자: <strong class="comment-author">${comment.user.userid}</strong> |
-			작성일: ${comment.regDate} <input type="hidden" class="commentNum"
-				value="${comment.commentNum}">
-		</div>
-		<div class="comment-content">${comment.content}</div>
-		<c:if test="${sessionScope.loginUser.userid eq comment.user.userid}">
-			<button class="btn btn-sm btn-primary btn-delete-comment"
-				data-comment-num="${comment.commentNum}">댓글 삭제</button>
-		</c:if>
 	</div>
-</c:forEach>
+
+	<div class="form-group mb-3">
+		<label for="comment-content"></label>
+		<textarea id="comment-content" name="content"
+			style="width: 100%; height: 80px;" placeholder="댓글을 입력하세요..."></textarea>
+	</div>
+
+	<input type="hidden" id="boardNum" value="${board.boardNum}">
+	<div class="text-center">
+		<button id="btn-insert-comment" type="submit" class="btn btn-primary"
+			data-user-id="${sessionScope.loginUser.userid}">댓글 등록</button>
+	</div>
+
+
+
+
+	<c:forEach items="${commentList}" var="comment">
+		<div class="comment-container">
+			<div class="comment-meta">
+				작성자: <strong class="comment-author">${comment.user.userid}</strong>
+				| 작성일: ${comment.regDate} <input type="hidden" class="commentNum"
+					value="${comment.commentNum}">
+			</div>
+			<div class="comment-content">${comment.content}</div>
+			<c:if test="${sessionScope.loginUser.userid eq comment.user.userid}">
+				<button class="btn btn-sm btn-primary btn-delete-comment"
+					data-comment-num="${comment.commentNum}">댓글 삭제</button>
+			</c:if>
+		</div>
+	</c:forEach>
 
 </div>
 <script src="/js/board/likesBoard.js"></script>

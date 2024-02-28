@@ -66,53 +66,53 @@
 
 <div class="container-main" style="margin-top: 30px;">
 <div class="book-container">
-<img src="/image/book/fish.jpg">
-	<p class="card-text"><strong>물고기는 존재하지 않는다</strong></p>
+<a href="/book/getBook/8"><img src="/image/book/fish.jpg"></a>
+	<p class="card-text"><strong><a href="/book/getBook/8">물고기는 존재하지 않는다</a></strong></p>
 </div>
 <div class="book-container">
-<img src="/image/book/eternal.jpg">
-	<p class="card-text"><strong>영원한 현재의 철학</strong></p>
+<a href="/book/getBook/27"><img src="/image/book/1708927181950_powerofmath.jpg"></a>
+	<p class="card-text"><strong><a href="/book/getBook/27">수학의 힘</a></strong></p>
 </div>
 <div class="book-container">
-<img src="/image/book/knowledge0.jpg">
-	<p class="card-text"><strong>지적 대화를 위한 넓고 얕은 지식 0</strong></p>
+<a href="/book/getBook/55"><img src="/image/book/1708929841371_XL(19).jpg"></a>
+	<p class="card-text"><strong><a href="/book/getBook/55">사라진 것들</a></strong></p>
 </div>
 <div class="book-container">
-<img src="/image/book/knowledge1.jpg">
-	<p class="card-text"><strong>지적 대화를 위한 넓고 얕은 지식 1</strong></p>
+<a href="/book/getBook/66"><img src="/image/book/1708930261425_guedo.jpg"></a>
+	<p class="card-text"><strong><a href="/book/getBook/66">과학이 필요한 시간</a></strong></p>
 </div>
 <div class="book-container">
-<img src="/image/book/knowledge2.jpg">
-	<p class="card-text"><strong>지적 대화를 위한 넓고 얕은 지식 2</strong></p>
+<a href="/book/getBook/68"><img src="/image/book/1709011608540_4walls.jpg"></a>
+	<p class="card-text"><strong><a href="/book/getBook/68">제 4의 벽</a></strong></p>
 </div>
 </div>
 
 <div class="container-main my-4">
 <div class="book-container">
-<img src="/image/book/medicalbest.jpg">
-	<p class="card-text"><strong>의학의 대가들</strong></p>
+<a href="/book/getBook/9"><img src="/image/book/cosmos.jpg"></a>
+	<p class="card-text"><strong><a href="/book/getBook/9">코스모스</a></strong></p>
 </div>
 <div class="book-container">
-<img src="/image/book/selfishgene.jpg">
-	<p class="card-text"><strong>이기적 유전자</strong></p>
+<a href="/book/getBook/12"><img src="/image/book/TheStroryOfUsAll.jpg"></a>
+	<p class="card-text"><strong><a href="/book/getBook/12">이주하는 인류 - 인구의 대이동과 그들이 써내려간 역동의 세계사</a></strong></p>
 </div>
 <div class="book-container">
-<img src="/image/book/show.jpg">
-	<p class="card-text"><strong>쇼펜하우어의 인생 수업</strong></p>
+<a href="/book/getBook/43"><img src="/image/book/1708928826819_XL(15).jpg"></a>
+	<p class="card-text"><strong><a href="/book/getBook/43">금과 부동산이 100% 오를 때, 200% 오른 수익률 1위 해외 ETF 백과사전</a></strong></p>
 </div>
 <div class="book-container">
-<img src="/image/book/wing.jpg">
-	<p class="card-text"><strong>날개가 전해 준 것</strong></p>
+<a href="/book/getBook/81"><img src="/image/book/1709012384959_selfishgene.jpg"></a>
+	<p class="card-text"><strong><a href="/book/getBook/81">이기적 유전자</a></strong></p>
 </div>
 <div class="book-container">
-<img src="/image/book/nietzsche.jpg">
-	<p class="card-text"><strong>니체의 말</strong></p>
+<a href="/book/getBook/46"><img src="/image/book/1708929013029_ban.jpg"></a>
+	<p class="card-text"><strong><a href="/book/getBook/46">반도체 구조 원리 교과서</a></strong></p>
 </div>
 </div>
 </div>
 
 <div class="container-main justify-content-center" style="margin-top: 80px;">
-<a href="https://gp.ezenac.co.kr/ezen/curriculum/?idx=1824"><img alt="광고" src="/image/ezen.png"></a>
+<a href="https://gp.ezenac.co.kr/ezen/curriculum/?idx=1824" target="_blank"><img alt="광고" src="/image/ezen.png"></a>
 </div>
 </div>
 <%@ include file="./layout/footer.jsp" %>

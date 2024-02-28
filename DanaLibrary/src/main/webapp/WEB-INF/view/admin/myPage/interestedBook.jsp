@@ -24,14 +24,14 @@
 				<p class="card-text">
 					<a href="/book/getBook/${book.book.bookNum}"><strong>${book.book.title}</strong></a>
 				</p>
-				<button class="btn-removeInterest btn btn-outline-primary" style="width: 100%"
-					data-booknum="${book.book.bookNum }">관심 도서 등록 해제</button>
+				<button class="btn-removeInterest btn btn-outline-primary"
+					style="width: 100%" data-booknum="${book.book.bookNum }">관심
+					도서 등록 해제</button>
 			</div>
 			<c:set var="count" value="${count + 1}" />
 			<c:if test="${count % 5 eq 0 or count eq fn:length(pastRentList)}">
 </div>
-</c:if>
-</c:forEach>
-
+			</c:if>
+		</c:forEach>
 </c:if>
 </div>

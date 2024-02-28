@@ -122,4 +122,11 @@ public class UserService {
 		return user.isPresent();
 	}
 
+	@Transactional
+	public void deleteUser(User user) {
+		user.setUserStatus(Status.INACTIVE);
+		userRepository.save(user);
+		
+	}
+
 }
