@@ -41,10 +41,11 @@
 					<td>${book.bookNum}</td>
 					<td> <c:choose>
                     <c:when test="${fn:length(book.title) <= 7}">
-                        ${book.title}
+                        <a href="/book/getBook/${book.bookNum }">${book.title}</a>
                     </c:when>
                     <c:otherwise>
-                        ${fn:substring(book.title, 0, 7)}...
+                    <a href="/book/getBook/${book.bookNum }">${fn:substring(book.title, 0, 7)}...</a>
+                        
                     </c:otherwise>
                		 </c:choose></td>
                 

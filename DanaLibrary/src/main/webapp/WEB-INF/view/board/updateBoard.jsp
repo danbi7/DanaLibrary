@@ -37,7 +37,7 @@
             });
         });
     </script>
-
+  
 		 <div class="text-center mt-4">
 		<button id="update-board" class="btn btn-primary">수정 완료</button>
 		<a href="/board/view/getBoard/${board.boardNum}"
