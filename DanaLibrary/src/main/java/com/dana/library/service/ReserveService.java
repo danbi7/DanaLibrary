@@ -108,5 +108,10 @@ public class ReserveService {
 	public List<Reserved_book> getResersveList(){
 		return reserveRepository.findAll();
 	}
+	
+	@Transactional
+	public void deleteReserve(int reserveNum) {
+		reserveRepository.deleteById(reserveNum);
+	}
 
 }
