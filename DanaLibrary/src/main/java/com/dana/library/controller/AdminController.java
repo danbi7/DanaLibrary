@@ -230,6 +230,80 @@ public class AdminController {
 			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "도서 등록 실패");
 		}
 	}
+	
+	// 도서 수정
+	@PutMapping("/admin/updateBook/{bookNum}")
+	public @ResponseBody ResponseDTO<?> updateBook(@PathVariable int bookNum,
+	        @RequestParam("title") String title,
+	        @RequestParam("author") String author,
+	        @RequestParam("publisher") String publisher,
+	        @RequestParam("publicationDate") String publicationDate,
+	        @RequestParam("category") String category,
+	        @RequestParam("info") String info,
+	        @RequestParam("pages") int pages,
+	        @RequestPart(value = "file", required = false) MultipartFile file) {
+	    System.out.println("도서 수정 컨트롤러 실행");
+	    try {
+	        // 문자열을 Date로 변환
+	        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	        Date parsedDate = dateFormat.parse(publicationDate);
+	        java.sql.Date sqlDate = new java.sql.Date(parsedDate.getTime());
+
+	        String image = null; // 변수를 선언하고 초기화
+
+	        // 파일이 있는지 확인
+	        if (file != null && !file.isEmpty()) {
+	            // 파일 데이터를 바이트 배열로 변환
+	            byte[] fileData = file.getBytes();
+
+	            // 업로드할 파일의 원본 이름
+	            String originalFilename = file.getOriginalFilename();
+
+	            // timestamp를 이용하여 파일 이름 생성
+	            long timestamp = System.currentTimeMillis();
+	            String fileName = timestamp + "_" + originalFilename;
+
+	            // 프로젝트 내의 특정 폴더에 파일 저장 (예시: resources/upload 폴더)
+	            String uploadDir = "src/main/resources/static/image/book/";
+	            image = "/image/book/" + fileName;
+	            String filePath = uploadDir + fileName;
+
+	            File imgFile = new File(filePath);
+
+	            // 중복 파일이 존재할 경우 덮어쓰기
+	            if (imgFile.exists()) {
+	                imgFile.delete();
+	            }
+
+	            FileCopyUtils.copy(fileData, imgFile);
+	        }
+
+	        // 도서 가져오기
+	        Book book = bookService.getBook(bookNum);
+	        book.setTitle(title);
+	        book.setAuthor(author);
+	        book.setPublisher(publisher);
+	        book.setPublicationDate(sqlDate);
+	        book.setCategory(category);
+	        book.setPages(pages);
+	        if (image != null) {
+	            book.setImage(image);
+	        }
+	        book.setInfo(info);
+
+	        bookService.updateBook(book);
+
+	        return new ResponseDTO<>(HttpStatus.OK.value(), "도서 정보가 수정되었습니다.");
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        // 에러 처리 로직을 추가합니다.
+	        return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "도서 정보 수정에 실패했습니다.");
+	    }
+	}
+
+
+
 
 	@PostMapping("/admin/bookRequest")
 	public @ResponseBody ResponseDTO<?> bookRequest(@Valid @RequestBody BookRequestDTO bookDTO,

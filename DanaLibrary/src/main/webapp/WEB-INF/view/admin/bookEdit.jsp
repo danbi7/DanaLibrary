@@ -13,7 +13,11 @@
 <body>
 
 	<div class="container mt-3" style="width:70%; border:1px solid #BDBDBD; ">
-	
+
+		<div>
+			<input type="hidden" id="bookNum" name="bookNum" value="${book.bookNum}">
+		</div>
+
 		<div class="container my-2">
 			 <label for="username" class="form-label">도서 제목</label>
 			<input type="text" class="form-control" id="title" value="${book.title}">
@@ -37,7 +41,7 @@
 		<div class="container my-2">
 				<label for="category" class="form-label">분류</label> 
 				<select class="form-select" id="category" name="category">
-					<option value='' selected>${book.category}</option>
+					<option value="${book.category}" selected>${book.category}</option>
 					<option value="기술과학">기술과학</option>
 					<option value="자연과학">자연과학</option>
 					<option value="예술">예술</option>
@@ -63,11 +67,12 @@
         </div>
 
 		<div class="container my-2 d-flex">
-			<input type="file" accept=".jpg,.png">
-			<button class="btn-add btn btn-outline-secondary ms-auto" type="button">도서 정보 수정</button>
-		</div>
+    <input type="file" accept=".jpg,.png" id="file">
+    <button class="btn-edit btn btn-outline-secondary ms-auto" type="button">도서 정보 수정</button>
+</div>
 
 	</div>
+	<script src="/js/admin/editBook.js"></script>
 	
 </body>
 </html>
