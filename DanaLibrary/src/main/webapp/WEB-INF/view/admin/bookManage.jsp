@@ -36,15 +36,16 @@
 			</thead>
 			
 			<tbody>
-			 <c:forEach var="book" items="${bookList.content}">
+			 <c:forEach var="book" items="${bookList}">
 				<tr>
 					<td>${book.bookNum}</td>
 					<td> <c:choose>
                     <c:when test="${fn:length(book.title) <= 7}">
-                        ${book.title}
+                        <a href="/book/getBook/${book.bookNum }">${book.title}</a>
                     </c:when>
                     <c:otherwise>
-                        ${fn:substring(book.title, 0, 7)}...
+                    <a href="/book/getBook/${book.bookNum }">${fn:substring(book.title, 0, 7)}...</a>
+                        
                     </c:otherwise>
                		 </c:choose></td>
                 
@@ -69,10 +70,13 @@
                         ${fn:substring(book.image, 0, 10)}...
                     </c:otherwise>
                		 </c:choose></td>
-					<td><div class="admin-edit">
-                        <img class="edit-btn" src="/image/icon/icon-edit-button.png" 
-                        onclick="openEditBook('${book.bookNum}')">
-                    </div></td>
+               		 
+					<td>
+						<div class="admin-edit">
+                        	<img class="edit-btn" src="/image/icon/icon-edit-button.png" 
+                        	onclick="openEditBook('${book.bookNum}')">
+                    	</div>
+                    </td>
 				</tr>
 				</c:forEach>
 			</tbody>	

@@ -91,7 +91,7 @@ public class RentService {
 		}
 	}
 
-	// 매일 12시에 자동 반납 대상 도서를 자동으로 반납시키는 메소드
+	// 매일 12시에 자동 반납 대상 도서를 자동으로 반납
 	@Scheduled(cron = "0 0 0 * * ?")
 	public void autoReturnBooks() {
 		List<Rent> rentList = getRentBookList();
@@ -102,9 +102,9 @@ public class RentService {
 			Rent rent = iterator.next();
 			if (rent.getRentStatus().equals(Status.ACTIVE) && rent.getDueDate().isEqual(today)) {
 				rent.setRentStatus(Status.INACTIVE);
-				updateRent(rent);
+				updateRent(rent); 
+				//반납 되면 예약된 도서가 있는지 검사한뒤 첫번째 예약자에게 알림 보내기
 				Reserved_book reserve = reserveService.rentedBookInReservedBook(rent.getBook());
-				System.out.println("테스트 예약 정보: " + reserve);
 				if (reserve != null) {
 					noticeService.addNotice(reserve);
 				}
@@ -113,7 +113,7 @@ public class RentService {
 		}
 	}
 
-	// 자동반납이 안됐을 때 자동반납을 시킨다
+	// 자동반납이 안됐을 때 반납을 시킨다
 	public void autoReturnCheck() {
 		List<Rent> rentList = getRentBookList();
 		LocalDate today = LocalDate.now();
@@ -125,8 +125,8 @@ public class RentService {
 					&& (rent.getDueDate().isBefore(today) || rent.getDueDate().isEqual(today))) {
 				rent.setRentStatus(Status.INACTIVE);
 				updateRent(rent);
+				//반납 되면 예약된 도서가 있는지 검사한뒤 첫번째 예약자에게 알림 보내기
 				Reserved_book reserve = reserveService.rentedBookInReservedBook(rent.getBook());
-				System.out.println("테스트 예약 정보: " + reserve);
 				if (reserve != null) {
 					noticeService.addNotice(reserve);
 				}

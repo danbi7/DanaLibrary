@@ -12,7 +12,7 @@
 
     <div class="container mt-3" style="width:70%; border:1px solid #BDBDBD; ">
     
-        <form action="/admin/addBook" method="post" enctype="multipart/form-data">
+        
             <div class="container my-2">
                 <label for="title" class="form-label">제목</label>
                 <input type="text" class="form-control" id="title" name="title">
@@ -62,10 +62,11 @@
             <div class="container my-2 d-flex">
                 <input type="file" accept=".jpg,.png" id="file" name="file">
                 
-                <button class="btn btn-outline-dark ms-auto" type="submit">도서 추가</button>
+                <button class="btn-add btn btn-outline-dark ms-auto" type="button">도서 추가</button>
             </div>
-        </form>
+        
     </div>
+    <script src="/js/admin/addBook.js"></script>
 
 </body>
 </html>

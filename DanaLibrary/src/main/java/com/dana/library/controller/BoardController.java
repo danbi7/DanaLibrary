@@ -33,28 +33,27 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class BoardController {
+   @Autowired
+   private BoardService boardService;
 
-	@Autowired
-	private BoardService boardService;
+   @Autowired
+   private CommentService commentService;
 
-	@Autowired
-	private CommentService commentService;
+   // 글 등록 페이지
+   @GetMapping("/board/view/insertBoard")
+   public String insertBoard() {
+      return "board/insertBoard";
+   }
 
-	// 글 등록 페이지
-	@GetMapping("/board/view/insertBoard")
-	public String insertBoard() {
-		return "board/insertBoard";
-	}
+   // 글 등록 기능
+   @PostMapping("/board/writePost")
+   public @ResponseBody ResponseDTO<?> writePost(@RequestBody Board board, HttpSession session) {
+      board.setUser((User) session.getAttribute("loginUser"));
+      boardService.writeBoard(board);
+      return null;
+   }
 
-	// 글 등록 기능
-	@PostMapping("/board/writePost")
-	public @ResponseBody ResponseDTO<?> writePost(@RequestBody Board board, HttpSession session) {
-		board.setUser((User) session.getAttribute("loginUser"));
-		boardService.writeBoard(board);
-		return null;
-	}
-
-	// 글 목록 보기 페이지
+	// 글 목록 보기
 	@GetMapping("/public/board/view/getBoardList")
 	public String getBoardList(@RequestParam(required = false) Category boardCategory,
 			@RequestParam(required = false) String boardTitle, Model model,
@@ -64,10 +63,13 @@ public class BoardController {
 
 		if (boardCategory == null && boardTitle == null) {
 			boardList = boardService.getBoardList(pageable);
+
 		} else if (!boardCategory.equals(Category.TOTAL) && boardTitle == null) {
 			boardList = boardService.getBoardList(boardCategory, pageable);
+
 		} else if (boardCategory.equals(Category.TOTAL) && boardTitle != null) {
 			boardList = boardService.getBoardList(boardTitle, pageable);
+
 		} else if (!boardCategory.equals(Category.TOTAL) && boardTitle != null) {
 			boardList = boardService.getBoardList(boardCategory, boardTitle, pageable);
 		}
@@ -79,10 +81,6 @@ public class BoardController {
 		model.addAttribute("nowPage", nowPage);
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
-
-		System.out.println(nowPage);
-		System.out.println(startPage);
-		System.out.println(endPage);
 
 		System.out.println("boardList: " + boardList);
 		model.addAttribute("boardList", boardList);
@@ -101,7 +99,7 @@ public class BoardController {
 		return "board/boardList";
 	}
 
-	// 글 상세 보기 페이지
+	// 글 상세 보기
 	@GetMapping("/board/view/getBoard/{boardNum}")
 	public String getBoard(@PathVariable int boardNum, Model model) {
 		Board board = boardService.getBoardById(boardNum);
@@ -158,8 +156,9 @@ public class BoardController {
 
 	}
 
+	// 글 조회수 기능
 	@PutMapping("/board/view/updateViews/{boardNum}")
-	public @ResponseBody ResponseDTO<?> insertViews(@PathVariable int boardNum, Model model) {
+	public @ResponseBody ResponseDTO<?> insertViews(@PathVariable int boardNum) {
 		Board board = boardService.getBoardById(boardNum);
 		if (board != null) {
 			boardService.increaseViews(board);

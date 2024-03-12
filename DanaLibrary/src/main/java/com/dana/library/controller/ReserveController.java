@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,10 +26,11 @@ public class ReserveController {
 	@Autowired
 	private BookService bookService;
 	
+	//도서 예약하기
 	@PostMapping("/reserve/reserveBook/{bookNum}")
 	public @ResponseBody ResponseDTO<?> reserveBook(@PathVariable int bookNum, HttpSession session){
 		User loginUser = (User)session.getAttribute("loginUser");
-		
+		//회원의 예약 도서 존재 여부 확인
 		if(reserveService.isReserved(loginUser)) {
 			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "이미 예약한 도서가 있습니다.");
 		}else {
@@ -51,6 +53,12 @@ public class ReserveController {
 		System.out.println("예약 취소");
 		reserveService.cancelReservation(reserve);
 		return new ResponseDTO<>(HttpStatus.OK.value(), "도서 예약 취소");
+	}
+	
+	@DeleteMapping("/reserve/delete/{reserveNum}")
+	public @ResponseBody ResponseDTO<?> deleteReserve(@PathVariable int reserveNum){
+		reserveService.deleteReserve(reserveNum);
+		return new ResponseDTO<>(HttpStatus.OK.value(), "예약 취소 완료");
 	}
 
 }

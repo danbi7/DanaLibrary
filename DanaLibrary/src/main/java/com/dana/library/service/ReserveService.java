@@ -18,10 +18,10 @@ public class ReserveService {
 
 	@Autowired
 	private ReserveRepository reserveRepository;
-
+	
+	//회원이 예약한 도서가 존재하는지 여부 확인
 	@Transactional
 	public boolean isReserved(User user) {
-		// 로그인된 유저가 이미 예약한 도서가 존재하는지 여부 확인 과정
 		Reserved_book reservedBook = reserveRepository.findByUser(user).orElseGet(new Supplier<Reserved_book>() {
 			public Reserved_book get() {
 				return new Reserved_book();
@@ -102,6 +102,16 @@ public class ReserveService {
 	@Transactional
 	public int reserveTurn(int bookNum) {
 		return reserveRepository.findAllByBook_BookNum(bookNum).size();
+	}
+	
+	@Transactional
+	public List<Reserved_book> getResersveList(){
+		return reserveRepository.findAll();
+	}
+	
+	@Transactional
+	public void deleteReserve(int reserveNum) {
+		reserveRepository.deleteById(reserveNum);
 	}
 
 }

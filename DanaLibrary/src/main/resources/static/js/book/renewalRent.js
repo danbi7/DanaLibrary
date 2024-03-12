@@ -22,6 +22,7 @@ let renewalRent = {
       }).done(function(response) {
          if(response.status===200){
             alert(response.data);
+            location.reload();
          }
          else if(response.status===400){
             alert(response.data);
@@ -45,6 +46,7 @@ let renewalRent = {
       }).done(function(response) {
             if(response.status===200){
                alert(response.data);
+               location.reload();
             }
             else{
                alert(response.data);

@@ -43,8 +43,20 @@
 
         <div style="width: 150px"></div>
     </div>
-
+  
     <div class="mt-3" style="border-top: 7px solid #205295; padding-top: 20px">
+     <nav aria-label="breadcrumb">
+    <ol class="breadcrumb breadcrumb-chevron bg-body-tertiary mx-4">
+      <li class="breadcrumb-item">
+		전체 도서 목록
+      </li>
+      <li class="breadcrumb-item">
+<c:if test="${category == null || category == ''}">전체</c:if>
+      		 <c:if test="${category ne null }">${category }</c:if>
+		</li>
+    </ol>
+  </nav>
+ <hr>
         <c:forEach var="book" items="${bookStatusMap.keySet()}">
             <div class="row">
                 <div class="col-md-3" align="center"
@@ -115,37 +127,60 @@
             <hr>
         </c:forEach>
     </div>
-  <div class="mt-2">
+  <div class="mt-4">
+    <ul class="pagination justify-content-center">
   <c:choose>
 	<c:when test="${bookList.first }">
-		<a class="btn btn-secondary">이전</a>
+		<a class="btn btn-outline-secondary" style="margin-right: 1px;">이전</a>
 	</c:when>
 	<c:otherwise>
-		<a href="?page=${bookList.number-1 }" class="btn btn-primary">이전</a>
+	<c:url value="/public/book/view/getBookList" var="encodedUrl">
+    <c:param name="category" value="${category}" />
+    <c:param name="bookTitle" value="${title}" />
+    <c:param name="page" value="${bookList.number - 1}" />
+</c:url>
+		<a href="${encodedUrl}" class="btn btn-outline-primary" style="margin-right: 1px;">이전</a>
 	</c:otherwise>
 </c:choose>
   
 <c:forEach begin="${startPage }" end="${endPage }" var="i">
 <c:choose>
 <c:when test="${nowPage == i }">
-<a href="/public/book/view/getBookList?page=${i-1}" class="btn">${i }</a>
-</c:when>
+<c:url value="/public/book/view/getBookList" var="encodedUrl">
+    <c:param name="category" value="${category}" />
+    <c:param name="bookTitle" value="${title}" />
+    <c:param name="page" value="${i - 1}" />
+</c:url>
+
+<li class="page-item"><a href="${encodedUrl}" class="page-link"><strong>${i}</strong></a></li></c:when>
 <c:otherwise>
 
-<a href="/public/book/view/getBookList?page=${i-1}" class="btn">${i }</a>
+<c:url value="/public/book/view/getBookList" var="encodedUrl">
+    <c:param name="category" value="${category}" />
+    <c:param name="bookTitle" value="${title}" />
+    <c:param name="page" value="${i - 1}" />
+</c:url>
+
+<li class="page-item"><a href="${encodedUrl}" class="page-link">${i}</a></li>
 </c:otherwise>
 </c:choose>
-
 </c:forEach>
 
 <c:choose>
 	<c:when test="${bookList.last }">
-		<a class="btn btn-secondary">다음</a>
+		<a class="btn btn-outline-secondary">다음</a>
 	</c:when>
 	<c:otherwise>
-		<a href="?page=${bookList.number+1 }" class="btn btn-primary">다음</a>
+<c:url value="/public/book/view/getBookList" var="encodedUrl">
+    <c:param name="category" value="${category}" />
+    <c:param name="bookTitle" value="${title}" />
+    <c:param name="page" value="${bookList.number + 1}" />
+</c:url>
+
+<a href="${encodedUrl}" class="btn btn-outline-primary">다음</a>
 	</c:otherwise>
 </c:choose>
+</ul>
 </div>
 </div>
 <script src="/js/book/book2.js"></script>
